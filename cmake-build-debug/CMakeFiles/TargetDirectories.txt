@@ -1,0 +1,14 @@
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/pjc.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/list_install_components.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/install.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/install/local.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/CMakeFiles/install/strip.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/fmt.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/edit_cache.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/rebuild_cache.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/list_install_components.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/install.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/install/local.dir
+/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-build/CMakeFiles/install/strip.dir
