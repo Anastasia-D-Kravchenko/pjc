@@ -270,22 +270,22 @@
 //     }
 // }
 
-auto reduceAdjacentWhitespaces(std::string x) {
-    std::string modstr = "";
-    bool last_was_space = false;
-    for ( auto c : x) {
-        if (std::isspace(c)) {
-            if (!last_was_space) {
-                modstr += ' ';
-            }
-            last_was_space = true;
-        }else {
-            modstr += c;
-            last_was_space = false;
-        }
-    }
-    return modstr;
-}
+// auto reduceAdjacentWhitespaces(std::string x) {
+//     std::string modstr = "";
+//     bool last_was_space = false;
+//     for ( auto c : x) {
+//         if (std::isspace(c)) {
+//             if (!last_was_space) {
+//                 modstr += ' ';
+//             }
+//             last_was_space = true;
+//         }else {
+//             modstr += c;
+//             last_was_space = false;
+//         }
+//     }
+//     return modstr;
+// }
 
 auto main() -> int {
 
