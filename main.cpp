@@ -694,220 +694,226 @@ auto main() -> int {
     // v3::printLongestString(strings);
     // v4::printLongestString(strings);
 
-    // fmt::println(
-    //         "[{}]\n[{}]\n[{}]\n[{}]",
-    //         reduceAdjacentWhitespaces("Abc"),
-    //         reduceAdjacentWhitespaces("A b c"),
-    //         reduceAdjacentWhitespaces("   A\tb c      "),
-    //         reduceAdjacentWhitespaces("A\t\tb\n \n  \t c")
-    // );
-
-    std::vector<int> v1 = {1, 2, 3, 4};
-    std::cout << "v1: " << bothHalvesContainGreatestNumber(v1) << std::endl; // Output: 0
-
-    std::vector<int> v2 = {1, 4, 3, 4};
-    std::cout << "v2: " << bothHalvesContainGreatestNumber(v2) << std::endl; // Output: 1
-
-    std::vector<int> v3 = {5, 2, 5, 1};
-    std::cout << "v3: " << bothHalvesContainGreatestNumber(v3) << std::endl; // Output: 1
-
-    std::vector<int> v4 = {10, 2, 3, 4, 10, 1};
-    std::cout << "v4: " << bothHalvesContainGreatestNumber(v4) << std::endl; // Output: 1
-
-    std::vector<int> v5 = {1, 2, 3, 10, 5, 6};
-    std::cout << "v5: " << bothHalvesContainGreatestNumber(v5) << std::endl; // Output: 0
-
-    auto words = std::set<std::string>{
-        "this", "is", "the", "second" // is second the this
-    };
-    // for (const auto& word : words) {
-    //     std::cout << word << std::endl;
+    // // fmt::println(
+    // //         "[{}]\n[{}]\n[{}]\n[{}]",
+    // //         reduceAdjacentWhitespaces("Abc"),
+    // //         reduceAdjacentWhitespaces("A b c"),
+    // //         reduceAdjacentWhitespaces("   A\tb c      "),
+    // //         reduceAdjacentWhitespaces("A\t\tb\n \n  \t c")
+    // // );
+    //
+    // std::vector<int> v1 = {1, 2, 3, 4};
+    // std::cout << "v1: " << bothHalvesContainGreatestNumber(v1) << std::endl; // Output: 0
+    //
+    // std::vector<int> v2 = {1, 4, 3, 4};
+    // std::cout << "v2: " << bothHalvesContainGreatestNumber(v2) << std::endl; // Output: 1
+    //
+    // std::vector<int> v3 = {5, 2, 5, 1};
+    // std::cout << "v3: " << bothHalvesContainGreatestNumber(v3) << std::endl; // Output: 1
+    //
+    // std::vector<int> v4 = {10, 2, 3, 4, 10, 1};
+    // std::cout << "v4: " << bothHalvesContainGreatestNumber(v4) << std::endl; // Output: 1
+    //
+    // std::vector<int> v5 = {1, 2, 3, 10, 5, 6};
+    // std::cout << "v5: " << bothHalvesContainGreatestNumber(v5) << std::endl; // Output: 0
+    //
+    // auto words = std::set<std::string>{
+    //     "this", "is", "the", "second" // is second the this
+    // };
+    // // for (const auto& word : words) {
+    // //     std::cout << word << std::endl;
+    // // }
+    // auto iter = words.begin(); // std::cout << *iter << std::endl; // is
+    // for (auto i = 0; i < 3; ++i) /*std::cout << *iter;*/ ++iter; // the
+    // fmt::println("({})", *words.begin(), *iter); // {} -> *words.begin() -> (is)
+    // // fmt::println("({})", *iter);
+    // auto count = std::ranges::count_if(
+    //     words.begin(), iter,
+    //     [](std::string const& s) {
+    //       return s.front() == 't';
+    //     });
+    // fmt::println("({})", count); // 1
+    // fmt::println("({})", std::vector<std::string>(iter, words.end())); // ([this])
+    //
+    //
+    // Callable callable_obj;
+    //
+    // std::vector<int> vec_a = {1, 5, 2, 8, 3};
+    // std::vector<int> vec_b = {9, 4, 7, 6, 10};
+    //
+    // std::cout << "Before calling replace:" << std::endl;
+    // std::cout << "vec_a: ";
+    // for (int val : vec_a) {
+    //     std::cout << val << " ";
     // }
-    auto iter = words.begin(); // std::cout << *iter << std::endl; // is
-    for (auto i = 0; i < 3; ++i) /*std::cout << *iter;*/ ++iter; // the
-    fmt::println("({})", *words.begin(), *iter); // {} -> *words.begin() -> (is)
-    // fmt::println("({})", *iter);
-    auto count = std::ranges::count_if(
-        words.begin(), iter,
-        [](std::string const& s) {
-          return s.front() == 't';
-        });
-    fmt::println("({})", count); // 1
-    fmt::println("({})", std::vector<std::string>(iter, words.end())); // ([this])
-
-
-    Callable callable_obj;
-
-    std::vector<int> vec_a = {1, 5, 2, 8, 3};
-    std::vector<int> vec_b = {9, 4, 7, 6, 10};
-
-    std::cout << "Before calling replace:" << std::endl;
-    std::cout << "vec_a: ";
-    for (int val : vec_a) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "vec_b: ";
-    for (int val : vec_b) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-
-    callable_obj.replace(vec_a, vec_b);
-
-    std::cout << "After calling replace:" << std::endl;
-    std::cout << "vec_a: ";
-    for (int val : vec_a) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "vec_b: ";
-    for (int val : vec_b) {
-        std::cout << val << " ";
-    }
-    std::cout << std::endl;
-
-
-
-    std::vector<std::string> vec = {"hello", "i am", "david", "a", "short"};
-    std::ranges::sort(vec, [](std::string const& s1, std::string const& s2) {
-        if (s1.size() != s2.size()) {
-            return s1.size() < s2.size();
-        } return s1 < s2;
-    });
-    fmt::println("({})", vec);
-
-    // std::vector<int> v6 = {1, 2, 3, 2, 1, 3};
-    // std::cout<< fun(v6);
-
-    auto word = std::string{"programming"};
-
-    for (auto const& c : word) {
-        std::cout << c;
-    }
-    std::cout << std::endl;
-
-    auto changer = [](char c) {
-        if (c == 'r') {
-            return 'R';
-        }
-        return c;
-    };
-
-    std::ranges::transform(word, word.begin(), changer);
-
-    std::cout << word << std::endl;
-
-
-    auto nums = std::vector<int>{237, 154, 33, 81, 900, 525};
-    std::ranges::sort(nums, {}, [](int const n) { return n % 10; });
-    fmt::println("({})", nums);
-    std::ranges::reverse(nums.begin() + 3, nums.end());
-    fmt::println("({})", nums);
-    fmt::println("({})", std::set<int>(nums.begin(), nums.end()));
-
-
-    std::vector<int> v7 = {3, 1, 2, 1, 2, 3, 2};
-    std::cout << "Duplicates in v1: " << name::duplicatesCount(v7) << std::endl; // Output: 4
-
-    std::vector<int> v8 = {1, 2, 3, 4, 5};
-    std::cout << "Duplicates in v2: " << name::duplicatesCount(v8) << std::endl; // Output: 0
-
-    std::vector<int> v9 = {1, 1, 1, 1, 1};
-    std::cout << "Duplicates in v3: " << name::duplicatesCount(v9) << std::endl; // Output: 4
-
-    std::vector<int> v10 = {};
-    std::cout << "Duplicates in v4: " << name::duplicatesCount(v10) << std::endl; // Output: 0
-
-    std::vector<int> v11 = {1, 2, 2, 3, 3, 3};
-    std::cout << "Duplicates in v5: " << name::duplicatesCount(v11) << std::endl; // Output: 3
-
-
-    auto producer = [](int n) { return std::vector<int>(n, 1); };
-    auto a1 = producer(3); // 0 0 0
-    auto a2 = producer(5); // 0 0 0 0 0
-    auto x = 0;
-    for (auto& e : a1) e *= x;
-    for (auto& e : a2) e *= x;
-    fmt::println("START {} END", a1); // START [0, 0, 0] END
-    fmt::println("START {} END", a2); // START [0, 0, 0, 0, 0] END
-    fmt::println("START {} END", std::set<int>(a2.begin(), a2.end())); // START {0} END
-
-
-    std::vector<std::string> b1 = {"hello", "i am", "david", "a", "short"};
-    std::cout << getShortestAndLongest(b1) << std::endl;
-
-    std::vector<std::string> b2 = {"one", "two", "three"};
-    std::cout << getShortestAndLongest(b2) << std::endl;
-
-    std::vector<std::string> b3 = {"same", "same"};
-    std::cout << getShortestAndLongest(b3) << std::endl;
-
-    std::vector<std::string> b4 = {"longest", "shrt"};
-    std::cout << getShortestAndLongest(b4) << std::endl;
-
-    std::vector<std::string> b5 = {};
-    std::cout << getShortestAndLongest(b5) << std::endl;
-
-    std::vector<int> numbers_vec = {1, 2, 3};
-    std::set<int> numbers_set = {1, 2, 3};
-
-    // fmt::print("{}", numbers); // Assuming you want to print the vector/set
-    fmt::println("Vector: {}", numbers_vec);
-    fmt::println("Set: {}", numbers_set);
-
-    // fmt::join(set, ", ")
-    fmt::println("Set joined with comma: {}", fmt::join(numbers_set, ", "));
-
+    // std::cout << std::endl;
+    // std::cout << "vec_b: ";
+    // for (int val : vec_b) {
+    //     std::cout << val << " ";
+    // }
+    // std::cout << std::endl;
+    //
+    // callable_obj.replace(vec_a, vec_b);
+    //
+    // std::cout << "After calling replace:" << std::endl;
+    // std::cout << "vec_a: ";
+    // for (int val : vec_a) {
+    //     std::cout << val << " ";
+    // }
+    // std::cout << std::endl;
+    // std::cout << "vec_b: ";
+    // for (int val : vec_b) {
+    //     std::cout << val << " ";
+    // }
+    // std::cout << std::endl;
+    //
+    //
+    //
+    // std::vector<std::string> vec = {"hello", "i am", "david", "a", "short"};
+    // std::ranges::sort(vec, [](std::string const& s1, std::string const& s2) {
+    //     if (s1.size() != s2.size()) {
+    //         return s1.size() < s2.size();
+    //     } return s1 < s2;
+    // });
+    // fmt::println("({})", vec);
+    //
+    // // std::vector<int> v6 = {1, 2, 3, 2, 1, 3};
+    // // std::cout<< fun(v6);
+    //
+    // auto word = std::string{"programming"};
+    //
+    // for (auto const& c : word) {
+    //     std::cout << c;
+    // }
+    // std::cout << std::endl;
+    //
+    // auto changer = [](char c) {
+    //     if (c == 'r') {
+    //         return 'R';
+    //     }
+    //     return c;
+    // };
+    //
+    // std::ranges::transform(word, word.begin(), changer);
+    //
+    // std::cout << word << std::endl;
+    //
+    //
+    // auto nums = std::vector<int>{237, 154, 33, 81, 900, 525};
+    // std::ranges::sort(nums, {}, [](int const n) { return n % 10; });
+    // fmt::println("({})", nums);
+    // std::ranges::reverse(nums.begin() + 3, nums.end());
+    // fmt::println("({})", nums);
+    // fmt::println("({})", std::set<int>(nums.begin(), nums.end()));
+    //
+    //
+    // std::vector<int> v7 = {3, 1, 2, 1, 2, 3, 2};
+    // std::cout << "Duplicates in v1: " << name::duplicatesCount(v7) << std::endl; // Output: 4
+    //
+    // std::vector<int> v8 = {1, 2, 3, 4, 5};
+    // std::cout << "Duplicates in v2: " << name::duplicatesCount(v8) << std::endl; // Output: 0
+    //
+    // std::vector<int> v9 = {1, 1, 1, 1, 1};
+    // std::cout << "Duplicates in v3: " << name::duplicatesCount(v9) << std::endl; // Output: 4
+    //
+    // std::vector<int> v10 = {};
+    // std::cout << "Duplicates in v4: " << name::duplicatesCount(v10) << std::endl; // Output: 0
+    //
+    // std::vector<int> v11 = {1, 2, 2, 3, 3, 3};
+    // std::cout << "Duplicates in v5: " << name::duplicatesCount(v11) << std::endl; // Output: 3
+    //
+    //
+    // auto producer = [](int n) { return std::vector<int>(n, 1); };
+    // auto a1 = producer(3); // 0 0 0
+    // auto a2 = producer(5); // 0 0 0 0 0
+    // auto x = 0;
+    // for (auto& e : a1) e *= x;
+    // for (auto& e : a2) e *= x;
+    // fmt::println("START {} END", a1); // START [0, 0, 0] END
+    // fmt::println("START {} END", a2); // START [0, 0, 0, 0, 0] END
+    // fmt::println("START {} END", std::set<int>(a2.begin(), a2.end())); // START {0} END
+    //
+    //
+    // std::vector<std::string> b1 = {"hello", "i am", "david", "a", "short"};
+    // std::cout << getShortestAndLongest(b1) << std::endl;
+    //
+    // std::vector<std::string> b2 = {"one", "two", "three"};
+    // std::cout << getShortestAndLongest(b2) << std::endl;
+    //
+    // std::vector<std::string> b3 = {"same", "same"};
+    // std::cout << getShortestAndLongest(b3) << std::endl;
+    //
+    // std::vector<std::string> b4 = {"longest", "shrt"};
+    // std::cout << getShortestAndLongest(b4) << std::endl;
+    //
+    // std::vector<std::string> b5 = {};
+    // std::cout << getShortestAndLongest(b5) << std::endl;
+    //
+    // std::vector<int> numbers_vec = {1, 2, 3};
+    // std::set<int> numbers_set = {1, 2, 3};
+    //
+    // // fmt::print("{}", numbers); // Assuming you want to print the vector/set
+    // fmt::println("Vector: {}", numbers_vec);
+    // fmt::println("Set: {}", numbers_set);
+    //
+    // // fmt::join(set, ", ")
+    // fmt::println("Set joined with comma: {}", fmt::join(numbers_set, ", "));
+    //
+    // // fmt::println("The answer is {}", 42);
     // fmt::println("The answer is {}", 42);
-    fmt::println("The answer is {}", 42);
+    //
+    // // fmt::println("{}", fmt::join(vec, " "));
+    // std::vector<std::string> words1 = {"hello", "world", "cpp"};
+    // fmt::println("Words joined with space: {}", fmt::join(words1, " "));
+    //
+    // std::vector<int> numbers = {5, 2, 8, 1, 9, 4};
+    //
+    // // std::ranges::find(): Find the first occurrence of a value
+    // auto find_result = std::ranges::find(numbers, 8);
+    // if (find_result != numbers.end()) {
+    //     fmt::println("Found 8 at index: {}", std::ranges::distance(numbers.begin(), find_result));
+    // } else {
+    //     fmt::println("8 not found.");
+    // }
+    //
+    // // std::ranges::max(): Find the maximum value in the range
+    // auto max_val = std::ranges::max(numbers);
+    // fmt::println("Maximum value: {}", max_val);
+    //
+    // // std::ranges::max_element(): Find an iterator to the maximum element
+    // auto max_iter = std::ranges::max_element(numbers);
+    // if (max_iter != numbers.end()) {
+    //     fmt::println("Maximum element is: {}", *max_iter);
+    // }
+    //
+    // // std::ranges::min(): Find the minimum value in the range
+    // auto min_val = std::ranges::min(numbers);
+    // fmt::println("Minimum value: {}", min_val);
+    //
+    // // std::ranges::min_element(): Find an iterator to the minimum element
+    // auto min_iter = std::ranges::min_element(numbers);
+    // if (min_iter != numbers.end()) {
+    //     fmt::println("Minimum element is: {}", *min_iter);
+    // }
+    //
+    // // std::ranges::iter_swap(maxIter, minIter): Swap elements pointed to by iterators
+    // if (max_iter != numbers.end() && min_iter != numbers.end()) {
+    //     std::ranges::iter_swap(max_iter, min_iter);
+    //     fmt::println("Vector after iter_swap: {}", numbers);
+    // }
+    //
+    // // std::ranges::swap(*maxIter, *minIter): Swap elements directly
+    // // (Assuming max_iter and min_iter are still valid)
+    // if (max_iter != numbers.end() && min_iter != numbers.end()) {
+    //     std::ranges::swap(*max_iter, *min_iter);
+    //     fmt::println("Vector after swap: {}", numbers);
+    // }
 
-    // fmt::println("{}", fmt::join(vec, " "));
-    std::vector<std::string> words1 = {"hello", "world", "cpp"};
-    fmt::println("Words joined with space: {}", fmt::join(words1, " "));
-
-    std::vector<int> numbers = {5, 2, 8, 1, 9, 4};
-
-    // std::ranges::find(): Find the first occurrence of a value
-    auto find_result = std::ranges::find(numbers, 8);
-    if (find_result != numbers.end()) {
-        fmt::println("Found 8 at index: {}", std::ranges::distance(numbers.begin(), find_result));
-    } else {
-        fmt::println("8 not found.");
-    }
-
-    // std::ranges::max(): Find the maximum value in the range
-    auto max_val = std::ranges::max(numbers);
-    fmt::println("Maximum value: {}", max_val);
-
-    // std::ranges::max_element(): Find an iterator to the maximum element
-    auto max_iter = std::ranges::max_element(numbers);
-    if (max_iter != numbers.end()) {
-        fmt::println("Maximum element is: {}", *max_iter);
-    }
-
-    // std::ranges::min(): Find the minimum value in the range
-    auto min_val = std::ranges::min(numbers);
-    fmt::println("Minimum value: {}", min_val);
-
-    // std::ranges::min_element(): Find an iterator to the minimum element
-    auto min_iter = std::ranges::min_element(numbers);
-    if (min_iter != numbers.end()) {
-        fmt::println("Minimum element is: {}", *min_iter);
-    }
-
-    // std::ranges::iter_swap(maxIter, minIter): Swap elements pointed to by iterators
-    if (max_iter != numbers.end() && min_iter != numbers.end()) {
-        std::ranges::iter_swap(max_iter, min_iter);
-        fmt::println("Vector after iter_swap: {}", numbers);
-    }
-
-    // std::ranges::swap(*maxIter, *minIter): Swap elements directly
-    // (Assuming max_iter and min_iter are still valid)
-    if (max_iter != numbers.end() && min_iter != numbers.end()) {
-        std::ranges::swap(*max_iter, *min_iter);
-        fmt::println("Vector after swap: {}", numbers);
-    }
-
+    auto set = std::set<int>{5, 5, 5, 4, 3, 1, 2};
+    auto iter = set.begin();
+    for ( int i=0; i<3; i++) ++iter;
+    fmt::print( "{:d}\n", std::ranges::count(set.begin(), iter, 5));
+    auto count = std::ranges::count_if(set, [](int i){return i>=2;});
+    fmt::println("{}", count);
 
 }
