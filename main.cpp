@@ -1,408 +1,490 @@
+// // // //
+// // // // Created by Anastasiia Kravchenko on 07.03.2025.
+// // // //
 // // //
-// // // Created by Anastasiia Kravchenko on 07.03.2025.
+// // // #include <algorithm>
+// // // #include <iostream>
+// // // #include <vector>
+// // // #include <string>
 // // //
+// // // void printStringView(std::string_view sv) {
+// // //     std::cout << "String view: " << sv << std::endl;
+// // // }
+// // //
+// // // // void printSpan(std::span<int> sp) {
+// // // //     std::cout << "Span: ";
+// // // //     for (int value : sp) {
+// // // //         std::cout << value << " ";
+// // // //     }
+// // // //     std::cout << std::endl;
+// // // // }
+// // //
+// // //
+// // // int main() {
+// // //     std::cout << "hello world\n";
+// // //     /*
+// // //             int x;
+// // //             double y;
+// // //             std::string s;
+// // //             std::cin >> x;
+// // //             std::cin >> y;
+// // //             std::cin >> s;
+// // //         //    std::cout << "[" << x << "]";
+// // //
+// // //             std::cout << x << ' ' << y << ' ' << s;*/
+// // //
+// // //     //    int x = 0;
+// // //     //    auto x = int();
+// // //     //    auto x = 0;
+// // //     //    auto x = 17;
+// // //     //    for (int i = 0; i < 10; i++) { }
+// // //     //    std::cout << x;
+// // //     //    for (int i = 0; i < 10; i++) { }
+// // //
+// // //     //    auto a = 0;
+// // //     //    auto b = 0;
+// // //     //    std::cin >> a >> b;
+// // //
+// // //     //    auto text = std::string();
+// // //     auto text = std::string();
+// // //     std::cin >> text;
+// // //     std::cout << text << std::endl;
+// // //     //    auto numbers = std::vector<int>();
+// // //     //
+// // //     auto str = std::vector<std::string>();
+// // //     str.push_back("hello world");
+// // //     str.push_back("hello");
+// // //     str.push_back("world");
+// // //     for (auto i : str) std::cout << i << std::endl;
+// // //     str.pop_back();
+// // //     for (auto i : str) std::cout << i << std::endl;
+// // //     //    numbers.push_back(3);
+// // //     //    numbers.push_back(7);
+// // //     //    numbers.push_back(1);
+// // //     //
+// // //     //    for (auto element : numbers) {
+// // //     //        std::cout << element << ' ';
+// // //     //    }
+// // //     //
+// // //     //    numbers.pop_back();
+// // //     //
+// // //     //    std::cout << '\n';
+// // //     //    for (auto element : numbers) {
+// // //     //        std::cout << element << ' ';
+// // //     //    }
+// // //     auto hi = int(4);
+// // //     switch (hi) {
+// // //         case 4: std::cout << "hi\n"; break;
+// // //         default: std::cout << "hi"; return 0;
+// // //     }
+// // //
+// // //     /*auto nums = std::vector<int>{1, 2, 3, 5, 12, 54, 6, 2, 46, 3, 2, 6, 7, 7};
+// // //     std::ranges::sort(nums);
+// // //
+// // //     for (auto element : nums) {
+// // //         std::cout << element << ' ';
+// // //     }*/
+// // //     std::string text1 = "long sentance with some meaning";
+// // //     for (auto i = 0; i < text1.size(); i++) std::cout << text1[i];
+// // //     std::cout << std::endl;
+// // //     for (auto i : text1) std::cout << i;
+// // //     std::cout << std::endl;
+// // //     std::vector<char> rev;
+// // //     for (int i = text1.size() - 1; i >= 0; i--) rev.push_back(text1[i]);
+// // //     for (auto i : rev) std::cout << i;
+// // //     std::cout << std::endl;
+// // //
+// // //
+// // //     text = std::string();
+// // //     auto first  = std::string("Programming");
+// // //     auto second = std::string("in");
+// // //     auto third  = std::string("C++");
+// // //     auto fourth = std::string(", Python");
+// // //     for (auto chr : first) text += chr;
+// // //     text += ' ';
+// // //     for (auto chr : second) text += chr;
+// // //     text += ' ';
+// // //     for (auto chr : third) text += chr;
+// // //     text += fourth;
+// // //     std::cout << text;
+// // //
+// // //
+// // //     text = std::string("Programming");
+// // //     std::cout << "kg stands for kilo" << text.substr(3, 4) << std::endl;
+// // //     //    auto s1 = std::string("hello");
+// // //     //    std::ranges::reverse(s1);
+// // //     //    auto s2 = std::string();
+// // //     //
+// // //     //    std::cin >> s2;
+// // //     //
+// // //     //    if (s1 < s2) {
+// // //     //        std::cout << ":>";
+// // //     //    }
+// // //     //
+// // //     auto vec = std::vector<int>{3, 5, 1, 4, 2};
+// // //
+// // //     std::ranges::reverse(vec);
+// // //
+// // //     for (auto element : vec) {
+// // //         std::cout << element << ' ';
+// // //     }
+// // //     //    auto words = std::vector<std::string>{"hello", "everyone", "present"};
+// // //     //    std::ranges::sort(words);
+// // //     //
+// // //     //    for (auto word : words) std::cout << word << ' ';
+// // //
+// // //     //    std::cout << words;
+// // //
+// // //     //    auto const x = 0;
+// // //     //    x = 10;
+// // //
+// // //     std::string myString = "Hello, string view!";
+// // //     printStringView(myString); // No copy is made
+// // //     const char* cString = "C-style string";
+// // //     printStringView(cString); // Works with C-style strings too
+// // //
+// // //
+// // //     // auto myVector = std::vector<int>{1, 2, 3, 4, 5};
+// // //     // printSpan(myVector);
+// // //     // int myArray[] = {10, 20, 30};
+// // //     // printSpan(myArray);
+// // // }
 // //
-// // #include <algorithm>
+// // //
+// // // Created by Anastasiia Kravchenko on 14.03.2025.
+// // //
 // // #include <iostream>
 // // #include <vector>
 // // #include <string>
-// //
-// // void printStringView(std::string_view sv) {
-// //     std::cout << "String view: " << sv << std::endl;
-// // }
-// //
-// // // void printSpan(std::span<int> sp) {
-// // //     std::cout << "Span: ";
-// // //     for (int value : sp) {
-// // //         std::cout << value << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // // }
-// //
+// // #include <ranges>
 // //
 // // int main() {
-// //     std::cout << "hello world\n";
-// //     /*
-// //             int x;
-// //             double y;
-// //             std::string s;
-// //             std::cin >> x;
-// //             std::cin >> y;
-// //             std::cin >> s;
-// //         //    std::cout << "[" << x << "]";
+// //     auto const word = std::string("hello");
+// //     auto text = word.back() + word + word.front(); // ohelloh
+// //     std::ranges::sort(text); // abcdefghigknlmoprt => ehhlloo
+// //     std::cout << text << "\n";
+// //     std::cout << word.size() << "\n"; // 5
 // //
-// //             std::cout << x << ' ' << y << ' ' << s;*/
-// //
-// //     //    int x = 0;
-// //     //    auto x = int();
-// //     //    auto x = 0;
-// //     //    auto x = 17;
-// //     //    for (int i = 0; i < 10; i++) { }
-// //     //    std::cout << x;
-// //     //    for (int i = 0; i < 10; i++) { }
-// //
-// //     //    auto a = 0;
-// //     //    auto b = 0;
-// //     //    std::cin >> a >> b;
-// //
-// //     //    auto text = std::string();
-// //     auto text = std::string();
-// //     std::cin >> text;
-// //     std::cout << text << std::endl;
-// //     //    auto numbers = std::vector<int>();
-// //     //
-// //     auto str = std::vector<std::string>();
-// //     str.push_back("hello world");
-// //     str.push_back("hello");
-// //     str.push_back("world");
-// //     for (auto i : str) std::cout << i << std::endl;
-// //     str.pop_back();
-// //     for (auto i : str) std::cout << i << std::endl;
-// //     //    numbers.push_back(3);
-// //     //    numbers.push_back(7);
-// //     //    numbers.push_back(1);
-// //     //
-// //     //    for (auto element : numbers) {
-// //     //        std::cout << element << ' ';
-// //     //    }
-// //     //
-// //     //    numbers.pop_back();
-// //     //
-// //     //    std::cout << '\n';
-// //     //    for (auto element : numbers) {
-// //     //        std::cout << element << ' ';
-// //     //    }
-// //     auto hi = int(4);
-// //     switch (hi) {
-// //         case 4: std::cout << "hi\n"; break;
-// //         default: std::cout << "hi"; return 0;
+// //     auto str = std::vector<std::string>(3);
+// //     for ( int i = 0; i < 3; i++) {
+// //         std::cin >> str[i];
 // //     }
-// //
-// //     /*auto nums = std::vector<int>{1, 2, 3, 5, 12, 54, 6, 2, 46, 3, 2, 6, 7, 7};
-// //     std::ranges::sort(nums);
-// //
-// //     for (auto element : nums) {
-// //         std::cout << element << ' ';
-// //     }*/
-// //     std::string text1 = "long sentance with some meaning";
-// //     for (auto i = 0; i < text1.size(); i++) std::cout << text1[i];
-// //     std::cout << std::endl;
-// //     for (auto i : text1) std::cout << i;
-// //     std::cout << std::endl;
-// //     std::vector<char> rev;
-// //     for (int i = text1.size() - 1; i >= 0; i--) rev.push_back(text1[i]);
-// //     for (auto i : rev) std::cout << i;
-// //     std::cout << std::endl;
-// //
-// //
-// //     text = std::string();
-// //     auto first  = std::string("Programming");
-// //     auto second = std::string("in");
-// //     auto third  = std::string("C++");
-// //     auto fourth = std::string(", Python");
-// //     for (auto chr : first) text += chr;
-// //     text += ' ';
-// //     for (auto chr : second) text += chr;
-// //     text += ' ';
-// //     for (auto chr : third) text += chr;
-// //     text += fourth;
-// //     std::cout << text;
-// //
-// //
-// //     text = std::string("Programming");
-// //     std::cout << "kg stands for kilo" << text.substr(3, 4) << std::endl;
-// //     //    auto s1 = std::string("hello");
-// //     //    std::ranges::reverse(s1);
-// //     //    auto s2 = std::string();
-// //     //
-// //     //    std::cin >> s2;
-// //     //
-// //     //    if (s1 < s2) {
-// //     //        std::cout << ":>";
-// //     //    }
-// //     //
-// //     auto vec = std::vector<int>{3, 5, 1, 4, 2};
-// //
-// //     std::ranges::reverse(vec);
-// //
-// //     for (auto element : vec) {
-// //         std::cout << element << ' ';
+// //     auto sorted = std::ranges::sort(str);
+// //     auto bol =
+// //     for ( int i = 0; i < 3; i++) {
+// //         if ( sorted[i] != str[i] ) {
+// //             std::cout << "%";
+// //         }else std::cout << "#";
 // //     }
-// //     //    auto words = std::vector<std::string>{"hello", "everyone", "present"};
-// //     //    std::ranges::sort(words);
-// //     //
-// //     //    for (auto word : words) std::cout << word << ' ';
-// //
-// //     //    std::cout << words;
-// //
-// //     //    auto const x = 0;
-// //     //    x = 10;
-// //
-// //     std::string myString = "Hello, string view!";
-// //     printStringView(myString); // No copy is made
-// //     const char* cString = "C-style string";
-// //     printStringView(cString); // Works with C-style strings too
-// //
-// //
-// //     // auto myVector = std::vector<int>{1, 2, 3, 4, 5};
-// //     // printSpan(myVector);
-// //     // int myArray[] = {10, 20, 30};
-// //     // printSpan(myArray);
 // // }
 //
+// // auto printhi() -> void {
+// //     fmt::print("Hello world!\n");
+// // }
+// // auto modify(int& x) -> void {
+// //     x += 3;
+// // }
 // //
-// // Created by Anastasiia Kravchenko on 14.03.2025.
+// // namespace std {
+// //     auto cou1(int x) -> void {
+// //         fmt::print("{}", x);
+// //     }
+// // }
+// // namespace pjc {
+// //     // auto sayHello() -> void {
+// //     //     fmt::print("Hello world!\n");
+// //     // }
 // //
+// //     auto sayHello() -> void {
+// //         fmt::println("Hello!");
+// //     }
+// // }
 // #include <iostream>
 // #include <vector>
-// #include <string>
 // #include <ranges>
+// #include <algorithm>
+// #include <numeric>
+// #include <fmt/ranges.h>
+// #include <set>
+// #include <string>
+// // auto dotProduct(std::vector<double> const& v1, std::vector<double> const& v2) {
+// //     int count = 0;
+// //     for ( int i = 0; i < v1.size(); i++ ) {
+// //         count += v1[i] * v2[i];
+// //     }
+// //     return count;
+// // }
 //
-// int main() {
-//     auto const word = std::string("hello");
-//     auto text = word.back() + word + word.front(); // ohelloh
-//     std::ranges::sort(text); // abcdefghigknlmoprt => ehhlloo
-//     std::cout << text << "\n";
-//     std::cout << word.size() << "\n"; // 5
+// // bool suffix(const std::set<int>& s, const std::vector<int>& v) {
+// //     auto starts = --s.end();
+// //     auto startv = --v.end();
+// //     int count = 0;
+// //     for ( int i = 0; i < v.size(); i++ ) {
+// //         if ( *starts == *startv ) {
+// //             count++;
+// //         }
+// //         --starts;
+// //         --startv;
+// //     }
+// //     return count == v.size();
+// // }
 //
-//     auto str = std::vector<std::string>(3);
-//     for ( int i = 0; i < 3; i++) {
-//         std::cin >> str[i];
-//     }
-//     auto sorted = std::ranges::sort(str);
-//     auto bol =
-//     for ( int i = 0; i < 3; i++) {
-//         if ( sorted[i] != str[i] ) {
-//             std::cout << "%";
-//         }else std::cout << "#";
-//     }
-// }
-
-// auto printhi() -> void {
-//     fmt::print("Hello world!\n");
-// }
-// auto modify(int& x) -> void {
-//     x += 3;
-// }
+// // auto isPalindrome(std::string s) -> bool {
+// //     auto s1 = s;
+// //     std::ranges::reverse(s);
+// //     if (s1 == s) {
+// //         return true;
+// //     }
+// // }
 //
-// namespace std {
-//     auto cou1(int x) -> void {
-//         fmt::print("{}", x);
-//     }
-// }
-// namespace pjc {
-//     // auto sayHello() -> void {
-//     //     fmt::print("Hello world!\n");
-//     // }
+// // auto sortBiggerHalf(std::vector<int> & x, int y) {
+// //     if ( y == 0) {
+// //         std::ranges::sort(x.begin(), x.begin() + x.size()/2);
+// //     }else if (y == 1) {
+// //         std::ranges::sort(x.begin() + x.size()/2, x.end());
+// //     }else {
+// //         std::ranges::sort(x);
+// //     }
+// // }
 //
-//     auto sayHello() -> void {
-//         fmt::println("Hello!");
-//     }
-// }
-#include <iostream>
-#include <vector>
-#include <ranges>
-#include <algorithm>
-#include <numeric>
-#include <fmt/ranges.h>
-#include <set>
-#include <string>
-// auto dotProduct(std::vector<double> const& v1, std::vector<double> const& v2) {
-//     int count = 0;
-//     for ( int i = 0; i < v1.size(); i++ ) {
-//         count += v1[i] * v2[i];
-//     }
-//     return count;
-// }
-
-// bool suffix(const std::set<int>& s, const std::vector<int>& v) {
-//     auto starts = --s.end();
-//     auto startv = --v.end();
-//     int count = 0;
-//     for ( int i = 0; i < v.size(); i++ ) {
-//         if ( *starts == *startv ) {
-//             count++;
-//         }
-//         --starts;
-//         --startv;
-//     }
-//     return count == v.size();
-// }
-
-// auto isPalindrome(std::string s) -> bool {
-//     auto s1 = s;
-//     std::ranges::reverse(s);
-//     if (s1 == s) {
-//         return true;
-//     }
-// }
-
-// auto sortBiggerHalf(std::vector<int> & x, int y) {
-//     if ( y == 0) {
-//         std::ranges::sort(x.begin(), x.begin() + x.size()/2);
-//     }else if (y == 1) {
-//         std::ranges::sort(x.begin() + x.size()/2, x.end());
-//     }else {
-//         std::ranges::sort(x);
-//     }
-// }
-
-// namespace v1 {
-//     auto printLongestString(std::vector<std::string> a) {
-//         std::cout << std::ranges::max(a, [](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
-//     }
-// }
-// namespace v2 {
-//     auto printLongestString(std::vector<std::string> a) {
-//         std::cout << *std::ranges::max_element(a,[](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
-//     }
-// }
-// namespace v3 {
-//     auto printLongestString(std::vector<std::string> a) {
-//         std::cout <<  std::ranges::min(a,[](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
-//     }
-// }
-// namespace v4 {
-//     auto printLongestString(std::vector<std::string> a) {
-//         std::cout << *std::ranges::min_element(a,[](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
-//     }
-// }
-
-// auto reduceAdjacentWhitespaces(std::string x) {
-//     std::string modstr = "";
-//     bool last_was_space = false;
-//     for ( auto c : x) {
-//         if (std::isspace(c)) {
-//             if (!last_was_space) {
-//                 modstr += ' ';
-//             }
-//             last_was_space = true;
-//         }else {
-//             modstr += c;
-//             last_was_space = false;
-//         }
-//     }
-//     return modstr;
-// }
-
-// bool bothHalvesContainGreatestNumber(const std::vector<int>& vec) {
-//     auto max_1 = std::ranges::max_element(vec.begin(),
-//         vec.begin() + vec.size()/2);
-//     auto max_2 = std::ranges::max_element(vec.begin() + vec.size()/2,
-//         vec.end());
-//     if ( *max_1 == *max_2 ) {
-//         return true;
-//     }
-//     return false;
-// }
+// // namespace v1 {
+// //     auto printLongestString(std::vector<std::string> a) {
+// //         std::cout << std::ranges::max(a, [](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
+// //     }
+// // }
+// // namespace v2 {
+// //     auto printLongestString(std::vector<std::string> a) {
+// //         std::cout << *std::ranges::max_element(a,[](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
+// //     }
+// // }
+// // namespace v3 {
+// //     auto printLongestString(std::vector<std::string> a) {
+// //         std::cout <<  std::ranges::min(a,[](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
+// //     }
+// // }
+// // namespace v4 {
+// //     auto printLongestString(std::vector<std::string> a) {
+// //         std::cout << *std::ranges::min_element(a,[](std::string x, std::string y){return x.size() < y.size();}) << std::endl;
+// //     }
+// // }
 //
-// class Callable {
-// public:
-//     void replace( std::vector<int>& a,  std::vector<int>& b){
-//         auto max_1 = std::ranges::max_element(a);
-//         auto max_2 = std::ranges::max_element(b);
-//         std::ranges::swap(*max_1, *max_2);
-//     }
-// };
-// //
-// // bool fun(const std::vector<int>& v1) {
-// //
-// //     auto max1 = std::ranges::max(v1);
-// //     auto max2 = std::ranges::max(v1);
-// //     std::cout << *max1;
-// //     std::cout << *max2;
-// //     if (*max1 == *max2) {
+// // auto reduceAdjacentWhitespaces(std::string x) {
+// //     std::string modstr = "";
+// //     bool last_was_space = false;
+// //     for ( auto c : x) {
+// //         if (std::isspace(c)) {
+// //             if (!last_was_space) {
+// //                 modstr += ' ';
+// //             }
+// //             last_was_space = true;
+// //         }else {
+// //             modstr += c;
+// //             last_was_space = false;
+// //         }
+// //     }
+// //     return modstr;
+// // }
+//
+// // bool bothHalvesContainGreatestNumber(const std::vector<int>& vec) {
+// //     auto max_1 = std::ranges::max_element(vec.begin(),
+// //         vec.begin() + vec.size()/2);
+// //     auto max_2 = std::ranges::max_element(vec.begin() + vec.size()/2,
+// //         vec.end());
+// //     if ( *max_1 == *max_2 ) {
 // //         return true;
 // //     }
 // //     return false;
 // // }
-// namespace name {
-//     int duplicatesCount( std::vector<int>& vec) {
-//         std::ranges::sort(vec);
-//         auto uniq = std::ranges::unique(vec);
-//         return vec.size() - uniq.size();
-//     }
-// }
+// //
+// // class Callable {
+// // public:
+// //     void replace( std::vector<int>& a,  std::vector<int>& b){
+// //         auto max_1 = std::ranges::max_element(a);
+// //         auto max_2 = std::ranges::max_element(b);
+// //         std::ranges::swap(*max_1, *max_2);
+// //     }
+// // };
+// // //
+// // // bool fun(const std::vector<int>& v1) {
+// // //
+// // //     auto max1 = std::ranges::max(v1);
+// // //     auto max2 = std::ranges::max(v1);
+// // //     std::cout << *max1;
+// // //     std::cout << *max2;
+// // //     if (*max1 == *max2) {
+// // //         return true;
+// // //     }
+// // //     return false;
+// // // }
+// // namespace name {
+// //     int duplicatesCount( std::vector<int>& vec) {
+// //         std::ranges::sort(vec);
+// //         auto uniq = std::ranges::unique(vec);
+// //         return vec.size() - uniq.size();
+// //     }
+// // }
+// //
+// // std::string getShortestAndLongest( std::vector<std::string>& vec) {
+// //
+// //     auto max_1 = std::ranges::max_element(vec.begin(), vec.end(), [](std::string s1, std::string s2){return s1.size()<s2.size();});
+// //     auto min_1 = std::ranges::min_element(vec.begin(), vec.end(), [](std::string s1, std::string s2){return s1.size()<s2.size();});
+// //     return *max_1 + *min_1;
+// // }
 //
-// std::string getShortestAndLongest( std::vector<std::string>& vec) {
+// // template <std::ranges::range Container> // vec set
+// // auto print(Container const& container) -> void {
+// //     for (auto const& element : container) {
+// //         std::cout << element << ' ';
+// //     }
+// //     std::cout << '\n';
+// // }
+// //
+// // template <typename Object> // int, double
+// // auto print(Object const& object) -> void {
+// //     std::cout << object << '\n';
+// // }
+// // template< class T >
+// // concept range = requires( T& t ) {
+// //     std::ranges::begin(t);
+// //     std::ranges::end  (t);
+// // };
+// // template <typename T>
+// // concept HasSize = requires(T const& t){t.size();};
+// // template <typename T>
+// // concept HasSizeAndIsRange = HasSize<T> && std::ranges::range<T>;
+// // auto greet(auto name) -> void {
+// //     std::cout << "Hello, " << name << "!" << std::endl;
+// // }
+// //
+// // auto multiply(auto a, auto b) {
+// //     return a * b;
+// // }
+// //
+// // template <typename F>
+// // auto execute(F func) -> void {
+// //     std::cout << "Executing: ";
+// //     func();
+// //     std::cout << "Done." << std::endl;
+// // }
 //
-//     auto max_1 = std::ranges::max_element(vec.begin(), vec.end(), [](std::string s1, std::string s2){return s1.size()<s2.size();});
-//     auto min_1 = std::ranges::min_element(vec.begin(), vec.end(), [](std::string s1, std::string s2){return s1.size()<s2.size();});
-//     return *max_1 + *min_1;
-// }
-
-// template <std::ranges::range Container> // vec set
-// auto print(Container const& container) -> void {
-//     for (auto const& element : container) {
-//         std::cout << element << ' ';
-//     }
-//     std::cout << '\n';
-// }
-//
-// template <typename Object> // int, double
-// auto print(Object const& object) -> void {
-//     std::cout << object << '\n';
-// }
-// template< class T >
-// concept range = requires( T& t ) {
-//     std::ranges::begin(t);
-//     std::ranges::end  (t);
+// #include <map>
+// #include <utility>  // std::pair
+// #include <fmt/ranges.h> // format for std::pair
+// enum class Direction {
+//     North, East, South, West
 // };
+//
+// enum class Ordering {
+//     Required, NotRequired
+// };
+//
 // template <typename T>
-// concept HasSize = requires(T const& t){t.size();};
-// template <typename T>
-// concept HasSizeAndIsRange = HasSize<T> && std::ranges::range<T>;
-// auto greet(auto name) -> void {
-//     std::cout << "Hello, " << name << "!" << std::endl;
+// auto equalContents(
+//         std::vector<T> const& left, std::vector<T> const& right,
+//         Ordering const ordering
+// ) -> bool {
+//     if (ordering == Ordering::Required) return left == right;
+//     else return std::ranges::is_permutation(left, right);
 // }
 //
-// auto multiply(auto a, auto b) {
-//     return a * b;
-// }
+// // namespace clazz {
+//     // class Point {
+//     //     public:
+//     //         int x;
+//     //         int y;
+//     // };
+// // }
 //
-// template <typename F>
-// auto execute(F func) -> void {
-//     std::cout << "Executing: ";
-//     func();
-//     std::cout << "Done." << std::endl;
-// }
+// // namespace strukt {
+//     struct Point {
+//         // private:
+//             int x;
+//             int y;
+//
+//     auto distanceToOrigin() const -> double {
+//         return std::hypot(x, y);
+//     }
+//     };
+// // }
+//
+// auto format_as(Point const p1){return std::pair<int, int>{p1.x, p1.y};}
+//
+// auto toDist(Point const p1){ fmt::println("{}", std::hypot(p1.x, p1.y));return std::hypot(p1.x, p1.y);}
 
+
+
+#include <iostream>
+#include <utility>
+#include <vector>
 #include <map>
-enum class Direction {
-    North, East, South, West
-};
+#include <set>
+#include <algorithm>
+#include <ranges>
+#include <fmt/base.h>
+#include <fmt/ranges.h>
+#include <array>
+#include <utility> // For std::pair
+#include <string>
 
-enum class Ordering {
-    Required, NotRequired
-};
-
-template <typename T>
-auto equalContents(
-        std::vector<T> const& left, std::vector<T> const& right,
-        Ordering const ordering
-) -> bool {
-    if (ordering == Ordering::Required) return left == right;
-    else return std::ranges::is_permutation(left, right);
-}
-
-namespace clazz {
-    class Point {
-        public:
-            int x;
-            int y;
-    };
-}
-
-namespace strukt {
-    struct Point {
-        // private:
-            int x;
-            int y;
-    };
-}
-
-auto format_as(strukt::Point p1){return std::pair<int, int>{p1.x, p1.y};}
-
+// namespace university {
+//     enum class SortCriterion {
+//         Name,
+//         Surname,
+//         Index,
+//         Semester
+//     };
+//
+//     struct Student {
+//     private:
+//         std::string firstName;
+//         std::string lastName;
+//         std::string studentID;
+//         int semesterNumber;
+//
+//     public:
+//         Student(std::string firstName, std::string lastName, std::string studentID, int semesterNumber)
+//             : firstName(std::move(firstName)), lastName(std::move(lastName)), studentID(std::move(studentID)), semesterNumber(semesterNumber){}
+//
+//         std::string getFirstName() const { return firstName; }
+//         std::string getLastName() const { return lastName; }
+//         std::string getStudentID() const { return studentID; }
+//         int getSemesterNumber() const { return semesterNumber; }
+//
+//         void setFirstName(const std::string& newFirstName) { firstName = newFirstName; }
+//         void setLastName(const std::string& newLastName) { lastName = newLastName; }
+//         void setStudentID(const std::string& newStudentID) { studentID = newStudentID; }
+//         void setSemesterNumber(int newSemesterNumber) { semesterNumber = newSemesterNumber; }
+//
+//         auto print() const {
+//             return getFirstName() + " " + getLastName() + " " + getStudentID() + " " + std::to_string(getSemesterNumber());
+//         }
+//     };
+//     void sort(std::vector<Student>& group, SortCriterion criterion) {
+//         switch (criterion) {
+//             case SortCriterion::Name:
+//                 std::ranges::sort(group, [](const Student& a, const Student& b) {
+//                     return a.getFirstName() < b.getFirstName();
+//                 });
+//             break;
+//             case SortCriterion::Surname:
+//                 std::ranges::sort(group, [](const Student& a, const Student& b) {
+//                     return a.getLastName() < b.getLastName();
+//                 });
+//             break;
+//             case SortCriterion::Index:
+//                 std::ranges::sort(group, [](const Student& a, const Student& b) {
+//                     return a.getStudentID() < b.getStudentID();
+//                 });
+//             break;
+//             case SortCriterion::Semester:
+//                 std::ranges::sort(group, [](const Student& a, const Student& b) {
+//                     return a.getSemesterNumber() < b.getSemesterNumber();
+//                 });
+//             break;
+//         }
+//     }
+// }
+// using namespace university;
 auto main() -> int {
 //
 //     auto iter = std::vector<std::string>{"hello", "world"};
@@ -1104,11 +1186,246 @@ auto main() -> int {
     //         equalContents(v1, v2, Ordering::Required),
     //         equalContents(v1, v2, Ordering::NotRequired)
     // );
+    //
+    // // auto p1 = Point();p1.x = 1;p1.y = 2;
+    // auto p2 = Point();p2.x = 1;p2.y = 2;
+    // auto sorting = std::vector<Point>{{1,0}, {2,3}, {0,0}};
+    //
+    // // fmt::println("{} {}", p1.x, p1.y);
+    // fmt::println("{} {}", p2.x, p2.y);
+    // std::ranges::sort(sorting, [](Point left, Point right) { return toDist(left) < toDist(right); });
+    // fmt::println("{}", p2);
+    // fmt::println("{}", sorting);
+    //
+    // auto points = std::vector<Point>{ {1, 2}, {0, 0}, {2, 0} };
+    // std::ranges::sort(points, [](Point const left, Point const  right) {
+    //     return left.distanceToOrigin() < right.distanceToOrigin();
+    // });
+    // fmt::println("{}", points);
+    //
+    // auto fibonacci = [n = 0, m = 1]() mutable {
+    //     fmt::print("{} ", m);
+    //     auto prevM = m;
+    //     m += n;
+    //     n = prevM;
+    // };
+    //
+    // for (auto i = 0; i < 10; i++) {
+    //     fibonacci();
+    // }
 
-    auto p1 = clazz::Point();p1.x = 1;p1.y = 2;
-    auto p2 = strukt::Point();p2.x = 1;p2.y = 2;
+    // auto graph = std::map<std::string, std::set<std::string>>();
+    // graph["A"] = {"B", "C"};
+    // graph["B"] = {"E"};
+    // graph["C"] = {"D"};
+    // graph["D"] = {"B"};
+    // graph["E"] = {"C"};
+    //
+    // auto route = [graph, letter = std::string("A")]() mutable {
+    //     for ( auto ent : graph[letter] ) {
+    //         fmt::print("{} -> ", ent);
+    //     }
+    //     letter = *graph[letter].begin();
+    // };
+    //
+    // for ( int i = 0; i < graph.size() * 2; ++i ) {
+    //     route();
+    // }
+    // std::cout << "..." << std::endl;
+    // std::cout << "Enter words (type 'stop' to finish):\n";
+    //
+    // std::map<int, std::set<std::string>> words;
+    // std::string word;
+    //
+    // while (std::cin >> word && word != "stop") {
+    //     words[word.length()].insert(word);
+    // }
+    // for (const auto& word : words) {
+    //     fmt::print("{}\n", fmt::join(word.second, " "));
+    // }
 
-    fmt::println("{} {}", p1.x, p1.y);
-    fmt::println("{} {}", p2.x, p2.y);
-    fmt::println("{} {}", p1);
+    // std::vector<Student> studentGroup = {
+    //     {"Alice", "Smith", "S1001", 3},
+    //     {"Bob", "Johnson", "S1002", 3},
+    //     {"Charlie", "Brown", "S1003", 4},
+    //     {"David", "Lee", "S1004", 3}
+    // };
+    //
+    // fmt::println("Student Group:");
+    // for (const auto& student : studentGroup) {
+    //     fmt::println("{}", student.print());
+    // }
+    // fmt::println("");
+    //
+    // fmt::println("Sorting by Name:");
+    // sort(studentGroup, SortCriterion::Name);
+    // for (const auto& student : studentGroup) {
+    //     fmt::println("{}", student.print());
+    // }
+    // fmt::println("");
+    //
+    // fmt::println("Sorting by Surname:");
+    // sort(studentGroup, SortCriterion::Surname);
+    // for (const auto& student : studentGroup) {
+    //     fmt::println("{}", student.print());
+    // }
+    // fmt::println("");
+    //
+    // fmt::println("Sorting by Index:");
+    // sort(studentGroup, SortCriterion::Index);
+    // for (const auto& student : studentGroup) {
+    //     fmt::println("{}", student.print());
+    // }
+    // fmt::println("");
+    //
+    // fmt::println("Sorting by Semester:");
+    // sort(studentGroup, SortCriterion::Semester);
+    // for (const auto& student : studentGroup) {
+    //     fmt::println("{}", student.print());
+    // }
+    // fmt::println("");
+    //
+    // auto text = std::string("helloworld");
+    //
+    // auto map  = std::map<char, int>();
+    // for (auto c : text) map[c] += 1;
+    //
+    // // for (auto all : map) {
+    // //     fmt::println("{} {}", all.first, all.second);
+    // // }
+    // for (auto [k, v] : map) {
+    //     fmt::println("{} {}", k, v);
+    // }
+
+    std::array<int, 9> arr1 = {1, 2, 3, 2, 3, 1, 3, 2, 1};
+    std::array<int, 3> triplet1 = {arr1[0], arr1[1], arr1[2]};
+    std::array<int, 3> triplet2 = {arr1[0], arr1[1], arr1[2]};
+    std::array<int, 3> triplet3 = {arr1[0], arr1[1], arr1[2]};
+    if (std::ranges::is_permutation(triplet1, triplet2) and std::ranges::is_permutation(triplet1, triplet3) and std::ranges::is_permutation(triplet2, triplet3)) {
+        std::cout << "yes" << std::endl;
+    }else {
+        std::cout << "no" << std::endl;
+    }
+
+    return 0;
 }
+
+
+// #include <iostream>
+// #include <cmath>
+// #include <vector>
+// #include <random>
+// #include <algorithm>
+// #include <limits>
+//
+// struct Point {
+//     double x;
+//     double y;
+//
+//     void display() const {
+//         std::cout << "[ " << x << ", " << y << " ]";
+//     }
+//
+//     double distanceTo(const Point& other) const {
+//         double dx = x - other.x;
+//         double dy = y - other.y;
+//         return std::sqrt(dx * dx + dy * dy);
+//     }
+//
+//     void changeCoordinates(double newX, double newY) {
+//         x = newX;
+//         y = newY;
+//     }
+// };
+//
+// struct Rectangle {
+//     Point bottomLeft;
+//     Point topRight;
+//
+//     Rectangle(const Point& bl, const Point& tr) : bottomLeft(bl), topRight(tr) {}
+//
+//     Rectangle() : bottomLeft({std::numeric_limits<double>::max(), std::numeric_limits<double>::max()}),
+//                   topRight({std::numeric_limits<double>::lowest(), std::numeric_limits<double>::lowest()}) {}
+//
+//     void display() const {
+//         std::cout << "Bottom-Left: ";
+//         bottomLeft.display();
+//         std::cout << ", Top-Right: ";
+//         topRight.display();
+//         std::cout << std::endl;
+//     }
+//
+//     bool contains(const Point& p) const {
+//         return p.x >= bottomLeft.x && p.x <= topRight.x &&
+//                p.y >= bottomLeft.y && p.y <= topRight.y;
+//     }
+//
+//     void expandToContain(const Point& p) {
+//         if (p.x < bottomLeft.x) {
+//             bottomLeft.x = p.x;
+//         }
+//         if (p.y < bottomLeft.y) {
+//             bottomLeft.y = p.y;
+//         }
+//         if (p.x > topRight.x) {
+//             topRight.x = p.x;
+//         }
+//         if (p.y > topRight.y) {
+//             topRight.y = p.y;
+//         }
+//     }
+// };
+//
+// // int main() {
+// //     Point p1{2.5, 3.0};
+// //     Point p2{-1.0, 5.0};
+// //
+// //     std::cout << "Point 1 coordinates: ";
+// //     p1.display();
+// //     std::cout << std::endl;
+// //
+// //     std::cout << "Point 2 coordinates: ";
+// //     p2.display();
+// //     std::cout << std::endl;
+// //
+// //     double distance = p1.distanceTo(p2);
+// //     std::cout << "Distance between Point 1 and Point 2: " << distance << std::endl;
+// //
+// //     p1.changeCoordinates(0.0, 0.0);
+// //     std::cout << "Point 1 coordinates after change: ";
+// //     p1.display();
+// //     std::cout << std::endl;
+// //
+// //     Point bl{1.0, 1.0};
+// //     Point tr{5.0, 4.0};
+// //     Rectangle rect1(bl, tr);
+// //     std::cout << "Rectangle 1: ";
+// //     rect1.display();
+// //
+// //     Point p3{3.0, 2.0};
+// //     Point p4{6.0, 3.0};
+// //     std::cout << "Does Rectangle 1 contain Point 3? " << (rect1.contains(p3) ? "Yes" : "No") << std::endl;
+// //     std::cout << "Does Rectangle 1 contain Point 4? " << (rect1.contains(p4) ? "Yes" : "No") << std::endl;
+// //
+// //     std::vector<Point> randomPoints(20);
+// //     std::random_device rd;
+// //     std::mt19937 gen(rd());
+// //     std::uniform_real_distribution<> distrib(-10.0, 10.0);
+// //
+// //     std::cout << "\nRandomly generated points:\n";
+// //     for (auto& p : randomPoints) {
+// //         p.x = distrib(gen);
+// //         p.y = distrib(gen);
+// //         p.display();
+// //         std::cout << std::endl;
+// //     }
+// //     Rectangle smallestRect;
+// //     for (const auto& p : randomPoints) {
+// //         smallestRect.expandToContain(p);
+// //     }
+// //
+// //     std::cout << "\nSmallest rectangle containing all points:\n";
+// //     smallestRect.display();
+// //
+// //     return 0;
+// // }
