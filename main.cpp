@@ -556,16 +556,52 @@ auto fun(const F& funy) {
 }
 
 // Function template to print a container.
-template <std::ranges::range Container> // vec set
-auto print(const Container& container) -> void {
+template <typename Container> // vec set
+auto print(const std::vector<Container>& container) -> void {
     fmt::println("Container: {}", container);
 }
 
 // Function template to print an object.
 template <typename Object> // int, double
 auto print(const Object& object) -> void {
+    if constexpr (std::ranges::range<Object>) {
+        std::vector<int> vec1 = {1, 2, 3};
+        std::vector<int> vec2 = {3, 2, 1};
+        bool isPermutation = std::ranges::is_permutation(vec1, vec2);
+        fmt::println("{}", isPermutation);
+    }
     fmt::println("Object: {}", object);
 }
+
+template <typename T>
+concept hasSize = requires(const std::vector<T>& t){t.size();};
+
+namespace clazz {
+    class Point { // class: members are private by default
+    public:
+        int x;
+        int y;
+    };
+}
+namespace strukt {
+    struct Point { // struct: members are public by default
+        int x;
+        int y;
+    };
+}
+
+// Chapter 5.4:
+// auto format_as(Point const p) { return std::pair<int, int>(p.x, p.y); }
+// return std::hypot(x, y); // ~ | |
+// auto fibonacci = [n = 0, m = 1]() mutable {
+struct Point2D {
+    double x;
+    double y;
+};
+
+auto format_as = [](Point2D const& p) { // Lambda function
+    return std::make_pair(p.x, p.y);
+};
 
 // using namespace university;
 auto main() -> int {
@@ -1524,6 +1560,107 @@ auto main() -> int {
     double pi = 3.14159;
     print(pi); // Calls the object version of print
 
+
+
+    std::cout << hasSize<decltype(fruits)>;
+
+    clazz::Point p1; // No () for default constructor in C++
+    p1.x = 1;
+    p1.y = 2;
+    strukt::Point p2;
+    p2.x = 1;
+    p2.y = 2;
+    fmt::println("p1: x = {}, y = {}", p1.x, p1.y);
+    fmt::println("p2: x = {}, y = {}", p2.x, p2.y);
+    fmt::println("\n");
+
+    // occurrences[c] += 1; // c will give ASCII value
+    std::string text = "hello";
+    std::map<char, int> occurrences;
+    for (char c : text) {
+        occurrences[c]++; // c is implicitly converted to its ASCII value for map access
+    }
+    fmt::println("Character occurrences: ");
+    for (const auto& pair : occurrences) {
+        fmt::println("  '{}': {}", pair.first, pair.second);
+    }
+    fmt::println("\n");
+
+    // static_cast<char>(i), //(char)i,
+    int intValue = 65; // ASCII value for 'A'
+    char charValue1 = static_cast<char>(intValue); // Preferred C++ style
+    char charValue2 = (char)intValue;             // C-style cast (less safe)
+    fmt::println("Casting int to char: {} {}", charValue1, charValue2); // Both print 'A'
+    fmt::println("\n");
+
+    // std::map<char, int>(); // alike set
+    std::map<char, int> charToIntMap; // Stores key-value pairs, keys are unique
+    charToIntMap['a'] = 1;
+    charToIntMap['b'] = 2;
+    charToIntMap['c'] = 3;
+    fmt::println("charToIntMap: ");
+    for (const auto& pair : charToIntMap) {
+        fmt::println("  {} : {}", pair.first, pair.second);
+    }
+     fmt::println("\n");
+
+    // auto const pair = std::pair<char, int>('a', 5);
+    // auto const [c, i] = pair;
+    std::pair<char, int> const myPair('a', 5); // Creating a pair
+    auto const [c, i] = myPair;             // Structured binding (C++17)
+    fmt::println("Pair values: c = {}, i = {}", c, i); // Prints 'a' 5
+    fmt::println("\n");
+
+    // auto [from, to] =
+    // auto new = ===> new.begin(), new.end()
+    std::string myString = "hello world";
+    auto [from, to] = std::make_pair(myString.front(), myString.back()); //using make_pair
+    fmt::println("First char: {}, Last char: {}", from, to);
+
+    // auto new = myString.begin(); // Example of getting iterator.
+    // auto newEnd = myString.end();
+     fmt::println("\n");
+
+    // auto array = std::array<int, 5>{1, 2, 3, 4, 5};
+    std::array<int, 5> myArray = {1, 2, 3, 4, 5}; // Fixed-size array
+    fmt::println("Array elements: {}", myArray);
+    fmt::println("Array size: {}", myArray.size());
+     fmt::println("\n");
+
+    // Chapter 5.2:
+    // enum class Direction {North, East, South, West};
+    // auto currentDirection = Direction();
+    // currentDirection = Direction::West;
+    enum class Direction { North, East, South, West }; // Scoped enum
+    Direction currentDirection = Direction::West;      // Initialization
+    fmt::println("Current direction: {}", static_cast<int>(currentDirection)); // Cast to int for output
+     fmt::println("\n");
+
+    // Chapter 5.3:
+    // namespace clazz {class Point {public:int x;int y;};}
+    // namespace strukt {struct Point {// private:int x;int y;};}
+    // auto p1 = clazz::Point();p1.x = 1;p1.y = 2;
+    // auto p2 = strukt::Point();p2.x = 1;p2.y = 2;
+
+    Point2D myPoint{ 3.0, 4.0 };
+    auto pointPair = format_as(myPoint);
+    fmt::println("Point as pair: ({}, {})", pointPair.first, pointPair.second);
+
+    double distance = std::hypot(myPoint.x, myPoint.y);
+    fmt::println("Distance from origin: {}", distance);
+
+    auto fibonacci = [n = 0, m = 1]() mutable {
+        auto result = n;
+        auto temp = n + m;
+        n = m;
+        m = temp;
+        return result;
+    };
+
+    fmt::println("Fibonacci sequence:");
+    for (int i = 0; i < 10; ++i) {
+        fmt::println("{}", fibonacci());
+    }
 
     return 0;
 }
