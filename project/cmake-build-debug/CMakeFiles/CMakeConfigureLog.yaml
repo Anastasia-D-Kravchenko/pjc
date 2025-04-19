@@ -459,3 +459,38 @@ events:
       LTO support using: LLVM version 17.0.0 (static support for 29, runtime is 29)
       TAPI support using: Apple TAPI version 17.0.0 (tapi-1700.0.3.4)
 ...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/share/cmake-3.30/Modules/CheckCXXCompilerFlag.cmake:34 (cmake_check_compiler_flag)"
+      - "cmake-build-debug/_deps/fmt-src/CMakeLists.txt:252 (check_cxx_compiler_flag)"
+    checks:
+      - "Performing Test HAS_NULLPTR_WARNING"
+    directories:
+      source: "/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-35X7Ky"
+      binary: "/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-35X7Ky"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/support/cmake"
+      CMAKE_OSX_ARCHITECTURES: ""
+      CMAKE_OSX_DEPLOYMENT_TARGET: ""
+      CMAKE_OSX_SYSROOT: "/Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk"
+    buildResult:
+      variable: "HAS_NULLPTR_WARNING"
+      cached: true
+      stdout: |
+        Change Dir: '/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-35X7Ky'
+        
+        Run Build Command(s): /Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -v cmTC_a5dcd
+        [1/2] /Library/Developer/CommandLineTools/usr/bin/c++ -DHAS_NULLPTR_WARNING  -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics   -Wzero-as-null-pointer-constant -MD -MT CMakeFiles/cmTC_a5dcd.dir/src.cxx.o -MF CMakeFiles/cmTC_a5dcd.dir/src.cxx.o.d -o CMakeFiles/cmTC_a5dcd.dir/src.cxx.o -c /Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/CMakeFiles/CMakeScratch/TryCompile-35X7Ky/src.cxx
+        [2/2] : && /Library/Developer/CommandLineTools/usr/bin/c++ -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/cmTC_a5dcd.dir/src.cxx.o -o cmTC_a5dcd   && :
+        
+      exitCode: 0
+...
