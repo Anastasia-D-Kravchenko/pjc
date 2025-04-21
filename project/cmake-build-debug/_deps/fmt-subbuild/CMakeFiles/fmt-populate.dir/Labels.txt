@@ -1,0 +1,14 @@
+# Target labels
+ fmt-populate
+# Source files and their labels
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/CMakeFiles/fmt-populate
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/CMakeFiles/fmt-populate.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/CMakeFiles/fmt-populate-complete.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-build.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-configure.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-download.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-install.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-mkdir.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-patch.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-test.rule
+/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-update.rule

@@ -13,7 +13,24 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(fmt)
 
-add_executable(project main.cpp, printFileInfo.cpp, printFileName.cpp, printFilePermissions.cpp,
-        printFileSize.cpp, printLastAccessTime.cpp, printLastModificationTime.cpp,
-        printLastStatusChangeTime.cpp, displayHelp.cpp, checkFilePermissions.cpp)
+add_executable(project main.cpp
+        printFileInfo.cpp
+        printFileName.cpp
+        printFilePermissions.cpp
+        printFileSize.cpp
+        printLastAccessTime.cpp
+        printLastModificationTime.cpp
+        printLastStatusChangeTime.cpp
+        displayHelp.cpp
+        checkFilePermissions.cpp
+        getFileSize.cpp
+        charToBinary.cpp
+        readPNG.cpp
+        writeMessageToPNG.cpp
+        binaryToChar.cpp
+        readMessageFromPNG.cpp
+        canWriteMessage.cpp
+
+)
 target_link_libraries(project fmt)
+

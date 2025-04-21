@@ -1,10 +1,7 @@
 # ninja log v6
-7	690	1745060824753141400	CMakeFiles/project.dir/main.cpp.o	6e02ffc864b7b1fe
-690	727	1745060825435816390	project	face8c954f57023d
-4	202	1745064820526921501	_deps/fmt-build/CMakeFiles/fmt.dir/src/os.cc.o	1e09f9827d6c5ab3
-4	499	1745064820526504753	_deps/fmt-build/CMakeFiles/fmt.dir/src/format.cc.o	44710ec49c05bf45
-3	40	1745064834773244183	_deps/fmt-build/libfmtd.a	fa0a04e876dba92a
-4	391	1745068193483444488	CMakeFiles/project.dir/main.cpp.o	e8b5a9dca558148e
-391	418	1745068193869940895	project	daa81ca239aa9229
-4	405	1745068209258668670	CMakeFiles/project.dir/main.cpp.o	e8b5a9dca558148e
+5	39	1745165745434865418	_deps/fmt-build/libfmtd.a	fa0a04e876dba92a
+4	506	1745165668567623672	_deps/fmt-build/CMakeFiles/fmt.dir/src/format.cc.o	44710ec49c05bf45
+4	215	1745165668567992465	_deps/fmt-build/CMakeFiles/fmt.dir/src/os.cc.o	1e09f9827d6c5ab3
 405	429	1745068209660053954	project	daa81ca239aa9229
+3	403	1745165916694572697	CMakeFiles/project.dir/main.cpp.o	e8b5a9dca558148e
+0	72	1745189972951887888	build.ninja	3519c47d328d2963

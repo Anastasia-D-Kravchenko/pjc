@@ -8,33 +8,6 @@
 #include <ctime>   // For timestamp conversion
 #include <algorithm> // For std::transform
 
-// Function to convert a binary string (8 bits) to a character
-char binaryToChar(const std::string& binary) {
-    if (binary.length() != 8) {
-        throw std::runtime_error("Binary string must be 8 bits long");
-    }
-    char c = 0;
-    for (int i = 0; i < 8; ++i) {
-        if (binary[i] == '1') {
-            c |= (1 << (7 - i));
-        }
-    }
-    return c;
-}
-
-// Function to get last modification time
-std::string getLastModifiedTime(const std::string& filename) {
-    struct stat stat_buf;
-    if (stat(filename.c_str(), &stat_buf) == 0) {
-        std::time_t t = stat_buf.st_mtime;
-        std::string time_str = std::ctime(&t);
-        // Remove the trailing newline character
-        time_str.erase(time_str.find_last_not_of("\n") + 1);
-        return time_str;
-    }
-    return "Error";
-}
-
 
 // Function to read a message from a BMP image
 std::string readMessageFromBMP(const std::string& filename) {
@@ -80,75 +53,6 @@ std::string readMessageFromBMP(const std::string& filename) {
             message += binaryToChar(byte);
     }
     return message;
-}
-
-// Function to read a message from a PNG image
-std::string readMessageFromPNG(const std::string& filename) {
-    std::ifstream file(filename, std::ios::binary);
-    if (!file) {
-        throw std::runtime_error("Could not open PNG file for reading.");
-    }
-     uint32_t width, height;
-    uint16_t bitsPerPixel;
-    std::vector<char> imageData = readPNG(filename, width, height, bitsPerPixel);
-
-
-    std::string binaryMessage = "";
-    for (int i = 0; i < imageData.size(); ++i) {
-        for(int j = 0; j < bitsPerPixel / 8; ++j){
-             binaryMessage += (imageData[i * (bitsPerPixel/8) + j] & 1) ? '1' : '0';
-        }
-    }
-
-    std::string message = "";
-    for (size_t i = 0; i < binaryMessage.length(); i += 8) {
-        if (i + 8 > binaryMessage.length()) {
-            break; //prevent reading past the end
-        }
-        std::string byte = binaryMessage.substr(i, 8);
-         if (byte == "00000000")
-        {
-            if(i+8 < binaryMessage.length() && binaryMessage.substr(i+8,8) == "00000000")
-                break; // End of message marker found
-            else
-                message += binaryToChar(byte);
-        }
-        else
-            message += binaryToChar(byte);
-    }
-    return message;
-}
-
-// Function to check if a message can be written to an image
-bool canWriteMessage(const std::string& filename, const std::string& message) {
-    long fileSize = getFileSize(filename);
-    if (fileSize == -1) {
-        throw std::runtime_error("Could not get file size.");
-    }
-
-    std::string fileExtension = filename.substr(filename.find_last_of(".") + 1);
-    std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower); //to lower case
-
-     if (fileExtension == "bmp") {
-        std::ifstream file(filename, std::ios::binary);
-        uint32_t width, height;
-        uint16_t bitsPerPixel;
-        uint32_t dataOffset = readBMPHeader(file, width, height, bitsPerPixel);
-        file.close();
-        long availableBits = (fileSize - dataOffset) * 8 / bitsPerPixel;
-        long messageBits = (message.length() + 2) * 8; // +2 for the two null terminators.
-        return messageBits <= availableBits;
-    } else if (fileExtension == "png") {
-         uint32_t width, height;
-        uint16_t bitsPerPixel;
-        std::vector<char> imageData = readPNG(filename, width, height, bitsPerPixel);
-        long availableBits = imageData.size() * 8 / bitsPerPixel;
-        long messageBits = (message.length() + 2) * 8;
-        return messageBits <= availableBits;
-    }
-    else {
-        throw std::runtime_error("Unsupported file format.");
-    }
 }
 
 int main(int argc, char* argv[]) {
@@ -267,3 +171,63 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+//
+//
+// #include <iostream>
+// #include <fstream>
+// #include <vector>
+// #include <iomanip>
+//
+// int main() {
+//     const std::string filename = "palac.png";
+//     std::ifstream file(filename, std::ios::binary);
+//
+//     if (!file.is_open()) {
+//         std::cerr << "ERROR: Could not open file: " << filename << std::endl;
+//         return 1;
+//     }
+//
+//     // PNG Signature
+//     unsigned char pngSignature[8];
+//     file.read(reinterpret_cast<char*>(pngSignature), 8);
+//
+//     std::cout << "PNG Signature: ";
+//     for (int i = 0; i < 8; ++i) {
+//         std::cout << std::hex << std::uppercase << static_cast<int>(pngSignature[i]) << " ";
+//     }
+//     std::cout << std::dec << std::endl;
+//
+//     // IHDR Chunk
+//     uint32_t ihdrLength;
+//     char ihdrType[4];
+//     file.read(reinterpret_cast<char*>(&ihdrLength), 4);
+//     file.read(ihdrType, 4);
+//
+//     uint32_t width;
+//     uint32_t height;
+//     unsigned char bitDepth;
+//     unsigned char colorType;
+//     unsigned char compressionMethod;
+//     unsigned char filterMethod;
+//     unsigned char interlaceMethod;
+//
+//     file.read(reinterpret_cast<char*>(&width), 4);
+//     file.read(reinterpret_cast<char*>(&height), 4);
+//     file.read(reinterpret_cast<char*>(&bitDepth), 1);
+//     file.read(reinterpret_cast<char*>(&colorType), 1);
+//     file.read(reinterpret_cast<char*>(&compressionMethod), 1);
+//     file.read(reinterpret_cast<char*>(&filterMethod), 1);
+//     file.read(reinterpret_cast<char*>(&interlaceMethod), 1);
+//
+//     std::cout << "IHDR Length: " << ihdrLength << std::endl;
+//     std::cout << "IHDR Type: " << std::string(ihdrType, 4) << std::endl;
+//     std::cout << "Width: " << width << std::endl;
+//     std::cout << "Height: " << height << std::endl;
+//     std::cout << "Bit Depth: " << static_cast<int>(bitDepth) << std::endl;
+//     std::cout << "Color Type: " << static_cast<int>(colorType) << std::endl;
+//     std::cout << "Compression Method: " << static_cast<int>(compressionMethod) << std::endl;
+//     std::cout << "Filter Method: " << static_cast<int>(filterMethod) << std::endl;
+//     std::cout << "Interlace Method: " << static_cast<int>(interlaceMethod) << std::endl;
+//
+//     return 0;
+// }

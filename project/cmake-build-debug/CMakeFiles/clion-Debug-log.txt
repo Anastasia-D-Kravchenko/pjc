@@ -2,14 +2,5 @@
 -- {fmt} version: 11.0.2
 -- Build type: Debug
 -- Configuring done (0.1s)
-CMake Error at CMakeLists.txt:16 (add_executable):
-  Cannot find source file:
-
-    main.cpp,
-
-
-CMake Error at CMakeLists.txt:16 (add_executable):
-  No SOURCES given to target: project
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug

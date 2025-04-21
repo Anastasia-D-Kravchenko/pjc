@@ -1,0 +1,21 @@
+# ninja log v6
+1	13	1745165656476338346	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-mkdir	c925684eb21eea0c
+1	13	1745165656476338346	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-mkdir	c925684eb21eea0c
+13	7026	1745165663489107465	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-download	4c9ebb4c29b98967
+13	7026	1745165663489107465	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-download	4c9ebb4c29b98967
+7026	7055	1745165663489663301	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-update	ccad1c5c56454b90
+7026	7055	1745165663489663301	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-update	ccad1c5c56454b90
+7055	7066	1745165663529943469	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-patch	d1161a51b2b98e56
+7055	7066	1745165663529943469	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-patch	d1161a51b2b98e56
+7066	7077	1745165663540278470	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-configure	bccb27f8710eda6a
+7066	7077	1745165663540278470	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-configure	bccb27f8710eda6a
+7077	7087	1745165663551002306	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-build	ff85648d144c7160
+7077	7087	1745165663551002306	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-build	ff85648d144c7160
+7087	7098	1745165663561224307	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-install	ffb191b1e4c3e496
+7087	7098	1745165663561224307	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-install	ffb191b1e4c3e496
+7098	7107	1745165663571070432	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-test	34e0d045428443a8
+7098	7107	1745165663571070432	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-test	34e0d045428443a8
+7107	7121	1745165663584753947	CMakeFiles/fmt-populate-complete	14705f5fc6c95737
+7107	7121	1745165663584753947	fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-done	14705f5fc6c95737
+7107	7121	1745165663584753947	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/CMakeFiles/fmt-populate-complete	14705f5fc6c95737
+7107	7121	1745165663584753947	/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-subbuild/fmt-populate-prefix/src/fmt-populate-stamp/fmt-populate-done	14705f5fc6c95737

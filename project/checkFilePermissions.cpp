@@ -1,18 +1,25 @@
 // function to check file permissions (read and write ps:no execution)
+// ifstream when you only need to read data from a file.
+// ofstream when you only need to write data to a file.
+// fstream when you need to both read and write data to the same file.
 bool checkFilePermissions(const std::string& filename, bool write_access) {
-    std::fstream file(filename);
+    // 1. Check if the file can be opened for reading.
+    std::ifstream file(filename); // Use ifstream for reading
     if (!file.is_open()) {
+        std::cerr << "Error: Cannot open file '" << filename << "' for reading." << std::endl;
         return false;
     }
-    std::cout << "Opening file '" << filename << "'." << std::endl;
-    file.close();
+    std::cout << "File '" << filename << "' can be opened for reading." << std::endl;
+    file.close(); // Close the file after checking
+
+    // 2. If write access is required, check if the file can be opened for writing.
     if (write_access) {
-        std::fstream test_file(filename, std::ios::app); // std::ios::app — go to the end of the file on each write operation;
+        std::ofstream test_file(filename, std::ios::app); // Use ofstream for writing in append mode.
         if (!test_file.is_open()) {
-            std::cout << "Error writing to file '" << filename << "' cannot write to the file" << std::endl;
+            std::cerr << "Error: Cannot open file '" << filename << "' for writing." << std::endl;
             return false;
         }
-        std::cout << "Writing to file '" << filename << "' - possible" << std::endl;
+        std::cout << "File '" << filename << "' can be opened for writing." << std::endl;
         test_file.close();
     }
     return true;
