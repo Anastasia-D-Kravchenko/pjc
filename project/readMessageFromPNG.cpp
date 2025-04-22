@@ -4,7 +4,7 @@
 std::string readMessageFromPNG(const std::string& filename) {
     uint32_t width, height;
     uint16_t bitsPerPixel;
-    // Read the PNG image data, including header information.
+    // Read the PNG image data, including header information. 
     std::vector<char> imageData = readPNG(filename, width, height, bitsPerPixel);
 
     std::string binaryMessage = "";  // Store the extracted binary message.
