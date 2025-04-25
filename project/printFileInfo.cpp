@@ -17,11 +17,11 @@ void printFileInfo(const char* filename) {
         }
         printFileName(filename);
         printFileSize(fileInfo.st_size); // for Regular File: The number of data bytes in the file.
-        printLastAccessTime(fileInfo.st_mtime); // The most recent time the contents of the file were accessed.
+        printLastAccessTime(fileInfo.st_atime); // The most recent time the contents of the file were accessed.
         printLastModificationTime(fileInfo.st_mtime); // The most recent time the contents of the file were changed.
         printLastStatusChangeTime(fileInfo.st_ctime); // The most recent time the status of the file was changed.
         printFilePermissions(fileInfo.st_mode); // A bit string indicating the permissions and privileges of the file
     } catch (const std::runtime_error& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "\033[31mError: " << e.what() << "\033[0m" << std::endl;
     }
 }

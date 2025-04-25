@@ -30,6 +30,11 @@ add_executable(project main.cpp
         binaryToChar.cpp
         readMessageFromPNG.cpp
         canWriteMessage.cpp
+        processPNG.cpp
+        processBMP.cpp
+        readMessageFromBMP.cpp
+        writeMessageToBMP.cpp
+        readBMPHeader.cpp
 
 )
 target_link_libraries(project fmt)

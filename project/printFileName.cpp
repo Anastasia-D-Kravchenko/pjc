@@ -2,6 +2,6 @@ void printFileName(const char* filename) {
     try{
         std::cout << "File: " << filename << std::endl;
     } catch (const std::exception& e) {
-        std::cerr << "Error printing file name: " << e.what() << std::endl;
+        std::cerr << "\033[31mError printing file name: " << e.what() << "\033[0m" << std::endl;
     }
 }

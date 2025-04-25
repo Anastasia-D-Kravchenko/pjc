@@ -24,7 +24,7 @@
 
 std::vector<char> readPNG(const std::string& filename, uint32_t& width, uint32_t& height, uint16_t& bitsPerPixel) {
     std::ifstream file(filename, std::ios::binary); // std::ios::binary — open the file as binary;
-    if (!file.is_open()) {throw std::runtime_error("ERROR: Could not open file.");}
+    if (!file.is_open()) {throw std::runtime_error("\033[31mERROR: Could not open file.\033[0m");}
 
     // PNG Signature
     unsigned char pngSignature[8]; // Declare an unsigned char array to hold the PNG signature (8 bytes).

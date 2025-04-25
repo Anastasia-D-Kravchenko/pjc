@@ -6,20 +6,20 @@ bool checkFilePermissions(const std::string& filename, bool write_access) {
     // 1. Check if the file can be opened for reading.
     std::ifstream file(filename); // Use ifstream for reading
     if (!file.is_open()) {
-        std::cerr << "Error: Cannot open file '" << filename << "' for reading." << std::endl;
+        std::cerr << "\033[31mError: Cannot open file '" << filename << "' for reading.\033[0m" << std::endl;
         return false;
     }
-    std::cout << "File '" << filename << "' can be opened for reading." << std::endl;
+    std::cout << "\033[33mFile '" << filename << "' can be opened for reading.\033[0m" << std::endl;
     file.close(); // Close the file after checking
 
     // 2. If write access is required, check if the file can be opened for writing.
     if (write_access) {
         std::ofstream test_file(filename, std::ios::app); // Use ofstream for writing in append mode.
         if (!test_file.is_open()) {
-            std::cerr << "Error: Cannot open file '" << filename << "' for writing." << std::endl;
+            std::cerr << "\033[31mError: Cannot open file '" << filename << "' for writing.\033[0m" << std::endl;
             return false;
         }
-        std::cout << "File '" << filename << "' can be opened for writing." << std::endl;
+        std::cout << "\033[33mFile '" << filename << "' can be opened for writing.\033[0m" << std::endl;
         test_file.close();
     }
     return true;

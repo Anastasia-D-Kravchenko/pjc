@@ -24,6 +24,6 @@ void printFilePermissions(const int mode) { // The permissions are not stored as
         if (mode & S_IXOTH) std::cout << "Execute"; else std::cout << "None";
         std::cout << std::endl;
     } catch (const std::exception& e) {
-        std::cerr << "Error printing file permissions: " << e.what() << std::endl;
+        std::cerr << "\033[31mError printing file permissions: " << e.what() << "\033[0m" << std::endl;
     }
 }
