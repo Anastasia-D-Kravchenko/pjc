@@ -1,6 +1,6 @@
 /*  how to use:
  * g++ -std=c++20 -o steganography main.cpp
- * ./steganography -i palac.png
+ * ./steganography -i palac.png --- or --- ./steganography -i dots.bmp
  * ./steganography -e palac.png "Okay, let's write something connected with PNG"  --- or --- ./steganography -e dots.bmp "Okay, let's write something connected with BMP"
  * ./steganography -d palac.png --- or --- ./steganography -d dots.bmp
  * ./steganography -c palac.png "Checking"  --- or --- ./steganography -c dots.bmp "Checking"

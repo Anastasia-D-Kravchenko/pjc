@@ -12,7 +12,7 @@
     // IHDR chunk type (4 bytes, which should be "IHDR")
     // Image width (4 bytes)
     // Image height (4 bytes)
-    // Bit depth (1 byte)
+    // Bit depth (1 byte) ---- END
     // Color type (1 byte)
     // Compression method (1 byte)
     // Filter method (1 byte)
@@ -34,34 +34,23 @@ std::vector<char> readPNG(const std::string& filename, uint32_t& width, uint32_t
                                                         // works with character arrays.
 
     // IHDR Chunk -  Image Header Chunk.  This chunk contains c-r-u-c-i-a-l information about the image.
-    uint32_t ihdrLength;     // declare a 32-bit unsigned integer to store the length of the IHDR chunk.
-    char ihdrType[4];       // declare a 4-byte character array to store the IHDR chunk type (which should be "IHDR").
+    uint32_t ihdrLength;
+    char ihdrType[4];
     file.read(reinterpret_cast<char*>(&ihdrLength), 4); // The length does NOT include the length of the chunk type field.
-    file.read(ihdrType, 4);       // Read the 4-byte chunk type from the file into ihdrType.
+    file.read(ihdrType, 4);
 
     // Image dimensions
-    file.read(reinterpret_cast<char*>(&width), 4);  // Read the 4-byte image width from the file into the 'width' variable.
+    file.read(reinterpret_cast<char*>(&width), 4);
     file.read(reinterpret_cast<char*>(&height), 4);
 
-    unsigned char bitDepth;
-    unsigned char colorType;
-    unsigned char compressionMethod;
-    unsigned char filterMethod;
-    unsigned char interlaceMethod;
-
     // Read IHDR data
+    unsigned char bitDepth;
     file.read(reinterpret_cast<char*>(&bitDepth), 1);
-    file.read(reinterpret_cast<char*>(&colorType), 1);
-    file.read(reinterpret_cast<char*>(&compressionMethod), 1);  // Read the 1-byte compression method.
-    file.read(reinterpret_cast<char*>(&filterMethod), 1);
-    file.read(reinterpret_cast<char*>(&interlaceMethod), 1);
-                                                        // These values define how the image data is stored.
-
     bitsPerPixel = bitDepth; //sets the bitsPerPixel
     // std::cout << "Bits per pixel: " << bitsPerPixel << std::endl; // A single pixel can be represented by 8 bits (e.g., grayscale),
                                                                      // 24 bits (e.g., RGB), or some other number of bits.
 
-    // Read the rest of the file and return the data.  This part reads the *entire* remaining file into a buffer.
+    // Read the rest of the file and return the data.  This part reads the entire remaining file into a buffer.
     file.seekg(0, std::ios::end);       // Move the file read position to the end of the file.
     auto fileSize = file.tellg(); // Get the current file position (which is now the size of the file).
     file.seekg(0, std::ios::beg);       // Move the file read position back to the beginning of the file.
@@ -71,6 +60,5 @@ std::vector<char> readPNG(const std::string& filename, uint32_t& width, uint32_t
                                                 // fileData.data() is a method of the std::vector that
                                                 // returns a pointer to the beginning of the memory
                                                 // where the vector's data is stored.
-    file.close();
     return fileData;                     // Return the vector containing the file's data.
 }

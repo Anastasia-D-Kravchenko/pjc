@@ -19,18 +19,12 @@ std::string readMessageFromPNG(const std::string& filename) {
     while (bitIndex + 8 <= imageData.size() * 8) {
         std::string currentByteBits = ""; // Store the binary representation of the current byte.
         // Extract 8 bits (1 byte) from the image data.
-        for (int i = dataOffset + (bitIndex / 8); i < dataOffset + (bitIndex / 8) + 1; ++i) {
-            for (int j = 0; j < 8; ++j) {
-                // Extract each bit from the current byte and append it to currentByteBits.
-                currentByteBits += ((imageData[i] >> (7 - j)) & 1) ? '1' : '0';
-            }
-        }
+        for (int i = dataOffset + (bitIndex / 8); i < dataOffset + (bitIndex / 8) + 1; ++i) for (int j = 0; j < 8; ++j) currentByteBits += ((imageData[i] >> (7 - j)) & 1) ? '1' : '0'; // Extract each bit from the current byte and append it to currentByteBits.
         binaryMessage += currentByteBits; // Append the extracted byte's bits to the binary message.
         bitIndex += 8; // Move to the next byte.
 
         // Check if enough bits have been read to check for the end-of-message marker.
-        if (binaryMessage.length() >= 16)
-        {
+        if (binaryMessage.length() >= 16){
             // Check for the end-of-message marker ("0000000000000000").
             if (binaryMessage.substr(binaryMessage.length() - 16, 16) == "0000000000000000") {
                 binaryMessage = binaryMessage.substr(0, binaryMessage.length() - 16); // Remove the marker.
@@ -40,9 +34,6 @@ std::string readMessageFromPNG(const std::string& filename) {
 
     }
     // Convert the binary message to an ASCII string.
-    for (size_t i = 0; i < binaryMessage.length(); i += 8)
-    {
-        message += binaryToChar(binaryMessage.substr(i, 8)); // Convert each 8-bit segment to a character.
-    }
+    for (size_t i = 0; i < binaryMessage.length(); i += 8) message += binaryToChar(binaryMessage.substr(i, 8)); // Convert each 8-bit segment to a character.
     return message; // Return the extracted ASCII message.
 }
