@@ -1919,10 +1919,10 @@ int main() {
     // string:  Used to store the file names.
     std::string filename1, filename2;
     // iostream: Used to get input from the user.
-    std::cout << "Enter the path to the first image file: /Users/anastasiiakravchenko/PJATK/pjc/project/F03CAD47-0CB7-49F2-9D98-4ABFB7CB14D7_1_105_c.jpeg\n";
-    filename1 = "/Users/anastasiiakravchenko/PJATK/pjc/project/F03CAD47-0CB7-49F2-9D98-4ABFB7CB14D7_1_105_c.jpeg";
+    std::cout << "Enter the path to the first image file: /Users/anastasiiakravchenko/PJATK/pjc/project/sample_640×426.bmp\n";
+    filename1 = "/Users/anastasiiakravchenko/Downloads/sample_640×426.bmp";
     std::cout << "Enter the path to the second image file: /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png\n";
-    filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/palac.png";
+    filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/dots.bmp";
     try {
         // vector, string, fstream:  Used by the readBinaryFile function.
         std::vector<unsigned char> image1Data = readBinaryFile(filename1);
@@ -1946,3 +1946,4 @@ int main() {
 
 // /Users/anastasiiakravchenko/PJATK/pjc/project/F03CAD47-0CB7-49F2-9D98-4ABFB7CB14D7_1_105_c.jpeg
 // /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png
+

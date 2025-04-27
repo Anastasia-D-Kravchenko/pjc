@@ -19,7 +19,6 @@ std::string readMessageFromBMP(const std::string& filename) {
     std::vector<unsigned char> imageData(fileSize);
     file.seekg(0, std::ios::beg);
     file.read(reinterpret_cast<char*>(imageData.data()), fileSize);
-    file.close();
 
     std::string binaryMessage = "";
     uint32_t bitIndex = 0;
@@ -27,26 +26,26 @@ std::string readMessageFromBMP(const std::string& filename) {
     bool endOfMessage = false;
     for (uint32_t i = dataOffset; i < fileSize && !endOfMessage; ++i) {
         for (int j = 0; j < 8 && !endOfMessage; ++j) {
-            if ((imageData[i] >> j) & 1) {
-                binaryMessage += '1';
-            } else {
-                binaryMessage += '0';
+            if (j == 0) {
+                if (binaryMessage[bitIndex] == '1') { // 0 or 1 and 1 or 1 will give 1.
+                    imageData[i] |= (1 << j);
+                } else { // Not 1 and 1 so always 0.
+                    imageData[i] &= ~(1 << j);
+                }
             }
             bitIndex++;
-            if (bitIndex % 8 == 0) {
-                char c = 0;
-                for (int k = 0; k < 8; ++k) {
-                    if (binaryMessage[binaryMessage.length() - 8 + k] == '1') {
-                        c |= (1 << (7 - k));
-                    }
-                }
-                if (c == 0) { //check for end of message
-                    endOfMessage = true;
-                } else {
-                    message += c;
+        }
+            char c = 0;
+            for (int k = 0; k < 8; ++k) {
+                if (binaryMessage[binaryMessage.length() - 8 + k] == '1') {
+                    c |= (1 << (7 - k));
                 }
             }
+            if (c == 0) { //check for end of message
+                endOfMessage = true;
+            } else {
+                message += c;
+            }
         }
-    }
     return message;
 }

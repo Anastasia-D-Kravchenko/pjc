@@ -40,14 +40,14 @@ uint32_t readBMPHeader(const std::string& filename, uint32_t& width, uint32_t& h
     uint32_t dibHeaderSize;
 
     file.read(reinterpret_cast<char*>(&dibHeaderSize), 4);
-    if (dibHeaderSize == 40) { //info header
+    // if (dibHeaderSize == dibHeaderSize) { //info header
         file.read(reinterpret_cast<char*>(&width), 4);
         file.read(reinterpret_cast<char*>(&height), 4);
         file.seekg(2, std::ios::cur); // Skip Planes
         file.read(reinterpret_cast<char*>(&bitsPerPixel), 2);
         // ... no need in further intel.
-    }
-    else throw std::runtime_error("\033[31mERROR: Unsupported DIB Header Size.\033[0m");
+    // }
+    // else throw std::runtime_error("\033[31mERROR: Unsupported DIB Header Size.\033[0m");
     if (bitsPerPixel != 8 && bitsPerPixel != 24 && bitsPerPixel != 32) throw std::runtime_error("\033[31mERROR: Unsupported bits per pixel.\033[0m");
     return dataOffset;
 }

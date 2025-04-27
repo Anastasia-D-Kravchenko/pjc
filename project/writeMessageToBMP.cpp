@@ -28,16 +28,14 @@ void writeMessageToBMP(const std::string& filename, const std::string& message, 
     // Embed the message
     uint32_t bitIndex = 0; // Initializes an index to keep track of the current bit being processed in the binary message.
     for (uint32_t i = dataOffset; i < fileSize && bitIndex < binaryMessage.length(); ++i) {
-        for (int j = 0; j < 8 && bitIndex < binaryMessage.length(); ++j) { // Iterates through the 8 bits of the current byte in the image data.
-            if (binaryMessage[bitIndex] == '1') { // 0 or 1 and 1 or 1 will give 1.
-                imageData[i] |= (1 << j); // Sets the j-th bit of the current image data byte to 1 if the corresponding bit in the binary message is 1.
-            } else { // Not 1 and 1 so always 0.
-                imageData[i] &= ~(1 << j); // Sets the j-th bit of the current image data byte to 0 if the corresponding bit in the binary message is 0.
+        for (int j = 0; j < 8 && bitIndex < binaryMessage.length(); j++) { // Iterates through the 8 bits of the current byte in the image data.
+            if (j == 0) {
+                if (binaryMessage[bitIndex] == '1') { // 0 or 1 and 1 or 1 will give 1.
+                    imageData[i] |= (1 << j);
+                } else { // Not 1 and 1 so always 0.
+                    imageData[i] &= ~(1 << j);
+                }
             }
-            // j = 0:  Targets the LSB.  1 << 0 results in 00000001.
-            // j = 1:  Targets the second LSB. 1 << 1 results in 00000010.
-            // j = 2:  Targets the third LSB.  1 << 2 results in 00000100.
-            // ...and so on.
             bitIndex++; // Moves to the next bit in the binary message.
         }
     }
