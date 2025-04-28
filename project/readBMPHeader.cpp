@@ -48,6 +48,9 @@ uint32_t readBMPHeader(const std::string& filename, uint32_t& width, uint32_t& h
         // ... no need in further intel.
     // }
     // else throw std::runtime_error("\033[31mERROR: Unsupported DIB Header Size.\033[0m");
-    if (bitsPerPixel != 8 && bitsPerPixel != 24 && bitsPerPixel != 32) throw std::runtime_error("\033[31mERROR: Unsupported bits per pixel.\033[0m");
+    std::string yes;
+    std::cout << "\033[31mERROR: Unsupported bits per pixel. Image can be embedded with text, but it may change the image itself.\033[0m Want to continue?(Y/n)" << std::endl;
+    std::cin >> yes;
+    if (!(yes == "Y" or yes == "y")) if (bitsPerPixel != 8 && bitsPerPixel != 24 && bitsPerPixel != 32) throw std::runtime_error("\033[31mERROR: Unsupported bits per pixel.\033[0m");
     return dataOffset;
 }

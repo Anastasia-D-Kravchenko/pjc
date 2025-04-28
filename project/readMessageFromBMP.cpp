@@ -26,15 +26,16 @@ std::string readMessageFromBMP(const std::string& filename) {
     bool endOfMessage = false;
     for (uint32_t i = dataOffset; i < fileSize && !endOfMessage; ++i) {
         for (int j = 0; j < 8 && !endOfMessage; ++j) {
-            if (j == 0) {
-                if (binaryMessage[bitIndex] == '1') { // 0 or 1 and 1 or 1 will give 1.
-                    imageData[i] |= (1 << j);
-                } else { // Not 1 and 1 so always 0.
-                    imageData[i] &= ~(1 << j);
+            if ( j == 0 ) {
+                if ((imageData[i] >> j) & 1) {
+                    binaryMessage += '1';
+                } else {
+                    binaryMessage += '0';
                 }
             }
-            bitIndex++;
         }
+        bitIndex++;
+        if (bitIndex % 8 == 0) {
             char c = 0;
             for (int k = 0; k < 8; ++k) {
                 if (binaryMessage[binaryMessage.length() - 8 + k] == '1') {
@@ -47,5 +48,6 @@ std::string readMessageFromBMP(const std::string& filename) {
                 message += c;
             }
         }
+    }
     return message;
 }
