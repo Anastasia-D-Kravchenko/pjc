@@ -1798,72 +1798,47 @@
 #include <limits> //numeric limits
 
 
-// Function to read the binary content of a file
 std::vector<unsigned char> readBinaryFile(const std::string& filename) {
-    // fstream: Used for file operations
-    // ifstream:  Specifically for reading from a file
-    // std::ios::binary:  Opens the file in binary mode (important for reading image data)
-    // std::ios::ate: Opens the file and positions the read pointer at the end
     std::ifstream file(filename, std::ios::binary | std::ios::ate);
     if (!file.is_open()) {
-        // iostream:  Used for reporting errors to the user
         throw std::runtime_error("Could not open file: " + filename);
     }
-    // fstream: Used to get the file size
     std::streamsize size = file.tellg();
-    // fstream: Used to reset the file pointer to the beginning of the file
     file.seekg(0, std::ios::beg);
-    // vector:  Used to store the file data.  A vector of unsigned chars is a good
-    //          representation of binary data.
     std::vector<unsigned char> buffer(size);
-    // fstream:  Used to read the data from the file into the buffer
     if (!file.read(reinterpret_cast<char*>(buffer.data()), size)) {
-        // iostream: Used for error handling
         throw std::runtime_error("Error reading file: " + filename);
     }
-    // fstream:  Used to close the file.  Good practice to close file handles when finished.
     file.close();
     return buffer;
 }
-
-// Function to compare two binary data vectors and print the result
 void compareBinaryData(const std::vector<unsigned char>& data1, const std::vector<unsigned char>& data2, const std::string& filename1, const std::string& filename2) {
-    // iostream:  Used to send formatted output to the console (std::cout).
-    // string: Used to define ANSI color codes for colored output.
     const std::string red = "\033[31m";
     const std::string green = "\033[32m";
     const std::string reset = "\033[0m";
     const std::string yellow = "\033[33m";
-
-    // vector:  Used to get the size of the data vectors.
     if (data1.size() != data2.size()) {
-        // iostream:  Used to output the file size差异 and that files are different.
         std::cout << red << "Files are different in size.  " << filename1 << ": " << data1.size() << " bytes, " << filename2 << ": " << data2.size() << " bytes" << reset << std::endl;
         std::cout << red << "Files are NOT identical." << reset << std::endl;
         return;
     }
-    // algorithm:  Used to compare the contents of the two vectors.
     if (std::equal(data1.begin(), data1.end(), data2.begin())) {
         std::cout << green << "Files are identical." << reset << std::endl;
     } else {
         std::cout << red << "Files are NOT identical." << reset << std::endl;
         size_t firstDifference = 0;
-        // vector:  Used to iterate through the data vectors.
         for (size_t i = 0; i < data1.size(); ++i) {
             if (data1[i] != data2[i]) {
                 firstDifference = i;
                 break;
             }
         }
-        // iomanip: Used to format the byte offset and the differing byte values as hexadecimal.
         std::cout << yellow << "First difference at byte " << firstDifference << ": "
                   << "File " << filename1 << " has 0x" << std::hex << std::setw(2) << std::setfill('0') << (int)data1[firstDifference] << ", "
                   << "File " << filename2 << " has 0x" << std::hex << std::setw(2) << std::setfill('0') << (int)data2[firstDifference] << reset << std::endl;
         int start = 0x1b;
         int end = (data1.size() - 1)/3000;
-        // algorithm: Used to determine the starting byte position for display.
         start = std::max(0, start);
-        // algorithm: Used to determine the ending byte position for display.
         end = std::min((int)data1.size() - 1, end);
 
         std::cout << "Displaying bytes 0x1b to " << end << " :" << std::endl;
@@ -1871,8 +1846,6 @@ void compareBinaryData(const std::vector<unsigned char>& data1, const std::vecto
         for (int i = start; i <= end; ++i) {
             if (data1[i] != data2[i])
                 std::cout << red;
-            // iomanip:  Used to format the output as hexadecimal, with a width of 2,
-            //           and fill with 0s.  (e.g., 0x1A, 0x05)
             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
             if (data1[i] != data2[i]) std::cout << reset;
         }
@@ -1886,9 +1859,6 @@ void compareBinaryData(const std::vector<unsigned char>& data1, const std::vecto
                 std::cout << reset;
         }
         std::cout << std::endl;
-        // iomanip: Used to format the first 10 bytes and last 10 bytes
-        //          of each file.
-        // vector and algorithm:  Used to control the loops.
         std::cout << "\nFirst 10 bytes of each file:" << std::endl;
         std::cout << "File " << filename1 << ": ";
         for (int i = 0; i < std::min(10, (int)data1.size()); ++i) {
@@ -1916,21 +1886,16 @@ void compareBinaryData(const std::vector<unsigned char>& data1, const std::vecto
 }
 
 int main() {
-    // string:  Used to store the file names.
     std::string filename1, filename2;
-    // iostream: Used to get input from the user.
     std::cout << "Enter the path to the first image file: /Users/anastasiiakravchenko/PJATK/pjc/project/sample_640×426.bmp\n";
     filename1 = "/Users/anastasiiakravchenko/Downloads/sample_640×426.bmp";
     std::cout << "Enter the path to the second image file: /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png\n";
     filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/dots.bmp";
     try {
-        // vector, string, fstream:  Used by the readBinaryFile function.
         std::vector<unsigned char> image1Data = readBinaryFile(filename1);
         std::vector<unsigned char> image2Data = readBinaryFile(filename2);
-        // vector, string, iostream, iomanip, algorithm: Used by compareBinaryData
         compareBinaryData(image1Data, image2Data, filename1, filename2);
     } catch (const std::runtime_error& e) {
-        // iostream:  Used to display error messages.
         std::cerr << "Error: " << e.what() << std::endl;
         return 1;
     }
