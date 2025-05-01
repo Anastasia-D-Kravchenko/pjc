@@ -1888,9 +1888,9 @@ void compareBinaryData(const std::vector<unsigned char>& data1, const std::vecto
 int main() {
     std::string filename1, filename2;
     std::cout << "Enter the path to the first image file: /Users/anastasiiakravchenko/PJATK/pjc/project/sample_640×426.bmp\n";
-    filename1 = "/Users/anastasiiakravchenko/Downloads/sample_640×426.bmp";
+    filename1 = "/Users/anastasiiakravchenko/Downloads/palac.png";
     std::cout << "Enter the path to the second image file: /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png\n";
-    filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/dots.bmp";
+    filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/palac.png";
     try {
         std::vector<unsigned char> image1Data = readBinaryFile(filename1);
         std::vector<unsigned char> image2Data = readBinaryFile(filename2);
