@@ -31,7 +31,7 @@
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 40,
+				"line" : 41,
 				"parent" : 0
 			}
 		]
@@ -84,7 +84,8 @@
 				18,
 				19,
 				20,
-				21
+				21,
+				22
 			]
 		}
 	],
@@ -150,7 +151,8 @@
 				18,
 				19,
 				20,
-				21
+				21,
+				22
 			]
 		}
 	],
@@ -231,13 +233,13 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "readPNG.cpp",
+			"path" : "readPPM.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "writeMessageToPNG.cpp",
+			"path" : "writeMessageToPPM.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -249,7 +251,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "readMessageFromPNG.cpp",
+			"path" : "readMessageFromPPM.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -261,7 +263,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "processPNG.cpp",
+			"path" : "processPPM.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
@@ -286,6 +288,12 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "readBMPHeader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "trim.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

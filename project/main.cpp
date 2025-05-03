@@ -1,9 +1,9 @@
 /*  how to use:
  * g++ -std=c++20 -o steganography main.cpp
- * ./steganography -i palac.png --- or --- ./steganography -i dots.bmp
- * ./steganography -e palac.png "Okay, let's write something connected with PNG"  --- or --- ./steganography -e dots.bmp "Okay, let's write something connected with BMP"
- * ./steganography -d palac.png --- or --- ./steganography -d dots.bmp
- * ./steganography -c palac.png "Checking"  --- or --- ./steganography -c dots.bmp "Checking"
+ * ./steganography -i lynx.ppm --- or --- ./steganography -i dots.bmp
+ * ./steganography -e lynx.ppm "Okay, let's write something connected with PPM"  --- or --- ./steganography -e dots.bmp "Okay, let's write something connected with BMP"
+ * ./steganography -d lynx.ppm --- or --- ./steganography -d dots.bmp
+ * ./steganography -c lynx.ppm "Checking"  --- or --- ./steganography -c dots.bmp "Checking"
  * ./steganography -h
  */
 
@@ -20,10 +20,10 @@
 #include "displayHelp.cpp"
 #include "checkFilePermissions.cpp"
 #include "printFileInfo.cpp"
-#include "writeMessageToPNG.cpp"
-#include "readMessageFromPNG.cpp"
+#include "writeMessageToPPM.cpp"
+#include "readMessageFromPPM.cpp"
 #include "canWriteMessage.cpp"
-#include "processPNG.cpp"
+#include "processPPM.cpp"
 #include "processBMP.cpp"
 #include "readMessageFromBMP.cpp"
 #include "writeMessageToBMP.cpp"
@@ -49,8 +49,8 @@ int main(int argc, char* argv[]) {
             std::string filename = argv[2];
             fileExtension = filename.substr(filename.find_last_of('.') + 1);
             std::ranges::transform(fileExtension, fileExtension.begin(), ::tolower);
-            if (fileExtension != "bmp" && fileExtension != "png") {
-                std::cerr << "\033[31mError: Unsupported file format.  Only .bmp and .png are supported.\033[0m" << std::endl;
+            if (fileExtension != "bmp" && fileExtension != "ppm") {
+                std::cerr << "\033[31mError: Unsupported file format.  Only .bmp and .ppm are supported.\033[0m" << std::endl;
                 return 1;
             }
             if (!checkFilePermissions(filename, false)) {
@@ -59,8 +59,8 @@ int main(int argc, char* argv[]) {
             }
             const char* file = argv[2];
             printFileInfo(file);
-            if (fileExtension == "png") {
-                processPNG(argv[2]);
+            if (fileExtension == "ppm") {
+                processPPM(argv[2]);
             } else if (fileExtension == "bmp") {
                 processBMP(argv[2]);
             } else {
@@ -77,8 +77,8 @@ int main(int argc, char* argv[]) {
             std::string message = argv[3];
             fileExtension = filename.substr(filename.find_last_of('.') + 1);
             std::ranges::transform(fileExtension, fileExtension.begin(), ::tolower);
-            if (fileExtension != "bmp" && fileExtension != "png") {
-                std::cerr << "\033[31mError: Unsupported file format. Only .bmp and .png are supported.\033[0m" << std::endl;
+            if (fileExtension != "bmp" && fileExtension != "ppm") {
+                std::cerr << "\033[31mError: Unsupported file format. Only .bmp and .ppm are supported.\033[0m" << std::endl;
                 return 1;
             }
             if (!checkFilePermissions(filename, true)) {
@@ -87,8 +87,8 @@ int main(int argc, char* argv[]) {
             }
             if (fileExtension == "bmp") {
                 writeMessageToBMP(filename, message, 0, 0, 0);
-            } else if (fileExtension == "png") {
-                writeMessageToPNG(filename, message, 0, 0, 0);
+            } else if (fileExtension == "ppm") {
+                writeMessageToPPM(filename, message);
             }
             std::cout << "\033[32mMessage successfully written to " << filename << "\033[0m" << std::endl;
         } else if (flag == "-d" || flag == "--decrypt") {
@@ -100,8 +100,8 @@ int main(int argc, char* argv[]) {
             std::string filename = argv[2];
             fileExtension = filename.substr(filename.find_last_of('.') + 1);
             std::ranges::transform(fileExtension, fileExtension.begin(), ::tolower); //to lower case
-            if (fileExtension != "bmp" && fileExtension != "png") {
-                std::cerr << "\033[31mError: Unsupported file format.  Only .bmp and .png are supported.\033[0m" << std::endl;
+            if (fileExtension != "bmp" && fileExtension != "ppm") {
+                std::cerr << "\033[31mError: Unsupported file format.  Only .bmp and .ppm are supported.\033[0m" << std::endl;
                 return 1;
             }
              if (!checkFilePermissions(filename, false)) {
@@ -111,8 +111,8 @@ int main(int argc, char* argv[]) {
             std::string message;
             if (fileExtension == "bmp") {
                 message = readMessageFromBMP(filename);
-            } else if (fileExtension == "png") {
-                message = readMessageFromPNG(filename);
+            } else if (fileExtension == "ppm") {
+                message = readMessageFromPPM(filename);
             }
             std::cout << "Decrypted message: " << message << std::endl;
         } else if (flag == "-c" || flag == "--check") {
@@ -125,8 +125,8 @@ int main(int argc, char* argv[]) {
             std::string message = argv[3];
             fileExtension = filename.substr(filename.find_last_of('.') + 1);
             std::ranges::transform(fileExtension, fileExtension.begin(), ::tolower); //to lower case
-            if (fileExtension != "bmp" && fileExtension != "png") {
-                std::cerr << "\033[31mError: Unsupported file format. Only .bmp and .png are supported.\033[0m" << std::endl;
+            if (fileExtension != "bmp" && fileExtension != "ppm") {
+                std::cerr << "\033[31mError: Unsupported file format. Only .bmp and .ppm are supported.\033[0m" << std::endl;
                 return 1;
             }
             if (!checkFilePermissions(filename, false)) {

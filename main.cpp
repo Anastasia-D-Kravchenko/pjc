@@ -1787,120 +1787,120 @@
 // // // }
 
 
-#include <iostream>  // For standard input and output (e.g., std::cout, std::cin, std::cerr)
-#include <fstream>   // For file input and output (e.g., std::ifstream, std::ofstream)
-#include <vector>    // For dynamic arrays (e.g., std::vector)
-#include <string>    // For working with strings (e.g., std::string)
-#include <algorithm> // For various algorithms (e.g., std::equal, std::max, std::min)
-#include <iomanip>   // For input/output manipulation (e.g., std::hex, std::setw, std::setfill, std::fixed, std::setprecision)
-#include <sstream> //string streams
-#include <cmath> //math functions
-#include <limits> //numeric limits
-
-
-std::vector<unsigned char> readBinaryFile(const std::string& filename) {
-    std::ifstream file(filename, std::ios::binary | std::ios::ate);
-    if (!file.is_open()) {
-        throw std::runtime_error("Could not open file: " + filename);
-    }
-    std::streamsize size = file.tellg();
-    file.seekg(0, std::ios::beg);
-    std::vector<unsigned char> buffer(size);
-    if (!file.read(reinterpret_cast<char*>(buffer.data()), size)) {
-        throw std::runtime_error("Error reading file: " + filename);
-    }
-    file.close();
-    return buffer;
-}
-void compareBinaryData(const std::vector<unsigned char>& data1, const std::vector<unsigned char>& data2, const std::string& filename1, const std::string& filename2) {
-    const std::string red = "\033[31m";
-    const std::string green = "\033[32m";
-    const std::string reset = "\033[0m";
-    const std::string yellow = "\033[33m";
-    if (data1.size() != data2.size()) {
-        std::cout << red << "Files are different in size.  " << filename1 << ": " << data1.size() << " bytes, " << filename2 << ": " << data2.size() << " bytes" << reset << std::endl;
-        std::cout << red << "Files are NOT identical." << reset << std::endl;
-        return;
-    }
-    if (std::equal(data1.begin(), data1.end(), data2.begin())) {
-        std::cout << green << "Files are identical." << reset << std::endl;
-    } else {
-        std::cout << red << "Files are NOT identical." << reset << std::endl;
-        size_t firstDifference = 0;
-        for (size_t i = 0; i < data1.size(); ++i) {
-            if (data1[i] != data2[i]) {
-                firstDifference = i;
-                break;
-            }
-        }
-        std::cout << yellow << "First difference at byte " << firstDifference << ": "
-                  << "File " << filename1 << " has 0x" << std::hex << std::setw(2) << std::setfill('0') << (int)data1[firstDifference] << ", "
-                  << "File " << filename2 << " has 0x" << std::hex << std::setw(2) << std::setfill('0') << (int)data2[firstDifference] << reset << std::endl;
-        int start = 0x1b;
-        int end = (data1.size() - 1)/3000;
-        start = std::max(0, start);
-        end = std::min((int)data1.size() - 1, end);
-
-        std::cout << "Displaying bytes 0x1b to " << end << " :" << std::endl;
-        std::cout << "File " << filename1 << ": ";
-        for (int i = start; i <= end; ++i) {
-            if (data1[i] != data2[i])
-                std::cout << red;
-            std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
-            if (data1[i] != data2[i]) std::cout << reset;
-        }
-        std::cout << std::endl;
-        std::cout << "File " << filename2 << ": ";
-        for (int i = start; i <= end; ++i) {
-            if (data1[i] != data2[i])
-                std::cout << red;
-            std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data2[i] << " ";
-            if (data1[i] != data2[i])
-                std::cout << reset;
-        }
-        std::cout << std::endl;
-        std::cout << "\nFirst 10 bytes of each file:" << std::endl;
-        std::cout << "File " << filename1 << ": ";
-        for (int i = 0; i < std::min(10, (int)data1.size()); ++i) {
-            std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "File " << filename2 << ": ";
-        for (int i = 0; i < std::min(10, (int)data2.size()); ++i) {
-            std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data2[i] << " ";
-        }
-        std::cout << std::endl;
-
-        std::cout << "\nLast 10 bytes of each file:" << std::endl;
-        std::cout << "File " << filename1 << ": ";
-        for (int i = std::max(0, (int)data1.size() - 10); i < data1.size(); ++i) {
-            std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
-        }
-        std::cout << std::endl;
-        std::cout << "File " << filename2 << ": ";
-        for (int i = std::max(0, (int)data2.size() - 10); i < data2.size(); ++i) {
-            std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data2[i] << " ";
-        }
-        std::cout << std::endl;
-    }
-}
-
-int main() {
-    std::string filename1, filename2;
-    std::cout << "Enter the path to the first image file: /Users/anastasiiakravchenko/PJATK/pjc/project/sample_640×426.bmp\n";
-    filename1 = "/Users/anastasiiakravchenko/Downloads/palac.png";
-    std::cout << "Enter the path to the second image file: /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png\n";
-    filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/palac.png";
-    try {
-        std::vector<unsigned char> image1Data = readBinaryFile(filename1);
-        std::vector<unsigned char> image2Data = readBinaryFile(filename2);
-        compareBinaryData(image1Data, image2Data, filename1, filename2);
-    } catch (const std::runtime_error& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
-    return 0;
-}
+// #include <iostream>  // For standard input and output (e.g., std::cout, std::cin, std::cerr)
+// #include <fstream>   // For file input and output (e.g., std::ifstream, std::ofstream)
+// #include <vector>    // For dynamic arrays (e.g., std::vector)
+// #include <string>    // For working with strings (e.g., std::string)
+// #include <algorithm> // For various algorithms (e.g., std::equal, std::max, std::min)
+// #include <iomanip>   // For input/output manipulation (e.g., std::hex, std::setw, std::setfill, std::fixed, std::setprecision)
+// #include <sstream> //string streams
+// #include <cmath> //math functions
+// #include <limits> //numeric limits
+//
+//
+// std::vector<unsigned char> readBinaryFile(const std::string& filename) {
+//     std::ifstream file(filename, std::ios::binary | std::ios::ate);
+//     if (!file.is_open()) {
+//         throw std::runtime_error("Could not open file: " + filename);
+//     }
+//     std::streamsize size = file.tellg();
+//     file.seekg(0, std::ios::beg);
+//     std::vector<unsigned char> buffer(size);
+//     if (!file.read(reinterpret_cast<char*>(buffer.data()), size)) {
+//         throw std::runtime_error("Error reading file: " + filename);
+//     }
+//     file.close();
+//     return buffer;
+// }
+// void compareBinaryData(const std::vector<unsigned char>& data1, const std::vector<unsigned char>& data2, const std::string& filename1, const std::string& filename2) {
+//     const std::string red = "\033[31m";
+//     const std::string green = "\033[32m";
+//     const std::string reset = "\033[0m";
+//     const std::string yellow = "\033[33m";
+//     if (data1.size() != data2.size()) {
+//         std::cout << red << "Files are different in size.  " << filename1 << ": " << data1.size() << " bytes, " << filename2 << ": " << data2.size() << " bytes" << reset << std::endl;
+//         std::cout << red << "Files are NOT identical." << reset << std::endl;
+//         return;
+//     }
+//     if (std::equal(data1.begin(), data1.end(), data2.begin())) {
+//         std::cout << green << "Files are identical." << reset << std::endl;
+//     } else {
+//         std::cout << red << "Files are NOT identical." << reset << std::endl;
+//         size_t firstDifference = 0;
+//         for (size_t i = 0; i < data1.size(); ++i) {
+//             if (data1[i] != data2[i]) {
+//                 firstDifference = i;
+//                 break;
+//             }
+//         }
+//         std::cout << yellow << "First difference at byte " << firstDifference << ": "
+//                   << "File " << filename1 << " has 0x" << std::hex << std::setw(2) << std::setfill('0') << (int)data1[firstDifference] << ", "
+//                   << "File " << filename2 << " has 0x" << std::hex << std::setw(2) << std::setfill('0') << (int)data2[firstDifference] << reset << std::endl;
+//         int start = 0x1b;
+//         int end = (data1.size() - 1)/3000;
+//         start = std::max(0, start);
+//         end = std::min((int)data1.size() - 1, end);
+//
+//         std::cout << "Displaying bytes 0x1b to " << end << " :" << std::endl;
+//         std::cout << "File " << filename1 << ": ";
+//         for (int i = start; i <= end; ++i) {
+//             if (data1[i] != data2[i])
+//                 std::cout << red;
+//             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
+//             if (data1[i] != data2[i]) std::cout << reset;
+//         }
+//         std::cout << std::endl;
+//         std::cout << "File " << filename2 << ": ";
+//         for (int i = start; i <= end; ++i) {
+//             if (data1[i] != data2[i])
+//                 std::cout << red;
+//             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data2[i] << " ";
+//             if (data1[i] != data2[i])
+//                 std::cout << reset;
+//         }
+//         std::cout << std::endl;
+//         std::cout << "\nFirst 10 bytes of each file:" << std::endl;
+//         std::cout << "File " << filename1 << ": ";
+//         for (int i = 0; i < std::min(10, (int)data1.size()); ++i) {
+//             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
+//         }
+//         std::cout << std::endl;
+//         std::cout << "File " << filename2 << ": ";
+//         for (int i = 0; i < std::min(10, (int)data2.size()); ++i) {
+//             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data2[i] << " ";
+//         }
+//         std::cout << std::endl;
+//
+//         std::cout << "\nLast 10 bytes of each file:" << std::endl;
+//         std::cout << "File " << filename1 << ": ";
+//         for (int i = std::max(0, (int)data1.size() - 10); i < data1.size(); ++i) {
+//             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data1[i] << " ";
+//         }
+//         std::cout << std::endl;
+//         std::cout << "File " << filename2 << ": ";
+//         for (int i = std::max(0, (int)data2.size() - 10); i < data2.size(); ++i) {
+//             std::cout << std::hex << std::setw(2) << std::setfill('0') << (int)data2[i] << " ";
+//         }
+//         std::cout << std::endl;
+//     }
+// }
+//
+// int main() {
+//     std::string filename1, filename2;
+//     std::cout << "Enter the path to the first image file: /Users/anastasiiakravchenko/PJATK/pjc/project/sample_640×426.bmp\n";
+//     filename1 = "/Users/anastasiiakravchenko/Downloads/palac.png";
+//     std::cout << "Enter the path to the second image file: /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png\n";
+//     filename2 = "/Users/anastasiiakravchenko/PJATK/pjc/project/palac.png";
+//     try {
+//         std::vector<unsigned char> image1Data = readBinaryFile(filename1);
+//         std::vector<unsigned char> image2Data = readBinaryFile(filename2);
+//         compareBinaryData(image1Data, image2Data, filename1, filename2);
+//     } catch (const std::runtime_error& e) {
+//         std::cerr << "Error: " << e.what() << std::endl;
+//         return 1;
+//     }
+//     return 0;
+// }
 
 
 
@@ -1912,3 +1912,449 @@ int main() {
 // /Users/anastasiiakravchenko/PJATK/pjc/project/F03CAD47-0CB7-49F2-9D98-4ABFB7CB14D7_1_105_c.jpeg
 // /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png
 
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stdexcept>
+#include <algorithm>
+#include <array>
+#include <climits> // For UINT_MAX
+#include <cstring>
+
+// Helper function to read bits from a byte array
+class BitReader {
+public:
+    BitReader(const std::vector<unsigned char>& data) : data_(data), bitIndex_(0), byteIndex_(0) {}
+
+    // Read a specified number of bits.  Returns the value as an unsigned 32-bit integer.
+    uint32_t readBits(int numBits) {
+        if (numBits == 0) return 0;
+        if (byteIndex_ >= data_.size()) {
+            throw std::runtime_error("Read past end of data");
+        }
+
+        uint32_t value = 0;
+        int bitsRead = 0;
+
+        while (bitsRead < numBits) {
+            if (bitIndex_ == 8) {
+                bitIndex_ = 0;
+                byteIndex_++;
+                if (byteIndex_ >= data_.size()) {
+                    break; // Read less than requested, will throw if numBits not satisfied
+                }
+            }
+
+            int bitsToRead = std::min(numBits - bitsRead, 8 - bitIndex_);
+            uint8_t currentByte = data_[byteIndex_];
+            uint32_t mask = ((1 << bitsToRead) - 1) << bitIndex_;
+            value |= ((currentByte & mask) >> bitIndex_) << bitsRead;
+            bitIndex_ += bitsToRead;
+            bitsRead += bitsToRead;
+        }
+        if (bitsRead != numBits) {
+            throw std::runtime_error("Not enough data to read requested bits");
+        }
+        return value;
+    }
+
+    // Read a single bit (0 or 1).
+    int readBit() {
+        return readBits(1);
+    }
+
+    // Returns the current byte index.
+    size_t getByteIndex() const { return byteIndex_; }
+     void advanceBytes(size_t numBytes) {
+        byteIndex_ += numBytes;
+        bitIndex_ = 0; // Reset bit index when advancing bytes
+    }
+
+private:
+    const std::vector<unsigned char>& data_;
+    size_t byteIndex_;
+    int bitIndex_;
+};
+
+// Function to calculate Adler-32 checksum
+uint32_t adler32(const std::vector<unsigned char>& data) {
+    uint32_t s1 = 1;
+    uint32_t s2 = 0;
+    for (unsigned char byte : data) {
+        s1 = (s1 + byte) % 65521;
+        s2 = (s2 + s1) % 65521;
+    }
+    return (s2 << 16) + s1;
+}
+
+// Structure to represent a Huffman tree node
+struct huffman_node {
+    uint16_t value; // If it's a leaf node, this is the symbol value.
+    int length;
+    huffman_node* left;
+    huffman_node* right;
+};
+
+// Function to build a Huffman tree from code lengths
+huffman_node* build_huffman_tree(const std::vector<int>& lengths, int& num_nodes) {
+    int num_symbols = lengths.size();
+    std::vector<uint16_t> bl_count(16, 0);
+    for (int len : lengths) {
+        if (len > 0) {
+            bl_count[len]++;
+        }
+    }
+
+    uint16_t max_len = lengths.empty() ? 0 : *std::max_element(lengths.begin(), lengths.end());
+    std::vector<uint16_t> next_code(max_len + 1);
+    uint16_t code = 0;
+    bl_count[0] = 0;
+    for (int bits = 1; bits <= max_len; bits++) {
+        code = (code + bl_count[bits - 1]) << 1;
+        next_code[bits] = code;
+    }
+
+    std::vector<huffman_node*> nodes;
+    nodes.resize(num_symbols);
+    for (int i = 0; i < num_symbols; i++) {
+        nodes[i] = new huffman_node{static_cast<uint16_t>(i), lengths[i], nullptr, nullptr};
+    }
+
+     // Sort nodes by length (shorter lengths first, then by symbol value)
+    std::sort(nodes.begin(), nodes.end(), [](huffman_node* a, huffman_node* b) {
+        if (a->length != b->length) {
+            return a->length < b->length;
+        }
+        return a->value < b->value; // Keep original order for symbols with same length.
+    });
+
+    std::vector<huffman_node*> internal_nodes;
+    std::vector<huffman_node*> leaves;
+
+    for(auto node : nodes){
+        if(node->length > 0){
+            leaves.push_back(node);
+        }
+    }
+    num_nodes = leaves.size();
+
+    while (leaves.size() > 1) {
+        huffman_node* node1 = leaves[0];
+        huffman_node* node2 = leaves[1];
+        leaves.erase(leaves.begin(), leaves.begin() + 2);
+
+        huffman_node* new_node = new huffman_node{0, std::max(node1->length, node2->length) + 1, node1, node2};
+        internal_nodes.push_back(new_node);
+
+        // Insert the new node into the leaves vector, maintaining sorted order
+        auto insert_pos = std::lower_bound(leaves.begin(), leaves.end(), new_node, [](huffman_node* a, huffman_node* b) {
+            if (a->length != b->length) {
+                return a->length < b->length;
+            }
+            return false;
+        });
+        leaves.insert(insert_pos, new_node);
+        num_nodes++;
+    }
+
+    return leaves.empty() ? nullptr : leaves[0];
+}
+
+// Function to decode a symbol from the Huffman tree
+uint16_t decode_huffman(BitReader& reader, huffman_node* root) {
+    if (root == nullptr) {
+        throw std::runtime_error("Empty Huffman tree");
+    }
+
+    huffman_node* current = root;
+    while (current->left != nullptr && current->right != nullptr) {
+        int bit = reader.readBit();
+        if (bit == 0) {
+            current = current->left;
+        } else {
+            current = current->right;
+        }
+    }
+    return current->value;
+}
+
+// Function to decompress zlib data (DEFLATE algorithm)
+std::vector<unsigned char> decompressZlib(const std::vector<unsigned char>& compressedData) {
+    BitReader reader(compressedData);
+
+    // 1.  Check CMF and FLG
+    uint8_t cmf = reader.readBits(8);
+    uint8_t flg = reader.readBits(8);
+
+    if ((cmf & 0x0F) != 8) { // CM = 8 for DEFLATE
+        throw std::runtime_error("Unsupported compression method");
+    }
+    if (((cmf << 8) + flg) % 31 != 0) {
+        throw std::runtime_error("Invalid CMF/FLG combination");
+    }
+    if (flg & 0x20) {
+        throw std::runtime_error("Preset dictionary not supported");
+    }
+
+    std::vector<unsigned char> decompressedData;
+    bool bFinalBlock = false;
+    // 2. Main decompression loop
+    while (!bFinalBlock) {
+        bFinalBlock = reader.readBit();
+        int btype = reader.readBits(2);
+
+        if (btype == 0) { // No compression (stored)
+            // Skip any remaining bits in the current byte
+            if (reader.readBits(8 - (reader.getByteIndex() * 8) % 8) != 0) {
+                if ((reader.getByteIndex() * 8) % 8 != 0) {
+                    reader.readBits(8 - (reader.getByteIndex() * 8) % 8);
+                }
+            }
+            uint16_t len = reader.readBits(16);
+            uint16_t nlen = reader.readBits(16);
+
+            for (int i = 0; i < len; ++i) {
+                if (reader.getByteIndex() >= compressedData.size()) {
+                    throw std::runtime_error("Read past end of compressed data");
+                }
+                decompressedData.push_back(compressedData[reader.getByteIndex()]);
+                reader.readBits(8); // Advance by one byte
+            }
+        } else if (btype == 1 || btype == 2) { // Fixed or dynamic Huffman compression
+            int hlit = 0;
+            int hdist = 0;
+            int hclen = 0;
+            std::vector<int> lens;
+            std::vector<int> dists;
+            std::vector<int> code_lengths;
+
+
+            if (btype == 1) { // Fixed Huffman codes
+                // Fixed literal/length codes (288 codes: 0-255 literal/length, 256 end-of-block, 257-285 length codes)
+                lens.resize(288);
+                for (int i = 0; i <= 255; ++i) {
+                    lens[i] = (i <= 143) ? 8 : (i <= 255) ? 9 : 0;
+                }
+                for (int i = 256; i <= 279; ++i) {
+                    lens[i] = 7;
+                }
+                for(int i=280; i<=287; ++i){
+                    lens[i] = 8;
+                }
+                // Fixed distance codes (32 codes, 0-29 are valid, 30 and 31 are never used)
+                dists.resize(32, 5); // All distance codes have length 5
+                hlit = 286;
+                hdist = 30;
+            } else { // btype == 2, Dynamic Huffman codes
+                hlit = reader.readBits(5) + 257;     // # of Literal/Length codes (5 bits + 257, 257 - 286)
+                hdist = reader.readBits(5) + 1;       // # of Distance codes (5 bits + 1, 1 - 32)
+                hclen = reader.readBits(4) + 4;       // # of Code Length codes (4 bits + 4, 4 - 19)
+
+                // Read code lengths for code length alphabet (hclen codes)
+                code_lengths.resize(19);
+                for (int i = 0; i < hclen; ++i) {
+                    code_lengths[i] = reader.readBits(3);
+                }
+                // Map code length codes in the order specified by the deflate spec
+                std::array<int, 19> code_order = {16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
+                std::vector<int> cl_lens(19);
+                for(int i=0; i<19; ++i){
+                    cl_lens[i] = code_lengths[code_order[i]];
+                }
+
+                // Build Huffman tree for code length codes
+                int num_nodes_cl;
+                huffman_node* cl_root = build_huffman_tree(cl_lens, num_nodes_cl);
+
+                // Read the code lengths for the literal/length and distance alphabets
+                lens.resize(hlit);
+                dists.resize(hdist);
+                int n = hlit + hdist;
+                int i = 0;
+                while (i < n) {
+                    uint16_t symbol = decode_huffman(reader, cl_root);
+                    if (symbol < 16) {
+                        if (i < hlit)
+                            lens[i++] = symbol;
+                        else
+                            dists[i++ - hlit] = symbol;
+                    } else if (symbol == 16) {
+                        uint8_t repeat = reader.readBits(2) + 3;
+                        uint8_t value = (i == 0 || i >= hlit) ? 0: (i < hlit) ? lens[i-1] : dists[i - hlit -1];
+                        for (int j = 0; j < repeat; ++j) {
+                             if (i < hlit)
+                                lens[i++] = value;
+                            else
+                                dists[i++ - hlit] = value;
+                        }
+                    } else if (symbol == 17) {
+                        uint8_t repeat = reader.readBits(3) + 3;
+                         for (int j = 0; j < repeat; ++j) {
+                            if (i < hlit)
+                                lens[i++] = 0;
+                            else
+                                dists[i++ - hlit] = 0;
+                        }
+                    } else if (symbol == 18) {
+                        uint8_t repeat = reader.readBits(7) + 11;
+                         for (int j = 0; j < repeat; ++j) {
+                            if (i < hlit)
+                                lens[i++] = 0;
+                            else
+                                dists[i++ - hlit] = 0;
+                        }
+                    }
+                }
+                for(int i=hlit; i<lens.size(); ++i){
+                    if(lens[i] == 0){
+                         lens[i] = 0;
+                    }
+                }
+                for(int i=hdist; i<dists.size(); ++i){
+                    dists[i] = 0;
+                }
+                delete cl_root;
+            }
+            // Build Huffman trees for literal/length and distance codes
+            int num_nodes_lit;
+            huffman_node* lit_root = build_huffman_tree(lens, num_nodes_lit);
+            int num_nodes_dist;
+            huffman_node* dist_root = build_huffman_tree(dists, num_nodes_dist);
+
+            // Decode the data using the Huffman trees
+            while (true) {
+                uint16_t symbol = decode_huffman(reader, lit_root);
+                if (symbol == 256) { // End of block
+                    break;
+                } else if (symbol < 256) { // Literal (0-255)
+                    decompressedData.push_back(static_cast<unsigned char>(symbol));
+                } else { // Length code (257-285)
+                    int length_code = symbol;
+                    int length_base = 0;
+                    int extra_bits = 0;
+                    if (length_code >= 257 && length_code <= 264) {
+                        length_base = length_code - 257 + 3;
+                        extra_bits = length_code - 257;
+                    } else if (length_code >= 265 && length_code <= 268) {
+                        length_base = (length_code - 265 + 11) << 1;
+                        extra_bits = length_code - 265 + 1;
+                    } else if (length_code >= 269 && length_code <= 272) {
+                        length_base = (length_code - 269 + 19) << 2;
+                        extra_bits = length_code - 269 + 1;
+                    } else if (length_code >= 273 && length_code <= 276) {
+                        length_base = (length_code - 273 + 35) << 3;
+                        extra_bits = length_code - 273 + 1;
+                    } else if (length_code >= 277 && length_code <= 280) {
+                        length_base = (length_code - 277 + 67) << 4;
+                        extra_bits = length_code - 277 + 1;
+                    } else if (length_code >= 281 && length_code <= 284) {
+                        length_base = (length_code - 281 + 131) << 5;
+                        extra_bits = length_code - 281 + 1;
+                    } else if (length_code == 285) {
+                        length_base = 258;
+                        extra_bits = 0;
+                    }
+                    uint32_t length = length_base + reader.readBits(extra_bits);
+
+                    // Distance code (0-29)
+                    uint16_t dist_code = decode_huffman(reader, dist_root);
+                    int dist_base = 0;
+                    int dist_extra_bits = 0;
+
+                    if (dist_code >= 0 && dist_code <= 3) {
+                        dist_base = dist_code + 1;
+                        dist_extra_bits = dist_code;
+                    } else if (dist_code >= 4 && dist_code <= 5) {
+                        dist_base = (dist_code - 4 + 5) << 1;
+                        dist_extra_bits = dist_code - 4 + 1;
+                    } else if (dist_code >= 6 && dist_code <= 7) {
+                        dist_base = (dist_code - 6 + 9) << 2;
+                        dist_extra_bits = dist_code - 6 + 1;
+                    } else if (dist_code >= 8 && dist_code <= 11) {
+                        dist_base = (dist_code - 8 + 17) << 3;
+                        dist_extra_bits = dist_code - 8 + 1;
+                    } else if (dist_code >= 12 && dist_code <= 15) {
+                        dist_base = (dist_code - 12 + 33) << 4;
+                        dist_extra_bits = dist_code - 12 + 1;
+                    } else if (dist_code >= 16 && dist_code <= 19) {
+                        dist_base = (dist_code - 16 + 65) << 5;
+                        dist_extra_bits = dist_code - 16 + 1;
+                    } else if (dist_code >= 20 && dist_code <= 23) {
+                        dist_base = (dist_code - 20 + 129) << 6;
+                        dist_extra_bits = dist_code - 20 + 1;
+                    } else if (dist_code >= 24 && dist_code <= 27) {
+                        dist_base = (dist_code - 24 + 257) << 7;
+                        dist_extra_bits = dist_code - 24 + 1;
+                    } else if (dist_code >= 28 && dist_code <= 29) {
+                        dist_base = (dist_code - 28 + 513) << 8;
+                        dist_extra_bits = dist_code - 28 + 1;
+                    }
+                    uint32_t distance = dist_base + reader.readBits(dist_extra_bits);
+
+                    // Copy the decoded data from the history
+                    size_t start = decompressedData.size() - distance;
+                    if (start < 0) {
+                        throw std::runtime_error("Invalid distance");
+                    }
+                    for (uint32_t j = 0; j < length; ++j) {
+                        decompressedData.push_back(decompressedData[start + j]);
+                    }
+                }
+            }
+            delete lit_root;
+            delete dist_root;
+        } else {
+            throw std::runtime_error("Invalid block type");
+        }
+    }
+
+    // 3.  Verify Adler-32 checksum
+    uint32_t adler32_calculated = adler32(decompressedData);
+    uint32_t adler32_read = reader.readBits(32);
+
+    return decompressedData;
+}
+
+// Example usage
+int main() {
+    // Example compressed data (replace with your actual compressed data)
+    // This example uses a very simple stored block followed by a fixed huffman block.
+    std::vector<unsigned char> compressedData = {
+        0x78, 0x9c, // CMF, FLG
+        0x01,       // Final block, no compression (stored)
+        0x01, 0x00, 0x00, 0x00, // LEN = 1, NLEN = 65534
+        0x41,       // Data: 'A'
+        0x01,       // Final block, fixed Huffman
+        0x00,       // Padding bits
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00,
+        0x21, 0x00, // Adler32 of "A\n"
+    };
+
+    try {
+        std::vector<unsigned char> decompressedData = decompressZlib(compressedData);
+        std::cout << "Decompressed data: ";
+        for (unsigned char byte : decompressedData) {
+            std::cout <<  byte;
+        }
+        std::cout << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}

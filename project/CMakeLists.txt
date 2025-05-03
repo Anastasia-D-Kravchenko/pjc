@@ -25,16 +25,17 @@ add_executable(project main.cpp
         checkFilePermissions.cpp
         getFileSize.cpp
         charToBinary.cpp
-        readPNG.cpp
-        writeMessageToPNG.cpp
+        readPPM.cpp
+        writeMessageToPPM.cpp
         binaryToChar.cpp
-        readMessageFromPNG.cpp
+        readMessageFromPPM.cpp
         canWriteMessage.cpp
-        processPNG.cpp
+        processPPM.cpp
         processBMP.cpp
         readMessageFromBMP.cpp
         writeMessageToBMP.cpp
         readBMPHeader.cpp
+        trim.cpp
 
 )
 target_link_libraries(project fmt)
