@@ -18,7 +18,7 @@ bool canWriteMessage(const std::string& filename, const std::string& message) {
         long messageBits = (message.length() + 2) * 8; // +2 for the two null terminators.
         std::cout << "Message size: " << messageBits/8 << ", available " << availableBits/8 << std::endl;
         return messageBits <= availableBits;
-    } else if (fileExtension == "png") {
+    } else if (fileExtension == "ppm") {
         uint32_t width, height;
         uint16_t bitsPerPixel;
         std::vector<char> imageData = readPPM(filename, width, height, bitsPerPixel);

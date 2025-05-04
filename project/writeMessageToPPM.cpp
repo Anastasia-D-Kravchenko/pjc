@@ -27,8 +27,8 @@ void writeMessageToPPM(const std::string& filename, const std::string& message) 
 
     int bytesPerPixel = (magicNumber == "P6") ? 3 : 1;
     long availableBits = (magicNumber == "P6") ? width * height * bytesPerPixel * 8 : width * height * 8;
-
-    if (message.length() * 8 > availableBits) {
+    std::cout << "Message size: " << message.length() << ", available " << availableBits/(3*8) << std::endl;
+    if (message.length() * 8 > availableBits/3) {
         throw std::runtime_error("\033[31mERROR: Message is too long to fit in the image.\033[0m");
     }
     if (message.empty()) return;
@@ -38,7 +38,7 @@ void writeMessageToPPM(const std::string& filename, const std::string& message) 
     for (char c : message) {
         binaryMessage += charToBinary(c);
     }
-    binaryMessage += "00000000"; // Null terminator
+    binaryMessage += "0000000000000000"; // Null terminator
 
     // 4. Embed the message
     int bitIndex = 0;
@@ -48,22 +48,18 @@ void writeMessageToPPM(const std::string& filename, const std::string& message) 
             ++bitIndex;
         }
     } else {
-        // std::vector<unsigned char> pixelData;
-        //
-        // for (int i = 0; i < height; ++i) {
-        //     for (int j = 0; j < width; ++j) {
-        //         unsigned char r = imageData[(i * width + j)];
-        //
-        //         if (bitIndex < binaryMessage.length()) {
-        //             r = (r & 0xFE) | ((binaryMessage[bitIndex] - '0') & 0x01);
-        //             bitIndex++;
-        //         }
-        //         pixelData.push_back(r);
-        //     }
-        // }
-        // imageData.clear();
-        // imageData.resize(pixelData.size());
-        // std::copy(pixelData.begin(), pixelData.end(), (char*)imageData.data());
+        uint32_t bitIndex = 0;
+        for (uint32_t i = 0; i < width * height * 3 - 1 && bitIndex < binaryMessage.length(); ++i){ //changed loop condition
+            if (imageData[i] != 32 && imageData[i + 1] == 32){ // Changed comparison value
+                if (binaryMessage[bitIndex] == '1'){
+                    imageData[i] |= 1; //changed bit shift
+                }
+                else{
+                    imageData[i] &= ~1; //changed bit shift
+                }
+                bitIndex++;
+            }
+        }
     }
 
     // 5. Write the modified image data back to the PPM file
@@ -73,17 +69,17 @@ void writeMessageToPPM(const std::string& filename, const std::string& message) 
     }
     // Write the PPM header
     outfile << magicNumber << std::endl;
-    std::cout << magicNumber << std::endl;
+    outfile << std::endl;
     outfile << width << " " << height << std::endl;
-    std::cout << width << " " << height << std::endl;
-    outfile << maxColorValue << std::endl;
-    std::cout << maxColorValue << std::endl;
-    // if (magicNumber == "P6") {
-    //     outfile.write(reinterpret_cast<const char*>(imageData.data()), imageData.size());
-    // } else {
-    //     for (int i = 0; i < imageData.size(); ++i) {
-    //         outfile << (int)imageData[i] << " " << (int)imageData[i] << " " << (int)imageData[i] << " ";
-    //     }
-    // }
+    outfile << std::endl;
+    outfile << maxColorValueStr << std::endl;
+    outfile << std::endl;
+    if (magicNumber == "P6") {
+        outfile.write(reinterpret_cast<const char*>(imageData.data()), imageData.size());
+    } else {
+        for (int i = 0; i < imageData.size(); ++i) {
+            outfile << imageData[i];
+        }
+    }
 }
 

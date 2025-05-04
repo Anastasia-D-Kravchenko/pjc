@@ -69,6 +69,5 @@ std::vector<char> readPPM(const std::string& filename, uint32_t& width, uint32_t
             imageData.push_back(' ');
         }
     }
-    std::cout << imageData.size() << std::endl;
     return imageData;
 }

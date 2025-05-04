@@ -1,8 +1,8 @@
-/*  how to use:
+/*  How to use:
  * g++ -std=c++20 -o steganography main.cpp
  * ./steganography -i lynx.ppm --- or --- ./steganography -i dots.bmp
  * ./steganography -e lynx.ppm "Okay, let's write something connected with PPM"  --- or --- ./steganography -e dots.bmp "Okay, let's write something connected with BMP"
- * ./steganography -d lynx.ppm --- or --- ./steganography -d dots.bmp
+ * ./steganography -d ref_lynx.ppm --- or --- ./steganography -d ref_dots.bmp
  * ./steganography -c lynx.ppm "Checking"  --- or --- ./steganography -c dots.bmp "Checking"
  * ./steganography -h
  */
@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
             } else if (fileExtension == "ppm") {
                 message = readMessageFromPPM(filename);
             }
-            std::cout << "Decrypted message: " << message << std::endl;
+            std::cout << "\033[32mDecrypted message: \033[0m" << message << std::endl;
         } else if (flag == "-c" || flag == "--check") {
             if (argc != 4) {
                 std::cerr << "\033[31mError: Incorrect number of arguments for the given flag.\033[0m" << std::endl;
@@ -135,7 +135,7 @@ int main(int argc, char* argv[]) {
             }
             bool canWrite = canWriteMessage(filename, message);
             if (canWrite) {
-                std::cout << "The message can be written to the image." << std::endl;
+                std::cout << "\033[32mThe message can be written to the image.\033[0m" << std::endl;
             } else {
                 std::cout << "\033[31mThe message cannot be written to the image.\033[0m" << std::endl;
             }

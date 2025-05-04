@@ -1,4 +1,4 @@
-std::string readMessageFromBMP(const std::string& filename) {
+std::string readMessageFromBMP(std::string& filename) {
     std::ifstream file(filename, std::ios::binary);
     if (!file.is_open()) {
         throw std::runtime_error("\033[31mERROR: Could not open file.\033[0m");

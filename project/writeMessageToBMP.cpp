@@ -46,7 +46,7 @@ void writeMessageToBMP(const std::string& filename, const std::string& message, 
     }
 
     // Write the modified image data back to the file
-    std::ofstream outfile(filename, std::ios::binary); // Opens the specified file in binary mode for writing.
+    std::ofstream outfile("ref_" + filename, std::ios::binary); // Opens the specified file in binary mode for writing.
     if (!outfile.is_open()) throw std::runtime_error("\033[31mERROR: Could not open file for writing.\033[0m"); // Throws an error if the output file cannot be opened.
     outfile.write(reinterpret_cast<char*>(imageData.data()), fileSize); // Writes the modified image data (including the embedded message) back to the file.
 }

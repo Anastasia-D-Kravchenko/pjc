@@ -1,41 +1,60 @@
 #include "binaryToChar.cpp"
 
-// Function to read a message from a PPM image
-std::string readMessageFromPPM(const std::string& filename) {
+std::string readMessageFromPPM(std::string& filename) {
     uint32_t width, height;
     uint16_t bitsPerPixel;
-    // Read the PPM image data, including header information.
-    std::vector<char> imageData = readPPM(filename, width, height, bitsPerPixel);
+    std::vector<char> imageData;
+    std::string magicNumber;
+    int maxColorValue;
 
-    std::string binaryMessage = "";  // Store the extracted binary message.
-    std::string message = "";        // Store the final ASCII message.
-    int bitIndex = 0;              // Track the current bit being read.
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        throw std::runtime_error("\033[31mERROR: Could not open file.\033[0m");
+    }
+    std::string widthStr, heightStr, maxColorValueStr;
 
-    // PPM stores data as RGB triples, so each byte is one component of a pixel.
-    // We'll extract the LSB from each byte.
+    // Read the PPM header.
+    std::getline(file, magicNumber);
+    magicNumber = trim(magicNumber);
+    // Check for the P3 magic number
+    if (magicNumber != "P3" && magicNumber != "P6") {
+        throw std::runtime_error("\033[31mERROR: Invalid PPM format. Only P3 and P6 are supported.\033[0m");
+    }
+    file >> width >> height >> maxColorValueStr;
+    file.ignore(); // Consume the newline character after the header.
 
-    // Loop through the image data, extracting one bit at a time.
-    while (bitIndex < imageData.size() * 8) {
-        size_t byteIndex = bitIndex / 8;
-        int bitOffset = bitIndex % 8;
+    imageData = readPPM(filename, width, height, bitsPerPixel);
 
-        // Extract the least significant bit.
-        unsigned char currentByte = imageData[byteIndex];
-        char lsb = ((currentByte >> (7 - bitOffset)) & 1) ? '1' : '0';
-        binaryMessage += lsb;
-        bitIndex++;
+    std::string binaryMessage = "";
+    std::string message = "";
+    bool endOfMessage = false;
+    uint32_t bitIndex = 0;
+    uint32_t charCount = 0; // Keep track of the number of characters processed
 
-        // Check for the end-of-message marker ("00000000").
-        if (binaryMessage.length() >= 8 && binaryMessage.substr(binaryMessage.length() - 8, 8) == "00000000") {
-            binaryMessage = binaryMessage.substr(0, binaryMessage.length() - 8); // Remove the marker.
-            break; // Exit the loop as the message end is found.
+    if (magicNumber == "P6") {
+        throw std::runtime_error("\033[31mERROR: This function is designed for P3 format with the specified encoding method.\033[0m");
+    } else {
+        for (uint32_t i = 0; i < width * height * 3 - 1 && !endOfMessage; ++i) {
+            if (imageData[i] != ' ' && imageData[i + 1] == ' ') {
+                binaryMessage += ((imageData[i] & 1) == 1) ? '1' : '0';
+                bitIndex++;
+
+                if (bitIndex % 8 == 0) {
+                    char c = 0;
+                    for (int k = 0; k < 8; ++k) {
+                        if (binaryMessage[binaryMessage.length() - 8 + k] == '1') {
+                            c |= (1 << (7 - k));
+                        }
+                    }
+                    if (c == 0) {
+                        endOfMessage = true;
+                    } else {
+                        message += c;
+                        charCount++;
+                    }
+                }
+            }
         }
     }
-
-    // Convert the binary message to an ASCII string.
-    for (size_t i = 0; i < binaryMessage.length(); i += 8) {
-        if (i + 8 > binaryMessage.length()) break; // Make sure we don't read out of bounds.
-        message += binaryToChar(binaryMessage.substr(i, 8));
-    }
-    return message; // Return the extracted ASCII message.
+    return message;
 }
