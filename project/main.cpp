@@ -1,9 +1,9 @@
 /*  How to use:
  * g++ -std=c++20 -o steganography main.cpp
- * ./steganography -i lynx.ppm --- or --- ./steganography -i dots.bmp
- * ./steganography -e lynx.ppm "Okay, let's write something connected with PPM"  --- or --- ./steganography -e dots.bmp "Okay, let's write something connected with BMP"
- * ./steganography -d ref_lynx.ppm --- or --- ./steganography -d ref_dots.bmp
- * ./steganography -c lynx.ppm "Checking"  --- or --- ./steganography -c dots.bmp "Checking"
+ * ./steganography -i images/ppm/lynx.ppm --- or --- ./steganography -i images/bmp/dots.bmp
+ * ./steganography -e images/ppm/lynx.ppm "Okay, let's write something connected with PPM"  --- or --- ./steganography -e images/bmp/dots.bmp "Okay, let's write something connected with BMP"
+ * ./steganography -d images/ppm/ref_lynx.ppm --- or --- ./steganography -d images/bmp/ref_dots.bmp
+ * ./steganography -c images/ppm/lynx.ppm "Checking"  --- or --- ./steganography -c images/bmp/dots.bmp "Checking"
  * ./steganography -h
  */
 
@@ -17,16 +17,19 @@
 #include <ctime>
 #include <algorithm>
 
-#include "displayHelp.cpp"
-#include "checkFilePermissions.cpp"
-#include "printFileInfo.cpp"
-#include "writeMessageToPPM.cpp"
-#include "readMessageFromPPM.cpp"
+#include "additional/trim.cpp"
+#include "additional/charToBinary.cpp"
+#include "additional/binaryToChar.cpp"
+#include "additional/displayHelp.cpp"
+#include "additional/checkFilePermissions.cpp"
+#include "FileInfo/printFileInfo.cpp"
+#include "PPM/writeMessageToPPM.cpp"
+#include "PPM/readMessageFromPPM.cpp"
 #include "canWriteMessage.cpp"
-#include "processPPM.cpp"
-#include "processBMP.cpp"
-#include "readMessageFromBMP.cpp"
-#include "writeMessageToBMP.cpp"
+#include "PPM/processPPM.cpp"
+#include "BMP/processBMP.cpp"
+#include "BMP/readMessageFromBMP.cpp"
+#include "BMP/writeMessageToBMP.cpp"
 // #include ".cpp"
 
 // https://gist.github.com/vratiu/9780109
@@ -40,21 +43,21 @@ int main(int argc, char* argv[]) {
         std::string flag = argv[1];
         std::string fileExtension;
 
-        if (flag == "-i" || flag == "--info") {
+        if (flag == "-i" || flag == "--info") { // ---------------------------------------------------------------------
             if (argc != 3) {
                 std::cerr << "\033[31mError: Incorrect number of arguments for the given flag.\033[0m" << std::endl;
                 displayHelp();
                 return 1;
             }
             std::string filename = argv[2];
-            fileExtension = filename.substr(filename.find_last_of('.') + 1);
-            std::ranges::transform(fileExtension, fileExtension.begin(), ::tolower);
+            fileExtension = filename.substr(filename.find_last_of('.') + 1); // .bmp, .ppm
+            std::ranges::transform(fileExtension, fileExtension.begin(), ::tolower); // bMp bMP Bmp BmP...
             if (fileExtension != "bmp" && fileExtension != "ppm") {
                 std::cerr << "\033[31mError: Unsupported file format.  Only .bmp and .ppm are supported.\033[0m" << std::endl;
                 return 1;
             }
             if (!checkFilePermissions(filename, false)) {
-                std::cerr << "\033[31mError: Cannot read the file or file does not exist.\033[0m" << std::endl;
+                std::cerr << "\033[31mError: CANNOT read the file or file does not exist.\033[0m" << std::endl;
                 return 1;
             }
             const char* file = argv[2];
@@ -63,11 +66,8 @@ int main(int argc, char* argv[]) {
                 processPPM(argv[2]);
             } else if (fileExtension == "bmp") {
                 processBMP(argv[2]);
-            } else {
-                std::cerr << "\033[31mError: Unsupported image type: " << fileExtension << "\033[0m" << std::endl;
-                return 1;
             }
-        } else if (flag == "-e" || flag == "--encrypt") {
+        } else if (flag == "-e" || flag == "--encrypt") { // -----------------------------------------------------------
             if (argc != 4) {
                 std::cerr << "\033[31mError: Incorrect number of arguments for the given flag.\033[0m" << std::endl;
                 displayHelp();
@@ -82,16 +82,16 @@ int main(int argc, char* argv[]) {
                 return 1;
             }
             if (!checkFilePermissions(filename, true)) {
-                std::cerr << "\033[31mError: Cannot write to the file or file does not exist.\033[0m" << std::endl;
+                std::cerr << "\033[31mError: CANNOT write to the file or file does not exist.\033[0m" << std::endl;
                 return 1;
             }
             if (fileExtension == "bmp") {
                 writeMessageToBMP(filename, message, 0, 0, 0);
             } else if (fileExtension == "ppm") {
-                writeMessageToPPM(filename, message);
+                writeMessageToPPM(filename, message, 0, 0, 0);
             }
-            std::cout << "\033[32mMessage successfully written to " << filename << "\033[0m" << std::endl;
-        } else if (flag == "-d" || flag == "--decrypt") {
+            std::cout << "\033[32mMessage successfully written to " << "ref_" + filename << "\033[0m" << std::endl;
+        } else if (flag == "-d" || flag == "--decrypt") { // -----------------------------------------------------------
             if (argc != 3) {
                 std::cerr << "\033[31mError: Incorrect number of arguments for the given flag.\033[0m" << std::endl;
                 displayHelp();
@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
                 return 1;
             }
              if (!checkFilePermissions(filename, false)) {
-                std::cerr << "\033[31mError: Cannot read the file or file does not exist.\033[0m" << std::endl;
+                std::cerr << "\033[31mError: CANNOT read the file or file does not exist.\033[0m" << std::endl;
                 return 1;
             }
             std::string message;
@@ -115,7 +115,7 @@ int main(int argc, char* argv[]) {
                 message = readMessageFromPPM(filename);
             }
             std::cout << "\033[32mDecrypted message: \033[0m" << message << std::endl;
-        } else if (flag == "-c" || flag == "--check") {
+        } else if (flag == "-c" || flag == "--check") { // -------------------------------------------------------------
             if (argc != 4) {
                 std::cerr << "\033[31mError: Incorrect number of arguments for the given flag.\033[0m" << std::endl;
                 displayHelp();
@@ -130,18 +130,18 @@ int main(int argc, char* argv[]) {
                 return 1;
             }
             if (!checkFilePermissions(filename, false)) {
-                std::cerr << "\033[31mError: Cannot read the file or file does not exist.\033[0m" << std::endl;
+                std::cerr << "\033[31mError: CANNOT read the file or file does not exist.\033[0m" << std::endl;
                 return 1;
             }
             bool canWrite = canWriteMessage(filename, message);
             if (canWrite) {
                 std::cout << "\033[32mThe message can be written to the image.\033[0m" << std::endl;
             } else {
-                std::cout << "\033[31mThe message cannot be written to the image.\033[0m" << std::endl;
+                std::cout << "\033[31mThe message CANNOT be written to the image.\033[0m" << std::endl;
             }
-        } else if (flag == "-h" || flag == "--help") {
+        } else if (flag == "-h" || flag == "--help") { // --------------------------------------------------------------
             displayHelp();
-        } else {
+        } else { // ----------------------------------------------------------------------------------------------------
             std::cerr << "\033[31mError: Invalid flag: " << flag << "\033[0m" << std::endl;
             displayHelp();
             return 1;
