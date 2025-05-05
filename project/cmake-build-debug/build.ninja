@@ -56,110 +56,117 @@ build CMakeFiles/project.dir/main.cpp.o: CXX_COMPILER__project_unscanned_Debug /
   OBJECT_DIR = CMakeFiles/project.dir
   OBJECT_FILE_DIR = CMakeFiles/project.dir
 
-build CMakeFiles/project.dir/printFileInfo.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printFileInfo.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printFileInfo.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printFileInfo.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printFileInfo.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printFileInfo.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/printFileName.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printFileName.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printFileName.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printFileName.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printFileName.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printFileName.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/printFilePermissions.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printFilePermissions.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printFilePermissions.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printFilePermissions.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printFilePermissions.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printFilePermissions.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/printFileSize.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printFileSize.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printFileSize.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printFileSize.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printFileSize.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printFileSize.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/printLastAccessTime.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printLastAccessTime.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printLastAccessTime.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printLastAccessTime.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printLastAccessTime.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printLastAccessTime.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/printLastModificationTime.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printLastModificationTime.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printLastModificationTime.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printLastModificationTime.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printLastModificationTime.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printLastModificationTime.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/printLastStatusChangeTime.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/printLastStatusChangeTime.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/printLastStatusChangeTime.cpp.o.d
+build CMakeFiles/project.dir/FileInfo/printLastStatusChangeTime.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/FileInfo/printLastStatusChangeTime.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/FileInfo/printLastStatusChangeTime.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/FileInfo
 
-build CMakeFiles/project.dir/displayHelp.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/displayHelp.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/displayHelp.cpp.o.d
+build CMakeFiles/project.dir/additional/displayHelp.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/additional/displayHelp.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/additional/displayHelp.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/additional
 
-build CMakeFiles/project.dir/checkFilePermissions.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/checkFilePermissions.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/checkFilePermissions.cpp.o.d
+build CMakeFiles/project.dir/additional/checkFilePermissions.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/additional/checkFilePermissions.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/additional/checkFilePermissions.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/additional
 
-build CMakeFiles/project.dir/getFileSize.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/getFileSize.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/getFileSize.cpp.o.d
+build CMakeFiles/project.dir/additional/getFileSize.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/additional/getFileSize.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/additional/getFileSize.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/additional
 
-build CMakeFiles/project.dir/charToBinary.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/charToBinary.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/charToBinary.cpp.o.d
+build CMakeFiles/project.dir/additional/charToBinary.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/additional/charToBinary.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/additional/charToBinary.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/additional
 
-build CMakeFiles/project.dir/readPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/readPPM.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/readPPM.cpp.o.d
+build CMakeFiles/project.dir/additional/binaryToChar.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/additional/binaryToChar.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/additional/binaryToChar.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/additional
 
-build CMakeFiles/project.dir/writeMessageToPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/writeMessageToPPM.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/writeMessageToPPM.cpp.o.d
+build CMakeFiles/project.dir/additional/trim.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/additional/trim.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/additional/trim.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/additional
 
-build CMakeFiles/project.dir/binaryToChar.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/binaryToChar.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/binaryToChar.cpp.o.d
+build CMakeFiles/project.dir/PPM/readPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/PPM/readPPM.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/PPM/readPPM.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/PPM
 
-build CMakeFiles/project.dir/readMessageFromPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/readMessageFromPPM.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/readMessageFromPPM.cpp.o.d
+build CMakeFiles/project.dir/PPM/writeMessageToPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/PPM/writeMessageToPPM.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/PPM/writeMessageToPPM.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/PPM
+
+build CMakeFiles/project.dir/PPM/readMessageFromPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/PPM/readMessageFromPPM.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/PPM/readMessageFromPPM.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
+  OBJECT_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/PPM
 
 build CMakeFiles/project.dir/canWriteMessage.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/canWriteMessage.cpp || cmake_object_order_depends_target_project
   DEP_FILE = CMakeFiles/project.dir/canWriteMessage.cpp.o.d
@@ -168,47 +175,40 @@ build CMakeFiles/project.dir/canWriteMessage.cpp.o: CXX_COMPILER__project_unscan
   OBJECT_DIR = CMakeFiles/project.dir
   OBJECT_FILE_DIR = CMakeFiles/project.dir
 
-build CMakeFiles/project.dir/processPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/processPPM.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/processPPM.cpp.o.d
+build CMakeFiles/project.dir/PPM/processPPM.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/PPM/processPPM.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/PPM/processPPM.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/PPM
 
-build CMakeFiles/project.dir/processBMP.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/processBMP.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/processBMP.cpp.o.d
+build CMakeFiles/project.dir/BMP/processBMP.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/BMP/processBMP.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/BMP/processBMP.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/BMP
 
-build CMakeFiles/project.dir/readMessageFromBMP.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/readMessageFromBMP.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/readMessageFromBMP.cpp.o.d
+build CMakeFiles/project.dir/BMP/readMessageFromBMP.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/BMP/readMessageFromBMP.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/BMP/readMessageFromBMP.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/BMP
 
-build CMakeFiles/project.dir/writeMessageToBMP.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/writeMessageToBMP.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/writeMessageToBMP.cpp.o.d
+build CMakeFiles/project.dir/BMP/writeMessageToBMP.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/BMP/writeMessageToBMP.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/BMP/writeMessageToBMP.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/BMP
 
-build CMakeFiles/project.dir/readBMPHeader.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/readBMPHeader.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/readBMPHeader.cpp.o.d
+build CMakeFiles/project.dir/BMP/readBMPHeader.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/BMP/readBMPHeader.cpp || cmake_object_order_depends_target_project
+  DEP_FILE = CMakeFiles/project.dir/BMP/readBMPHeader.cpp.o.d
   FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
   INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
   OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
-
-build CMakeFiles/project.dir/trim.cpp.o: CXX_COMPILER__project_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/project/trim.cpp || cmake_object_order_depends_target_project
-  DEP_FILE = CMakeFiles/project.dir/trim.cpp.o.d
-  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
-  INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug/_deps/fmt-src/include
-  OBJECT_DIR = CMakeFiles/project.dir
-  OBJECT_FILE_DIR = CMakeFiles/project.dir
+  OBJECT_FILE_DIR = CMakeFiles/project.dir/BMP
 
 
 # =============================================================================
@@ -218,7 +218,7 @@ build CMakeFiles/project.dir/trim.cpp.o: CXX_COMPILER__project_unscanned_Debug /
 #############################################
 # Link the executable project
 
-build project: CXX_EXECUTABLE_LINKER__project_Debug CMakeFiles/project.dir/main.cpp.o CMakeFiles/project.dir/printFileInfo.cpp.o CMakeFiles/project.dir/printFileName.cpp.o CMakeFiles/project.dir/printFilePermissions.cpp.o CMakeFiles/project.dir/printFileSize.cpp.o CMakeFiles/project.dir/printLastAccessTime.cpp.o CMakeFiles/project.dir/printLastModificationTime.cpp.o CMakeFiles/project.dir/printLastStatusChangeTime.cpp.o CMakeFiles/project.dir/displayHelp.cpp.o CMakeFiles/project.dir/checkFilePermissions.cpp.o CMakeFiles/project.dir/getFileSize.cpp.o CMakeFiles/project.dir/charToBinary.cpp.o CMakeFiles/project.dir/readPPM.cpp.o CMakeFiles/project.dir/writeMessageToPPM.cpp.o CMakeFiles/project.dir/binaryToChar.cpp.o CMakeFiles/project.dir/readMessageFromPPM.cpp.o CMakeFiles/project.dir/canWriteMessage.cpp.o CMakeFiles/project.dir/processPPM.cpp.o CMakeFiles/project.dir/processBMP.cpp.o CMakeFiles/project.dir/readMessageFromBMP.cpp.o CMakeFiles/project.dir/writeMessageToBMP.cpp.o CMakeFiles/project.dir/readBMPHeader.cpp.o CMakeFiles/project.dir/trim.cpp.o | _deps/fmt-build/libfmtd.a || _deps/fmt-build/libfmtd.a
+build project: CXX_EXECUTABLE_LINKER__project_Debug CMakeFiles/project.dir/main.cpp.o CMakeFiles/project.dir/FileInfo/printFileInfo.cpp.o CMakeFiles/project.dir/FileInfo/printFileName.cpp.o CMakeFiles/project.dir/FileInfo/printFilePermissions.cpp.o CMakeFiles/project.dir/FileInfo/printFileSize.cpp.o CMakeFiles/project.dir/FileInfo/printLastAccessTime.cpp.o CMakeFiles/project.dir/FileInfo/printLastModificationTime.cpp.o CMakeFiles/project.dir/FileInfo/printLastStatusChangeTime.cpp.o CMakeFiles/project.dir/additional/displayHelp.cpp.o CMakeFiles/project.dir/additional/checkFilePermissions.cpp.o CMakeFiles/project.dir/additional/getFileSize.cpp.o CMakeFiles/project.dir/additional/charToBinary.cpp.o CMakeFiles/project.dir/additional/binaryToChar.cpp.o CMakeFiles/project.dir/additional/trim.cpp.o CMakeFiles/project.dir/PPM/readPPM.cpp.o CMakeFiles/project.dir/PPM/writeMessageToPPM.cpp.o CMakeFiles/project.dir/PPM/readMessageFromPPM.cpp.o CMakeFiles/project.dir/canWriteMessage.cpp.o CMakeFiles/project.dir/PPM/processPPM.cpp.o CMakeFiles/project.dir/BMP/processBMP.cpp.o CMakeFiles/project.dir/BMP/readMessageFromBMP.cpp.o CMakeFiles/project.dir/BMP/writeMessageToBMP.cpp.o CMakeFiles/project.dir/BMP/readBMPHeader.cpp.o | _deps/fmt-build/libfmtd.a || _deps/fmt-build/libfmtd.a
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk
   LINK_LIBRARIES = _deps/fmt-build/libfmtd.a
   OBJECT_DIR = CMakeFiles/project.dir

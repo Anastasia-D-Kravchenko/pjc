@@ -1,15 +1,6 @@
 /Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/anastasiiakravchenko/PJATK/pjc/project -B /Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug
 -- {fmt} version: 11.0.2
 -- Build type: Debug
--- Configuring done (0.1s)
-CMake Error at CMakeLists.txt:16 (add_executable):
-  Cannot find source file:
-
-    printFileInfo.cpp
-
-
-CMake Error at CMakeLists.txt:16 (add_executable):
-  No SOURCES given to target: project
-
-
-CMake Generate step failed.  Build files cannot be regenerated correctly.
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/anastasiiakravchenko/PJATK/pjc/project/cmake-build-debug

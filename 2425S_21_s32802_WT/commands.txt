@@ -1,0 +1,53 @@
+g++ -std=c++20 -o steganography main.cpp
+./steganography -h
+—————————————————
+./steganography -i images/bmp/dots.bmp
+./steganography -i images/ppm/lynx.ppm
+—————————————————
+./steganography -e images/ppm/lynx.ppm "Okay, let's write something connected with PPM"
+./steganography -e images/ppm/lynx_222.ppm "Okay, let's write something connected with PPM"
+./steganography -e images/ppm/simple.ppm "Okay, let's write something connected with PPM"
+—————————————————
+./steganography -e images/bmp/dots.bmp "Okay, let's write something connected with BMP"
+./steganography -e images/bmp/r7vm4067.bmp "Okay, let's write something connected with BMP"
+./steganography -e images/bmp/pal4gs.bmp "Okay, let's write something connected with BMP"
+./steganography -e images/bmp/pal2.bmp "Okay, let's write something connected wi"
+./steganography -e images/bmp/lena.bmp "Okay, let's write something connected with BMP"
+—————————————————
+./steganography -d changedImages/bmp/ref_dots.bmp
+./steganography -d changedImages/bmp/ref_r7vm4067.bmp
+./steganography -d changedImages/bmp/ref_pal4gs.bmp
+./steganography -d changedImages/bmp/ref_pal2.bmp
+./steganography -d changedImages/bmp/ref_lena.bmp
+—————————————————
+./steganography -d changedImages/ppm/ref_lynx.ppm 
+./steganography -d changedImages/ppm/ref_lynx_222.ppm 
+./steganography -d changedImages/ppm/ref_simple.ppm 
+—————————————————
+./steganography -c images/ppm/lynx.ppm "Checking" 
+./steganography -c images/bmp/dots.bmp "Checking"
+
+
+Errors:
+./steganography -dg
+./steganography -i images/bmp/dots.bmp “hi”
+—————————————————
+./steganography -e images/bmp/pal2.bmp 
+./steganography -e images/bmp/pal2.bmp "Okay, let's write something connected with BMP"
+./steganography -e images/bmp/pal2.bmp "Okay, let's write something connected with BMP"
+./steganography -e images/bmp/pal2.png "Okay, let's write something connected with BMP"
+./steganography -e images/bmp/pal.bmp "Okay, let's write something connected with BMP"
+./steganography -e err/bmp/lena.bmp "Okay, let's write something connected with BMP"
+./steganography -e err/bmp/lenapixel.bmp "Okay, let's write something connected with BMP"
+./steganography -e err/ppm/simpleform.ppm "Okay, let's write something connected with PPM"
+./steganography -e err/ppm/simplemaxcolor.ppm "Okay, let's write something connected with PPM"
+./steganography -e err/ppm/simplevaluemaxcolor.ppm "Okay, let's write something connected with PPM"
+./steganography -e err/ppm/simplebytes.ppm "Okay, let's write something connected with PPM"
+—————————————————
+./steganography -d changedImages/bmp/ref_pal2.bmp “hi” 
+./steganography -d changedImages/bmp/ref_pal2.png 
+./steganography -d changedImages/bmp/ref_pal.bmp
+—————————————————
+./steganography -c images/bmp/pal2.bmp 
+./steganography -c images/bmp/pal2.png "Okay, let's write something connected with BMP"
+./steganography -c images/bmp/pal.bmp "Okay, let's write something connected with BMP"

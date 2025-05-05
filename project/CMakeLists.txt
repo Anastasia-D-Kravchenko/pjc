@@ -14,28 +14,28 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(fmt)
 
 add_executable(project main.cpp
-        printFileInfo.cpp
-        printFileName.cpp
-        printFilePermissions.cpp
-        printFileSize.cpp
-        printLastAccessTime.cpp
-        printLastModificationTime.cpp
-        printLastStatusChangeTime.cpp
-        displayHelp.cpp
-        checkFilePermissions.cpp
-        getFileSize.cpp
-        charToBinary.cpp
-        readPPM.cpp
-        writeMessageToPPM.cpp
-        binaryToChar.cpp
-        readMessageFromPPM.cpp
+        FileInfo/printFileInfo.cpp
+        FileInfo/printFileName.cpp
+        FileInfo/printFilePermissions.cpp
+        FileInfo/printFileSize.cpp
+        FileInfo/printLastAccessTime.cpp
+        FileInfo/printLastModificationTime.cpp
+        FileInfo/printLastStatusChangeTime.cpp
+        additional/displayHelp.cpp
+        additional/checkFilePermissions.cpp
+        additional/getFileSize.cpp
+        additional/charToBinary.cpp
+        additional/binaryToChar.cpp
+        additional/trim.cpp
+        PPM/readPPM.cpp
+        PPM/writeMessageToPPM.cpp
+        PPM/readMessageFromPPM.cpp
         canWriteMessage.cpp
-        processPPM.cpp
-        processBMP.cpp
-        readMessageFromBMP.cpp
-        writeMessageToBMP.cpp
-        readBMPHeader.cpp
-        trim.cpp
+        PPM/processPPM.cpp
+        BMP/processBMP.cpp
+        BMP/readMessageFromBMP.cpp
+        BMP/writeMessageToBMP.cpp
+        BMP/readBMPHeader.cpp
 
 )
 target_link_libraries(project fmt)
