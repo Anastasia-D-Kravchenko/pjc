@@ -610,8 +610,190 @@
 #include <fmt/ranges.h>     // formatting ranges
 #include <filesystem>
 #include <fmt/std.h>
+#include <sstream>  // std::stringstream
+#include <sstream>
+#include <bit>
+#include "printer/printer.hpp"
+#include "maths/maths.hpp"
+#include "Rectangle/Rectangle.hpp"
 namespace fs = std::filesystem;
+// template <typename T, typename U, typename V>
+// struct Triple {
+//     T first;
+//     U second;
+//     V third;
+//
+//     auto overwrite(T const& t, U const& u, V const& v) -> void {
+//         first  = t;
+//         second = u;
+//         third  = v;
+//     }
+//
+//     auto equals(Triple<T, U, V> const& other) const -> bool {
+//         return first == other.first
+//                and second == other.second
+//                and third == other.third;
+//     }
+//
+//     template <typename OtherT, typename OtherU, typename OtherV>
+//     auto equals(Triple<OtherT, OtherU, OtherV> const& other) const -> bool {
+//         return first == other.first
+//                and second == other.second
+//                and third == other.third;
+//     }
+// };
+// template <typename T>
+// struct Hasher {
+//     // auto compute(T const& t) const -> int {
+//     //     return t;
+//     // }
+//
+//     auto compute(float const f) const -> int {
+//         return std::bit_cast<int>(f);
+//     }
+//
+// };
+// template <typename T>
+// struct Hasher {
+//     auto compute(T const& t) const -> int {
+//         return t;
+//     }
+// };
+//
+// template <>
+// struct Hasher<float> {
+//     auto compute(float const f) const -> int {
+//         return std::bit_cast<int>(f);
+//     }
+// };
+auto replace(auto & file, auto replacement) {
+    if (!file.is_open() || !file.good()) {
+        std::cerr << "Error: Invalid file stream." << std::endl;
+        return;
+    }
+
+    std::string file_content;
+    file.seekg(0, std::ios::beg);
+    char c;
+    while (file.get(c)) {
+        file_content += c;
+    }
+    file.close();
+
+    std::string new_content;
+    for (size_t i = 0; i < file_content.length(); ++i) {
+        if (std::isdigit(file_content[i])) {
+            size_t j = i;
+            while (j < file_content.length() && std::isdigit(file_content[j])) {
+                j++;
+            }
+            if (j - i > 1) {
+                new_content += replacement;
+            } else {
+                new_content += file_content[i];
+            }
+            i = j - 1;
+        } else {
+            new_content += file_content[i];
+        }
+    }
+    file.open("new_data.txt", std::ios::out | std::ios::trunc);
+    fmt::println(file, "{}", new_content);
+}
+namespace real_data {
+    struct DataView {
+        std::vector<int>& data;
+    };
+} // namespace real_data
+
+namespace fake_data {
+    struct DataView {
+        std::vector<int>& data;
+    };
+}
+
+struct Point {
+    int x = 0; // Default initialization
+    int y = 0; // Default initialization
+};
 auto main() -> int {
+    // std::vector<int> data_in_main = {1, 2, 3, 4, 5};
+    //
+    // // Reverse the first three elements of data_in_main
+    // std::ranges::reverse(data_in_main.begin(), data_in_main.begin() + 3);
+    //
+    // // Create DataView objects
+    // real_data::DataView real{data_in_main};
+    // fake_data::DataView fake{data_in_main};
+    //
+    // // Print the data through the views
+    // fmt::println("real.data: {}", real.data);
+    // fmt::println("fake.data: {}", fake.data);
+    //
+    // // Sort the data through the real view
+    // std::ranges::sort(real.data);
+    // fmt::println("data_in_main (after sort through real): {}", data_in_main);
+    // fmt::println("data_in_main (after sort through real): {}", data_in_main);
+    //
+    // // Reverse the data through the fake view
+    // std::ranges::reverse(fake.data);
+    // fmt::println("data_in_main (after reverse through fake): {}", data_in_main);
+    // fmt::println("data_in_main (after reverse through fake): {}", data_in_main);
+
+    // std::vector<int> first = {1, 3, 5, 7, 9};
+    // auto& second = first;      // second is a reference to first
+    // auto third = first;        // third is a copy of first
+    //
+    // // Lambda that modifies the original 'first' vector (captured by value, but made mutable)
+    // auto modifier = [first](std::vector<int>& v) mutable {
+    //     for (auto& num : first) {
+    //         num += 1; // Modifies the captured 'first'
+    //     }
+    // };
+    //
+    // // Lambda that modifies the original 'first' vector (captured by reference)
+    // auto changer = [&first](std::vector<int>& v) {
+    //     for (auto& num : first) {
+    //         num += 1; // Modifies the captured 'first'
+    //     }
+    // };
+    //
+    // modifier(second); // Calls modifier, modifying 'first'
+    // changer(third);  // Calls changer, modifying 'first'
+    //
+    // fmt::println("first: {}", first);
+    // fmt::println("second: {}", second);
+    // fmt::println("third: {}", third);
+
+    std::vector<Point> points = {
+        {1, 2}, {7, 9}, {3, 12}, {5, 0}, {0, 2}
+    };
+
+    // Count points where x + y >= 5
+    auto const value = std::ranges::count_if(points, [](const Point& p) {
+        return p.x + p.y >= 5; // 3
+    });
+
+    // Reverse the first (points.size() - value) elements
+    std::ranges::reverse(points.begin(), points.end() - value);
+
+    // Print the points
+    for (const auto& [x, y] : points) {
+        fmt::print("({}, {}) ", x, y);
+    }
+    fmt::println(""); // Add a newline for better formatting
+
+    // Modify the points (demonstrates different ways to modify)
+    for (auto& [x, y] : points) { // Correct way to modify elements
+        x += 10;
+        y += 10;
+    }
+
+    fmt::println(""); // Add a newline for better formatting
+    for (const auto& [x, y] : points) {
+        fmt::print("({}, {}) ", x, y);
+    }
+    fmt::println("");
 // //
 // //     auto iter = std::vector<std::string>{"hello", "world"};
 // //     // auto start = iter.begin();
@@ -1692,92 +1874,162 @@ auto main() -> int {
 
     // file << "ji";
 
-    std::string filename = "data.txt";
+    // std::string filename = "data.txt";
+    //
+    // // // std::ios::app: Append to the end of the file
+    // std::fstream file_app(filename, std::ios::out | std::ios::app);
+    // if (file_app.is_open()) {
+    //     file_app << "Appending some text.\n";
+    //     std::cout << "Appended to " << filename << std::endl;
+    //     file_app.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for appending.\n";
+    // }
+    //
+    // std::fstream file_inpp(filename, std::ios::in);
+    // if (file_inpp.is_open()) {
+    //     std::string line;
+    //     std::cout << "Reading from " << filename << ":\n";
+    //     while (std::getline(file_inpp, line)) {
+    //         fmt::println("{}", line);
+    //     }
+    //     file_inpp.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for reading.\n";
+    // }
+    //
+    // // std::ios::binary: Open the file in binary mode
+    // std::fstream file_bin_out(filename, std::ios::out | std::ios::binary);
+    // if (file_bin_out.is_open()) {
+    //     int data[] = {1, 2, 3, 4, 5};
+    //     file_bin_out.write(reinterpret_cast<const char*>(data), sizeof(data));
+    //     std::cout << "Wrote binary data to " << filename << std::endl;
+    //     file_bin_out.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for binary writing.\n";
+    // }
+    //
+    // std::fstream file_bin_in(filename, std::ios::in | std::ios::binary);
+    // int str[5];
+    // if (file_bin_in.is_open()) {
+    //     file_bin_in.read(reinterpret_cast<char*>(str), sizeof(str));
+    //     fmt::print("Read binary data: {}\n", str);
+    //     file_bin_in.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for binary reading.\n";
+    // }
+    //
+    // // std::ios::in: Open the file for reading
+    // std::fstream file_in(filename, std::ios::in);
+    // if (file_in.is_open()) {
+    //     std::string line;
+    //     while (std::getline(file_in, line)) {
+    //         std::cout << "Read line: " << line << std::endl;
+    //     }
+    //     file_in.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for reading.\n";
+    // }
+    //
+    // // std::ios::out: Open the file for writing (creates or overwrites)
+    // std::fstream file_out(filename, std::ios::out);
+    // if (file_out.is_open()) {
+    //     file_out << "Writing some new text to overwrite.\n";
+    //     file_out.close();
+    //     std::cout << "Wrote text to " << filename << " (may have overwritten).\n";
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for writing.\n";
+    // }
+    //
+    // // std::ios::trunc: Clear the file after opening
+    // std::fstream file_trunc(filename, std::ios::out | std::ios::trunc);
+    // if (file_trunc.is_open()) {
+    //     std::cout << "File " << filename << " has been truncated (cleared).\n";
+    //     file_trunc << "Writing after truncation.\n";
+    //     file_trunc.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " for truncation.\n";
+    // }
+    //
+    // // std::ios::ate: Go to the end of the file after opening (initial position)
+    // std::fstream file_ate(filename, std::ios::out | std::ios::ate);
+    // if (file_ate.is_open()) {
+    //     std::cout << "Cursor positioned at the end of " << filename << " upon opening.\n";
+    //     file_ate << "Writing at the end.\n";\
+    //     file_ate.seekp(0,std::ios::end);
+    //     file_ate << "Writing at the end.\n";
+    //     file_ate.close();
+    // } else {
+    //     std::cerr << "Unable to open " << filename << " with ate option.\n";
+    // }
 
-    // // std::ios::app: Append to the end of the file
-    std::fstream file_app(filename, std::ios::out | std::ios::app);
-    if (file_app.is_open()) {
-        file_app << "Appending some text.\n";
-        std::cout << "Appended to " << filename << std::endl;
-        file_app.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " for appending.\n";
-    }
+    // auto file = std::fstream("data.txt");
+    // std::string line;
+    // while (std::getline(file, line)) {
+    //     auto stream = std::stringstream(line);
+    //     auto wordsCount = 0;
+    //     for ( std::string word; stream >> word; wordsCount++);
+    //     fmt::println("Line \"{}\" contains {} words",line, wordsCount);
+    // }
 
-    std::fstream file_inpp(filename, std::ios::in);
-    if (file_inpp.is_open()) {
-        std::string line;
-        std::cout << "Reading from " << filename << ":\n";
-        while (std::getline(file_inpp, line)) {
-            fmt::println("{}", line);
-        }
-        file_inpp.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " for reading.\n";
-    }
+    // auto x = Triple<int, int, int>(1, 2, 3);
+    // auto y = Triple<int, int, int>(1, 2, 3);
+    // auto z = Triple<int, int, int>(3, 2, 1);
+    //
+    // fmt::println("{} {} {}", x.equals(y), y.equals(z), z.equals(x));
+    //
+    // auto const a = Triple<int, double, int>(1, 2.0, 3);
+    // auto const b = Triple<double, int, double>(1.0, 2, 3.0);
+    //
+    // fmt::println("{}", a.equals(b));
 
-    // std::ios::binary: Open the file in binary mode
-    std::fstream file_bin_out(filename, std::ios::out | std::ios::binary);
-    if (file_bin_out.is_open()) {
-        int data[] = {1, 2, 3, 4, 5};
-        file_bin_out.write(reinterpret_cast<const char*>(data), sizeof(data));
-        std::cout << "Wrote binary data to " << filename << std::endl;
-        file_bin_out.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " for binary writing.\n";
-    }
-
-    std::fstream file_bin_in(filename, std::ios::in | std::ios::binary);
-    int str[5];
-    if (file_bin_in.is_open()) {
-        file_bin_in.read(reinterpret_cast<char*>(str), sizeof(str));
-        fmt::print("Read binary data: {}\n", str);
-        file_bin_in.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " for binary reading.\n";
-    }
-
-    // std::ios::in: Open the file for reading
-    std::fstream file_in(filename, std::ios::in);
-    if (file_in.is_open()) {
-        std::string line;
-        while (std::getline(file_in, line)) {
-            std::cout << "Read line: " << line << std::endl;
-        }
-        file_in.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " for reading.\n";
-    }
-
-    // std::ios::out: Open the file for writing (creates or overwrites)
-    std::fstream file_out(filename, std::ios::out);
-    if (file_out.is_open()) {
-        file_out << "Writing some new text to overwrite.\n";
-        file_out.close();
-        std::cout << "Wrote text to " << filename << " (may have overwritten).\n";
-    } else {
-        std::cerr << "Unable to open " << filename << " for writing.\n";
-    }
-
-    // std::ios::trunc: Clear the file after opening
-    std::fstream file_trunc(filename, std::ios::out | std::ios::trunc);
-    if (file_trunc.is_open()) {
-        std::cout << "File " << filename << " has been truncated (cleared).\n";
-        file_trunc << "Writing after truncation.\n";
-        file_trunc.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " for truncation.\n";
-    }
-
-    // std::ios::ate: Go to the end of the file after opening (initial position)
-    std::fstream file_ate(filename, std::ios::out | std::ios::ate);
-    if (file_ate.is_open()) {
-        std::cout << "Cursor positioned at the end of " << filename << " upon opening.\n";
-        file_ate << "Writing at the end.\n";
-        file_ate.close();
-    } else {
-        std::cerr << "Unable to open " << filename << " with ate option.\n";
-    }
+    // auto const floatHash = Hasher<float>();
+    //
+    // fmt::println("{} {}", floatHash.compute(2.01f), floatHash.compute(2.99f));
+    // print();
+    // print(isEven(2));
+    // print(isOdd(2));
+    // print(squared(2));
+    // print(squared(2.5));
+    auto file = std::fstream("data.txt");
+    replace(file, "hello");
+    // std::string words;
+    // int count;
+    // while (file >> words) {
+    //     bool end = true;
+    //     for (auto word : words) {
+    //         if (end and std::isdigit(word)) {
+    //             if (words[words.size()-1]==word) {
+    //                 count++;
+    //                 fmt::print("{} {}\n", words, count);
+    //             }
+    //         }else {
+    //             end = false;
+    //         }
+    //     }
+    // }
+    // Create a Rectangle object
+    // Rectangle myRect;
+    // myRect.width = 5;
+    // myRect.height = 10;
+    //
+    // // Print the initial dimensions
+    // std::cout << "Initial Rectangle: width = " << myRect.width
+    //           << ", height = " << myRect.height << std::endl;
+    //
+    // // Calculate and print the area
+    // int area = myRect.area();
+    // std::cout << "Area: " << area << std::endl;
+    //
+    // // Scale the rectangle
+    // myRect.scale(2);
+    // std::cout << "Scaled Rectangle: width = " << myRect.width
+    //           << ", height = " << myRect.height << std::endl;
+    //
+    // // Double the size (using the doubleSize function)
+    // doubleSize(myRect);
+    // std::cout << "Double Sized Rectangle: width = " << myRect.width
+    //           << ", height = " << myRect.height << std::endl;
 
     return 0;
 }

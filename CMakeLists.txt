@@ -21,6 +21,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(fmt)
 
-add_executable(pjc main.cpp)
+add_executable(pjc main.cpp maths/maths.cpp printer/printer.cpp Rectangle/Rectangle.cpp)
 target_link_libraries(pjc fmt)
 

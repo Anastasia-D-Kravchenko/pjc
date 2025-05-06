@@ -56,6 +56,27 @@ build CMakeFiles/pjc.dir/main.cpp.o: CXX_COMPILER__pjc_unscanned_Debug /Users/an
   OBJECT_DIR = CMakeFiles/pjc.dir
   OBJECT_FILE_DIR = CMakeFiles/pjc.dir
 
+build CMakeFiles/pjc.dir/maths/maths.cpp.o: CXX_COMPILER__pjc_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/maths/maths.cpp || cmake_object_order_depends_target_pjc
+  DEP_FILE = CMakeFiles/pjc.dir/maths/maths.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-src/include
+  OBJECT_DIR = CMakeFiles/pjc.dir
+  OBJECT_FILE_DIR = CMakeFiles/pjc.dir/maths
+
+build CMakeFiles/pjc.dir/printer/printer.cpp.o: CXX_COMPILER__pjc_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/printer/printer.cpp || cmake_object_order_depends_target_pjc
+  DEP_FILE = CMakeFiles/pjc.dir/printer/printer.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-src/include
+  OBJECT_DIR = CMakeFiles/pjc.dir
+  OBJECT_FILE_DIR = CMakeFiles/pjc.dir/printer
+
+build CMakeFiles/pjc.dir/Rectangle/Rectangle.cpp.o: CXX_COMPILER__pjc_unscanned_Debug /Users/anastasiiakravchenko/PJATK/pjc/Rectangle/Rectangle.cpp || cmake_object_order_depends_target_pjc
+  DEP_FILE = CMakeFiles/pjc.dir/Rectangle/Rectangle.cpp.o.d
+  FLAGS = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -fcolor-diagnostics
+  INCLUDES = -I/Users/anastasiiakravchenko/PJATK/pjc/cmake-build-debug/_deps/fmt-src/include
+  OBJECT_DIR = CMakeFiles/pjc.dir
+  OBJECT_FILE_DIR = CMakeFiles/pjc.dir/Rectangle
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target pjc
@@ -64,7 +85,7 @@ build CMakeFiles/pjc.dir/main.cpp.o: CXX_COMPILER__pjc_unscanned_Debug /Users/an
 #############################################
 # Link the executable pjc
 
-build pjc: CXX_EXECUTABLE_LINKER__pjc_Debug CMakeFiles/pjc.dir/main.cpp.o | _deps/fmt-build/libfmtd.a || _deps/fmt-build/libfmtd.a
+build pjc: CXX_EXECUTABLE_LINKER__pjc_Debug CMakeFiles/pjc.dir/main.cpp.o CMakeFiles/pjc.dir/maths/maths.cpp.o CMakeFiles/pjc.dir/printer/printer.cpp.o CMakeFiles/pjc.dir/Rectangle/Rectangle.cpp.o | _deps/fmt-build/libfmtd.a || _deps/fmt-build/libfmtd.a
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk
   LINK_LIBRARIES = _deps/fmt-build/libfmtd.a
   OBJECT_DIR = CMakeFiles/pjc.dir
