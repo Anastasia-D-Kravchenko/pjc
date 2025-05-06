@@ -199,14 +199,14 @@
 // // //         fmt::println("Hello!");
 // // //     }
 // // // }
-// // #include <iostream>
-// // #include <vector>
-// // #include <ranges>
-// // #include <algorithm>
-// // #include <numeric>
-// // #include <fmt/ranges.h>
-// // #include <set>
-// // #include <string>
+#include <iostream>
+#include <vector>
+#include <ranges>
+#include <algorithm>
+#include <numeric>
+#include <fmt/ranges.h>
+#include <set>
+#include <string>
 // // // auto dotProduct(std::vector<double> const& v1, std::vector<double> const& v2) {
 // // //     int count = 0;
 // // //     for ( int i = 0; i < v1.size(); i++ ) {
@@ -413,19 +413,19 @@
 //
 //
 //
-// #include <iostream>
-// #include <utility>
-// #include <vector>
-// #include <map>
-// #include <set>
-// #include <algorithm>
-// #include <ranges>
-// #include <fmt/base.h>
-// #include <fmt/ranges.h>
-// #include <array>
-// #include <list>
-// #include <utility> // For std::pair
-// #include <string>
+#include <iostream>
+#include <utility>
+#include <vector>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <ranges>
+#include <fmt/base.h>
+#include <fmt/ranges.h>
+#include <array>
+#include <list>
+#include <utility> // For std::pair
+#include <string>
 //
 // // namespace university {
 // //     enum class SortCriterion {
@@ -604,1067 +604,1183 @@
 // };
 //
 // // using namespace university;
-// auto main() -> int {
-// // //
-// // //     auto iter = std::vector<std::string>{"hello", "world"};
-// // //     // auto start = iter.begin();
-// // //     auto end = iter.end();
-// // //     end--;
-// // //     std::cout << *end << std::endl;
-// // //
-// // //     auto vec = std::vector<int>{3, 5, 1, 4, 2, 0};
-// // //
-// // //     auto middle = vec.begin() + vec.size()/2;
-// // //
-// // //     std::ranges::reverse(++middle, vec.end());
-// // //
-// // //     for (auto n : vec) {
-// // //         std::cout << n << ' ';
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     std::cout << *vec.begin() << std::endl;
-// // //     auto first = vec.begin() + 1;
-// // //     std::cout << *vec.begin() << std::endl;
-// // //     auto last = vec.begin() + 4;
-// // //     std::cout << *first << ' ' << *last << '\n';
-// // //
-// // //     auto vec = std::vector<int>{11, 22, 33, 22, 33, 11};
-// // //     auto middle = vec.begin() + vec.size()/2;
-// // //     std::ranges::sort(middle, vec.end());
-// // //
-// // //     std::cout << std::ranges::equal(vec.begin(), middle, middle, vec.end());
-// // //     std::cout << std::endl;
-// // //
-// // //     for ( auto i = vec.begin(); i != vec.end(); i++) {
-// // //         std::cout << *i << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     auto setik = std::set<int>();
-// // //     for (auto i : {1,2,3,4,5,6,7,8,9,9,8,7,6,5,4,3,2,1,0}) {
-// // //         setik.insert(i);
-// // //     }
-// // //     for (auto i : setik) {
-// // //         std::cout << i << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     auto Uniqeset = std::set<int>{1,2,3,4,5,6,7,8,9,9,8,7,6,5,4,3,2,1,0};
-// // //     auto Uniqevec = std::vector<int>();
-// // //     for (auto i : Uniqeset) {
-// // //         std::cout << i << " ";
-// // //         Uniqevec.emplace_back(i);
-// // //     }
-// // //     std::cout << std::endl;
-// // //     for (auto i : Uniqevec) {
-// // //         std::cout << i << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     auto uniqevec = std::vector<int>(5,1);
-// // //     auto dub = std::ranges::unique(uniqevec);
-// // //     for (auto i : dub) {
-// // //         std::cout << i << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //     uniqevec.erase(dub.begin(),dub.end());
-// // //     // uniqevec.erase(uniqevec.begin(),uniqevec.end());
-// // //     if (uniqevec.empty()) {
-// // //         std::cout << "nothing" << std::endl;
-// // //     }
-// // //     for (auto i : uniqevec) {
-// // //         std::cout << i << " ";
-// // //     }
-// // //
-// // //     auto numbers = std::vector<int>{1, 2, 3, 1, 2, 3, 1, 2, 3};
-// // //
-// // //     std::ranges::sort(numbers);
-// // //     auto duplicates = std::ranges::unique(numbers);
-// // //
-// // //     numbers.erase(duplicates.begin(), duplicates.end());
-// // //
-// // //     std::cout << std::endl;
-// // //     for (auto element : numbers) {
-// // //         std::cout << element << ' ';
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     fmt::println("{}", numbers);
-// // //
-// // //     // numbers.erase(numbers.end()); // will work
-// // //
-// // //     fmt::print("{}", numbers);
-// // //     fmt::print("{}", numbers);
-// // //     std::cout << std::endl;
-// // //
-// // //     auto vector = std::vector<int>{1, 2, 3};
-// // //     auto set    = std::set<int>{1, 2, 3};
-// // //
-// // //     fmt::println("{}", vector);
-// // //     fmt::println("{}", set);
-// // //     fmt::println("{}", vector);
-// // //     fmt::println("[{}]", fmt::join(set, ", "));
-// // //     fmt::println("The answer to ur question is {}", 3);
-// // //
-// // //     // fmt::format_string<> x = "5";
-// // //     // fmt::println(x);
-// // //
-// // //     auto x = 5;
-// // //     fmt::println("{}", x);
-// // //
-// // //     printhi();
-// // //
-// // //     modify(x);
-// // //     fmt::println("{}", x);
-// // //
-// // //     auto vec = std::vector<int>{1, 1, 3};
-// // //     fmt::println("{}", fmt::join(vec, " "));
-// // //
-// // //     std::cou1(5);
-// // //     pjc::sayHello();
-// // //
-// // //     auto const find = std::ranges::find(vec, 1);
-// // //     auto find2 = *find != 1;
-// // //     fmt::println("{}", *find);
-// // //
-// // //     auto const numbers = std::vector<int>{3, 5, 1, 4, 2};
-// // //
-// // //     auto const iter = std::ranges::find(numbers, 9);
-// // //
-// // //     auto const present = iter != numbers.end();
-// // //
-// // //     if (present) {
-// // //         fmt::println("{}", *iter);
-// // //     } else {
-// // //         fmt::println("No such element");
-// // //     }
-// // //
-// // //     auto numbers = std::vector<int>(21);
-// // //
-// // //     for (auto i = 0; i < numbers.size(); i++) {
-// // //         std::cin >> numbers[i];
-// // //     }
-// // //
-// // //     auto zeroCounter = 0;
-// // //
-// // //     for (auto start = numbers.begin(); start != numbers.end(); start += 3) {
-// // //         auto end = start + 3;
-// // //
-// // //         auto const iterToZero = std::ranges::find(start, end, 0);
-// // //         auto range = std::ranges::subrange(start, end);
-// // //         for ( auto i : range) {
-// // //             std::cout << i << " ";
-// // //         }
-// // //         std::cout << std::endl;
-// // //
-// // //         if (iterToZero != end) {
-// // //             zeroCounter += 1;
-// // //         }
-// // //     }
-// // //
-// // //     fmt::println("There were {} groups with zeros", zeroCounter);
-// // //
-// // //
-// // //     auto numbers = std::vector<int>{11, 1, 1111, 111};
-// // //
-// // //     auto const maxNumber = std::ranges::max(numbers);
-// // //     auto const maxIter   = std::ranges::max_element(numbers);
-// // //
-// // //     auto const minNumber = std::ranges::min(numbers);
-// // //     auto const minIter   = std::ranges::min_element(numbers);
-// // //
-// // //     fmt::println(
-// // //             "min: {}\nmax: {}\nminElement: {}\nmaxElement: {}",
-// // //             minNumber, maxNumber,
-// // //             *minIter, *maxIter
-// // //     );
-// // //
-// // //     fmt::println("{}", numbers);
-// // //     std::ranges::swap(*maxIter, *minIter);
-// // //     // std::ranges::iter_swap(maxIter, minIter);
-// // //     fmt::println("{}", numbers);
-// // //
-// // //     std::ranges::sort(numbers);
-// // //     fmt::println("{}", numbers);
-// // //
-// // //
-// // //     auto words = std::vector<std::string>{"w2", "w103", "w101", "w1020", "w105", "w7", "w303", "w4"};
-// // //     std::ranges::sort(words, std::ranges::greater());
-// // //     std::ranges::sort(words, std::ranges::greater(), std::ranges::size);
-// // //     fmt::println("{}", words);
-// // //
-// // //
-// // //     auto lamb = [](int x)->void{std::cout << x << '\n';};
-// // //     lamb(3);
-// // //
-// // //     auto words = std::vector<std::string>{
-// // //         "hello", "there", "and", "welcome"
-// // // };
-// // //
-// // //     std::ranges::sort(words, std::ranges::less(), [](std::string const& s) {
-// // //         return s.size();
-// // //     });
-// // //
-// // //     fmt::println("{}", words);
-// // //
-// // //     std::ranges::sort(words, std::ranges::greater(), [](std::string const& s) {
-// // //         return s.size();
-// // //     });
-// // //
-// // //     fmt::println("{}", words);
-// // //
-// // //     auto words = std::vector<std::string>{
-// // //         "hello", "there", "and", "welcome"
-// // // };
-// // //
-// // //     auto const capitalize = [](std::string copy) {
-// // //         auto const differenceBetweenLowerAndUpperCase = 'a' - 'A';
-// // //         copy.front() -= differenceBetweenLowerAndUpperCase;
-// // //         return copy;
-// // //     };
-// // //
-// // //     fmt::println("{}", words);
-// // //     std::ranges::transform(words, words.begin()+1, capitalize);
-// // //     fmt::println("{}", words);
-// // //
-// // //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
-// // //     auto min_it = std::ranges::min_element(data);
-// // //     auto max_it = std::ranges::max_element(data);
-// // //
-// // //     if (min_it != data.end() && max_it != data.end()) {
-// // //         std::ranges::iter_swap(min_it, max_it);
-// // //     }
-// // //
-// // //     for (int val : data) {
-// // //         std::cout << val << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //     return 0;
-// // //
-// // //
-// // //     std::vector<int> numbers = {3, 1, 4, 1, 5, 9, 2, 6};
-// // //     auto maxIter = std::ranges::max_element(numbers);
-// // //     auto minIter = std::ranges::min_element(numbers);
-// // //
-// // //     std::cout << "Before swap: max = " << *maxIter << ", min = " << *minIter << std::endl;
-// // //
-// // //     std::ranges::iter_swap(maxIter, minIter);
-// // //
-// // //     std::cout << "After swap: max = " << *maxIter << ", min = " << *minIter << std::endl;
-// // //     std::cout << "Vector after swap: ";
-// // //     for (int num : numbers) {
-// // //         std::cout << num << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
-// // //     auto has = std::ranges::find_if(data, [](int x){return x > 10;});
-// // //     std::cout << (has==data.end()?"hasn't":"has");
-// // //
-// // //
-// // //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
-// // //     auto has = std::ranges::find_if(data, [](int x) {
-// // //         if (x > 10) {
-// // //             return -1;
-// // //         }
-// // //         return 0;
-// // //     });
-// // //     std::cout << (has==data.end()?"hasn't":"has");
-// // //
-// // //     std::vector<std::string> words = {"apple", "banana", "kiwi", "orange", "grape"};
-// // //     std::ranges::sort(words, std::ranges::greater(), [](const std::string& s) { return s.size(); });
-// // //     for (const auto& word : words) {
-// // //         std::cout << word << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
-// // //     int mi = 0;
-// // //     std::cin >> mi;
-// // //     std::cout << ((std::ranges::find(data, mi) != data.end()) ? "all good" : "not good");
-// // //
-// // //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
-// // //     auto max_value = std::ranges::max(data);
-// // //     std::cout << max_value << std::endl;
-// // //
-// // //     auto all = std::vector<int>(7);
-// // //     for ( int i = 0; i < 7; ++i ) {
-// // //         std::cin >> all[i];
-// // //     }
-// // //     // std::ranges::sort(all);
-// // //     // auto start = all.begin();
-// // //     // all.erase(start);
-// // //     // auto end = all.end()-1;
-// // //     // all.erase(end);
-// // //     // fmt::print("{}", all);
-// // //     all.erase(std::ranges::min_element(all));
-// // //     all.erase(std::ranges::max_element(all));
-// // //     fmt::print("{}\n", all);
-// // //
-// // //     std::vector<double> v1 = {1.0, 2.0, 3.0};
-// // //     std::vector<double> v2 = {4.0, 5.0, 6.0};
-// // //     std::cout << dotProduct(v1, v2) << std::endl;
-// // //
-// // //     auto mass = std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-// // //     for ( int i = 0; i < mass.size(); i++ ) {
-// // //         if ( i % 2 == 0 ) {
-// // //             std::cout << mass[i] << std::endl;
-// // //         }
-// // //     }
-// // //
-// // //     std::set<int> s1 = {1, 2, 3, 4, 5, 6, 7};
-// // //     std::vector<int> v1 = {5, 6, 7};
-// // //     std::cout << "v1 is a suffix of s1: " << (suffix(s1, v1) ? "true" : "false") << std::endl;
-// // //
-// // //     fmt::println(
-// // //            "{}\n{}\n{}",
-// // //            isPalindrome("KajaK"),
-// // //            isPalindrome("ala"),
-// // //            isPalindrome("programowanie")
-// // //    );
-// // //
-// // //     auto firstHalfBigger  = std::vector<int>{3, 2, 1, 0, 1, 0};
-// // //     auto secondHalfBigger = std::vector<int>{3, 2, 1, 6, 5, 4};
-// // //     auto bothHalvesSame   = std::vector<int>{5, 4, 5, 4};
-// // //
-// // //     sortBiggerHalf(firstHalfBigger, 0);
-// // //     sortBiggerHalf(secondHalfBigger, 1);
-// // //     sortBiggerHalf(bothHalvesSame, 1);
-// // //
-// // //     fmt::println(
-// // //             "{}\n{}\n{}",
-// // //             firstHalfBigger,
-// // //             secondHalfBigger,
-// // //             bothHalvesSame
-// // //     );
-// // //
-// // //     std::vector<std::string> names = {"Adam", "Illia", "Ewa", "Anastasia", "Illia", "Ewa", "Illia", "Maciej", "Adam", "Natalia"};
-// // //     std::set<std::string> unique_names;
-// // //
-// // //     for (auto name : names) {
-// // //         unique_names.insert(name);
-// // //     }
-// // //
-// // //     fmt::println("{}", unique_names);
-// // //
-// // //     auto fileNames = std::vector<std::string>{
-// // //         "lecture 1", "lecture 2", "lecture 3",
-// // //         "lecture 10", "lecture 11", "lecture 12",
-// // //         "lecture 35", "lecture 39", "lecture 92",
-// // //         "lecture 101", "lecture 111", "lecture 133",
-// // //         "lecture 159", "lecture 212", "lecture 221",
-// // //         "file1.txt", "file10.txt", "file11.txt", "file2.txt", "file20.txt", "file3.txt",
-// // //         "file1_part3.txt", "file10_part10.txt", "file10_part2.txt", "file2_part1.txt", "file20_part21.txt", "file3_part1.txt"
-// // //     };
-// // //     std::ranges::sort(fileNames);
-// // //     std::ranges::sort(fileNames, std::ranges::less{}, [](std::string const& a) {return a.size();});
-// // //
-// // //     fmt::println("{}", fmt::join(fileNames, "\n"));
-// // //
-// // //     std::vector<std::string> strings = {"apple", "banana", "kiwi", "orange", "strawberry", "grapefruit"};
-// // //
-// // //     v1::printLongestString(strings);
-// // //     v2::printLongestString(strings);
-// // //     v3::printLongestString(strings);
-// // //     v4::printLongestString(strings);
-// // //
-// // //     // fmt::println(
-// // //     //         "[{}]\n[{}]\n[{}]\n[{}]",
-// // //     //         reduceAdjacentWhitespaces("Abc"),
-// // //     //         reduceAdjacentWhitespaces("A b c"),
-// // //     //         reduceAdjacentWhitespaces("   A\tb c      "),
-// // //     //         reduceAdjacentWhitespaces("A\t\tb\n \n  \t c")
-// // //     // );
-// // //
-// // //     std::vector<int> v1 = {1, 2, 3, 4};
-// // //     std::cout << "v1: " << bothHalvesContainGreatestNumber(v1) << std::endl; // Output: 0
-// // //
-// // //     std::vector<int> v2 = {1, 4, 3, 4};
-// // //     std::cout << "v2: " << bothHalvesContainGreatestNumber(v2) << std::endl; // Output: 1
-// // //
-// // //     std::vector<int> v3 = {5, 2, 5, 1};
-// // //     std::cout << "v3: " << bothHalvesContainGreatestNumber(v3) << std::endl; // Output: 1
-// // //
-// // //     std::vector<int> v4 = {10, 2, 3, 4, 10, 1};
-// // //     std::cout << "v4: " << bothHalvesContainGreatestNumber(v4) << std::endl; // Output: 1
-// // //
-// // //     std::vector<int> v5 = {1, 2, 3, 10, 5, 6};
-// // //     std::cout << "v5: " << bothHalvesContainGreatestNumber(v5) << std::endl; // Output: 0
-// // //
-// // //     auto words = std::set<std::string>{
-// // //         "this", "is", "the", "second" // is second the this
-// // //     };
-// // //     // for (const auto& word : words) {
-// // //     //     std::cout << word << std::endl;
-// // //     // }
-// // //     auto iter = words.begin(); // std::cout << *iter << std::endl; // is
-// // //     for (auto i = 0; i < 3; ++i) /*std::cout << *iter;*/ ++iter; // the
-// // //     fmt::println("({})", *words.begin(), *iter); // {} -> *words.begin() -> (is)
-// // //     // fmt::println("({})", *iter);
-// // //     auto count = std::ranges::count_if(
-// // //         words.begin(), iter,
-// // //         [](std::string const& s) {
-// // //           return s.front() == 't';
-// // //         });
-// // //     fmt::println("({})", count); // 1
-// // //     fmt::println("({})", std::vector<std::string>(iter, words.end())); // ([this])
-// // //
-// // //
-// // //     Callable callable_obj;
-// // //
-// // //     std::vector<int> vec_a = {1, 5, 2, 8, 3};
-// // //     std::vector<int> vec_b = {9, 4, 7, 6, 10};
-// // //
-// // //     std::cout << "Before calling replace:" << std::endl;
-// // //     std::cout << "vec_a: ";
-// // //     for (int val : vec_a) {
-// // //         std::cout << val << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //     std::cout << "vec_b: ";
-// // //     for (int val : vec_b) {
-// // //         std::cout << val << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     callable_obj.replace(vec_a, vec_b);
-// // //
-// // //     std::cout << "After calling replace:" << std::endl;
-// // //     std::cout << "vec_a: ";
-// // //     for (int val : vec_a) {
-// // //         std::cout << val << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //     std::cout << "vec_b: ";
-// // //     for (int val : vec_b) {
-// // //         std::cout << val << " ";
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //
-// // //
-// // //     std::vector<std::string> vec = {"hello", "i am", "david", "a", "short"};
-// // //     std::ranges::sort(vec, [](std::string const& s1, std::string const& s2) {
-// // //         if (s1.size() != s2.size()) {
-// // //             return s1.size() < s2.size();
-// // //         } return s1 < s2;
-// // //     });
-// // //     fmt::println("({})", vec);
-// // //
-// // //     // std::vector<int> v6 = {1, 2, 3, 2, 1, 3};
-// // //     // std::cout<< fun(v6);
-// // //
-// // //     auto word = std::string{"programming"};
-// // //
-// // //     for (auto const& c : word) {
-// // //         std::cout << c;
-// // //     }
-// // //     std::cout << std::endl;
-// // //
-// // //     auto changer = [](char c) {
-// // //         if (c == 'r') {
-// // //             return 'R';
-// // //         }
-// // //         return c;
-// // //     };
-// // //
-// // //     std::ranges::transform(word, word.begin(), changer);
-// // //
-// // //     std::cout << word << std::endl;
-// // //
-// // //
-// // //     auto nums = std::vector<int>{237, 154, 33, 81, 900, 525};
-// // //     std::ranges::sort(nums, {}, [](int const n) { return n % 10; });
-// // //     fmt::println("({})", nums);
-// // //     std::ranges::reverse(nums.begin() + 3, nums.end());
-// // //     fmt::println("({})", nums);
-// // //     fmt::println("({})", std::set<int>(nums.begin(), nums.end()));
-// // //
-// // //
-// // //     std::vector<int> v7 = {3, 1, 2, 1, 2, 3, 2};
-// // //     std::cout << "Duplicates in v1: " << name::duplicatesCount(v7) << std::endl; // Output: 4
-// // //
-// // //     std::vector<int> v8 = {1, 2, 3, 4, 5};
-// // //     std::cout << "Duplicates in v2: " << name::duplicatesCount(v8) << std::endl; // Output: 0
-// // //
-// // //     std::vector<int> v9 = {1, 1, 1, 1, 1};
-// // //     std::cout << "Duplicates in v3: " << name::duplicatesCount(v9) << std::endl; // Output: 4
-// // //
-// // //     std::vector<int> v10 = {};
-// // //     std::cout << "Duplicates in v4: " << name::duplicatesCount(v10) << std::endl; // Output: 0
-// // //
-// // //     std::vector<int> v11 = {1, 2, 2, 3, 3, 3};
-// // //     std::cout << "Duplicates in v5: " << name::duplicatesCount(v11) << std::endl; // Output: 3
-// // //
-// // //
-// // //     auto producer = [](int n) { return std::vector<int>(n, 1); };
-// // //     auto a1 = producer(3); // 0 0 0
-// // //     auto a2 = producer(5); // 0 0 0 0 0
-// // //     auto x = 0;
-// // //     for (auto& e : a1) e *= x;
-// // //     for (auto& e : a2) e *= x;
-// // //     fmt::println("START {} END", a1); // START [0, 0, 0] END
-// // //     fmt::println("START {} END", a2); // START [0, 0, 0, 0, 0] END
-// // //     fmt::println("START {} END", std::set<int>(a2.begin(), a2.end())); // START {0} END
-// // //
-// // //
-// // //     std::vector<std::string> b1 = {"hello", "i am", "david", "a", "short"};
-// // //     std::cout << getShortestAndLongest(b1) << std::endl;
-// // //
-// // //     std::vector<std::string> b2 = {"one", "two", "three"};
-// // //     std::cout << getShortestAndLongest(b2) << std::endl;
-// // //
-// // //     std::vector<std::string> b3 = {"same", "same"};
-// // //     std::cout << getShortestAndLongest(b3) << std::endl;
-// // //
-// // //     std::vector<std::string> b4 = {"longest", "shrt"};
-// // //     std::cout << getShortestAndLongest(b4) << std::endl;
-// // //
-// // //     std::vector<std::string> b5 = {};
-// // //     std::cout << getShortestAndLongest(b5) << std::endl;
-// // //
-// // //     std::vector<int> numbers_vec = {1, 2, 3};
-// // //     std::set<int> numbers_set = {1, 2, 3};
-// // //
-// // //     // fmt::print("{}", numbers); // Assuming you want to print the vector/set
-// // //     fmt::println("Vector: {}", numbers_vec);
-// // //     fmt::println("Set: {}", numbers_set);
-// // //
-// // //     // fmt::join(set, ", ")
-// // //     fmt::println("Set joined with comma: {}", fmt::join(numbers_set, ", "));
-// // //
-// // //     // fmt::println("The answer is {}", 42);
-// // //     fmt::println("The answer is {}", 42);
-// // //
-// // //     // fmt::println("{}", fmt::join(vec, " "));
-// // //     std::vector<std::string> words1 = {"hello", "world", "cpp"};
-// // //     fmt::println("Words joined with space: {}", fmt::join(words1, " "));
-// // //
-// // //     std::vector<int> numbers = {5, 2, 8, 1, 9, 4};
-// // //
-// // //     // std::ranges::find(): Find the first occurrence of a value
-// // //     auto find_result = std::ranges::find(numbers, 8);
-// // //     if (find_result != numbers.end()) {
-// // //         fmt::println("Found 8 at index: {}", std::ranges::distance(numbers.begin(), find_result));
-// // //     } else {
-// // //         fmt::println("8 not found.");
-// // //     }
-// // //
-// // //     // std::ranges::max(): Find the maximum value in the range
-// // //     auto max_val = std::ranges::max(numbers);
-// // //     fmt::println("Maximum value: {}", max_val);
-// // //
-// // //     // std::ranges::max_element(): Find an iterator to the maximum element
-// // //     auto max_iter = std::ranges::max_element(numbers);
-// // //     if (max_iter != numbers.end()) {
-// // //         fmt::println("Maximum element is: {}", *max_iter);
-// // //     }
-// // //
-// // //     // std::ranges::min(): Find the minimum value in the range
-// // //     auto min_val = std::ranges::min(numbers);
-// // //     fmt::println("Minimum value: {}", min_val);
-// // //
-// // //     // std::ranges::min_element(): Find an iterator to the minimum element
-// // //     auto min_iter = std::ranges::min_element(numbers);
-// // //     if (min_iter != numbers.end()) {
-// // //         fmt::println("Minimum element is: {}", *min_iter);
-// // //     }
-// // //
-// // //     // std::ranges::iter_swap(maxIter, minIter): Swap elements pointed to by iterators
-// // //     if (max_iter != numbers.end() && min_iter != numbers.end()) {
-// // //         std::ranges::iter_swap(max_iter, min_iter);
-// // //         fmt::println("Vector after iter_swap: {}", numbers);
-// // //     }
-// // //
-// // //     // std::ranges::swap(*maxIter, *minIter): Swap elements directly
-// // //     // (Assuming max_iter and min_iter are still valid)
-// // //     if (max_iter != numbers.end() && min_iter != numbers.end()) {
-// // //         std::ranges::swap(*max_iter, *min_iter);
-// // //         fmt::println("Vector after swap: {}", numbers);
-// // //     }
+#include <fstream>
+#include <fmt/base.h>
+#include <fmt/ostream.h>    // fmt::print() for std::fstream
+#include <fmt/ranges.h>     // formatting ranges
+#include <filesystem>
+#include <fmt/std.h>
+namespace fs = std::filesystem;
+auto main() -> int {
 // //
-// //     // auto set = std::set<int>{5, 5, 5, 4, 3, 1, 2};
-// //     // for ( auto set1 : set) {
-// //     //     std::cout << set1 << std::endl;
-// //     // }
-// //     // auto iter = set.begin();
-// //     // for ( int i=0; i<3; i++) ++iter;
-// //     // fmt::print( "{:d}\n", std::ranges::count(set.begin(), iter, 5));
-// //     // auto count = std::ranges::count_if(set, [](int i){return i>=2;});
-// //     // fmt::println("{}", count);
+// //     auto iter = std::vector<std::string>{"hello", "world"};
+// //     // auto start = iter.begin();
+// //     auto end = iter.end();
+// //     end--;
+// //     std::cout << *end << std::endl;
 // //
-// //     // // auto const vec = std::vector<int>{1, 2, 3};
-// //     // // auto const set = std::set<int>{1, 2, 3};
-// //     //
-// //     // auto const set = "HI";
-// //     // print(set);
-// //     // // print(vec);
-// //     // // print(set);
-// //     //
-// //     // fmt::println("vector is a range? {}", std::ranges::range<std::vector<int>>);
-// //     // fmt::println("set is a range?    {}", std::ranges::range<std::set<int>>);
-// //     // fmt::println("string is a range? {}", std::ranges::range<std::string>);
-// //     // fmt::println("int is a range?    {}", std::ranges::range<int>);
-// //     // fmt::println("double is a range? {}", std::ranges::range<double>);
-// //     //
-// //     // fmt::println("int has size?    {}", HasSize<int>);
-// //     // fmt::println("string has size? {}", HasSize<std::string>);
-// //     // fmt::println("vector has size? {}", HasSize<std::vector<int>>);
-// //     //
-// //     // fmt::println("{}", HasSizeAndIsRange<int>);
-// //     // fmt::println("{}", HasSizeAndIsRange<std::string>);
-// //     // fmt::println("{}", HasSizeAndIsRange<std::vector<int>>);
-// //     //
-// //     // greet("Alice");
-// //     // std::cout << multiply(3, 4) << std::endl;
-// //     // std::cout << multiply(1.5, 2.0) << std::endl;
-// //     //
-// //     // auto myLambda = []() { std::cout << "Lambda called!" << std::endl; };
-// //     // execute(myLambda);
+// //     auto vec = std::vector<int>{3, 5, 1, 4, 2, 0};
 // //
-// //     // // Using std::function (as mentioned, it's a template itself)
-// //     // std::function<void()> anotherLambda = []() { std::cout << "Another lambda!" << std::endl; };
-// //     // execute(anotherLambda);
+// //     auto middle = vec.begin() + vec.size()/2;
 // //
-// //     // auto const fileContent = std::string("some random text appears here");
-// //     //
-// //     // auto const totalNumberOfASCIICharacters = 128;
-// //     // auto occurrences = std::vector<int>(totalNumberOfASCIICharacters);
-// //     // fmt::println("{}", occurrences);
-// //     //
-// //     // for (auto const c : fileContent) {
-// //     //     occurrences[c] += 1; // c will give ascci value
-// //     // }
-// //     //
-// //     // for (auto i = 0; i < occurrences.size(); i++) {
-// //     //     if (occurrences[i] > 0) {
-// //     //         fmt::println(
-// //     //                 "'{}' occurred {} times",
-// //     //                 static_cast<char>(i), //(char)i,
-// //     //                 occurrences[i]
-// //     //         );
-// //     //     }
-// //     // }
+// //     std::ranges::reverse(++middle, vec.end());
 // //
-// //     // auto const fileContent = std::string("some random text appears here");
-// //     //
-// //     // auto occurrences = std::map<char, int>();
-// //     //
-// //     // for (auto const c : fileContent) {
-// //     //     occurrences[c] += 1;
-// //     // }
-// //     //
-// //     // for (auto const& charAndCount : occurrences) {
-// //     //     fmt::println(
-// //     //             "'{}' occurred {} times",
-// //     //             charAndCount.first,
-// //     //             charAndCount.second
-// //     //     );
-// //     // }
-// //     // for (auto const& [c, count] : occurrences) {
-// //     //     fmt::println("'{}' occurred {} times", c, count);
-// //     // }
-// //     //
-// //     // auto const pair = std::pair<char, int>('a', 5);
-// //     //
-// //     // auto const [c, i] = pair;
-// //     //
-// //     // fmt::println("{} {}", c, i);
-// //     //
-// //     // // auto uniqueCharacters = fileContent;
-// //     // // std::ranges::sort(uniqueCharacters);
-// //     // // auto [from, to] = std::ranges::unique(uniqueCharacters);
-// //     // // // auto newy = std::ranges::unique(uniqueCharacters);
-// //     // // // fmt::println("{}", newy);
-// //     // // // uniqueCharacters.erase(newy.begin(), newy.end());
-// //     // // // fmt::println("{}", uniqueCharacters);
-// //     // // fmt::println("{} {}", *from, *to);
-// //     // // fmt::println("{}", uniqueCharacters);
-// //     // // uniqueCharacters.erase(from, to);
-// //     // // fmt::println("{}", uniqueCharacters);
-// //     //
-// //     // auto uniqueCharacters = fileContent;
-// //     // std::ranges::sort(uniqueCharacters);
-// //     // auto const [from, to] = std::ranges::unique(uniqueCharacters);
-// //     // uniqueCharacters.erase(from, to);
-// //     //
-// //     // auto array = std::array<int, 5>{1, 2, 3, 4, 5};
-// //     // std::ranges::reverse(array);
-// //     // fmt::println("{}", array);
+// //     for (auto n : vec) {
+// //         std::cout << n << ' ';
+// //     }
+// //     std::cout << std::endl;
 // //
-// //     // auto currentDirection = Direction();
-// //     //
-// //     // currentDirection = Direction::South;
-// //     // currentDirection = Direction::West;
-// //     //
-// //     // auto v1 = std::vector<int>{1, 2, 3};
-// //     // auto v2 = std::vector<int>{3, 2, 1};
-// //     //
-// //     // fmt::println(
-// //     //         "{} {}",
-// //     //         equalContents(v1, v2, Ordering::Required),
-// //     //         equalContents(v1, v2, Ordering::NotRequired)
-// //     // );
-// //     //
-// //     // // auto p1 = Point();p1.x = 1;p1.y = 2;
-// //     // auto p2 = Point();p2.x = 1;p2.y = 2;
-// //     // auto sorting = std::vector<Point>{{1,0}, {2,3}, {0,0}};
-// //     //
-// //     // // fmt::println("{} {}", p1.x, p1.y);
-// //     // fmt::println("{} {}", p2.x, p2.y);
-// //     // std::ranges::sort(sorting, [](Point left, Point right) { return toDist(left) < toDist(right); });
-// //     // fmt::println("{}", p2);
-// //     // fmt::println("{}", sorting);
-// //     //
-// //     // auto points = std::vector<Point>{ {1, 2}, {0, 0}, {2, 0} };
-// //     // std::ranges::sort(points, [](Point const left, Point const  right) {
-// //     //     return left.distanceToOrigin() < right.distanceToOrigin();
-// //     // });
-// //     // fmt::println("{}", points);
-// //     //
-// //     // auto fibonacci = [n = 0, m = 1]() mutable {
-// //     //     fmt::print("{} ", m);
-// //     //     auto prevM = m;
-// //     //     m += n;
-// //     //     n = prevM;
-// //     // };
-// //     //
-// //     // for (auto i = 0; i < 10; i++) {
-// //     //     fibonacci();
-// //     // }
+// //     std::cout << *vec.begin() << std::endl;
+// //     auto first = vec.begin() + 1;
+// //     std::cout << *vec.begin() << std::endl;
+// //     auto last = vec.begin() + 4;
+// //     std::cout << *first << ' ' << *last << '\n';
 // //
-// //     // auto graph = std::map<std::string, std::set<std::string>>();
-// //     // graph["A"] = {"B", "C"};
-// //     // graph["B"] = {"E"};
-// //     // graph["C"] = {"D"};
-// //     // graph["D"] = {"B"};
-// //     // graph["E"] = {"C"};
-// //     //
-// //     // auto route = [graph, letter = std::string("A")]() mutable {
-// //     //     for ( auto ent : graph[letter] ) {
-// //     //         fmt::print("{} -> ", ent);
-// //     //     }
-// //     //     letter = *graph[letter].begin();
-// //     // };
-// //     //
-// //     // for ( int i = 0; i < graph.size() * 2; ++i ) {
-// //     //     route();
-// //     // }
-// //     // std::cout << "..." << std::endl;
-// //     // std::cout << "Enter words (type 'stop' to finish):\n";
-// //     //
-// //     // std::map<int, std::set<std::string>> words;
-// //     // std::string word;
-// //     //
-// //     // while (std::cin >> word && word != "stop") {
-// //     //     words[word.length()].insert(word);
-// //     // }
-// //     // for (const auto& word : words) {
-// //     //     fmt::print("{}\n", fmt::join(word.second, " "));
-// //     // }
+// //     auto vec = std::vector<int>{11, 22, 33, 22, 33, 11};
+// //     auto middle = vec.begin() + vec.size()/2;
+// //     std::ranges::sort(middle, vec.end());
 // //
-// //     // std::vector<Student> studentGroup = {
-// //     //     {"Alice", "Smith", "S1001", 3},
-// //     //     {"Bob", "Johnson", "S1002", 3},
-// //     //     {"Charlie", "Brown", "S1003", 4},
-// //     //     {"David", "Lee", "S1004", 3}
-// //     // };
-// //     //
-// //     // fmt::println("Student Group:");
-// //     // for (const auto& student : studentGroup) {
-// //     //     fmt::println("{}", student.print());
-// //     // }
-// //     // fmt::println("");
-// //     //
-// //     // fmt::println("Sorting by Name:");
-// //     // sort(studentGroup, SortCriterion::Name);
-// //     // for (const auto& student : studentGroup) {
-// //     //     fmt::println("{}", student.print());
-// //     // }
-// //     // fmt::println("");
-// //     //
-// //     // fmt::println("Sorting by Surname:");
-// //     // sort(studentGroup, SortCriterion::Surname);
-// //     // for (const auto& student : studentGroup) {
-// //     //     fmt::println("{}", student.print());
-// //     // }
-// //     // fmt::println("");
-// //     //
-// //     // fmt::println("Sorting by Index:");
-// //     // sort(studentGroup, SortCriterion::Index);
-// //     // for (const auto& student : studentGroup) {
-// //     //     fmt::println("{}", student.print());
-// //     // }
-// //     // fmt::println("");
-// //     //
-// //     // fmt::println("Sorting by Semester:");
-// //     // sort(studentGroup, SortCriterion::Semester);
-// //     // for (const auto& student : studentGroup) {
-// //     //     fmt::println("{}", student.print());
-// //     // }
-// //     // fmt::println("");
-// //     //
-// //     // auto text = std::string("helloworld");
-// //     //
-// //     // auto map  = std::map<char, int>();
-// //     // for (auto c : text) map[c] += 1;
-// //     //
-// //     // // for (auto all : map) {
-// //     // //     fmt::println("{} {}", all.first, all.second);
-// //     // // }
-// //     // for (auto [k, v] : map) {
-// //     //     fmt::println("{} {}", k, v);
-// //     // }
+// //     std::cout << std::ranges::equal(vec.begin(), middle, middle, vec.end());
+// //     std::cout << std::endl;
 // //
-// //     // std::array<int, 9> arr1 = {1, 2, 3, 2, 3, 1, 3, 2, 1};
-// //     // std::array<int, 3> triplet1 = {arr1[0], arr1[1], arr1[2]};
-// //     // std::array<int, 3> triplet2 = {arr1[0], arr1[1], arr1[2]};
-// //     // std::array<int, 3> triplet3 = {arr1[0], arr1[1], arr1[2]};
-// //     // if (std::ranges::is_permutation(triplet1, triplet2) and std::ranges::is_permutation(triplet1, triplet3) and std::ranges::is_permutation(triplet2, triplet3)) {
-// //     //     std::cout << "yes" << std::endl;
-// //     // }else {
-// //     //     std::cout << "no" << std::endl;
-// //     // }
+// //     for ( auto i = vec.begin(); i != vec.end(); i++) {
+// //         std::cout << *i << " ";
+// //     }
+// //     std::cout << std::endl;
 // //
-// //     // std::vector<Student> vec = {
-// //     //     {"Alice", "Smith", 20},
-// //     //     {"Bob", "Johnson", 22},
-// //     //     {"Charlie", "Williams", 21},
-// //     //     {"David", "Brown", 20},
-// //     //     {"Eve", "Davis", 22},
-// //     //     {"Frank", "Miller", 21},
-// //     //     {"Grace", "Smith", 19}
-// //     // };
-// //     //
-// //     // std::cout << "Original Vector:\n";
-// //     // std::ranges::for_each(vec, [](const Student& student) {
-// //     //     std::cout << student << "\n";
-// //     // });
-// //     // std::cout << "\n";
-// //     //
-// //     // std::ranges::sort(vec, [](const Student& a, const Student& b) {
-// //     //     if (a.age != b.age) {
-// //     //         return a.age < b.age;
-// //     //     }
-// //     //     return a.surname < b.surname;
-// //     // });
-// //     //
-// //     // // Print the sorted vector.  Again using std::ranges::for_each
-// //     // std::cout << "Sorted Vector (Youngest to Oldest, then Last Name):\n";
-// //     // std::ranges::for_each(vec, [](const Student& student) {
-// //     //     std::cout << student << "\n";
-// //     // });
-// //     // std::cout << "\n";
+// //     auto setik = std::set<int>();
+// //     for (auto i : {1,2,3,4,5,6,7,8,9,9,8,7,6,5,4,3,2,1,0}) {
+// //         setik.insert(i);
+// //     }
+// //     for (auto i : setik) {
+// //         std::cout << i << " ";
+// //     }
+// //     std::cout << std::endl;
 // //
-// //     // auto modifier = [](int& x) {
-// //     //     x += 10;
-// //     // };
-// //     // auto num = 0;
-// //     // call(3, modifier, num);
-// //     // fmt::println("{}", num);
-// //     //
-// //     // auto first = Student("Giorno", "Giovanna");
-// //     // auto second = Student("Bruno", "Bucciarati");
-// //     // fmt::println("[{}] [{}] {}", first.name, second.surname, second);
-// //     //
-// //     // auto ints = std::vector<int>{3, 4, 5, 6, 7, 8, 9, 10};
-// //     // auto map = std::map<int, std::set<int>>{};
-// //     //
-// //     // for (auto e : ints) {
-// //     //     map[e % 3].insert(e);
-// //     // }
-// //     //
-// //     // for (auto pair : map) {
-// //     //     fmt::println("{} {}", pair.first, pair.second);
-// //     // }
+// //     auto Uniqeset = std::set<int>{1,2,3,4,5,6,7,8,9,9,8,7,6,5,4,3,2,1,0};
+// //     auto Uniqevec = std::vector<int>();
+// //     for (auto i : Uniqeset) {
+// //         std::cout << i << " ";
+// //         Uniqevec.emplace_back(i);
+// //     }
+// //     std::cout << std::endl;
+// //     for (auto i : Uniqevec) {
+// //         std::cout << i << " ";
+// //     }
+// //     std::cout << std::endl;
 // //
-// //     std::map<int, std::string> my_map = {
-// //         {1, "apple"},
-// //         {2, "banana"},
-// //         {3, "cherry"}
-// //     };
+// //     auto uniqevec = std::vector<int>(5,1);
+// //     auto dub = std::ranges::unique(uniqevec);
+// //     for (auto i : dub) {
+// //         std::cout << i << " ";
+// //     }
+// //     std::cout << std::endl;
+// //     uniqevec.erase(dub.begin(),dub.end());
+// //     // uniqevec.erase(uniqevec.begin(),uniqevec.end());
+// //     if (uniqevec.empty()) {
+// //         std::cout << "nothing" << std::endl;
+// //     }
+// //     for (auto i : uniqevec) {
+// //         std::cout << i << " ";
+// //     }
 // //
-// //     std::vector<std::string> val_vec = values(my_map);
-// //     fmt::println("{}", val_vec);
+// //     auto numbers = std::vector<int>{1, 2, 3, 1, 2, 3, 1, 2, 3};
 // //
+// //     std::ranges::sort(numbers);
+// //     auto duplicates = std::ranges::unique(numbers);
+// //
+// //     numbers.erase(duplicates.begin(), duplicates.end());
+// //
+// //     std::cout << std::endl;
+// //     for (auto element : numbers) {
+// //         std::cout << element << ' ';
+// //     }
+// //     std::cout << std::endl;
+// //
+// //     fmt::println("{}", numbers);
+// //
+// //     // numbers.erase(numbers.end()); // will work
+// //
+// //     fmt::print("{}", numbers);
+// //     fmt::print("{}", numbers);
+// //     std::cout << std::endl;
+// //
+// //     auto vector = std::vector<int>{1, 2, 3};
+// //     auto set    = std::set<int>{1, 2, 3};
+// //
+// //     fmt::println("{}", vector);
+// //     fmt::println("{}", set);
+// //     fmt::println("{}", vector);
+// //     fmt::println("[{}]", fmt::join(set, ", "));
+// //     fmt::println("The answer to ur question is {}", 3);
+// //
+// //     // fmt::format_string<> x = "5";
+// //     // fmt::println(x);
+// //
+// //     auto x = 5;
+// //     fmt::println("{}", x);
+// //
+// //     printhi();
+// //
+// //     modify(x);
+// //     fmt::println("{}", x);
+// //
+// //     auto vec = std::vector<int>{1, 1, 3};
+// //     fmt::println("{}", fmt::join(vec, " "));
+// //
+// //     std::cou1(5);
+// //     pjc::sayHello();
+// //
+// //     auto const find = std::ranges::find(vec, 1);
+// //     auto find2 = *find != 1;
+// //     fmt::println("{}", *find);
+// //
+// //     auto const numbers = std::vector<int>{3, 5, 1, 4, 2};
+// //
+// //     auto const iter = std::ranges::find(numbers, 9);
+// //
+// //     auto const present = iter != numbers.end();
+// //
+// //     if (present) {
+// //         fmt::println("{}", *iter);
+// //     } else {
+// //         fmt::println("No such element");
+// //     }
+// //
+// //     auto numbers = std::vector<int>(21);
+// //
+// //     for (auto i = 0; i < numbers.size(); i++) {
+// //         std::cin >> numbers[i];
+// //     }
+// //
+// //     auto zeroCounter = 0;
+// //
+// //     for (auto start = numbers.begin(); start != numbers.end(); start += 3) {
+// //         auto end = start + 3;
+// //
+// //         auto const iterToZero = std::ranges::find(start, end, 0);
+// //         auto range = std::ranges::subrange(start, end);
+// //         for ( auto i : range) {
+// //             std::cout << i << " ";
+// //         }
+// //         std::cout << std::endl;
+// //
+// //         if (iterToZero != end) {
+// //             zeroCounter += 1;
+// //         }
+// //     }
+// //
+// //     fmt::println("There were {} groups with zeros", zeroCounter);
+// //
+// //
+// //     auto numbers = std::vector<int>{11, 1, 1111, 111};
+// //
+// //     auto const maxNumber = std::ranges::max(numbers);
+// //     auto const maxIter   = std::ranges::max_element(numbers);
+// //
+// //     auto const minNumber = std::ranges::min(numbers);
+// //     auto const minIter   = std::ranges::min_element(numbers);
+// //
+// //     fmt::println(
+// //             "min: {}\nmax: {}\nminElement: {}\nmaxElement: {}",
+// //             minNumber, maxNumber,
+// //             *minIter, *maxIter
+// //     );
+// //
+// //     fmt::println("{}", numbers);
+// //     std::ranges::swap(*maxIter, *minIter);
+// //     // std::ranges::iter_swap(maxIter, minIter);
+// //     fmt::println("{}", numbers);
+// //
+// //     std::ranges::sort(numbers);
+// //     fmt::println("{}", numbers);
+// //
+// //
+// //     auto words = std::vector<std::string>{"w2", "w103", "w101", "w1020", "w105", "w7", "w303", "w4"};
+// //     std::ranges::sort(words, std::ranges::greater());
+// //     std::ranges::sort(words, std::ranges::greater(), std::ranges::size);
+// //     fmt::println("{}", words);
+// //
+// //
+// //     auto lamb = [](int x)->void{std::cout << x << '\n';};
+// //     lamb(3);
 // //
 // //     auto words = std::vector<std::string>{
-// //         "the", "dog", "and", "frog",
-// //         "leaped", "barked", "and", "croaked"
+// //         "hello", "there", "and", "welcome"
+// // };
+// //
+// //     std::ranges::sort(words, std::ranges::less(), [](std::string const& s) {
+// //         return s.size();
+// //     });
+// //
+// //     fmt::println("{}", words);
+// //
+// //     std::ranges::sort(words, std::ranges::greater(), [](std::string const& s) {
+// //         return s.size();
+// //     });
+// //
+// //     fmt::println("{}", words);
+// //
+// //     auto words = std::vector<std::string>{
+// //         "hello", "there", "and", "welcome"
+// // };
+// //
+// //     auto const capitalize = [](std::string copy) {
+// //         auto const differenceBetweenLowerAndUpperCase = 'a' - 'A';
+// //         copy.front() -= differenceBetweenLowerAndUpperCase;
+// //         return copy;
 // //     };
 // //
-// //     auto map = std::map<int, std::string>{};
+// //     fmt::println("{}", words);
+// //     std::ranges::transform(words, words.begin()+1, capitalize);
+// //     fmt::println("{}", words);
 // //
-// //     for (auto word : words) {
-// //         map[word.size()] += word.front();
+// //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+// //     auto min_it = std::ranges::min_element(data);
+// //     auto max_it = std::ranges::max_element(data);
+// //
+// //     if (min_it != data.end() && max_it != data.end()) {
+// //         std::ranges::iter_swap(min_it, max_it);
 // //     }
 // //
-// //     for (auto pair : map) {
-// //         fmt::println("{} - {}", pair.first, pair.second);
+// //     for (int val : data) {
+// //         std::cout << val << " ";
+// //     }
+// //     std::cout << std::endl;
+// //     return 0;
+// //
+// //
+// //     std::vector<int> numbers = {3, 1, 4, 1, 5, 9, 2, 6};
+// //     auto maxIter = std::ranges::max_element(numbers);
+// //     auto minIter = std::ranges::min_element(numbers);
+// //
+// //     std::cout << "Before swap: max = " << *maxIter << ", min = " << *minIter << std::endl;
+// //
+// //     std::ranges::iter_swap(maxIter, minIter);
+// //
+// //     std::cout << "After swap: max = " << *maxIter << ", min = " << *minIter << std::endl;
+// //     std::cout << "Vector after swap: ";
+// //     for (int num : numbers) {
+// //         std::cout << num << " ";
+// //     }
+// //     std::cout << std::endl;
+// //
+// //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+// //     auto has = std::ranges::find_if(data, [](int x){return x > 10;});
+// //     std::cout << (has==data.end()?"hasn't":"has");
+// //
+// //
+// //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+// //     auto has = std::ranges::find_if(data, [](int x) {
+// //         if (x > 10) {
+// //             return -1;
+// //         }
+// //         return 0;
+// //     });
+// //     std::cout << (has==data.end()?"hasn't":"has");
+// //
+// //     std::vector<std::string> words = {"apple", "banana", "kiwi", "orange", "grape"};
+// //     std::ranges::sort(words, std::ranges::greater(), [](const std::string& s) { return s.size(); });
+// //     for (const auto& word : words) {
+// //         std::cout << word << " ";
+// //     }
+// //     std::cout << std::endl;
+// //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+// //     int mi = 0;
+// //     std::cin >> mi;
+// //     std::cout << ((std::ranges::find(data, mi) != data.end()) ? "all good" : "not good");
+// //
+// //     std::vector<int> data = {5, 2, 8, 1, 9, 3, 7, 4, 6};
+// //     auto max_value = std::ranges::max(data);
+// //     std::cout << max_value << std::endl;
+// //
+// //     auto all = std::vector<int>(7);
+// //     for ( int i = 0; i < 7; ++i ) {
+// //         std::cin >> all[i];
+// //     }
+// //     // std::ranges::sort(all);
+// //     // auto start = all.begin();
+// //     // all.erase(start);
+// //     // auto end = all.end()-1;
+// //     // all.erase(end);
+// //     // fmt::print("{}", all);
+// //     all.erase(std::ranges::min_element(all));
+// //     all.erase(std::ranges::max_element(all));
+// //     fmt::print("{}\n", all);
+// //
+// //     std::vector<double> v1 = {1.0, 2.0, 3.0};
+// //     std::vector<double> v2 = {4.0, 5.0, 6.0};
+// //     std::cout << dotProduct(v1, v2) << std::endl;
+// //
+// //     auto mass = std::vector<int>{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+// //     for ( int i = 0; i < mass.size(); i++ ) {
+// //         if ( i % 2 == 0 ) {
+// //             std::cout << mass[i] << std::endl;
+// //         }
 // //     }
 // //
-// //     //  Using double for map values.
-// //     auto my_map1 = std::map<int, double>{};
+// //     std::set<int> s1 = {1, 2, 3, 4, 5, 6, 7};
+// //     std::vector<int> v1 = {5, 6, 7};
+// //     std::cout << "v1 is a suffix of s1: " << (suffix(s1, v1) ? "true" : "false") << std::endl;
 // //
-// //     // Inserts elements into the map.
-// //     for (auto i = 0; i < 5; ++i) {
-// //         my_map1[i] = i * 1.5;
+// //     fmt::println(
+// //            "{}\n{}\n{}",
+// //            isPalindrome("KajaK"),
+// //            isPalindrome("ala"),
+// //            isPalindrome("programowanie")
+// //    );
+// //
+// //     auto firstHalfBigger  = std::vector<int>{3, 2, 1, 0, 1, 0};
+// //     auto secondHalfBigger = std::vector<int>{3, 2, 1, 6, 5, 4};
+// //     auto bothHalvesSame   = std::vector<int>{5, 4, 5, 4};
+// //
+// //     sortBiggerHalf(firstHalfBigger, 0);
+// //     sortBiggerHalf(secondHalfBigger, 1);
+// //     sortBiggerHalf(bothHalvesSame, 1);
+// //
+// //     fmt::println(
+// //             "{}\n{}\n{}",
+// //             firstHalfBigger,
+// //             secondHalfBigger,
+// //             bothHalvesSame
+// //     );
+// //
+// //     std::vector<std::string> names = {"Adam", "Illia", "Ewa", "Anastasia", "Illia", "Ewa", "Illia", "Maciej", "Adam", "Natalia"};
+// //     std::set<std::string> unique_names;
+// //
+// //     for (auto name : names) {
+// //         unique_names.insert(name);
 // //     }
-// //     fmt::println("Map after insertions: {}", my_map1); // Print the map
 // //
-// //     fmt::println("my_map.size(): {}", my_map1.size()); // Print the size of the map.
+// //     fmt::println("{}", unique_names);
 // //
-// //     auto start = 2;
-// //     for (auto i = start; i < 5; ++i) {
-// //         my_map1[i] = 10.0 / i;
+// //     auto fileNames = std::vector<std::string>{
+// //         "lecture 1", "lecture 2", "lecture 3",
+// //         "lecture 10", "lecture 11", "lecture 12",
+// //         "lecture 35", "lecture 39", "lecture 92",
+// //         "lecture 101", "lecture 111", "lecture 133",
+// //         "lecture 159", "lecture 212", "lecture 221",
+// //         "file1.txt", "file10.txt", "file11.txt", "file2.txt", "file20.txt", "file3.txt",
+// //         "file1_part3.txt", "file10_part10.txt", "file10_part2.txt", "file2_part1.txt", "file20_part21.txt", "file3_part1.txt"
+// //     };
+// //     std::ranges::sort(fileNames);
+// //     std::ranges::sort(fileNames, std::ranges::less{}, [](std::string const& a) {return a.size();});
+// //
+// //     fmt::println("{}", fmt::join(fileNames, "\n"));
+// //
+// //     std::vector<std::string> strings = {"apple", "banana", "kiwi", "orange", "strawberry", "grapefruit"};
+// //
+// //     v1::printLongestString(strings);
+// //     v2::printLongestString(strings);
+// //     v3::printLongestString(strings);
+// //     v4::printLongestString(strings);
+// //
+// //     // fmt::println(
+// //     //         "[{}]\n[{}]\n[{}]\n[{}]",
+// //     //         reduceAdjacentWhitespaces("Abc"),
+// //     //         reduceAdjacentWhitespaces("A b c"),
+// //     //         reduceAdjacentWhitespaces("   A\tb c      "),
+// //     //         reduceAdjacentWhitespaces("A\t\tb\n \n  \t c")
+// //     // );
+// //
+// //     std::vector<int> v1 = {1, 2, 3, 4};
+// //     std::cout << "v1: " << bothHalvesContainGreatestNumber(v1) << std::endl; // Output: 0
+// //
+// //     std::vector<int> v2 = {1, 4, 3, 4};
+// //     std::cout << "v2: " << bothHalvesContainGreatestNumber(v2) << std::endl; // Output: 1
+// //
+// //     std::vector<int> v3 = {5, 2, 5, 1};
+// //     std::cout << "v3: " << bothHalvesContainGreatestNumber(v3) << std::endl; // Output: 1
+// //
+// //     std::vector<int> v4 = {10, 2, 3, 4, 10, 1};
+// //     std::cout << "v4: " << bothHalvesContainGreatestNumber(v4) << std::endl; // Output: 1
+// //
+// //     std::vector<int> v5 = {1, 2, 3, 10, 5, 6};
+// //     std::cout << "v5: " << bothHalvesContainGreatestNumber(v5) << std::endl; // Output: 0
+// //
+// //     auto words = std::set<std::string>{
+// //         "this", "is", "the", "second" // is second the this
+// //     };
+// //     // for (const auto& word : words) {
+// //     //     std::cout << word << std::endl;
+// //     // }
+// //     auto iter = words.begin(); // std::cout << *iter << std::endl; // is
+// //     for (auto i = 0; i < 3; ++i) /*std::cout << *iter;*/ ++iter; // the
+// //     fmt::println("({})", *words.begin(), *iter); // {} -> *words.begin() -> (is)
+// //     // fmt::println("({})", *iter);
+// //     auto count = std::ranges::count_if(
+// //         words.begin(), iter,
+// //         [](std::string const& s) {
+// //           return s.front() == 't';
+// //         });
+// //     fmt::println("({})", count); // 1
+// //     fmt::println("({})", std::vector<std::string>(iter, words.end())); // ([this])
+// //
+// //
+// //     Callable callable_obj;
+// //
+// //     std::vector<int> vec_a = {1, 5, 2, 8, 3};
+// //     std::vector<int> vec_b = {9, 4, 7, 6, 10};
+// //
+// //     std::cout << "Before calling replace:" << std::endl;
+// //     std::cout << "vec_a: ";
+// //     for (int val : vec_a) {
+// //         std::cout << val << " ";
 // //     }
-// //     fmt::println("Map after update: {}", my_map1);
+// //     std::cout << std::endl;
+// //     std::cout << "vec_b: ";
+// //     for (int val : vec_b) {
+// //         std::cout << val << " ";
+// //     }
+// //     std::cout << std::endl;
 // //
-// //     // Iterate and print map.
-// //     for (const auto& pair : my_map1) {
-// //         fmt::println("({}, {})", pair.first, pair.second);
+// //     callable_obj.replace(vec_a, vec_b);
+// //
+// //     std::cout << "After calling replace:" << std::endl;
+// //     std::cout << "vec_a: ";
+// //     for (int val : vec_a) {
+// //         std::cout << val << " ";
+// //     }
+// //     std::cout << std::endl;
+// //     std::cout << "vec_b: ";
+// //     for (int val : vec_b) {
+// //         std::cout << val << " ";
+// //     }
+// //     std::cout << std::endl;
+// //
+// //
+// //
+// //     std::vector<std::string> vec = {"hello", "i am", "david", "a", "short"};
+// //     std::ranges::sort(vec, [](std::string const& s1, std::string const& s2) {
+// //         if (s1.size() != s2.size()) {
+// //             return s1.size() < s2.size();
+// //         } return s1 < s2;
+// //     });
+// //     fmt::println("({})", vec);
+// //
+// //     // std::vector<int> v6 = {1, 2, 3, 2, 1, 3};
+// //     // std::cout<< fun(v6);
+// //
+// //     auto word = std::string{"programming"};
+// //
+// //     for (auto const& c : word) {
+// //         std::cout << c;
+// //     }
+// //     std::cout << std::endl;
+// //
+// //     auto changer = [](char c) {
+// //         if (c == 'r') {
+// //             return 'R';
+// //         }
+// //         return c;
+// //     };
+// //
+// //     std::ranges::transform(word, word.begin(), changer);
+// //
+// //     std::cout << word << std::endl;
+// //
+// //
+// //     auto nums = std::vector<int>{237, 154, 33, 81, 900, 525};
+// //     std::ranges::sort(nums, {}, [](int const n) { return n % 10; });
+// //     fmt::println("({})", nums);
+// //     std::ranges::reverse(nums.begin() + 3, nums.end());
+// //     fmt::println("({})", nums);
+// //     fmt::println("({})", std::set<int>(nums.begin(), nums.end()));
+// //
+// //
+// //     std::vector<int> v7 = {3, 1, 2, 1, 2, 3, 2};
+// //     std::cout << "Duplicates in v1: " << name::duplicatesCount(v7) << std::endl; // Output: 4
+// //
+// //     std::vector<int> v8 = {1, 2, 3, 4, 5};
+// //     std::cout << "Duplicates in v2: " << name::duplicatesCount(v8) << std::endl; // Output: 0
+// //
+// //     std::vector<int> v9 = {1, 1, 1, 1, 1};
+// //     std::cout << "Duplicates in v3: " << name::duplicatesCount(v9) << std::endl; // Output: 4
+// //
+// //     std::vector<int> v10 = {};
+// //     std::cout << "Duplicates in v4: " << name::duplicatesCount(v10) << std::endl; // Output: 0
+// //
+// //     std::vector<int> v11 = {1, 2, 2, 3, 3, 3};
+// //     std::cout << "Duplicates in v5: " << name::duplicatesCount(v11) << std::endl; // Output: 3
+// //
+// //
+// //     auto producer = [](int n) { return std::vector<int>(n, 1); };
+// //     auto a1 = producer(3); // 0 0 0
+// //     auto a2 = producer(5); // 0 0 0 0 0
+// //     auto x = 0;
+// //     for (auto& e : a1) e *= x;
+// //     for (auto& e : a2) e *= x;
+// //     fmt::println("START {} END", a1); // START [0, 0, 0] END
+// //     fmt::println("START {} END", a2); // START [0, 0, 0, 0, 0] END
+// //     fmt::println("START {} END", std::set<int>(a2.begin(), a2.end())); // START {0} END
+// //
+// //
+// //     std::vector<std::string> b1 = {"hello", "i am", "david", "a", "short"};
+// //     std::cout << getShortestAndLongest(b1) << std::endl;
+// //
+// //     std::vector<std::string> b2 = {"one", "two", "three"};
+// //     std::cout << getShortestAndLongest(b2) << std::endl;
+// //
+// //     std::vector<std::string> b3 = {"same", "same"};
+// //     std::cout << getShortestAndLongest(b3) << std::endl;
+// //
+// //     std::vector<std::string> b4 = {"longest", "shrt"};
+// //     std::cout << getShortestAndLongest(b4) << std::endl;
+// //
+// //     std::vector<std::string> b5 = {};
+// //     std::cout << getShortestAndLongest(b5) << std::endl;
+// //
+// //     std::vector<int> numbers_vec = {1, 2, 3};
+// //     std::set<int> numbers_set = {1, 2, 3};
+// //
+// //     // fmt::print("{}", numbers); // Assuming you want to print the vector/set
+// //     fmt::println("Vector: {}", numbers_vec);
+// //     fmt::println("Set: {}", numbers_set);
+// //
+// //     // fmt::join(set, ", ")
+// //     fmt::println("Set joined with comma: {}", fmt::join(numbers_set, ", "));
+// //
+// //     // fmt::println("The answer is {}", 42);
+// //     fmt::println("The answer is {}", 42);
+// //
+// //     // fmt::println("{}", fmt::join(vec, " "));
+// //     std::vector<std::string> words1 = {"hello", "world", "cpp"};
+// //     fmt::println("Words joined with space: {}", fmt::join(words1, " "));
+// //
+// //     std::vector<int> numbers = {5, 2, 8, 1, 9, 4};
+// //
+// //     // std::ranges::find(): Find the first occurrence of a value
+// //     auto find_result = std::ranges::find(numbers, 8);
+// //     if (find_result != numbers.end()) {
+// //         fmt::println("Found 8 at index: {}", std::ranges::distance(numbers.begin(), find_result));
+// //     } else {
+// //         fmt::println("8 not found.");
 // //     }
 // //
-// //     // Example usage with a vector of doubles.
-// //     std::vector<double> numbers = {1.0, 2.0, 3.0, 4.0, 5.0};
-// //     Stats stats = getStats(numbers);
+// //     // std::ranges::max(): Find the maximum value in the range
+// //     auto max_val = std::ranges::max(numbers);
+// //     fmt::println("Maximum value: {}", max_val);
 // //
-// //     std::cout << "Max: " << stats.max << std::endl;
-// //     std::cout << "Min: " << stats.min << std::endl;
-// //     std::cout << "Average: " << stats.average << std::endl;
+// //     // std::ranges::max_element(): Find an iterator to the maximum element
+// //     auto max_iter = std::ranges::max_element(numbers);
+// //     if (max_iter != numbers.end()) {
+// //         fmt::println("Maximum element is: {}", *max_iter);
+// //     }
 // //
-// //     // Example with another container (e.g., a list).  Requires #include <list>
-// //     std::list<double> values = {2.5, 1.0, 5.5, 3.0, 4.0};
-// //     Stats listStats = getStats(values);
+// //     // std::ranges::min(): Find the minimum value in the range
+// //     auto min_val = std::ranges::min(numbers);
+// //     fmt::println("Minimum value: {}", min_val);
 // //
-// //     std::cout << "List Max: " << listStats.max << std::endl;
-// //     std::cout << "List Min: " << listStats.min << std::endl;
-// //     std::cout << "List Average: " << listStats.average << std::endl;
-//     auto x = 5;
-//     auto fu = [x]{std::cout << x << " hi\n";return 0;};
-//     fun(fu);
+// //     // std::ranges::min_element(): Find an iterator to the minimum element
+// //     auto min_iter = std::ranges::min_element(numbers);
+// //     if (min_iter != numbers.end()) {
+// //         fmt::println("Minimum element is: {}", *min_iter);
+// //     }
+// //
+// //     // std::ranges::iter_swap(maxIter, minIter): Swap elements pointed to by iterators
+// //     if (max_iter != numbers.end() && min_iter != numbers.end()) {
+// //         std::ranges::iter_swap(max_iter, min_iter);
+// //         fmt::println("Vector after iter_swap: {}", numbers);
+// //     }
+// //
+// //     // std::ranges::swap(*maxIter, *minIter): Swap elements directly
+// //     // (Assuming max_iter and min_iter are still valid)
+// //     if (max_iter != numbers.end() && min_iter != numbers.end()) {
+// //         std::ranges::swap(*max_iter, *min_iter);
+// //         fmt::println("Vector after swap: {}", numbers);
+// //     }
 //
-//     // Example with a vector (a range).
-//     std::vector<int> numbers = {1, 2, 3, 4, 5};
-//     print(numbers); // Calls the container version of print
+//     // auto set = std::set<int>{5, 5, 5, 4, 3, 1, 2};
+//     // for ( auto set1 : set) {
+//     //     std::cout << set1 << std::endl;
+//     // }
+//     // auto iter = set.begin();
+//     // for ( int i=0; i<3; i++) ++iter;
+//     // fmt::print( "{:d}\n", std::ranges::count(set.begin(), iter, 5));
+//     // auto count = std::ranges::count_if(set, [](int i){return i>=2;});
+//     // fmt::println("{}", count);
 //
-//     // Example with a set (another range).
-//     std::set<std::string> fruits = {"apple", "banana", "cherry"};
-//     print(fruits); // Calls the container version of print
+//     // // auto const vec = std::vector<int>{1, 2, 3};
+//     // // auto const set = std::set<int>{1, 2, 3};
+//     //
+//     // auto const set = "HI";
+//     // print(set);
+//     // // print(vec);
+//     // // print(set);
+//     //
+//     // fmt::println("vector is a range? {}", std::ranges::range<std::vector<int>>);
+//     // fmt::println("set is a range?    {}", std::ranges::range<std::set<int>>);
+//     // fmt::println("string is a range? {}", std::ranges::range<std::string>);
+//     // fmt::println("int is a range?    {}", std::ranges::range<int>);
+//     // fmt::println("double is a range? {}", std::ranges::range<double>);
+//     //
+//     // fmt::println("int has size?    {}", HasSize<int>);
+//     // fmt::println("string has size? {}", HasSize<std::string>);
+//     // fmt::println("vector has size? {}", HasSize<std::vector<int>>);
+//     //
+//     // fmt::println("{}", HasSizeAndIsRange<int>);
+//     // fmt::println("{}", HasSizeAndIsRange<std::string>);
+//     // fmt::println("{}", HasSizeAndIsRange<std::vector<int>>);
+//     //
+//     // greet("Alice");
+//     // std::cout << multiply(3, 4) << std::endl;
+//     // std::cout << multiply(1.5, 2.0) << std::endl;
+//     //
+//     // auto myLambda = []() { std::cout << "Lambda called!" << std::endl; };
+//     // execute(myLambda);
 //
-//     // Example with an int (a single object).
-//     int count = 10;
-//     print(count); // Calls the object version of print
+//     // // Using std::function (as mentioned, it's a template itself)
+//     // std::function<void()> anotherLambda = []() { std::cout << "Another lambda!" << std::endl; };
+//     // execute(anotherLambda);
 //
-//     // Example with a double (another single object).
-//     double pi = 3.14159;
-//     print(pi); // Calls the object version of print
+//     // auto const fileContent = std::string("some random text appears here");
+//     //
+//     // auto const totalNumberOfASCIICharacters = 128;
+//     // auto occurrences = std::vector<int>(totalNumberOfASCIICharacters);
+//     // fmt::println("{}", occurrences);
+//     //
+//     // for (auto const c : fileContent) {
+//     //     occurrences[c] += 1; // c will give ascci value
+//     // }
+//     //
+//     // for (auto i = 0; i < occurrences.size(); i++) {
+//     //     if (occurrences[i] > 0) {
+//     //         fmt::println(
+//     //                 "'{}' occurred {} times",
+//     //                 static_cast<char>(i), //(char)i,
+//     //                 occurrences[i]
+//     //         );
+//     //     }
+//     // }
 //
-//
-//
-//     std::cout << hasSize<decltype(fruits)>;
-//
-//     clazz::Point p1; // No () for default constructor in C++
-//     p1.x = 1;
-//     p1.y = 2;
-//     strukt::Point p2;
-//     p2.x = 1;
-//     p2.y = 2;
-//     fmt::println("p1: x = {}, y = {}", p1.x, p1.y);
-//     fmt::println("p2: x = {}, y = {}", p2.x, p2.y);
-//     fmt::println("\n");
-//
-//     // occurrences[c] += 1; // c will give ASCII value
-//     std::string text = "hello";
-//     std::map<char, int> occurrences;
-//     for (char c : text) {
-//         occurrences[c]++; // c is implicitly converted to its ASCII value for map access
-//     }
-//     fmt::println("Character occurrences: ");
-//     for (const auto& pair : occurrences) {
-//         fmt::println("  '{}': {}", pair.first, pair.second);
-//     }
-//     fmt::println("\n");
-//
-//     // static_cast<char>(i), //(char)i,
-//     int intValue = 65; // ASCII value for 'A'
-//     char charValue1 = static_cast<char>(intValue); // Preferred C++ style
-//     char charValue2 = (char)intValue;             // C-style cast (less safe)
-//     fmt::println("Casting int to char: {} {}", charValue1, charValue2); // Both print 'A'
-//     fmt::println("\n");
-//
-//     // std::map<char, int>(); // alike set
-//     std::map<char, int> charToIntMap; // Stores key-value pairs, keys are unique
-//     charToIntMap['a'] = 1;
-//     charToIntMap['b'] = 2;
-//     charToIntMap['c'] = 3;
-//     fmt::println("charToIntMap: ");
-//     for (const auto& pair : charToIntMap) {
-//         fmt::println("  {} : {}", pair.first, pair.second);
-//     }
-//      fmt::println("\n");
-//
+//     // auto const fileContent = std::string("some random text appears here");
+//     //
+//     // auto occurrences = std::map<char, int>();
+//     //
+//     // for (auto const c : fileContent) {
+//     //     occurrences[c] += 1;
+//     // }
+//     //
+//     // for (auto const& charAndCount : occurrences) {
+//     //     fmt::println(
+//     //             "'{}' occurred {} times",
+//     //             charAndCount.first,
+//     //             charAndCount.second
+//     //     );
+//     // }
+//     // for (auto const& [c, count] : occurrences) {
+//     //     fmt::println("'{}' occurred {} times", c, count);
+//     // }
+//     //
 //     // auto const pair = std::pair<char, int>('a', 5);
+//     //
 //     // auto const [c, i] = pair;
-//     std::pair<char, int> const myPair('a', 5); // Creating a pair
-//     auto const [c, i] = myPair;             // Structured binding (C++17)
-//     fmt::println("Pair values: c = {}, i = {}", c, i); // Prints 'a' 5
-//     fmt::println("\n");
-//
-//     // auto [from, to] =
-//     // auto new = ===> new.begin(), new.end()
-//     std::string myString = "hello world";
-//     auto [from, to] = std::make_pair(myString.front(), myString.back()); //using make_pair
-//     fmt::println("First char: {}, Last char: {}", from, to);
-//
-//     // auto new = myString.begin(); // Example of getting iterator.
-//     // auto newEnd = myString.end();
-//      fmt::println("\n");
-//
+//     //
+//     // fmt::println("{} {}", c, i);
+//     //
+//     // // auto uniqueCharacters = fileContent;
+//     // // std::ranges::sort(uniqueCharacters);
+//     // // auto [from, to] = std::ranges::unique(uniqueCharacters);
+//     // // // auto newy = std::ranges::unique(uniqueCharacters);
+//     // // // fmt::println("{}", newy);
+//     // // // uniqueCharacters.erase(newy.begin(), newy.end());
+//     // // // fmt::println("{}", uniqueCharacters);
+//     // // fmt::println("{} {}", *from, *to);
+//     // // fmt::println("{}", uniqueCharacters);
+//     // // uniqueCharacters.erase(from, to);
+//     // // fmt::println("{}", uniqueCharacters);
+//     //
+//     // auto uniqueCharacters = fileContent;
+//     // std::ranges::sort(uniqueCharacters);
+//     // auto const [from, to] = std::ranges::unique(uniqueCharacters);
+//     // uniqueCharacters.erase(from, to);
+//     //
 //     // auto array = std::array<int, 5>{1, 2, 3, 4, 5};
-//     std::array<int, 5> myArray = {1, 2, 3, 4, 5}; // Fixed-size array
-//     fmt::println("Array elements: {}", myArray);
-//     fmt::println("Array size: {}", myArray.size());
-//      fmt::println("\n");
+//     // std::ranges::reverse(array);
+//     // fmt::println("{}", array);
 //
-//     // Chapter 5.2:
-//     // enum class Direction {North, East, South, West};
 //     // auto currentDirection = Direction();
+//     //
+//     // currentDirection = Direction::South;
 //     // currentDirection = Direction::West;
-//     enum class Direction { North, East, South, West }; // Scoped enum
-//     Direction currentDirection = Direction::West;      // Initialization
-//     fmt::println("Current direction: {}", static_cast<int>(currentDirection)); // Cast to int for output
-//      fmt::println("\n");
+//     //
+//     // auto v1 = std::vector<int>{1, 2, 3};
+//     // auto v2 = std::vector<int>{3, 2, 1};
+//     //
+//     // fmt::println(
+//     //         "{} {}",
+//     //         equalContents(v1, v2, Ordering::Required),
+//     //         equalContents(v1, v2, Ordering::NotRequired)
+//     // );
+//     //
+//     // // auto p1 = Point();p1.x = 1;p1.y = 2;
+//     // auto p2 = Point();p2.x = 1;p2.y = 2;
+//     // auto sorting = std::vector<Point>{{1,0}, {2,3}, {0,0}};
+//     //
+//     // // fmt::println("{} {}", p1.x, p1.y);
+//     // fmt::println("{} {}", p2.x, p2.y);
+//     // std::ranges::sort(sorting, [](Point left, Point right) { return toDist(left) < toDist(right); });
+//     // fmt::println("{}", p2);
+//     // fmt::println("{}", sorting);
+//     //
+//     // auto points = std::vector<Point>{ {1, 2}, {0, 0}, {2, 0} };
+//     // std::ranges::sort(points, [](Point const left, Point const  right) {
+//     //     return left.distanceToOrigin() < right.distanceToOrigin();
+//     // });
+//     // fmt::println("{}", points);
+//     //
+//     // auto fibonacci = [n = 0, m = 1]() mutable {
+//     //     fmt::print("{} ", m);
+//     //     auto prevM = m;
+//     //     m += n;
+//     //     n = prevM;
+//     // };
+//     //
+//     // for (auto i = 0; i < 10; i++) {
+//     //     fibonacci();
+//     // }
 //
-//     // Chapter 5.3:
-//     // namespace clazz {class Point {public:int x;int y;};}
-//     // namespace strukt {struct Point {// private:int x;int y;};}
-//     // auto p1 = clazz::Point();p1.x = 1;p1.y = 2;
-//     // auto p2 = strukt::Point();p2.x = 1;p2.y = 2;
+//     // auto graph = std::map<std::string, std::set<std::string>>();
+//     // graph["A"] = {"B", "C"};
+//     // graph["B"] = {"E"};
+//     // graph["C"] = {"D"};
+//     // graph["D"] = {"B"};
+//     // graph["E"] = {"C"};
+//     //
+//     // auto route = [graph, letter = std::string("A")]() mutable {
+//     //     for ( auto ent : graph[letter] ) {
+//     //         fmt::print("{} -> ", ent);
+//     //     }
+//     //     letter = *graph[letter].begin();
+//     // };
+//     //
+//     // for ( int i = 0; i < graph.size() * 2; ++i ) {
+//     //     route();
+//     // }
+//     // std::cout << "..." << std::endl;
+//     // std::cout << "Enter words (type 'stop' to finish):\n";
+//     //
+//     // std::map<int, std::set<std::string>> words;
+//     // std::string word;
+//     //
+//     // while (std::cin >> word && word != "stop") {
+//     //     words[word.length()].insert(word);
+//     // }
+//     // for (const auto& word : words) {
+//     //     fmt::print("{}\n", fmt::join(word.second, " "));
+//     // }
 //
-//     Point2D myPoint{ 3.0, 4.0 };
-//     auto pointPair = format_as(myPoint);
-//     fmt::println("Point as pair: ({}, {})", pointPair.first, pointPair.second);
+//     // std::vector<Student> studentGroup = {
+//     //     {"Alice", "Smith", "S1001", 3},
+//     //     {"Bob", "Johnson", "S1002", 3},
+//     //     {"Charlie", "Brown", "S1003", 4},
+//     //     {"David", "Lee", "S1004", 3}
+//     // };
+//     //
+//     // fmt::println("Student Group:");
+//     // for (const auto& student : studentGroup) {
+//     //     fmt::println("{}", student.print());
+//     // }
+//     // fmt::println("");
+//     //
+//     // fmt::println("Sorting by Name:");
+//     // sort(studentGroup, SortCriterion::Name);
+//     // for (const auto& student : studentGroup) {
+//     //     fmt::println("{}", student.print());
+//     // }
+//     // fmt::println("");
+//     //
+//     // fmt::println("Sorting by Surname:");
+//     // sort(studentGroup, SortCriterion::Surname);
+//     // for (const auto& student : studentGroup) {
+//     //     fmt::println("{}", student.print());
+//     // }
+//     // fmt::println("");
+//     //
+//     // fmt::println("Sorting by Index:");
+//     // sort(studentGroup, SortCriterion::Index);
+//     // for (const auto& student : studentGroup) {
+//     //     fmt::println("{}", student.print());
+//     // }
+//     // fmt::println("");
+//     //
+//     // fmt::println("Sorting by Semester:");
+//     // sort(studentGroup, SortCriterion::Semester);
+//     // for (const auto& student : studentGroup) {
+//     //     fmt::println("{}", student.print());
+//     // }
+//     // fmt::println("");
+//     //
+//     // auto text = std::string("helloworld");
+//     //
+//     // auto map  = std::map<char, int>();
+//     // for (auto c : text) map[c] += 1;
+//     //
+//     // // for (auto all : map) {
+//     // //     fmt::println("{} {}", all.first, all.second);
+//     // // }
+//     // for (auto [k, v] : map) {
+//     //     fmt::println("{} {}", k, v);
+//     // }
 //
-//     double distance = std::hypot(myPoint.x, myPoint.y);
-//     fmt::println("Distance from origin: {}", distance);
+//     // std::array<int, 9> arr1 = {1, 2, 3, 2, 3, 1, 3, 2, 1};
+//     // std::array<int, 3> triplet1 = {arr1[0], arr1[1], arr1[2]};
+//     // std::array<int, 3> triplet2 = {arr1[0], arr1[1], arr1[2]};
+//     // std::array<int, 3> triplet3 = {arr1[0], arr1[1], arr1[2]};
+//     // if (std::ranges::is_permutation(triplet1, triplet2) and std::ranges::is_permutation(triplet1, triplet3) and std::ranges::is_permutation(triplet2, triplet3)) {
+//     //     std::cout << "yes" << std::endl;
+//     // }else {
+//     //     std::cout << "no" << std::endl;
+//     // }
 //
-//     auto fibonacci = [n = 0, m = 1]() mutable {
-//         auto result = n;
-//         auto temp = n + m;
-//         n = m;
-//         m = temp;
-//         return result;
+//     // std::vector<Student> vec = {
+//     //     {"Alice", "Smith", 20},
+//     //     {"Bob", "Johnson", 22},
+//     //     {"Charlie", "Williams", 21},
+//     //     {"David", "Brown", 20},
+//     //     {"Eve", "Davis", 22},
+//     //     {"Frank", "Miller", 21},
+//     //     {"Grace", "Smith", 19}
+//     // };
+//     //
+//     // std::cout << "Original Vector:\n";
+//     // std::ranges::for_each(vec, [](const Student& student) {
+//     //     std::cout << student << "\n";
+//     // });
+//     // std::cout << "\n";
+//     //
+//     // std::ranges::sort(vec, [](const Student& a, const Student& b) {
+//     //     if (a.age != b.age) {
+//     //         return a.age < b.age;
+//     //     }
+//     //     return a.surname < b.surname;
+//     // });
+//     //
+//     // // Print the sorted vector.  Again using std::ranges::for_each
+//     // std::cout << "Sorted Vector (Youngest to Oldest, then Last Name):\n";
+//     // std::ranges::for_each(vec, [](const Student& student) {
+//     //     std::cout << student << "\n";
+//     // });
+//     // std::cout << "\n";
+//
+//     // auto modifier = [](int& x) {
+//     //     x += 10;
+//     // };
+//     // auto num = 0;
+//     // call(3, modifier, num);
+//     // fmt::println("{}", num);
+//     //
+//     // auto first = Student("Giorno", "Giovanna");
+//     // auto second = Student("Bruno", "Bucciarati");
+//     // fmt::println("[{}] [{}] {}", first.name, second.surname, second);
+//     //
+//     // auto ints = std::vector<int>{3, 4, 5, 6, 7, 8, 9, 10};
+//     // auto map = std::map<int, std::set<int>>{};
+//     //
+//     // for (auto e : ints) {
+//     //     map[e % 3].insert(e);
+//     // }
+//     //
+//     // for (auto pair : map) {
+//     //     fmt::println("{} {}", pair.first, pair.second);
+//     // }
+//
+//     std::map<int, std::string> my_map = {
+//         {1, "apple"},
+//         {2, "banana"},
+//         {3, "cherry"}
 //     };
 //
-//     fmt::println("Fibonacci sequence:");
-//     for (int i = 0; i < 10; ++i) {
-//         fmt::println("{}", fibonacci());
+//     std::vector<std::string> val_vec = values(my_map);
+//     fmt::println("{}", val_vec);
+//
+//
+//     auto words = std::vector<std::string>{
+//         "the", "dog", "and", "frog",
+//         "leaped", "barked", "and", "croaked"
+//     };
+//
+//     auto map = std::map<int, std::string>{};
+//
+//     for (auto word : words) {
+//         map[word.size()] += word.front();
 //     }
 //
-//     return 0;
+//     for (auto pair : map) {
+//         fmt::println("{} - {}", pair.first, pair.second);
+//     }
 //
-// }
+//     //  Using double for map values.
+//     auto my_map1 = std::map<int, double>{};
+//
+//     // Inserts elements into the map.
+//     for (auto i = 0; i < 5; ++i) {
+//         my_map1[i] = i * 1.5;
+//     }
+//     fmt::println("Map after insertions: {}", my_map1); // Print the map
+//
+//     fmt::println("my_map.size(): {}", my_map1.size()); // Print the size of the map.
+//
+//     auto start = 2;
+//     for (auto i = start; i < 5; ++i) {
+//         my_map1[i] = 10.0 / i;
+//     }
+//     fmt::println("Map after update: {}", my_map1);
+//
+//     // Iterate and print map.
+//     for (const auto& pair : my_map1) {
+//         fmt::println("({}, {})", pair.first, pair.second);
+//     }
+//
+//     // Example usage with a vector of doubles.
+//     std::vector<double> numbers = {1.0, 2.0, 3.0, 4.0, 5.0};
+//     Stats stats = getStats(numbers);
+//
+//     std::cout << "Max: " << stats.max << std::endl;
+//     std::cout << "Min: " << stats.min << std::endl;
+//     std::cout << "Average: " << stats.average << std::endl;
+//
+//     // Example with another container (e.g., a list).  Requires #include <list>
+//     std::list<double> values = {2.5, 1.0, 5.5, 3.0, 4.0};
+//     Stats listStats = getStats(values);
+//
+//     std::cout << "List Max: " << listStats.max << std::endl;
+//     std::cout << "List Min: " << listStats.min << std::endl;
+//     std::cout << "List Average: " << listStats.average << std::endl;
+    // auto x = 5;
+    // auto fu = [x]{std::cout << x << " hi\n";return 0;};
+    // fun(fu);
+    //
+    // // Example with a vector (a range).
+    // std::vector<int> numbers = {1, 2, 3, 4, 5};
+    // print(numbers); // Calls the container version of print
+    //
+    // // Example with a set (another range).
+    // std::set<std::string> fruits = {"apple", "banana", "cherry"};
+    // print(fruits); // Calls the container version of print
+    //
+    // // Example with an int (a single object).
+    // int count = 10;
+    // print(count); // Calls the object version of print
+    //
+    // // Example with a double (another single object).
+    // double pi = 3.14159;
+    // print(pi); // Calls the object version of print
+    //
+    //
+    //
+    // std::cout << hasSize<decltype(fruits)>;
+    //
+    // clazz::Point p1; // No () for default constructor in C++
+    // p1.x = 1;
+    // p1.y = 2;
+    // strukt::Point p2;
+    // p2.x = 1;
+    // p2.y = 2;
+    // fmt::println("p1: x = {}, y = {}", p1.x, p1.y);
+    // fmt::println("p2: x = {}, y = {}", p2.x, p2.y);
+    // fmt::println("\n");
+    //
+    // // occurrences[c] += 1; // c will give ASCII value
+    // std::string text = "hello";
+    // std::map<char, int> occurrences;
+    // for (char c : text) {
+    //     occurrences[c]++; // c is implicitly converted to its ASCII value for map access
+    // }
+    // fmt::println("Character occurrences: ");
+    // for (const auto& pair : occurrences) {
+    //     fmt::println("  '{}': {}", pair.first, pair.second);
+    // }
+    // fmt::println("\n");
+    //
+    // // static_cast<char>(i), //(char)i,
+    // int intValue = 65; // ASCII value for 'A'
+    // char charValue1 = static_cast<char>(intValue); // Preferred C++ style
+    // char charValue2 = (char)intValue;             // C-style cast (less safe)
+    // fmt::println("Casting int to char: {} {}", charValue1, charValue2); // Both print 'A'
+    // fmt::println("\n");
+    //
+    // // std::map<char, int>(); // alike set
+    // std::map<char, int> charToIntMap; // Stores key-value pairs, keys are unique
+    // charToIntMap['a'] = 1;
+    // charToIntMap['b'] = 2;
+    // charToIntMap['c'] = 3;
+    // fmt::println("charToIntMap: ");
+    // for (const auto& pair : charToIntMap) {
+    //     fmt::println("  {} : {}", pair.first, pair.second);
+    // }
+    //  fmt::println("\n");
+    //
+    // // auto const pair = std::pair<char, int>('a', 5);
+    // // auto const [c, i] = pair;
+    // std::pair<char, int> const myPair('a', 5); // Creating a pair
+    // auto const [c, i] = myPair;             // Structured binding (C++17)
+    // fmt::println("Pair values: c = {}, i = {}", c, i); // Prints 'a' 5
+    // fmt::println("\n");
+    //
+    // // auto [from, to] =
+    // // auto new = ===> new.begin(), new.end()
+    // std::string myString = "hello world";
+    // auto [from, to] = std::make_pair(myString.front(), myString.back()); //using make_pair
+    // fmt::println("First char: {}, Last char: {}", from, to);
+    //
+    // // auto new = myString.begin(); // Example of getting iterator.
+    // // auto newEnd = myString.end();
+    //  fmt::println("\n");
+    //
+    // // auto array = std::array<int, 5>{1, 2, 3, 4, 5};
+    // std::array<int, 5> myArray = {1, 2, 3, 4, 5}; // Fixed-size array
+    // fmt::println("Array elements: {}", myArray);
+    // fmt::println("Array size: {}", myArray.size());
+    //  fmt::println("\n");
+    //
+    // // Chapter 5.2:
+    // // enum class Direction {North, East, South, West};
+    // // auto currentDirection = Direction();
+    // // currentDirection = Direction::West;
+    // enum class Direction { North, East, South, West }; // Scoped enum
+    // Direction currentDirection = Direction::West;      // Initialization
+    // fmt::println("Current direction: {}", static_cast<int>(currentDirection)); // Cast to int for output
+    //  fmt::println("\n");
+    //
+    // // Chapter 5.3:
+    // // namespace clazz {class Point {public:int x;int y;};}
+    // // namespace strukt {struct Point {// private:int x;int y;};}
+    // // auto p1 = clazz::Point();p1.x = 1;p1.y = 2;
+    // // auto p2 = strukt::Point();p2.x = 1;p2.y = 2;
+    //
+    // Point2D myPoint{ 3.0, 4.0 };
+    // auto pointPair = format_as(myPoint);
+    // fmt::println("Point as pair: ({}, {})", pointPair.first, pointPair.second);
+    //
+    // double distance = std::hypot(myPoint.x, myPoint.y);
+    // fmt::println("Distance from origin: {}", distance);
+    //
+    // auto fibonacci = [n = 0, m = 1]() mutable {
+    //     auto result = n;
+    //     auto temp = n + m;
+    //     n = m;
+    //     m = temp;
+    //     return result;
+    // };
+    //
+    // fmt::println("Fibonacci sequence:");
+    // for (int i = 0; i < 10; ++i) {
+    //     fmt::println("{}", fibonacci());
+    // }
+    //
+    // return 0;
+    // auto file = std::fstream("data.txt", std::ios::app);
+    //
+    // auto numbers = std::vector<int>{1, 2, 3, 4};
+    //
+    // fmt::println(file, "{}", numbers);
+
+    // auto const path = fs::path(".");
+
+    // for (auto const& entry : fs::directory_iterator(".")) {
+    //     if (fs::is_regular_file(entry)) {
+    //         fmt::println("It's a regular file: {}", entry.path().string());
+    //     }else {
+    //         fmt::println("It's not a regular file: {}", entry.path().string());
+    //     }
+    // }
+
+    // auto file = std::fstream("data.txt", std::ios::ate);
+
+    // for (auto word = std::string(); file >> word; fmt::println("{}", word));
+
+    // file << "ji";
+
+    std::string filename = "data.txt";
+
+    // // std::ios::app: Append to the end of the file
+    std::fstream file_app(filename, std::ios::out | std::ios::app);
+    if (file_app.is_open()) {
+        file_app << "Appending some text.\n";
+        std::cout << "Appended to " << filename << std::endl;
+        file_app.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " for appending.\n";
+    }
+
+    std::fstream file_inpp(filename, std::ios::in);
+    if (file_inpp.is_open()) {
+        std::string line;
+        std::cout << "Reading from " << filename << ":\n";
+        while (std::getline(file_inpp, line)) {
+            fmt::println("{}", line);
+        }
+        file_inpp.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " for reading.\n";
+    }
+
+    // std::ios::binary: Open the file in binary mode
+    std::fstream file_bin_out(filename, std::ios::out | std::ios::binary);
+    if (file_bin_out.is_open()) {
+        int data[] = {1, 2, 3, 4, 5};
+        file_bin_out.write(reinterpret_cast<const char*>(data), sizeof(data));
+        std::cout << "Wrote binary data to " << filename << std::endl;
+        file_bin_out.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " for binary writing.\n";
+    }
+
+    std::fstream file_bin_in(filename, std::ios::in | std::ios::binary);
+    int str[5];
+    if (file_bin_in.is_open()) {
+        file_bin_in.read(reinterpret_cast<char*>(str), sizeof(str));
+        fmt::print("Read binary data: {}\n", str);
+        file_bin_in.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " for binary reading.\n";
+    }
+
+    // std::ios::in: Open the file for reading
+    std::fstream file_in(filename, std::ios::in);
+    if (file_in.is_open()) {
+        std::string line;
+        while (std::getline(file_in, line)) {
+            std::cout << "Read line: " << line << std::endl;
+        }
+        file_in.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " for reading.\n";
+    }
+
+    // std::ios::out: Open the file for writing (creates or overwrites)
+    std::fstream file_out(filename, std::ios::out);
+    if (file_out.is_open()) {
+        file_out << "Writing some new text to overwrite.\n";
+        file_out.close();
+        std::cout << "Wrote text to " << filename << " (may have overwritten).\n";
+    } else {
+        std::cerr << "Unable to open " << filename << " for writing.\n";
+    }
+
+    // std::ios::trunc: Clear the file after opening
+    std::fstream file_trunc(filename, std::ios::out | std::ios::trunc);
+    if (file_trunc.is_open()) {
+        std::cout << "File " << filename << " has been truncated (cleared).\n";
+        file_trunc << "Writing after truncation.\n";
+        file_trunc.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " for truncation.\n";
+    }
+
+    // std::ios::ate: Go to the end of the file after opening (initial position)
+    std::fstream file_ate(filename, std::ios::out | std::ios::ate);
+    if (file_ate.is_open()) {
+        std::cout << "Cursor positioned at the end of " << filename << " upon opening.\n";
+        file_ate << "Writing at the end.\n";
+        file_ate.close();
+    } else {
+        std::cerr << "Unable to open " << filename << " with ate option.\n";
+    }
+
+    return 0;
+}
 //
 //
 // // #include <iostream>
@@ -1911,450 +2027,3 @@
 
 // /Users/anastasiiakravchenko/PJATK/pjc/project/F03CAD47-0CB7-49F2-9D98-4ABFB7CB14D7_1_105_c.jpeg
 // /Users/anastasiiakravchenko/PJATK/pjc/project/palac.png
-
-
-#include <iostream>
-#include <vector>
-#include <string>
-#include <stdexcept>
-#include <algorithm>
-#include <array>
-#include <climits> // For UINT_MAX
-#include <cstring>
-
-// Helper function to read bits from a byte array
-class BitReader {
-public:
-    BitReader(const std::vector<unsigned char>& data) : data_(data), bitIndex_(0), byteIndex_(0) {}
-
-    // Read a specified number of bits.  Returns the value as an unsigned 32-bit integer.
-    uint32_t readBits(int numBits) {
-        if (numBits == 0) return 0;
-        if (byteIndex_ >= data_.size()) {
-            throw std::runtime_error("Read past end of data");
-        }
-
-        uint32_t value = 0;
-        int bitsRead = 0;
-
-        while (bitsRead < numBits) {
-            if (bitIndex_ == 8) {
-                bitIndex_ = 0;
-                byteIndex_++;
-                if (byteIndex_ >= data_.size()) {
-                    break; // Read less than requested, will throw if numBits not satisfied
-                }
-            }
-
-            int bitsToRead = std::min(numBits - bitsRead, 8 - bitIndex_);
-            uint8_t currentByte = data_[byteIndex_];
-            uint32_t mask = ((1 << bitsToRead) - 1) << bitIndex_;
-            value |= ((currentByte & mask) >> bitIndex_) << bitsRead;
-            bitIndex_ += bitsToRead;
-            bitsRead += bitsToRead;
-        }
-        if (bitsRead != numBits) {
-            throw std::runtime_error("Not enough data to read requested bits");
-        }
-        return value;
-    }
-
-    // Read a single bit (0 or 1).
-    int readBit() {
-        return readBits(1);
-    }
-
-    // Returns the current byte index.
-    size_t getByteIndex() const { return byteIndex_; }
-     void advanceBytes(size_t numBytes) {
-        byteIndex_ += numBytes;
-        bitIndex_ = 0; // Reset bit index when advancing bytes
-    }
-
-private:
-    const std::vector<unsigned char>& data_;
-    size_t byteIndex_;
-    int bitIndex_;
-};
-
-// Function to calculate Adler-32 checksum
-uint32_t adler32(const std::vector<unsigned char>& data) {
-    uint32_t s1 = 1;
-    uint32_t s2 = 0;
-    for (unsigned char byte : data) {
-        s1 = (s1 + byte) % 65521;
-        s2 = (s2 + s1) % 65521;
-    }
-    return (s2 << 16) + s1;
-}
-
-// Structure to represent a Huffman tree node
-struct huffman_node {
-    uint16_t value; // If it's a leaf node, this is the symbol value.
-    int length;
-    huffman_node* left;
-    huffman_node* right;
-};
-
-// Function to build a Huffman tree from code lengths
-huffman_node* build_huffman_tree(const std::vector<int>& lengths, int& num_nodes) {
-    int num_symbols = lengths.size();
-    std::vector<uint16_t> bl_count(16, 0);
-    for (int len : lengths) {
-        if (len > 0) {
-            bl_count[len]++;
-        }
-    }
-
-    uint16_t max_len = lengths.empty() ? 0 : *std::max_element(lengths.begin(), lengths.end());
-    std::vector<uint16_t> next_code(max_len + 1);
-    uint16_t code = 0;
-    bl_count[0] = 0;
-    for (int bits = 1; bits <= max_len; bits++) {
-        code = (code + bl_count[bits - 1]) << 1;
-        next_code[bits] = code;
-    }
-
-    std::vector<huffman_node*> nodes;
-    nodes.resize(num_symbols);
-    for (int i = 0; i < num_symbols; i++) {
-        nodes[i] = new huffman_node{static_cast<uint16_t>(i), lengths[i], nullptr, nullptr};
-    }
-
-     // Sort nodes by length (shorter lengths first, then by symbol value)
-    std::sort(nodes.begin(), nodes.end(), [](huffman_node* a, huffman_node* b) {
-        if (a->length != b->length) {
-            return a->length < b->length;
-        }
-        return a->value < b->value; // Keep original order for symbols with same length.
-    });
-
-    std::vector<huffman_node*> internal_nodes;
-    std::vector<huffman_node*> leaves;
-
-    for(auto node : nodes){
-        if(node->length > 0){
-            leaves.push_back(node);
-        }
-    }
-    num_nodes = leaves.size();
-
-    while (leaves.size() > 1) {
-        huffman_node* node1 = leaves[0];
-        huffman_node* node2 = leaves[1];
-        leaves.erase(leaves.begin(), leaves.begin() + 2);
-
-        huffman_node* new_node = new huffman_node{0, std::max(node1->length, node2->length) + 1, node1, node2};
-        internal_nodes.push_back(new_node);
-
-        // Insert the new node into the leaves vector, maintaining sorted order
-        auto insert_pos = std::lower_bound(leaves.begin(), leaves.end(), new_node, [](huffman_node* a, huffman_node* b) {
-            if (a->length != b->length) {
-                return a->length < b->length;
-            }
-            return false;
-        });
-        leaves.insert(insert_pos, new_node);
-        num_nodes++;
-    }
-
-    return leaves.empty() ? nullptr : leaves[0];
-}
-
-// Function to decode a symbol from the Huffman tree
-uint16_t decode_huffman(BitReader& reader, huffman_node* root) {
-    if (root == nullptr) {
-        throw std::runtime_error("Empty Huffman tree");
-    }
-
-    huffman_node* current = root;
-    while (current->left != nullptr && current->right != nullptr) {
-        int bit = reader.readBit();
-        if (bit == 0) {
-            current = current->left;
-        } else {
-            current = current->right;
-        }
-    }
-    return current->value;
-}
-
-// Function to decompress zlib data (DEFLATE algorithm)
-std::vector<unsigned char> decompressZlib(const std::vector<unsigned char>& compressedData) {
-    BitReader reader(compressedData);
-
-    // 1.  Check CMF and FLG
-    uint8_t cmf = reader.readBits(8);
-    uint8_t flg = reader.readBits(8);
-
-    if ((cmf & 0x0F) != 8) { // CM = 8 for DEFLATE
-        throw std::runtime_error("Unsupported compression method");
-    }
-    if (((cmf << 8) + flg) % 31 != 0) {
-        throw std::runtime_error("Invalid CMF/FLG combination");
-    }
-    if (flg & 0x20) {
-        throw std::runtime_error("Preset dictionary not supported");
-    }
-
-    std::vector<unsigned char> decompressedData;
-    bool bFinalBlock = false;
-    // 2. Main decompression loop
-    while (!bFinalBlock) {
-        bFinalBlock = reader.readBit();
-        int btype = reader.readBits(2);
-
-        if (btype == 0) { // No compression (stored)
-            // Skip any remaining bits in the current byte
-            if (reader.readBits(8 - (reader.getByteIndex() * 8) % 8) != 0) {
-                if ((reader.getByteIndex() * 8) % 8 != 0) {
-                    reader.readBits(8 - (reader.getByteIndex() * 8) % 8);
-                }
-            }
-            uint16_t len = reader.readBits(16);
-            uint16_t nlen = reader.readBits(16);
-
-            for (int i = 0; i < len; ++i) {
-                if (reader.getByteIndex() >= compressedData.size()) {
-                    throw std::runtime_error("Read past end of compressed data");
-                }
-                decompressedData.push_back(compressedData[reader.getByteIndex()]);
-                reader.readBits(8); // Advance by one byte
-            }
-        } else if (btype == 1 || btype == 2) { // Fixed or dynamic Huffman compression
-            int hlit = 0;
-            int hdist = 0;
-            int hclen = 0;
-            std::vector<int> lens;
-            std::vector<int> dists;
-            std::vector<int> code_lengths;
-
-
-            if (btype == 1) { // Fixed Huffman codes
-                // Fixed literal/length codes (288 codes: 0-255 literal/length, 256 end-of-block, 257-285 length codes)
-                lens.resize(288);
-                for (int i = 0; i <= 255; ++i) {
-                    lens[i] = (i <= 143) ? 8 : (i <= 255) ? 9 : 0;
-                }
-                for (int i = 256; i <= 279; ++i) {
-                    lens[i] = 7;
-                }
-                for(int i=280; i<=287; ++i){
-                    lens[i] = 8;
-                }
-                // Fixed distance codes (32 codes, 0-29 are valid, 30 and 31 are never used)
-                dists.resize(32, 5); // All distance codes have length 5
-                hlit = 286;
-                hdist = 30;
-            } else { // btype == 2, Dynamic Huffman codes
-                hlit = reader.readBits(5) + 257;     // # of Literal/Length codes (5 bits + 257, 257 - 286)
-                hdist = reader.readBits(5) + 1;       // # of Distance codes (5 bits + 1, 1 - 32)
-                hclen = reader.readBits(4) + 4;       // # of Code Length codes (4 bits + 4, 4 - 19)
-
-                // Read code lengths for code length alphabet (hclen codes)
-                code_lengths.resize(19);
-                for (int i = 0; i < hclen; ++i) {
-                    code_lengths[i] = reader.readBits(3);
-                }
-                // Map code length codes in the order specified by the deflate spec
-                std::array<int, 19> code_order = {16, 17, 18, 0, 8, 7, 9, 6, 10, 5, 11, 4, 12, 3, 13, 2, 14, 1, 15};
-                std::vector<int> cl_lens(19);
-                for(int i=0; i<19; ++i){
-                    cl_lens[i] = code_lengths[code_order[i]];
-                }
-
-                // Build Huffman tree for code length codes
-                int num_nodes_cl;
-                huffman_node* cl_root = build_huffman_tree(cl_lens, num_nodes_cl);
-
-                // Read the code lengths for the literal/length and distance alphabets
-                lens.resize(hlit);
-                dists.resize(hdist);
-                int n = hlit + hdist;
-                int i = 0;
-                while (i < n) {
-                    uint16_t symbol = decode_huffman(reader, cl_root);
-                    if (symbol < 16) {
-                        if (i < hlit)
-                            lens[i++] = symbol;
-                        else
-                            dists[i++ - hlit] = symbol;
-                    } else if (symbol == 16) {
-                        uint8_t repeat = reader.readBits(2) + 3;
-                        uint8_t value = (i == 0 || i >= hlit) ? 0: (i < hlit) ? lens[i-1] : dists[i - hlit -1];
-                        for (int j = 0; j < repeat; ++j) {
-                             if (i < hlit)
-                                lens[i++] = value;
-                            else
-                                dists[i++ - hlit] = value;
-                        }
-                    } else if (symbol == 17) {
-                        uint8_t repeat = reader.readBits(3) + 3;
-                         for (int j = 0; j < repeat; ++j) {
-                            if (i < hlit)
-                                lens[i++] = 0;
-                            else
-                                dists[i++ - hlit] = 0;
-                        }
-                    } else if (symbol == 18) {
-                        uint8_t repeat = reader.readBits(7) + 11;
-                         for (int j = 0; j < repeat; ++j) {
-                            if (i < hlit)
-                                lens[i++] = 0;
-                            else
-                                dists[i++ - hlit] = 0;
-                        }
-                    }
-                }
-                for(int i=hlit; i<lens.size(); ++i){
-                    if(lens[i] == 0){
-                         lens[i] = 0;
-                    }
-                }
-                for(int i=hdist; i<dists.size(); ++i){
-                    dists[i] = 0;
-                }
-                delete cl_root;
-            }
-            // Build Huffman trees for literal/length and distance codes
-            int num_nodes_lit;
-            huffman_node* lit_root = build_huffman_tree(lens, num_nodes_lit);
-            int num_nodes_dist;
-            huffman_node* dist_root = build_huffman_tree(dists, num_nodes_dist);
-
-            // Decode the data using the Huffman trees
-            while (true) {
-                uint16_t symbol = decode_huffman(reader, lit_root);
-                if (symbol == 256) { // End of block
-                    break;
-                } else if (symbol < 256) { // Literal (0-255)
-                    decompressedData.push_back(static_cast<unsigned char>(symbol));
-                } else { // Length code (257-285)
-                    int length_code = symbol;
-                    int length_base = 0;
-                    int extra_bits = 0;
-                    if (length_code >= 257 && length_code <= 264) {
-                        length_base = length_code - 257 + 3;
-                        extra_bits = length_code - 257;
-                    } else if (length_code >= 265 && length_code <= 268) {
-                        length_base = (length_code - 265 + 11) << 1;
-                        extra_bits = length_code - 265 + 1;
-                    } else if (length_code >= 269 && length_code <= 272) {
-                        length_base = (length_code - 269 + 19) << 2;
-                        extra_bits = length_code - 269 + 1;
-                    } else if (length_code >= 273 && length_code <= 276) {
-                        length_base = (length_code - 273 + 35) << 3;
-                        extra_bits = length_code - 273 + 1;
-                    } else if (length_code >= 277 && length_code <= 280) {
-                        length_base = (length_code - 277 + 67) << 4;
-                        extra_bits = length_code - 277 + 1;
-                    } else if (length_code >= 281 && length_code <= 284) {
-                        length_base = (length_code - 281 + 131) << 5;
-                        extra_bits = length_code - 281 + 1;
-                    } else if (length_code == 285) {
-                        length_base = 258;
-                        extra_bits = 0;
-                    }
-                    uint32_t length = length_base + reader.readBits(extra_bits);
-
-                    // Distance code (0-29)
-                    uint16_t dist_code = decode_huffman(reader, dist_root);
-                    int dist_base = 0;
-                    int dist_extra_bits = 0;
-
-                    if (dist_code >= 0 && dist_code <= 3) {
-                        dist_base = dist_code + 1;
-                        dist_extra_bits = dist_code;
-                    } else if (dist_code >= 4 && dist_code <= 5) {
-                        dist_base = (dist_code - 4 + 5) << 1;
-                        dist_extra_bits = dist_code - 4 + 1;
-                    } else if (dist_code >= 6 && dist_code <= 7) {
-                        dist_base = (dist_code - 6 + 9) << 2;
-                        dist_extra_bits = dist_code - 6 + 1;
-                    } else if (dist_code >= 8 && dist_code <= 11) {
-                        dist_base = (dist_code - 8 + 17) << 3;
-                        dist_extra_bits = dist_code - 8 + 1;
-                    } else if (dist_code >= 12 && dist_code <= 15) {
-                        dist_base = (dist_code - 12 + 33) << 4;
-                        dist_extra_bits = dist_code - 12 + 1;
-                    } else if (dist_code >= 16 && dist_code <= 19) {
-                        dist_base = (dist_code - 16 + 65) << 5;
-                        dist_extra_bits = dist_code - 16 + 1;
-                    } else if (dist_code >= 20 && dist_code <= 23) {
-                        dist_base = (dist_code - 20 + 129) << 6;
-                        dist_extra_bits = dist_code - 20 + 1;
-                    } else if (dist_code >= 24 && dist_code <= 27) {
-                        dist_base = (dist_code - 24 + 257) << 7;
-                        dist_extra_bits = dist_code - 24 + 1;
-                    } else if (dist_code >= 28 && dist_code <= 29) {
-                        dist_base = (dist_code - 28 + 513) << 8;
-                        dist_extra_bits = dist_code - 28 + 1;
-                    }
-                    uint32_t distance = dist_base + reader.readBits(dist_extra_bits);
-
-                    // Copy the decoded data from the history
-                    size_t start = decompressedData.size() - distance;
-                    if (start < 0) {
-                        throw std::runtime_error("Invalid distance");
-                    }
-                    for (uint32_t j = 0; j < length; ++j) {
-                        decompressedData.push_back(decompressedData[start + j]);
-                    }
-                }
-            }
-            delete lit_root;
-            delete dist_root;
-        } else {
-            throw std::runtime_error("Invalid block type");
-        }
-    }
-
-    // 3.  Verify Adler-32 checksum
-    uint32_t adler32_calculated = adler32(decompressedData);
-    uint32_t adler32_read = reader.readBits(32);
-
-    return decompressedData;
-}
-
-// Example usage
-int main() {
-    // Example compressed data (replace with your actual compressed data)
-    // This example uses a very simple stored block followed by a fixed huffman block.
-    std::vector<unsigned char> compressedData = {
-        0x78, 0x9c, // CMF, FLG
-        0x01,       // Final block, no compression (stored)
-        0x01, 0x00, 0x00, 0x00, // LEN = 1, NLEN = 65534
-        0x41,       // Data: 'A'
-        0x01,       // Final block, fixed Huffman
-        0x00,       // Padding bits
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x00,
-        0x21, 0x00, // Adler32 of "A\n"
-    };
-
-    try {
-        std::vector<unsigned char> decompressedData = decompressZlib(compressedData);
-        std::cout << "Decompressed data: ";
-        for (unsigned char byte : decompressedData) {
-            std::cout <<  byte;
-        }
-        std::cout << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-        return 1;
-    }
-
-    return 0;
-}
