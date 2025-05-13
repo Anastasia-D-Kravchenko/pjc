@@ -40,7 +40,7 @@ std::vector<char> readPPM(const std::string& filename, uint32_t& width, uint32_t
     size_t expectedByteCount = (magicNumber == "P6") ? static_cast<size_t>(width) * height * 3 : static_cast<size_t>(width) * height * 3 * 4;
     std::vector<char> imageData;            // Vector to store the image data as raw bytes.
     imageData.reserve(expectedByteCount);
-    // For P6, resize is used to allocate the exact required memory.
+    // For P6, resize is used to allocate the exact required memory
     // For P3, reserve is used to allocate enough memory to avoid reallocations during the conversion
     // from ASCII to binary, but the vector is not resized to this large amount.
     if (magicNumber == "P6") {

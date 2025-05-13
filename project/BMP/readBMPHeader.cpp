@@ -37,7 +37,7 @@ uint32_t readBMPHeader(const std::string& filename, uint32_t& width, uint32_t& h
     file.read(reinterpret_cast<char*>(bmpSignature), 2);
     if (bmpSignature[0] != 'B' || bmpSignature[1] != 'M') throw std::runtime_error("\033[31mERROR: Not a valid BMP file.\033[0m");
     file.read(reinterpret_cast<char*>(&fileSize), 4); // For pointer conversion.
-    file.seekg(10, std::ios::beg); // Skip reserved. Where to go, start position. file.seekg(4, std::ios::cur);
+    file.seekg(10, std::ios::beg); // Skip reserved. Where to go, start position. file.seekg(4, std::ios::cur)
     file.read(reinterpret_cast<char*>(&dataOffset), 4);
 
     // DIB Header
@@ -51,7 +51,7 @@ uint32_t readBMPHeader(const std::string& filename, uint32_t& width, uint32_t& h
 
     if (bitsPerPixel != 8 && bitsPerPixel != 24 && bitsPerPixel != 32 && pixelAlert) {
         // The number of bits per pixel (1, 4, 8, 15, 24, 32, or 64) for a given BMP file is
-        // specified in a file header. BMP files with 24 bits per pixel are common.
+        // specified in a file header. BMP files with 24 bits per pixel are common
         if (bitsPerPixel == 1 || bitsPerPixel == 2 || bitsPerPixel == 4 || bitsPerPixel == 8 || // 2 bytes - legal on Windows CE
             bitsPerPixel == 15 || bitsPerPixel == 24 || bitsPerPixel == 32 || bitsPerPixel == 64) {
             std::string yes;

@@ -1,4 +1,4 @@
-void printFilePermissions(const int mode) { // The permissions are not stored as simple characters like "rwx"; they're encoded as a set of bits within an integer.
+void printFilePermissions(const int mode) { // The permissions are not stored as simple characters like "rwx"; they're encoded as a set of bits within an integer
     try{
         // S_IRUSR = 100000000  (binary)  r--------              110101101
         // S_IWUSR = 010000000  (binary)  -w-------            & 100000000
@@ -11,7 +11,7 @@ void printFilePermissions(const int mode) { // The permissions are not stored as
         // S_IXOTH = 000000001  (binary)  --------x
         std::cout << "File permissions: "; // S_IR or S_IW or S_IX (rwx)
         std::cout << "\nOwner: "; // USR for current user
-        if (mode & S_IRUSR) std::cout << "Read "; else std::cout << "None "; // If a specific bit is set (1) in both operands, the corresponding bit in the result is also 1; otherwise, it's 0.
+        if (mode & S_IRUSR) std::cout << "Read "; else std::cout << "None "; // If a specific bit is set (1) in both operands, the corresponding bit in the result is also 1; otherwise, it's 0
         if (mode & S_IWUSR) std::cout << "Write "; else std::cout << "None "; // 0 0 -> 0 | 1 1 -> 0 | 0 1 -> 0 We have a problem! 0 and 1 not the same false!
         if (mode & S_IXUSR) std::cout << "Execute"; else std::cout << "None";
         std::cout << "\nGroup: "; // GRP for user group

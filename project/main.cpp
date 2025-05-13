@@ -33,15 +33,15 @@
 // #include ".cpp"
 
 // https://gist.github.com/vratiu/9780109
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) { // count, vector
     try {
         if (argc == 1) {
             displayHelp();
             return 0;
         }
 
-        std::string flag = argv[1];
-        std::string fileExtension;
+        std::string flag = argv[1]; // -i -e -d ... could be word
+        std::string fileExtension; // ONLY bmp, ppm
 
         if (flag == "-i" || flag == "--info") { // ---------------------------------------------------------------------
             if (argc != 3) {

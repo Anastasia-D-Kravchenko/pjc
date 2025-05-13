@@ -1,3 +1,4 @@
+// https://courses.cs.washington.edu/courses/cse576/06sp/software/ppmman.html#:~:text=A%20ppm%20file's%20magic%20number,as%20ASCII%20characters%20in%20decimal.
 void processPPM(const std::string& filename) {
     std::ifstream file(filename);
     if (!file) {
