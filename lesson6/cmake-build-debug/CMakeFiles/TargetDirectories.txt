@@ -1,0 +1,14 @@
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/lesson6.dir
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/edit_cache.dir
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/list_install_components.dir
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/install.dir
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/install/local.dir
+Z:/pjc/lesson6/cmake-build-debug/CMakeFiles/install/strip.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/fmt.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/edit_cache.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/rebuild_cache.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/list_install_components.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/install.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/install/local.dir
+Z:/pjc/lesson6/cmake-build-debug/_deps/fmt-build/CMakeFiles/install/strip.dir
