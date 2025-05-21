@@ -2282,31 +2282,63 @@
 
 
 
-#include <vector>
-#include <fmt/ranges.h>
-#include <string>
+// #include <vector>
+// #include <fmt/ranges.h>
+// #include <string>
+//
+// struct Person
+// {
+//     std::string name;
+//     std::string surname;
+// };
+//
+// auto format_as(Person const& p) -> std::string
+// {
+//     return p.name;
+// }
 
-struct Person
-{
+#include <iostream>
+#include <ostream>
+
+struct Foo {
+    static inline int value = 0;
+    static int num;
+    void print() {
+        std::cout << "Hello World!" << std::endl;
+    }
+    static void printic(){
+        std::cout << "Hello World!" << std::endl;
+    }
+};
+class Cool {
     std::string name;
     std::string surname;
+    public:
+    Cool(std::string const& name, std::string const& surname) {
+        this->name = name;
+        this->surname = surname;
+    }
+    ~Cool() {
+        std::cout << "Cool deleted!" << name << " " << surname << std::endl;
+    }
 };
-
-auto format_as(Person const& p) -> std::string
-{
-    return p.name;
-}
-
 int main()
 {
-    auto person = Person("Hirohiko", "Araki");
-    auto other  = person;
-    auto& [n, s] = person;
-    n = "Nobody";
-    auto [oN, oS] = other;
-    oS = "Knows";
-    fmt::println("{}", person);
-    fmt::println("{}", other);
-    fmt::println("{} {}", n, s);
-    fmt::println("{} {}", oN, oS);
+    // auto person = Person("Hirohiko", "Araki");
+    // auto other  = person;
+    // auto& [n, s] = person;
+    // n = "Nobody";
+    // auto [oN, oS] = other;
+    // oS = "Knows";
+    // fmt::println("{}", person);
+    // fmt::println("{}", other);
+    // fmt::println("{} {}", n, s);
+    // fmt::println("{} {}", oN, oS);
+
+    Foo foo;
+    foo.print();
+    Foo::printic();
+    Cool cool("Nastya", "Krava");
+
+    return 0;
 }
