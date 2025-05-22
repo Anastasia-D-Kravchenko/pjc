@@ -2299,46 +2299,130 @@
 
 #include <iostream>
 #include <ostream>
+#include <vector>
+#include <algorithm> // Required for std::ranges::reverse
+#include <fmt/core.h> // Required for fmt::println
+#include <fmt/ranges.h> // Required for printing std::vector directly
+
+// struct Foo {
+//     static inline int value = 0;
+//     static int num;
+//     void print() {
+//         std::cout << "Hello World!" << std::endl;
+//     }
+//     static void printic(){
+//         std::cout << "Hello World!" << std::endl;
+//     }
+// };
+// class Cool {
+//     std::string name;
+//     std::string surname;
+//     public:
+//     Cool(std::string const& name, std::string const& surname) : name(name), surname(surname) { }
+//     Cool(Cool const& cool) = default;
+//     ~Cool() {
+//         std::cout << "Cool deleted!" << name << " " << surname << std::endl;
+//     }
+//     auto byCopy(std::vector<Cool> const& nums){fmt::println("{}", "Hi");}
+// };
+// struct Point{
+//     int x;
+//     int y;
+//     Point(int x, int y) : x(x), y(y) {}
+// };
+// auto operator+(Point const& a, Point const& b) {
+//     return Point(b.x + a.x, b.y + a.y);
+// }
+// auto format_as(Point const& p){ return fmt::format("{}, {}", p.x, p.y);}
+// auto operator+(
+//         std::vector<int> left, std::vector<int> const& right
+// ) -> std::vector<int> {
+//     left.insert(left.end(), right.begin(), right.end());
+//     return left;
+// }
+// auto operator-(std::vector<int> & vec) {
+//     for ( int i = 0; i < vec.size(); i++ ) {
+//         vec[i] = -vec[i];
+//     }
+// }
+// auto operator~(std::string const& str) {
+//     std::string stry = str;
+//     for ( int i = 0; i < stry.size(); i++ ) {
+//         if (std::tolower(stry[i]) == stry[i]) {
+//             stry[i] = std::toupper(stry[i]);
+//         }else {
+//             stry[i] = std::tolower(stry[i]);
+//         }
+//     }
+//     return stry;
+// }
+// template <typename T>
+// std::vector<T> operator!(const std::vector<T>& vec) {
+//     std::vector<T> reversed_copy = vec;
+//     std::reverse(reversed_copy.begin(), reversed_copy.end());
+//     return reversed_copy;
+// }
+// int main()
+// {
+//     // auto person = Person("Hirohiko", "Araki");
+//     // auto other  = person;
+//     // auto& [n, s] = person;
+//     // n = "Nobody";
+//     // auto [oN, oS] = other;
+//     // oS = "Knows";
+//     // fmt::println("{}", person);
+//     // fmt::println("{}", other);
+//     // fmt::println("{} {}", n, s);
+//     // fmt::println("{} {}", oN, oS);
+//
+//     Foo foo;
+//     foo.print();
+//     Foo::printic();
+//     Cool cool("Nastya", "Krava");
+//     Cool coool(cool);
+//     auto cool1 = std::vector{cool};
+//     cool.byCopy(cool1);
+//     cool.byCopy(cool1);
+//     cool.byCopy(cool1);
+//     Point point(1,2);
+//     Point point2(4,4);
+//     fmt::println("{}", point+point2);
+//     auto v1 = std::vector<int>{1, 2, 3};
+//     std::ranges::reverse(v1);
+//     fmt::println("{}", v1);
+//     auto v2 = std::vector<int>{4, 5};
+//
+//     fmt::println("{} + {} = {}", v1, v2, v1 + v2);
+//     auto v3 = std::vector<int>{1, -2, 3};
+//     -v3;
+//     fmt::println("{}", v3);
+//
+//     fmt::println("{}", ~std::string("heLWow"));
+//     return 0;
+// }
+#include <fmt/ranges.h>
 
 struct Foo {
-    static inline int value = 0;
-    static int num;
-    void print() {
-        std::cout << "Hello World!" << std::endl;
-    }
-    static void printic(){
-        std::cout << "Hello World!" << std::endl;
-    }
+    Foo() { fmt::println("create"); }
+    Foo(const Foo& o) { fmt::println("copy"); }
+    auto operator= (const Foo& o) -> void { fmt::println("assign"); }
+    ~Foo() { fmt::println("destroy"); }
 };
-class Cool {
-    std::string name;
-    std::string surname;
-    public:
-    Cool(std::string const& name, std::string const& surname) {
-        this->name = name;
-        this->surname = surname;
-    }
-    ~Cool() {
-        std::cout << "Cool deleted!" << name << " " << surname << std::endl;
-    }
-};
-int main()
-{
-    // auto person = Person("Hirohiko", "Araki");
-    // auto other  = person;
-    // auto& [n, s] = person;
-    // n = "Nobody";
-    // auto [oN, oS] = other;
-    // oS = "Knows";
-    // fmt::println("{}", person);
-    // fmt::println("{}", other);
-    // fmt::println("{} {}", n, s);
-    // fmt::println("{} {}", oN, oS);
 
-    Foo foo;
-    foo.print();
-    Foo::printic();
-    Cool cool("Nastya", "Krava");
+auto accept(Foo f1, int i) -> void { // f1 is passed by value (copy)
+    if (i == 2) {
+        return;
+    }
 
+    auto f = f1; // f is a copy of f1
+    fmt::println("hello {}", i);
+    f = f1;      // f is assigned f1
+    accept(f1, i + 1); // f1 (original copy) is passed by value again
+}
+
+auto main() -> int {
+    auto x = Foo(); // calls default constructor
+    accept(x, 0);   // x is copied into f1
+    fmt::println("end");
     return 0;
 }
