@@ -18,7 +18,7 @@ void processBMP(const std::string& filename) {
     // 2 bytes: Number of color planes
     // 2 bytes: Bits per pixel
 
-    char bmpSignature[2];  // 2 bytes: "BM" identifier
+    unsigned char bmpSignature[2];  // 2 bytes: "BM" identifier
     uint32_t fileSize;      // 4 bytes: File size
     uint32_t reserved;      // 4 bytes: Reserved (unused)
     uint32_t dataOffset;    // 4 bytes: Data offset (where the pixel data starts)
@@ -30,23 +30,14 @@ void processBMP(const std::string& filename) {
 
     auto num = sizeof(unsigned int); // 4 bytes
 
-    // Read the BMP signature
     file.read(reinterpret_cast<char*>(bmpSignature), 2);
-    // Read the file size
     file.read(reinterpret_cast<char*>(&fileSize), num);
-    // Read the reserved field
     file.read(reinterpret_cast<char*>(&reserved), num);
-    // Read the data offset
     file.read(reinterpret_cast<char*>(&dataOffset), num);
-    // Read the header size
     file.read(reinterpret_cast<char*>(&headerSize), num);
-    // Read the image width
     file.read(reinterpret_cast<char*>(&width), num);
-    // Read the image height
     file.read(reinterpret_cast<char*>(&height), num);
-    // Read the number of color planes
     file.read(reinterpret_cast<char*>(&colorPlanes), 2);
-    // Read the bits per pixel
     file.read(reinterpret_cast<char*>(&bitsPerPixel), 2);
 
     // Print the BMP header information

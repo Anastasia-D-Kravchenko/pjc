@@ -22,7 +22,6 @@ std::string readMessageFromPPM(std::string& filename) {
 
     // Handle different PPM formats (P6 and P3)
     if (magicNumber == "P6") {
-        bool endOfMessage = false; // local scope
         // For P6 (binary PPM), extract message from the least significant bit of each color component
         for (uint32_t i = 0; i < width * height * 3 && !endOfMessage; ++i) {
             for (int j = 0; j < 8 && !endOfMessage; ++j) {

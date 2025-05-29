@@ -30,10 +30,10 @@ uint32_t readBMPHeader(const std::string& filename, uint32_t& width, uint32_t& h
     if (!file.is_open()) {throw std::runtime_error("\033[31mERROR: Could not open file.\033[0m");}
 
     // BMP Header
-    unsigned char bmpSignature[2];
-    uint32_t fileSize;
+    unsigned char bmpSignature[2]; // smallest unit 8 bits
+    uint32_t fileSize; // 32 bits unit
     uint32_t dataOffset;
-
+// signed char (values typically -128 to 127) or unsigned char (values typically 0 to 255) depending on the compiler and platform
     file.read(reinterpret_cast<char*>(bmpSignature), 2);
     if (bmpSignature[0] != 'B' || bmpSignature[1] != 'M') throw std::runtime_error("\033[31mERROR: Not a valid BMP file.\033[0m");
     file.read(reinterpret_cast<char*>(&fileSize), 4); // For pointer conversion.

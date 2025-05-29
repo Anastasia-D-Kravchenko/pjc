@@ -14,7 +14,6 @@ bool canWriteMessage(const std::string& filename, const std::string& message) {
         uint32_t width, height;
         uint16_t bitsPerPixel;
         uint32_t dataOffset = readBMPHeader(filename, width, height, bitsPerPixel, false);
-        long fileSize = getFileSize(filename);
         uint32_t dataSize = fileSize - dataOffset;
         uint32_t availableBytes = dataSize / 8;
         int n = 1;

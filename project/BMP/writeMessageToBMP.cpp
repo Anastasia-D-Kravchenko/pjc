@@ -34,7 +34,7 @@ void writeMessageToBMP(const std::string& filename, const std::string& message, 
     for (uint32_t i = dataOffset; i < fileSize && bitIndex < binaryMessage.length(); ++i) {
         if (i%n==0){ // Check if the current byte is one where we can embed data
             for (int j = 0; j < 8 && bitIndex < binaryMessage.length(); ++j) {
-                if ( j == 0 ){ // Embed the data in the 4th bit
+                if ( j == 0 ){ // Embed the data in the 7th bit
                     if (binaryMessage[bitIndex] == '1') {
                         imageData[i] |= 1; // Set the least significant bit to 1
                     } else {
