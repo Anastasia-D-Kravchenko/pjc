@@ -2400,6 +2400,7 @@
 //     fmt::println("{}", ~std::string("heLWow"));
 //     return 0;
 // }
+#include <unistd.h>
 #include <fmt/ranges.h>
 
 struct Foo {
@@ -2421,8 +2422,37 @@ auto accept(Foo f1, int i) -> void { // f1 is passed by value (copy)
 }
 
 auto main() -> int {
-    auto x = Foo(); // calls default constructor
-    accept(x, 0);   // x is copied into f1
-    fmt::println("end");
-    return 0;
+    // auto x = Foo(); // calls default constructor
+    // accept(x, 0);   // x is copied into f1
+    // fmt::println("end");
+    // return 0;
+    // for (int i = 0; i < 100; i++) {
+        int result = 0; // Initialized in both parent and child
+        std::cout << "Diagnostic message 1" << std::endl; // Printed by both parent and child
+
+        int pid = fork(); // Point of divergence
+    //     fork();
+    // fork();
+
+        switch (pid) {
+            case -1: // Fork failed
+                std::cerr << "Error in fork" << std::endl;
+            exit(1); // Process exits
+            case 0: // Child process
+                std::cout << "Diagnostic message 2" << std::endl;
+            std::cout << "Child says " << result << std::endl; // 'result' here is 0 from initialization
+            sleep(10); // Child sleeps for 10 seconds
+            break; // Child exits the switch.
+            default: // Parent process (pid > 0)
+                std::cout << "Diagnostic message 3" << std::endl;
+            // fork();
+            // result = execlp("cat", "cat", "/proc/cpuinfo", NULL); // Parent attempts to execute 'cat'
+            // std::cerr << "Error in execlp" << std::endl; // Only printed if execlp fails
+            // exit(2); // Parent exits
+        }
+
+        // This line is only reached by the child process after the 'break' from its case.
+        // The parent process exits either on fork failure or after execlp/execlp failure.
+        std::cout << "Diagnostic message 4" << std::endl;
+    // }
 }
