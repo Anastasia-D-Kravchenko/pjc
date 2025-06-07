@@ -2433,7 +2433,7 @@ auto main() -> int {
         int pid = fork(); // Point of divergence
     //     fork();
     // fork();
-    
+
         switch (pid) {
             case -1: // Fork failed
                 std::cerr << "Error in fork" << std::endl;
