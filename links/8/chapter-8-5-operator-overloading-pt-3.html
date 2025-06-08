@@ -1,0 +1,467 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 8.5 - Operator overloading, pt. 3" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="/~fk/en/lectures/chapter-8-5-operator-overloading-pt-3/" /><meta property="og:url" content="/~fk/en/lectures/chapter-8-5-operator-overloading-pt-3/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-04-24T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 8.5 - Operator overloading, pt. 3" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-24T00:00:00+02:00","datePublished":"2025-04-24T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"Chapter 8.5 - Operator overloading, pt. 3","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-8-5-operator-overloading-pt-3/"},"url":"/~fk/en/lectures/chapter-8-5-operator-overloading-pt-3/"}</script><title>Chapter 8.5 - Operator overloading, pt. 3 | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="/~fk/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/~fk/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/~fk/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/~fk/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/~fk/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="/~fk/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="/~fk/en/" id="avatar" class="rounded-circle"> <img src="/~fk/assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="/~fk/en/">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="/~fk/en/" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/~fk/en/information/" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="/~fk/en/lectures/" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="/~fk/en/presentations/" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="/~fk/en/tasks/" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="/~fk/en/tags/" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="/~fk/wyklady/rozdzia%C5%82-8-5-przeci%C4%85%C5%BCanie-operator%C3%B3w-cz-3/" class="nav-link"> <img src="/~fk/assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="/~fk/en/lectures/chapter-8-5-operator-overloading-pt-3/" class="nav-link"> <img src="/~fk/assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="/~fk/"> Home </a> </span> <span>Chapter 8.5 - Operator overloading, pt. 3</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 8.5 - Operator overloading, pt. 3</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1745445600" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Apr 24, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2305 words" > <em>12 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="operator-overloading-as-methods-and-free-functions"><span class="me-2">Operator overloading as methods and free functions</span><a href="#operator-overloading-as-methods-and-free-functions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>In the earlier part of the chapter, we learned (and noticed) that operators can be overloaded in two ways — as methods and as free functions. Most operators can be overloaded in both ways. However, there are some exceptions.</p><p><code class="language-plaintext highlighter-rouge">operator=</code> <strong>cannot</strong> be overloaded as a free function. It <strong>must</strong> be implemented as a method. This is to prevent anyone from “outside” changing what happens when objects of types created by someone else are overwritten. What a disaster it could be if we overrode <code class="language-plaintext highlighter-rouge">operator=</code> for <code class="language-plaintext highlighter-rouge">std::string</code> without realizing how much we just broke in the {fmt} implementation?</p><p><code class="language-plaintext highlighter-rouge">operator+</code>, which we examined in the previous chapter, can be overloaded in both ways. Let’s consider the example with the <code class="language-plaintext highlighter-rouge">Point</code> class:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">left</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">right</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"({}, {})"</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Now, let’s change it so that the overloading of <code class="language-plaintext highlighter-rouge">operator+</code> is not implemented as a free function, but as a method:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">right</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"({}, {})"</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The effect is still <strong>identical</strong>. Let’s look at the only difference in the code:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">right</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>We should observe some interesting things:</p><ol><li>The left argument has disappeared.<li>The method is marked as <code class="language-plaintext highlighter-rouge">const</code>.</ol><blockquote class="prompt-info"><p>When overloading a binary operator using a method, its left operand becomes the object on which it is called.</p></blockquote><p>This means that with the snippet:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+<span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">);</span>
+</pre></table></code></div></div><p>This <code class="language-plaintext highlighter-rouge">+</code> is effectively called on <code class="language-plaintext highlighter-rouge">p1</code>. <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> from the operator overloading implementation refer to <code class="language-plaintext highlighter-rouge">p1.x</code> and <code class="language-plaintext highlighter-rouge">p1.y</code>.</p><p><code class="language-plaintext highlighter-rouge">p2</code> becomes <code class="language-plaintext highlighter-rouge">right</code>, of course.</p><p>We marked the overloaded operator (as a method) as <code class="language-plaintext highlighter-rouge">const</code> because we want to indicate that this operator does not modify the left operand (in the above example — <code class="language-plaintext highlighter-rouge">p1</code>). In the example where we implemented it as a free function, both arguments were <code class="language-plaintext highlighter-rouge">const</code>. The right operand was <code class="language-plaintext highlighter-rouge">const</code>, but for the method to have the left operand marked as immutable, the entire method must be marked as such.</p><h3 id="problem-with-overloading-operator-as-a-method-for-existing-classes"><span class="me-2">Problem with overloading operator as a method for existing classes</span><a href="#problem-with-overloading-operator-as-a-method-for-existing-classes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>In the previous chapter, we provided <code class="language-plaintext highlighter-rouge">operator+</code> for two <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;</code> as well. It was also overloaded as a free function. So how could it be changed to a method?</p><p>It cannot.</p><p>We do not have access to the <code class="language-plaintext highlighter-rouge">std::vector</code> template. We cannot “open” it and add <code class="language-plaintext highlighter-rouge">operator+</code> as a method there. Hence the <em>necessity</em> to provide it as a free function.</p><h3 id="common-examples-where-the-operator-is-provided-as-a-free-function"><span class="me-2">Common examples where the operator is provided as a free function</span><a href="#common-examples-where-the-operator-is-provided-as-a-free-function" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>We cannot edit existing classes (at most we can add template specializations, but what if the given type is not a template?).</p><p>We cannot always use {fmt} (for example, if the product created by our company is under a non-compliant license).</p><p>Nevertheless, sometimes we want our types to be “displayable”. Before introducing {fmt}, we used <code class="language-plaintext highlighter-rouge">std::cout</code>. The type of this object is <code class="language-plaintext highlighter-rouge">std::ostream</code>. This means that if we wanted to provide the ability to display our type (e.g., <code class="language-plaintext highlighter-rouge">Point</code>), it would have to be done using a properly overloaded <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> operator:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="k">operator</span><span class="o">+</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">left</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">right</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">left</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">right</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="sc">'('</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="sc">')'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>(6, 10)
+</pre></table></code></div></div><p>This time again, we’re using <code class="language-plaintext highlighter-rouge">&lt;iostream&gt;</code>, where objects of type <code class="language-plaintext highlighter-rouge">std::ostream</code> and <code class="language-plaintext highlighter-rouge">std::istream</code> use <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> and <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>. This means that in order for <code class="language-plaintext highlighter-rouge">Point</code> to be displayed, the appropriate operator must be overloaded:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="sc">'('</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">", "</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="sc">')'</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>It’s worth noting that since the left operand is of type <code class="language-plaintext highlighter-rouge">std::ostream</code>, and it’s clearly a class created by someone else, there’s no other way to provide the required operator than by using a free function.</p><h2 id="other-operators-that-must-be-overloaded-as-methods"><span class="me-2">Other operators that must be overloaded as methods</span><a href="#other-operators-that-must-be-overloaded-as-methods" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>We’ve already learned about <code class="language-plaintext highlighter-rouge">operator=</code>, which <em>must</em> be overloaded as a method. What other operators require this?</p><p>There are three such operators<sup id="fnref:why"><a href="#fn:why" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>:</p><ul><li><code class="language-plaintext highlighter-rouge">operator()</code><li><code class="language-plaintext highlighter-rouge">operator[]</code><li><code class="language-plaintext highlighter-rouge">operator-&gt;</code></ul><p>We won’t worry about the last one.</p><h3 id="operator"><span class="me-2"><code>operator()</code></span><a href="#operator" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>The function call operator is the operator that allows objects of our class to be called like functions. Let’s look at an example:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Printer</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">message</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">()()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">greeter</span>   <span class="o">=</span> <span class="n">Printer</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">announcer</span> <span class="o">=</span> <span class="n">Printer</span><span class="p">(</span><span class="s">"Get ready!"</span><span class="p">);</span>
+
+    <span class="n">greeter</span><span class="p">();</span>
+    <span class="n">announcer</span><span class="p">();</span>
+    <span class="n">greeter</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>Hello
+Get ready!
+Hello
+</pre></table></code></div></div><p>Lines 13-19 call <code class="language-plaintext highlighter-rouge">operator()</code> from lines 8-10.</p><p>It’s worth noting a fragment that may seem very strange. Why do we write <code class="language-plaintext highlighter-rouge">operator()()</code>? Specifically, it’s about these two parentheses. The answer is quite straightforward. The first ones are part of the name (<code class="language-plaintext highlighter-rouge">operator()</code>), and the second ones specify what arguments it takes.</p><p>This operator can take <em>any number of arguments</em>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Adder</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="k">const</span> <span class="n">b</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Reverser</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">a</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">add</span>     <span class="o">=</span> <span class="n">Adder</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">reverse</span> <span class="o">=</span> <span class="n">Reverser</span><span class="p">();</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">reverse</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>3 3
+</pre></table></code></div></div><p>It’s impossible not to notice a certain similarity between the use of objects of the <code class="language-plaintext highlighter-rouge">Adder</code> or <code class="language-plaintext highlighter-rouge">Reverser</code> classes and lambdas. Let’s see:</p><div class="language-cpp prompt-info highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Reverser</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">a</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">reverse1</span> <span class="o">=</span> <span class="n">Reverser</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">reverse2</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">-</span><span class="n">a</span><span class="p">;</span> <span class="p">};</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">reverse1</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">reverse2</span><span class="p">(</span><span class="mi">3</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The output, as before, is the same, namely <raw-data>-3 -3</raw-data>.</p><p>The similarity is not accidental — that’s exactly how lambdas work!</p><blockquote class="prompt-info"><p>A lambda literal (some form of <code class="language-plaintext highlighter-rouge">[](){}</code>) results in the creation of an anonymous type, which — among other things — has an overloaded <code class="language-plaintext highlighter-rouge">operator()</code> with a body consistent with what we provided in the literal. Then the literal is replaced with the creation of an object of the newly created type.</p></blockquote><p>Of course, what exactly is found in the type generated by the lambda expression is a bit more complicated. However, it’s not relevant at this point.</p><h3 id="operator-1"><span class="me-2"><code>operator[]</code></span><a href="#operator-1" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>The indexing operator must also be defined as a method. It is used to standardize the way elements of most containers are accessed. Thanks to it, <code class="language-plaintext highlighter-rouge">std::array</code>, <code class="language-plaintext highlighter-rouge">std::vector</code>, or <code class="language-plaintext highlighter-rouge">std::string</code> can offer the same way of accessing data. Recall that in Java:</p><ul><li>arrays are indexed using <code class="language-plaintext highlighter-rouge">[]</code>;<li>lists (and generally collections) using <code class="language-plaintext highlighter-rouge">.get()</code>;<li>and text types using <code class="language-plaintext highlighter-rouge">.charAt()</code>.</ul><p>In C++, it’s always <code class="language-plaintext highlighter-rouge">[]</code>.</p><p>Until C++23, <code class="language-plaintext highlighter-rouge">operator[]</code> could only take a single argument. This meant that when representing a multidimensional collection, one had to use inefficient (or complicated) constructions that provided syntax like <code class="language-plaintext highlighter-rouge">[i][j][k][...]</code> or provide indexing through <code class="language-plaintext highlighter-rouge">operator()</code>.</p><p>Its implementation doesn’t differ particularly from the rest of the operators. Let’s consider, for example, a wrapper type around <code class="language-plaintext highlighter-rouge">std::string</code> that displays information when someone tries to access this <code class="language-plaintext highlighter-rouge">std::string</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">class</span> <span class="nc">StringWrapper</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buffer</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">StringWrapper</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="o">:</span> <span class="n">buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">char</span><span class="o">&amp;</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Accessing index #{}"</span> <span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="nf">print</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">sw</span> <span class="o">=</span> <span class="n">StringWrapper</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">sw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'h'</span><span class="p">;</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">sw</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'e'</span><span class="p">;</span>
+    <span class="n">sw</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'e'</span><span class="p">;</span>
+    <span class="n">sw</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'y'</span><span class="p">;</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>Hello
+Accessing index #0
+hello
+Accessing index #2
+Accessing index #3
+Accessing index #4
+heeey
+</pre></table></code></div></div><p>A trap worth noting, however, is that our <code class="language-plaintext highlighter-rouge">operator[]</code> is not <code class="language-plaintext highlighter-rouge">const</code>. What’s problematic about this?</p><p>Consider changing <code class="language-plaintext highlighter-rouge">main()</code> to this:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">sw</span> <span class="o">=</span> <span class="n">StringWrapper</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">sw</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output is, clearly:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>Hello
+Accessing index #0
+H
+</pre></table></code></div></div><p>Let’s note that <code class="language-plaintext highlighter-rouge">sw</code> is <strong>not changed anywhere</strong>. Therefore, there should be no obstacle to declare this object as <code class="language-plaintext highlighter-rouge">const</code>, like this:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sw</span> <span class="o">=</span> <span class="n">StringWrapper</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="n">sw</span><span class="p">.</span><span class="n">print</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">sw</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Unfortunately, such code will not compile:</p><div file="sample compilation error" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="sample compilation error"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>main.cpp:22:28: error: passing 'const StringWrapper' as 'this' argument discards qualifiers [-fpermissive]
+   22 |     fmt::println("{}", sw[0]);
+      |                            ^
+main.cpp:9:10: note:   in call to 'char&amp; StringWrapper::operator[](int)'
+    9 |     auto operator[](int const index) -&gt; char&amp; {
+      |          ^~~~~~~~
+</pre></table></code></div></div><p>This cryptic error is C++’s way of saying that <code class="language-plaintext highlighter-rouge">operator[]</code> doesn’t promise that its invocation won’t modify the object’s content. We’re not doing that, but the compiler doesn’t always catch it. To fix this, we should declare it as <code class="language-plaintext highlighter-rouge">const</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">char</span><span class="o">&amp;</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Accessing index #{}"</span> <span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Note that the <strong>only</strong> change is adding <code class="language-plaintext highlighter-rouge">const</code> before <code class="language-plaintext highlighter-rouge">-&gt;</code>.</p><p>Unfortunately, now a different error appears!</p><div file="sample compilation error" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="sample compilation error"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>main.cpp:11:28: error: binding reference of type 'char&amp;' to 'const __gnu_cxx::__alloc_traits&lt;std::allocator&lt;char&gt;, char&gt;::value_type' {aka 'const char'} discards qualifiers
+   11 |         return buffer[index];
+      |                            ^
+</pre></table></code></div></div><p>Let’s translate the error into plain language — it’s saying that we claim <code class="language-plaintext highlighter-rouge">return buffer[index]</code> will return <code class="language-plaintext highlighter-rouge">char&amp;</code> (because that’s what we wrote after <code class="language-plaintext highlighter-rouge">-&gt;</code>). The problem is that… we can’t do that. Within a <code class="language-plaintext highlighter-rouge">const</code> method, the expression <code class="language-plaintext highlighter-rouge">return buffer[index]</code> returns <code class="language-plaintext highlighter-rouge">char const&amp;</code>.</p><p>It probably sounds terribly illogical, strange, tragic, and senseless. But on the other hand, the effect is quite understandable — a <code class="language-plaintext highlighter-rouge">const</code> method shouldn’t return a raw (non-<code class="language-plaintext highlighter-rouge">const</code>) reference to an object’s member. If it could, such code <strong>would have to compile</strong>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sw</span> <span class="o">=</span> <span class="n">StringWrapper</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="n">sw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Which would obviously be nonsensical. <code class="language-plaintext highlighter-rouge">const</code> is supposed to signify <strong>true</strong> immutability. You can only invoke <code class="language-plaintext highlighter-rouge">const</code> methods on such an object. But if <code class="language-plaintext highlighter-rouge">operator[]</code>, when <code class="language-plaintext highlighter-rouge">const</code>, allowed returning a non-<code class="language-plaintext highlighter-rouge">const</code> reference to a member, the above code would compile without any problem.</p><blockquote><p>So how does it work with <code class="language-plaintext highlighter-rouge">std::vector</code> then? I can perform indexing on both <code class="language-plaintext highlighter-rouge">const</code> and non-<code class="language-plaintext highlighter-rouge">const</code> vectors. With a non-<code class="language-plaintext highlighter-rouge">const</code> vector, it allows me to modify objects, while with a <code class="language-plaintext highlighter-rouge">const</code> vector, it doesn’t. How is that done? Some kind of “third state”?</p></blockquote><p>Not exactly. It’s done through overloading:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">class</span> <span class="nc">StringWrapper</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">buffer</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">StringWrapper</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span> <span class="o">&amp;</span> <span class="n">buffer</span><span class="p">)</span> <span class="o">:</span> <span class="n">buffer</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">char</span><span class="o">&amp;</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Accessing (maybe mutating) index #{}"</span> <span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">index</span><span class="p">)</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">char</span> <span class="k">const</span><span class="o">&amp;</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Accessing (immutably) index #{}"</span> <span class="p">,</span> <span class="n">index</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">buffer</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="p">}</span>
+
+
+    <span class="k">auto</span> <span class="nf">print</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">first</span> <span class="o">=</span> <span class="n">StringWrapper</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">second</span>      <span class="o">=</span> <span class="n">StringWrapper</span><span class="p">(</span><span class="s">"Friends"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">first</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">second</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="possible output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="possible output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>Accessing (maybe mutating) index #0
+Accessing (immutably) index #0
+H F
+</pre></table></code></div></div><p><sup id="fnref:unordered"><a href="#fn:unordered" class="footnote" rel="footnote" role="doc-noteref">2</a></sup></p><p>When we have a <code class="language-plaintext highlighter-rouge">const</code> object (<code class="language-plaintext highlighter-rouge">first</code>) and use indexing, the <code class="language-plaintext highlighter-rouge">const</code> version is selected. When we have a non-<code class="language-plaintext highlighter-rouge">const</code> object (<code class="language-plaintext highlighter-rouge">second</code>) and use indexing, the version without <code class="language-plaintext highlighter-rouge">const</code> is selected.</p><blockquote class="prompt-info"><p>Methods can be overloaded based on their “<em><code class="language-plaintext highlighter-rouge">const</code>ness</em>”.</p></blockquote><p>It’s also worth noting that the non-<code class="language-plaintext highlighter-rouge">const</code> version returns <code class="language-plaintext highlighter-rouge">char&amp;</code>, whereas the <code class="language-plaintext highlighter-rouge">const</code> version returns <code class="language-plaintext highlighter-rouge">char const&amp;</code>. This ensures everything works smoothly<sup id="fnref:note"><a href="#fn:note" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>.</p><h2 id="other-operators-that-must-be-overloaded-as-free-functions"><span class="me-2">Other Operators that Must Be Overloaded as Free Functions</span><a href="#other-operators-that-must-be-overloaded-as-free-functions" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>All other operators can be overloaded as free functions.</p><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:why"><p>Why exactly these three must be implemented as methods? I don’t know. If someone knows, please let me know. I’ve seen many opinions, but none were confirmed by reliable sources that explain why this decision was made by the C++ language standardization committee. <a href="#fnref:why" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:unordered"><p>The first two lines of the presented output may be printed in the reverse order. That’s because C++ is allowed to evaluate function arguments out of order (i.e., not necessarily from left to right). <a href="#fnref:unordered" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:note"><p>C++ programmers have long expressed some discontent about the necessity of such overloads. C++23, along with the “deducing <code class="language-plaintext highlighter-rouge">this</code>” feature, partly addresses this, though it’s not a perfect solution to the problem. <a href="#fnref:note" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="/~fk/en/lectures/chapter-8-4-operator-overloading-pt-2/" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 8.4 - Operator overloading, pt. 2</p></a> <a href="/~fk/en/lectures/chapter-8-6-operator-overloading-pt-4/" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 8.6 - Operator overloading, pt. 4</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="/~fk/assets/js/dist/post.min.js"></script> <script defer src="/~fk/app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

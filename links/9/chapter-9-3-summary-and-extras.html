@@ -1,0 +1,349 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 9.3 - Summary and extras" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="/~fk/en/lectures/chapter-9-3-summary-and-extras/" /><meta property="og:url" content="/~fk/en/lectures/chapter-9-3-summary-and-extras/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-05-05T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 9.3 - Summary and extras" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-05T00:00:00+02:00","datePublished":"2025-05-05T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"Chapter 9.3 - Summary and extras","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-9-3-summary-and-extras/"},"url":"/~fk/en/lectures/chapter-9-3-summary-and-extras/"}</script><title>Chapter 9.3 - Summary and extras | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="/~fk/assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/~fk/assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/~fk/assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="/~fk/assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="/~fk/assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="/~fk/assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="/~fk/en/" id="avatar" class="rounded-circle"> <img src="/~fk/assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="/~fk/en/">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="/~fk/en/" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/~fk/en/information/" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="/~fk/en/lectures/" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="/~fk/en/presentations/" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="/~fk/en/tasks/" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="/~fk/en/tags/" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="/~fk/wyklady/rozdzia%C5%82-9-3-podsumowanie-i-dodatki/" class="nav-link"> <img src="/~fk/assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="/~fk/en/lectures/chapter-9-3-summary-and-extras/" class="nav-link"> <img src="/~fk/assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="/~fk/"> Home </a> </span> <span>Chapter 9.3 - Summary and extras</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 9.3 - Summary and extras</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1746396000" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > May 5, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1837 words" > <em>10 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="inheritance"><span class="me-2">Inheritance</span><a href="#inheritance" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Inheritance is primarily used to represent a hierarchy of types from general to specific. The general (base class) introduces some common features and behaviors (fields and methods), and the inheriting classes can add their own new features, new behaviors, and optionally override common behaviors for all types in their hierarchy.</p><p>Because inheriting classes inherit everything the base class has, inheritance can also be used to reduce code duplication.</p><h2 id="encapsulation-manipulation"><span class="me-2">Encapsulation manipulation</span><a href="#encapsulation-manipulation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>You can inherit publicly as well as privately<sup id="fnref:more-on-that"><a href="#fn:more-on-that" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. If any polymorphic behavior is of interest, public inheritance should be used. When inheriting publicly, “everyone” knows that a given class inherits from another. However, when inheriting privately, “no one else” knows about it. Private inheritance can be used for delegating work when creating custom methods or <em>exposing</em> some of them.</p><p>The process of exposing such methods is very useful. For example, let’s say we want to create a custom type representing a stack (data structure), where elements can only be added at the end, removed only from the end, and there is possible access only to the last element. This can be achieved in several ways:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Stack</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">elements_</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="k">auto</span> <span class="n">push</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">elements_</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="nf">pop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">elements_</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="nf">top</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">elements_</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>One can use inheritance instead:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="c1">// private inheritance by default for classes</span>
+<span class="k">class</span> <span class="nc">Stack</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">auto</span> <span class="n">push</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="nf">pop</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="nf">top</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">back</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>However, if we’re not interested in changing the method names and we’re satisfied with those provided by <code class="language-plaintext highlighter-rouge">std::vector</code>, we can do the following:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="c1">// private inheritance by default for classes</span>
+<span class="k">class</span> <span class="nc">Stack</span> <span class="o">:</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="nl">public:</span>
+    <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">push_back</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">pop_back</span><span class="p">;</span>
+    <span class="k">using</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">back</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>In such a <code class="language-plaintext highlighter-rouge">Stack</code>, you can call methods like <code class="language-plaintext highlighter-rouge">.push_back()</code>, <code class="language-plaintext highlighter-rouge">.pop_back()</code>, or <code class="language-plaintext highlighter-rouge">.back()</code>.</p><h2 id="polymorphism"><span class="me-2">Polymorphism</span><a href="#polymorphism" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Polymorphism in C++ requires the use of virtual methods and careful handling to avoid the problem of object slicing. In Java, this problem does not exist because all methods are inherently virtual, and due to Java’s reference semantics, object slicing is not an issue.</p><p>We denote virtual methods with the keyword <code class="language-plaintext highlighter-rouge">virtual</code>, and we mitigate object slicing by using references.</p><h2 id="pure-virtual-methods"><span class="me-2">Pure virtual methods</span><a href="#pure-virtual-methods" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>In Java, a method without a body that must be overridden is called an “abstract” method. A class with an abstract method is called an “abstract class.” In C++, sometimes instead of “abstract method,” we often use the term “pure virtual method.” Pure virtual methods have no body and are marked with the syntax <code class="language-plaintext highlighter-rouge">= 0;</code>.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// pure virtual</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Class that contains a pure virtual method becomes abstract, and it’s not possible to create objects of that class.</p><h2 id="multiple-inheritance"><span class="me-2">Multiple Inheritance</span><a href="#multiple-inheritance" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>C++ supports multiple inheritance, unlike Java. A single class can inherit from any number of classes. This is achieved quite simply — after the class from which another class inherits, you simply put a comma.</p><p>For example, you can specify that class <code class="language-plaintext highlighter-rouge">A</code> inherits from classes <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code> like this: <code class="language-plaintext highlighter-rouge">struct A : B, C { };</code>.</p><p>This is not possible in Java, but this language does not face the problems associated with the limitations resulting from this decision. This is because Java allows the implementation of multiple interfaces simultaneously. C++ does not distinguish between a class with only methods and an interface, so both concepts are realized by the same language element. Hence the need to allow multiple inheritance.</p><p>As a rule, it should be avoided because it carries the risk of encountering the “dreaded diamond problem”.</p><pre><code class="language-mermaid">flowchart BT
+    D(D) --&gt; |inherits from|C(C)
+    D --&gt; |inherits from|B(B)
+    B --&gt; |inherits from|A(A)
+    C --&gt; |inherits from|A
+    
+</code></pre><p>In the above inheritance diagram, we see that both <code class="language-plaintext highlighter-rouge">C</code> and <code class="language-plaintext highlighter-rouge">B</code> inherit (separately) from <code class="language-plaintext highlighter-rouge">A</code> (without knowing anything about each other). Then the class <code class="language-plaintext highlighter-rouge">D</code> inherits from both of these classes.</p><p>The problem in this situation is that if <code class="language-plaintext highlighter-rouge">A</code> consists of some field (e.g., <code class="language-plaintext highlighter-rouge">int x</code>), then both <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code> will inherit this field. This, in itself, is not problematic (after all, inheritance works this way!).</p><p>The problem arises because now the class <code class="language-plaintext highlighter-rouge">D</code>, inheriting from both <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code>, will inherit <code class="language-plaintext highlighter-rouge">int x</code> from both <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code> <strong>separately</strong>. This means that <code class="language-plaintext highlighter-rouge">D</code> consists not of one, but of two <code class="language-plaintext highlighter-rouge">int</code>s!</p><p>This problem can be observed using the <code class="language-plaintext highlighter-rouge">sizeof()</code> operator, which returns information about the number of bytes occupied by a given type or object. Like so:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">B</span> <span class="o">:</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="nc">C</span> <span class="o">:</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">D</span> <span class="o">:</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of A is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">A</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of B is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">B</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of C is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">C</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of D is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">D</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>Size of A is 4 bytes
+Size of B is 4 bytes
+Size of C is 4 bytes
+Size of D is 8 bytes
+</pre></table></code></div></div><p>Of course, this problem can be fixed. It’s enough to mark <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code> as virtually inheriting from <code class="language-plaintext highlighter-rouge">A</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">B</span> <span class="o">:</span> <span class="k">virtual</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>   <span class="c1">// virtual inheritance</span>
+<span class="k">struct</span> <span class="nc">C</span> <span class="o">:</span> <span class="k">virtual</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>   <span class="c1">// virtual inheritance</span>
+
+<span class="k">struct</span> <span class="nc">D</span> <span class="o">:</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of A is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">A</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of B is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">B</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of C is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">C</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of D is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">D</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>Size of A is 4 bytes
+Size of B is 16 bytes
+Size of C is 16 bytes
+Size of D is 24 bytes
+</pre></table></code></div></div><p>Of course, this has its pros and cons. The advantage is that <code class="language-plaintext highlighter-rouge">D</code> is now not of size <code class="language-plaintext highlighter-rouge">sizeof(B) + sizeof(C)</code>. It’s slightly smaller. However, <code class="language-plaintext highlighter-rouge">sizeof(B)</code> and <code class="language-plaintext highlighter-rouge">sizeof(C)</code> have increased significantly.</p><p>The difference and potential growth in class size may not be obvious, based on the example above, so it’s worth changing <code class="language-plaintext highlighter-rouge">sizeof(A)</code> from <code class="language-plaintext highlighter-rouge">4</code> to some larger value:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;array&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span>  <span class="c1">// sizeof(arr) == 40</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">B</span> <span class="o">:</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>
+<span class="k">struct</span> <span class="nc">C</span> <span class="o">:</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">D</span> <span class="o">:</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of A is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">A</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of B is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">B</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of C is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">C</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of D is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">D</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>Size of A is 40 bytes
+Size of B is 40 bytes
+Size of C is 40 bytes
+Size of D is 80 bytes
+</pre></table></code></div></div><p>And now let’s apply virtual inheritance again:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;array&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">A</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;</span> <span class="n">arr</span><span class="p">;</span>  <span class="c1">// sizeof(arr) == 40</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">B</span> <span class="o">:</span> <span class="k">virtual</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>   <span class="c1">// virtual inheritance</span>
+<span class="k">struct</span> <span class="nc">C</span> <span class="o">:</span> <span class="k">virtual</span> <span class="n">A</span> <span class="p">{</span> <span class="p">};</span>   <span class="c1">// virtual inheritance</span>
+
+<span class="k">struct</span> <span class="nc">D</span> <span class="o">:</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of A is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">A</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of B is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">B</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of C is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">C</span><span class="p">));</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Size of D is {} bytes"</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">D</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>Size of A is 40 bytes
+Size of B is 48 bytes
+Size of C is 48 bytes
+Size of D is 56 bytes
+</pre></table></code></div></div><p>Additionally, it’s worth noting that when creating <code class="language-plaintext highlighter-rouge">B</code> and <code class="language-plaintext highlighter-rouge">C</code>, we don’t know if someone will want to inherit from both of these classes at the same time, so we don’t know if we should use virtual inheritance. As seen, it’s not free. The general consensus is not to use it.</p><h2 id="the-override-keyword"><span class="me-2">The <code>override</code> Keyword</span><a href="#the-override-keyword" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>In Java, we used the <code class="language-plaintext highlighter-rouge">@Override</code> annotation to instruct the compiler to check if we correctly override a method. This annotation was placed above the method in the derived (inheriting) class, causing the compiler to look at its signature and compare it with methods from the base class. If there was a method in the base class with a compatible signature that could be overridden (not <code class="language-plaintext highlighter-rouge">final</code>), the compilation proceeded to the next stages. However, if there wasn’t, the compilation stopped and returned an error.</p><p>In C++, we don’t have annotations. Instead, we have the <code class="language-plaintext highlighter-rouge">override</code> specifier, which we can place right before the method body. Its effect will be identical to what we expect when using the <code class="language-plaintext highlighter-rouge">@Override</code> annotation in Java. For example, considering the known hierarchy of animals:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>We can enrich the overridden methods in <code class="language-plaintext highlighter-rouge">Cat</code> and <code class="language-plaintext highlighter-rouge">Dog</code> with the <code class="language-plaintext highlighter-rouge">override</code> specifier:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>This achieves two goals:</p><ol><li>The compiler will assist us in situations where we make a typo. It will also help us detect errors if we change the name of a method in the base class and forget to change those names in the derived classes.<li>It’s immediately visible that a given method is part of a polymorphic hierarchy of overridden functionalities. We could achieve the same result by repeating the word <code class="language-plaintext highlighter-rouge">virtual</code> before each of these methods, but this is not a common practice. Instead, <code class="language-plaintext highlighter-rouge">override</code> is much more commonly used.</ol><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:more-on-that"><p>In reality, you can also inherit in a protected manner (<code class="language-plaintext highlighter-rouge">protected</code>). Additionally, each of these types of inheritance can be enriched with the <code class="language-plaintext highlighter-rouge">virtual</code> keyword, representing <em>virtual inheritance</em>, which is mentioned in this subtext. However, because these inheritances are extremely rare, they have been described very sparingly in this chapter. <a href="#fnref:more-on-that" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="/~fk/en/lectures/chapter-9-2-polymorphism/" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 9.2 - Polymorphism</p></a> <a href="/~fk/en/lectures/chapter-10-1-the-problem-with-polymorphic-container/" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 10.1 - The problem with polymorphic container</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js,npm/mermaid@10.9.0/dist/mermaid.min.js"></script> <script defer src="/~fk/assets/js/dist/post.min.js"></script> <script defer src="/~fk/app.js"></script> <script type="text/javascript"> (function () { function updateMermaid(event) { if (event.source === window && event.data && event.data.direction === ModeToggle.ID) { const mode = event.data.message; if (typeof mermaid === 'undefined') { return; } let expectedTheme = mode === ModeToggle.DARK_MODE ? 'dark' : 'default'; let config = { theme: expectedTheme }; /* Re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $('.mermaid').each(function () { let svgCode = $(this).prev().children().html(); $(this).removeAttr('data-processed'); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, '.mermaid'); } } let initTheme = 'default'; const html = document.documentElement; if ( (html.hasAttribute('data-mode') && html.getAttribute('data-mode') === 'dark') || (!html.hasAttribute('data-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches) ) { initTheme = 'dark'; } let mermaidConf = { theme: initTheme /* <default|dark|forest|neutral> */ }; /* Create mermaid tag */ document.querySelectorAll('pre>code.language-mermaid').forEach((elem) => { const svgCode = elem.textContent; const backup = elem.parentElement; backup.classList.add('unloaded'); /* create mermaid node */ let mermaid = document.createElement('pre'); mermaid.classList.add('mermaid'); const text = document.createTextNode(svgCode); mermaid.appendChild(text); backup.after(mermaid); }); mermaid.initialize(mermaidConf); window.addEventListener('message', updateMermaid); })(); </script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>
