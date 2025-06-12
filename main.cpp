@@ -2445,7 +2445,6 @@ auto main() -> int {
             break; // Child exits the switch.
             default: // Parent process (pid > 0)
                 std::cout << "Diagnostic message 3" << std::endl;
-            
             // fork();
             // result = execlp("cat", "cat", "/proc/cpuinfo", NULL); // Parent attempts to execute 'cat'
             // std::cerr << "Error in execlp" << std::endl; // Only printed if execlp fails
