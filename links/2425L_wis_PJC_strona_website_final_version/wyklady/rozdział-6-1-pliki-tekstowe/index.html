@@ -1,0 +1,511 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 6.1 - Pliki tekstowe" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-6-1-pliki-tekstowe/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-04-07T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 6.1 - Pliki tekstowe" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-07T00:00:00+02:00","datePublished":"2025-04-07T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 6.1 - Pliki tekstowe","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-6-1-pliki-tekstowe/"},"url":"/~fk/wyklady/rozdzia%C5%82-6-1-pliki-tekstowe/"}</script><title>Rozdział 6.1 - Pliki tekstowe | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en/lectures/chapter-6-1-text-files/index.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 6.1 - Pliki tekstowe</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 6.1 - Pliki tekstowe</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1743976800" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Apr 7, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2264 słów" > <em>12 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="klasa-stdfstream"><span class="me-2">Klasa <code>std::fstream</code></span><a href="index.html#klasa-stdfstream" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>W języku C++ standardowym sposobem na interakcję z plikami jest wykorzystywanie klasy <code class="language-plaintext highlighter-rouge">std::fstream</code>. Pozwala ona na czytanie i zapisywanie do pliku tekstowego oraz binarnego. Na ten moment skoncentrujemy się wyłącznie na plikach tekstowych.</p><blockquote class="prompt-info"><p>Aby czytać z lub zapisywać do pliku tekstowego, należy stworzyć obiekty klasy <code class="language-plaintext highlighter-rouge">std::fstream</code> i przekazać mu odpowiednią ścieżkę.</p></blockquote><p>Obiekty tej klasy pozwalają na swojego rodzaju “połączenie” z plikiem. Przykładowo, jeżeli obok pliku wykonywalnego aplikacji będziemy mieli plik <code class="language-plaintext highlighter-rouge">data.txt</code>, to stworzenie obiektu <code class="language-plaintext highlighter-rouge">std::fstream</code>, który się z nim połączy, może wyglądać następująco:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="c1">  // std::fstream</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Przejdźmy teraz do wczytywania z i zapisu do takiego pliku.</p><h3 id="czytanie-słów-z-pliku"><span class="me-2">Czytanie słów z pliku</span><a href="index.html#czytanie-słów-z-pliku" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Aby wczytać dane z pliku, należy mieć je gdzieś zapisać. Dane zapisujemy w obiektach, które zwykle są reprezentowane jako zmienne (lub jako część jakiejś kolekcji).</p><p>Z pliku tekstowego zawsze da się wczytać <code class="language-plaintext highlighter-rouge">std::string</code> — w końcu pliki tekstowe to nic innego jak jeden wielki zbitek tekstu. Oczywiście ignorujemy tutaj przypadki, gdy plik jest uszkodzony lub pusty.</p><p>Aby wczytać <code class="language-plaintext highlighter-rouge">std::string</code> z pliku należy wpierw stworzyć odpowiednią zmienną, a później skorzystać z tych samych operacji, co w przypadku input-output streamów, czyli <code class="language-plaintext highlighter-rouge">&lt;&lt;</code> oraz <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>. W tym przypadku interesuje nas <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+    <span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">;</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Zakładając, że plik <code class="language-plaintext highlighter-rouge">data.txt</code> wygląda następująco:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello!
+</pre></table></code></div></div><p>To powyższy kod wyświetli następujący output:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello!
+</pre></table></code></div></div><p>Nic dziwnego — w pliku znajduje się pojedynczy fragment tekstu, który wczytaliśmy przy pomocy operacji <code class="language-plaintext highlighter-rouge">file &gt;&gt; word</code> (zupełnie jakbyśmy czytali z <code class="language-plaintext highlighter-rouge">std::cin</code>), a następnie go wyświetliliśmy.</p><p>Co jednak w przypadku, gdy w pliku jest wiele słów? Czy taka operacja wczyta cały plik? Sprawdźmy:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+    <span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">;</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello World!
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello
+</pre></table></code></div></div><p>Jak widać, wczytaliśmy tylko pierwsze słowo.</p><blockquote class="prompt-info"><p>Przez <em>słowo</em> rozumiemy dowolny ciąg niebiałych znaków oddzielonych białymi znakami i / lub początkiem / końcem pliku.</p></blockquote><p>Aby wczytać drugie słowo, wystarczy powtórzyć operację czytania. Zakładając taką samą zawartość pliku tekstowego co wcześniej, następujący kod:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+    <span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">;</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">;</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Wyświetli następujący output:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>Hello
+World!
+</pre></table></code></div></div><p>Jak widać, każda kolejna operacja <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> wczytuje każde kolejne słowo. Popularnym pytaniem w takich przypadkach jest:</p><blockquote><p>Skąd <code class="language-plaintext highlighter-rouge">file</code> wie, że akurat to wywołanie <code class="language-plaintext highlighter-rouge">&gt;&gt;</code> powinno wczytać dane (kolejne) słowo?</p></blockquote><p>Obiekty typu <code class="language-plaintext highlighter-rouge">std::fstream</code> “pamiętają”, gdzie skończyły ostatnią operację. W środku obiektu <code class="language-plaintext highlighter-rouge">file</code> przechowywana jest informacja, gdzie poprzednie operacje (w tym przypadku pierwszy <code class="language-plaintext highlighter-rouge">file &gt;&gt; word</code>) zakończyły swe działanie.</p><p>Wiemy już, jak wczytać jeden lub dwa słowa. Jak zatem wczytać 10 słów?</p><p>Można użyć pętli:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>one two three
+four five six
+seven eight nine
+ten
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">;</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>1 one
+2 two
+3 three
+4 four
+5 five
+6 six
+7 seven
+8 eight
+9 nine
+10 ten
+</pre></table></code></div></div><p>Warto zauważyć, że niezależnie od tego, czy biały znak oddzielający słowa to spacja, czy znak nowej linii (czy znak tabulacji, który nie został tutaj zaprezentowany), to <code class="language-plaintext highlighter-rouge">std::fstream</code> poprawnie rozumie go jako element rozdzielający słowa.</p><blockquote><p>W porządku, ale co gdy nie wiemy, ile jest słów w pliku?</p></blockquote><p>Bardzo dobre pytanie. Wtedy też możemy użyć pętli, ale ze zmodyfikowanym warunkiem. Zamiast iterować konkretną liczbę razy, chcemy iterować, <em>dopóki z danego pliku da się wczytać słowo</em>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>one
+two
+three
+four
+five
+six
+seven
+eight
+nine
+ten
+</pre></table></code></div></div><p>Najistotniejszym elementem tego kodu jest umieszczenie operacji wczytywania w warunku pętli. <code class="language-plaintext highlighter-rouge">file &gt;&gt; word</code> <em>spróbuje</em> wczytać słowo. Gdy się to uda, <code class="language-plaintext highlighter-rouge">file</code> będzie zadowolony. Jeżeli nie (bo np. już wszystkie słowa zostały wczytane), <code class="language-plaintext highlighter-rouge">file</code> to zapamięta i będzie informowało, że nie można z niego nic więcej wyczytać.</p><p>Operacja <code class="language-plaintext highlighter-rouge">file &gt;&gt; word</code> formalnie zwraca referencję do lewego argumentu. Stąd widać, że po wykonaniu operacji czytania (<code class="language-plaintext highlighter-rouge">&gt;&gt;</code>), pętla <code class="language-plaintext highlighter-rouge">while ()</code> otrzymuje w warunku referencję do <code class="language-plaintext highlighter-rouge">file</code>. Gdy obiekt typu <code class="language-plaintext highlighter-rouge">std::fstream</code> zostanie użyty w kontekście, gdzie oczekujemy wartości logicznej <code class="language-plaintext highlighter-rouge">bool</code>, to wygeneruje wartość <code class="language-plaintext highlighter-rouge">true</code>, jeżeli wszystko jest w porządku (ostatnia operacja (np. wczytanie słowa) się powiodła). Jeżeli jednak coś poszło nie tak (np. ostatnia operacja (np. wczytanie słowa) nic nie wczytało, bo, przykładowo, nie ma już kolejnych słów w pliku), to wygeneruje wartość <code class="language-plaintext highlighter-rouge">false</code>.</p><p>Powyższy akapit jest formalnym i nieco skomplikowanym wyjaśnieniem następującego uproszczenia:</p><blockquote class="prompt-tip"><p><code class="language-plaintext highlighter-rouge">while (file &gt;&gt; word) { }</code> oznacza <em>wykonuj ciało pętli, dopóki z <code class="language-plaintext highlighter-rouge">file</code> da się wczytać <code class="language-plaintext highlighter-rouge">word</code></em>.</p></blockquote><p>Warto zwrócić uwagę, że gdy zastąpimy <code class="language-plaintext highlighter-rouge">file</code> obiektem <code class="language-plaintext highlighter-rouge">std::cin</code>, to będziemy wczytywać słowa od użytkownika aż do momentu, gdy nie wprowadzi znaku końca pliku.</p><h3 id="wczytywanie-linii-z-pliku"><span class="me-2">Wczytywanie linii z pliku</span><a href="index.html#wczytywanie-linii-z-pliku" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Czytanie słowo po słowie to jedno, a co z czytaniem całych linii?</p><p>Moglibyśmy chcieć wczytać całą linię w celu zachowania formatowania. Przykładowo, jeżeli plik wygląda tak:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>lots       of   spaces
+</pre></table></code></div></div><p>I wczytamy go w następujący sposób:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">word</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">file</span> <span class="o">&gt;&gt;</span> <span class="n">word</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">word</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>To wynikiem będzie:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>lots
+of
+spaces
+</pre></table></code></div></div><p>Nawet jeżeli zamiast <code class="language-plaintext highlighter-rouge">fmt::println()</code> użyjemy <code class="language-plaintext highlighter-rouge">fmt::print()</code>, to białe znaki oddzielające słowa z pliku zostaną pominięte.</p><p>Wczytując od razu całą linię, zachowamy pełne formatowanie. Do wczytania linii używamy <code class="language-plaintext highlighter-rouge">std::getline()</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">line</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>lots       of   spaces
+</pre></table></code></div></div><p>Funkcja <code class="language-plaintext highlighter-rouge">std::getline()</code> jako pierwszy argument pobiera źródło (strumień), z którego ma wczytać linię, a jako drugi argument pobiera <code class="language-plaintext highlighter-rouge">std::string</code>, do którego ma tę linię zapisać.</p><p>Podobnie jak <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>, <code class="language-plaintext highlighter-rouge">std::getline()</code> zwraca referencję do strumienia-źródła, więc można jej użyć w warunku pętli:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>first line
+second line
+third line
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">line</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">getline</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">line</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>first line
+second line
+third line
+</pre></table></code></div></div><p>Taka pętla pozwala nam wyświetlić całą zawartość pliku.</p><h2 id="zapis-tekstu-do-pliku"><span class="me-2">Zapis tekstu do pliku</span><a href="index.html#zapis-tekstu-do-pliku" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Czytanie zawartości pliku tekstowego niewątpliwie przypomina czytanie danych od użytkownika. W obydwu przypadkach używamy operatora <code class="language-plaintext highlighter-rouge">&gt;&gt;</code>. Taką samą analogię możemy zastosować przy zapisywaniu tekstu do pliku oraz wyświetlaniu (przy pomocy <code class="language-plaintext highlighter-rouge">std::cout &lt;&lt;</code>).</p><p>Poniższy kod, zamiast czytać z pliku, zapisze do niego kilka słów. Wpierw załóżmy, że plik jest pusty:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+    <span class="n">file</span> <span class="o">&lt;&lt;</span> <span class="s">"Hello There!"</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello There!
+</pre></table></code></div></div><p>Podobnie jak w przypadku <code class="language-plaintext highlighter-rouge">std::cout</code>, możemy zapisywać do pliku nie tylko literały, ale też i całe obiekty:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">first</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">second</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"There!"</span><span class="p">);</span>
+
+    <span class="n">file</span> <span class="o">&lt;&lt;</span> <span class="n">first</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span> <span class="o">&lt;&lt;</span> <span class="n">second</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello There!
+</pre></table></code></div></div><p>Ponownie, tak samo, jak w przypadku <code class="language-plaintext highlighter-rouge">std::cout</code>, używanie strumieni do zapisu do pliku może być nieco męczące. Przykładowo, chcąc zapisać stan wektora do pliku, poniższy kod nie przejdzie pomyślnie procesu kompilacji:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">file</span> <span class="o">&lt;&lt;</span> <span class="n">numbers</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>main.cpp:11:10: error: no match for 'operator&lt;&lt;' (operand types are 'std::basic_fstream&lt;char&gt;' and 'std::vector&lt;int&gt;')
+   11 |     file &lt;&lt; numbers;
+      |     ~~~~ ^~ ~~~~~~~
+      |     |       |
+      |     |       std::vector&lt;int&gt;
+      |     std::basic_fstream&lt;char&gt;
+</pre></table></code></div></div><p><sup id="fnref:fstream-to-basic-fstream"><a href="index.html#fn:fstream-to-basic-fstream" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p><p>Nie trzeba się jednak tym martwić. Rozwiążemy ten problem w identyczny sposób, jak to zrobiliśmy z <code class="language-plaintext highlighter-rouge">std::cout</code> — użyjemy {fmt}.</p><h3 id="użycie-fmt-wraz-z-stdfstream"><span class="me-2">Użycie {fmt} wraz z <code>std::fstream</code></span><a href="index.html#użycie-fmt-wraz-z-stdfstream" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Wyświetlenie wektora na standardowe wyjście z użyciem {fmt} jest bardzo proste:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">});</span>
+</pre></table></code></div></div><p>Zapisanie tekstowej reprezentacji takiego samego wektora (czyli tego, co by wyświetliła powyższa instrukcja, tj. <raw-data>[1, 2, 3]</raw-data>) do pliku, z którym jesteśmy połączeni dzięki <code class="language-plaintext highlighter-rouge">std::fstream</code>, jest praktycznie tak samo proste:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">});</span>
+</pre></table></code></div></div><p>Jak widać, wystarczy sprecyzować dodatkowy argument na samym początku — reprezentuje on strumień wyjścia, do którego {fmt} ma wysłać sformatowany tekst.</p><p>Pełen listing może wyglądać tak:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ostream.h&gt;</span><span class="c1">    // fmt::print() for std::fstream</span><span class="cp">
+#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="c1">     // formatting ranges</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="n">numbers</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Poskutkuje on zapisaniem pliku w następującym stanie:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>[1, 2, 3]
+
+</pre></table></code></div></div><p>Warto zwrócić uwagę na dwa istotne fakty:</p><ol><li>Na końcu pliku znajduje się pusta linia. To dlatego, że <code class="language-plaintext highlighter-rouge">fmt::println()</code> zapisał <raw-data>[1, 2, 3]</raw-data> do pliku, a następnie “dodał” znak nowej linii. Pojawiła się linia nr 2, która jest pusta.<li>W żadnym z listingów przedstawionych w tym rozdziale nie zamknęliśmy pliku. To dlatego, że o ile <code class="language-plaintext highlighter-rouge">std::fstream</code> oferuje metodę <code class="language-plaintext highlighter-rouge">.close()</code>, to nie trzeba jej używać, chyba że z jakiegoś powodu chcemy zamknąć plik wcześniej niż moment, gdy obiekt zakończy swoje życie. Dzieje się tak dzięki destruktorom, które będą omówione w dalszej części przedmiotu. Na ten moment wystarczy zapamiętać, że nie trzeba ręcznie zamykać plików w C++.</ol><blockquote class="prompt-info"><p>Nie powinniśmy ręcznie zamykać plików (obiektów typu <code class="language-plaintext highlighter-rouge">std::fstream</code>) w C++, chyba że mamy bardzo dobry powód, żeby to zrobić (np. chęć użycia tego samego obiektu do otworzenia innego pliku).</p></blockquote><p>Kolejnym tematem, który należy omówić, jest wielokrotne <strong>zapisywanie</strong> do pliku. Rozumiemy przez to odwrotną sytuację niż ta, w której czytaliśmy z pliku kilka razy. W tym drugim przypadku <code class="language-plaintext highlighter-rouge">std::fstream</code> “zapamiętywał”, gdzie skończyliśmy czytać. Jak to wygląda w kwestii zapisywania do pliku? Przyjrzyjmy się kilku przykładom.</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ostream.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"There"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello There
+</pre></table></code></div></div><p>Nie ma w tym przykładzie nic nadzwyczajnego — dwukrotne wywołanie <code class="language-plaintext highlighter-rouge">fmt::print()</code> sprawia, że do pliku zapisują się dwa fragmenty tekstu.</p><p>Należy jednak zwrócić uwagę, że <strong>plik był pierwotnie pusty</strong>. Załóżmy teraz, że przed wykonaniem naszego programu, w pliku coś się znajduje, np.:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>There is text in this file.
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ostream.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"There"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Co się stanie, gdy uruchomimy taki kod?</p><p>Zaskakująco, plik będzie wyglądał tak:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello Therext in this file.
+</pre></table></code></div></div><p>Zapisany tekst <raw-data>Hello There</raw-data> zastąpił pierwsze znaki w pliku. Najpewniej spodziewaliśmy się czegoś innego, jak choćby:</p><ul><li>Dopisania tekstu na koniec pliku.<li>Zastąpienia całej zawartości pliku nowym tekstem, tj. wyczyszczenie jego zawartości i zaczęcie zapisywania elementów poprzez <code class="language-plaintext highlighter-rouge">fmt::print()</code>.</ul><p>Ale tak nie było. Domyślnie, <code class="language-plaintext highlighter-rouge">std::fstream</code> zaczyna odczytywanie i zapisywanie w tym samym miejscu — na początku pliku.</p><p>Możemy to zmienić za pomocą sprecyzowania innych argumentów konstruktora. Precyzuje się je przy pomocy wartości <code class="language-plaintext highlighter-rouge">std::ios::openmode</code></p><h3 id="flagi-stdiosopenmode"><span class="me-2">Flagi <code>std::ios::openmode</code></span><a href="index.html#flagi-stdiosopenmode" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Gdy stworzymy obiekt <code class="language-plaintext highlighter-rouge">std::fstream</code> w następujący sposób:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">);</span>
+</pre></table></code></div></div><p>To jest to jednoznaczne ze stworzeniem go w taki sposób:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">in</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="p">);</span>
+</pre></table></code></div></div><p>To dlatego, że konstruktor <code class="language-plaintext highlighter-rouge">std::fstream</code> korzysta z <em>domyślnego argumentu</em> wyglądającego tak, jak zaprezentowano wyżej.</p><p><code class="language-plaintext highlighter-rouge">std::ios::in</code> oraz <code class="language-plaintext highlighter-rouge">std::ios::out</code> mówią same za siebie — pierwszy reprezentuje sposób działania wspierający czytanie z pliku (<code class="language-plaintext highlighter-rouge">in</code>put), a drugi zapisywanie do pliku (<code class="language-plaintext highlighter-rouge">out</code>put). Łącząc je przy pomocy bitowej alternatywy (czyli swojego rodzaju konkatenacji flag bitowych — <code class="language-plaintext highlighter-rouge">|</code>) otrzymujemy obiekt, który pozwala na jednoczesne czytanie oraz zapisywanie.</p><p>Aby osiągnąć dowolne z alternatywnych zachowań zapisywania do pliku, które zostały wspomniane wyżej, wystarczy podać odpowiednią kombinację flag:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>There is text in this file.
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ostream.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">trunc</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"There"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello There
+</pre></table></code></div></div><p>Jak widać, połączenie <code class="language-plaintext highlighter-rouge">std::ios::out</code> oraz <code class="language-plaintext highlighter-rouge">std::ios::trunc</code> pozwoliło na usunięcie pierwotnej zawartości pliku i zastąpienie jej tym, co w ramach działania programu zostało do pliku wysłane.</p><p>Innym przykładem będzie użycie połączenia <code class="language-plaintext highlighter-rouge">std::ios::out</code> oraz <code class="language-plaintext highlighter-rouge">std::ios::app</code>. Pozwoli to na dopisanie elementów do końca pliku:</p><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>There is text in this file.
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fstream&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ostream.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">file</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">fstream</span><span class="p">(</span><span class="s">"data.txt"</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">out</span> <span class="o">|</span> <span class="n">std</span><span class="o">::</span><span class="n">ios</span><span class="o">::</span><span class="n">app</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"Hello "</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s">"{}"</span><span class="p">,</span> <span class="s">"There"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="data.txt" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="data.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>There is text in this file.Hello There
+</pre></table></code></div></div><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:fstream-to-basic-fstream"><p><code class="language-plaintext highlighter-rouge">std::fstream</code> to alias typu <code class="language-plaintext highlighter-rouge">std::basic_fstream&lt;char&gt;</code>. Tak samo jak <code class="language-plaintext highlighter-rouge">std::string</code> to <code class="language-plaintext highlighter-rouge">std::basic_string&lt;char&gt;</code>. Czemu? Bo to “generyczne rozwiązania”. Można tworzyć łańcuchy znaków operujące na innych typach zamiast <code class="language-plaintext highlighter-rouge">char</code>. To samo się tyczy obiektów łączących się z plikami. W ramach PJC nas to jednak <strong>nie interesuje</strong>. <a href="index.html#fnref:fstream-to-basic-fstream" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-5-5-podsumowanie-i-dodatki/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 5.5 - Podsumowanie i dodatki</p></a> <a href="../rozdział-6-2-system-plików/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Rozdział 6.2 - System plików</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script defer src="../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-6-1-pliki-tekstowe/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

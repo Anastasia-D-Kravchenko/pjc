@@ -1,0 +1,525 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 12 - Wyjątki" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-12-1-wyj%C4%85tki/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-05-20T07:24:39+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 12 - Wyjątki" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-20T07:24:39+02:00","datePublished":"2025-05-20T07:24:39+02:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 12 - Wyjątki","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-12-1-wyj%C4%85tki/"},"url":"/~fk/wyklady/rozdzia%C5%82-12-1-wyj%C4%85tki/"}</script><title>Rozdział 12 - Wyjątki | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 12 - Wyjątki</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 12 - Wyjątki</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1747718679" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > May 20, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1589 słów" > <em>8 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="wyjątki"><span class="me-2">Wyjątki</span><a href="index.html#wyjątki" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>W kwestii wyjątków w C++ jest dobra i zła wiadomość:</p><blockquote class="prompt-info"><p>Dobra wiadomość jest taka, że używanie ich w “klasyczny i poprawny sposób” jest jeszcze prostsze niż korzystanie z wyjątków w Javie.</p></blockquote><blockquote class="prompt-info"><p>Zła wiadomość jest taka, że tak naprawdę są dużo bardziej skomplikowane — zwłaszcza w kwestii szczegółów.</p></blockquote><p>Na szczęście w 99% przypadków możemy kompletnie zignorować te szczegóły. Przyjrzyjmy się zatem najprostszemu przykładowi użycia wyjątków w C++:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="c1">    // std::exception</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"before `throw`"</span><span class="p">);</span>
+
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="p">();</span>
+
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"after `throw`"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Exception! Message: {}"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>before `throw`
+Exception! Message: std::exception
+</pre></table></code></div></div><p>Wszystko wygląda znajomo — jest <code class="language-plaintext highlighter-rouge">try</code>, jest <code class="language-plaintext highlighter-rouge">throw</code> jest <code class="language-plaintext highlighter-rouge">catch</code>, a kod po <code class="language-plaintext highlighter-rouge">throw</code> się nie wykonuje. Nie ma <code class="language-plaintext highlighter-rouge">.printStackTrace()</code> ani <code class="language-plaintext highlighter-rouge">.getMessage()</code>, ale ta druga metoda jest zastąpiona metodą <code class="language-plaintext highlighter-rouge">.what()</code>, która — jak sama nazwa wskazuje — zwraca informację o tym, <em>co</em> się stało. Wszystko jasne!</p><p>I takie właśnie są realia — nie ma jakiś ukrytych problemów z <em>klasycznym</em> używaniem wyjątków, a to właśnie w taki <em>klasyczny</em> sposób powinniśmy ich używać. Oczywiście dowiemy się później, co oznacza <em>nieklasyczne</em> korzystanie z wyjątków, ale to potem. Teraz spójrzmy na kilka większych przykładów, które odświeżą i utrwalą naszą wiedzę o wyjątkach.</p><h3 id="własne-wiadomości"><span class="me-2">Własne wiadomości</span><a href="index.html#własne-wiadomości" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Na pierwszy ogień idzie tworzenie wyjątku z własną wiadomością. W takim przypadku należy skorzystać z <code class="language-plaintext highlighter-rouge">std::logic_error</code>, które bezpośrednio dziedziczy po <code class="language-plaintext highlighter-rouge">std::exception</code>. To dlatego, że <code class="language-plaintext highlighter-rouge">std::exception</code> jest na tyle “bazowym” typem, że nawet nie ma konstruktora akceptującego jakikolwiek tekst!</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="c1">    // std::exception</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="c1">    // std::logic_error</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"before `throw`"</span><span class="p">);</span>
+
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">logic_error</span><span class="p">(</span>
+            <span class="s">"You can catch exceptions in a polymorphic manner"</span>
+        <span class="p">);</span>
+
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"after `throw`"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Exception! Message: {}"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>before `throw`
+Exception! Message: You can catch exceptions in a polymorphic manner
+</pre></table></code></div></div><p>Jak sam przykład wskazuje, gdy podnosimy wyjątek typu <code class="language-plaintext highlighter-rouge">T</code>, to możemy użyć typu <code class="language-plaintext highlighter-rouge">U</code> do złapania go, o ile <code class="language-plaintext highlighter-rouge">U</code> jest klasą bazową dla <code class="language-plaintext highlighter-rouge">T</code>. Czyli — mówiąc w skrócie:</p><blockquote class="prompt-info"><p>Wyjątki można łapać polimorficznie.</p></blockquote><p>Warto też zwrócić uwagę, że łapiemy wyjątki poprzez stałą referencję (<code class="language-plaintext highlighter-rouge">const&amp;</code>). Nie ma powodu, aby kopiować wyjątki przy ich łapaniu.</p><h3 id="wychodzenie-z-dowolnie-zagnieżdżonego-stosu-wywołań"><span class="me-2">Wychodzenie z dowolnie zagnieżdżonego stosu wywołań</span><a href="index.html#wychodzenie-z-dowolnie-zagnieżdżonego-stosu-wywołań" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Gdy funkcja wywołuje funkcję, a tamta z kolei wywołuje kolejną, gdzie tamta kolejna wywołuje jeszcze jedną (itd.), mówimy o <em>stosie wywołań funkcji</em>. Co to ma do wyjątków? Otóż:</p><blockquote class="prompt-info"><p>Wyjątki pozwalają na wychodzenie z dowolnie zagnieżdżonego stosu wywołań.</p></blockquote><p>Spójrzmy na przykład:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">thisFunctionThrows</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"we will throw"</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">logic_error</span><span class="p">(</span><span class="s">"From nested call stack"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"we threw"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">delegate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"delegate begin"</span><span class="p">);</span>
+    <span class="n">thisFunctionThrows</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"delegate end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">call</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call begin"</span><span class="p">);</span>
+    <span class="n">delegate</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"before `throw`"</span><span class="p">);</span>
+
+        <span class="n">call</span><span class="p">();</span>
+
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"after `throw`"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Exception! Message: {}"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>before `throw`
+call begin
+delegate begin
+we will throw
+Exception! Message: From nested call stack
+</pre></table></code></div></div><p>Można sobie uprościć, mówiąc, że <em>gdy podnosimy wyjątek, to “szuka” on najbliższego <code class="language-plaintext highlighter-rouge">catch</code>a</em>.</p><p>Warto na spokojnie przeanalizować sobie powyższy kod, a <em>najlepiej</em> byłoby przejść po nim debuggerem. Wtedy można bardzo łatwo zobaczyć, jak wygląda proces “wychodzenia” z zagnieżdżonego stosu wywołania.</p><h3 id="wyjątki-a-poprawna-obsługa-zasobów"><span class="me-2">Wyjątki a poprawna obsługa zasobów</span><a href="index.html#wyjątki-a-poprawna-obsługa-zasobów" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Szalenie ważnym elementem pracy z wyjątkami jest pewność, że zasoby, z których korzysta aplikacja, są poprawnie obsługiwane nawet w przypadku pojawienia się wyjątków.</p><h4 id="zasoby-z-automatycznym-czasem-życia"><span class="me-2">Zasoby z automatycznym czasem życia</span><a href="index.html#zasoby-z-automatycznym-czasem-życia" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4><p>Zobaczmy, co się dzieje z lokalnymi obiektami, gdy podnoszony jest wyjątek:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">();</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>
+</pre></table></code></div></div><p>Outputu brak, ale też brak jakichkolwiek błędów. Wygląda nieźle, choć dla pewności dodajmy do <code class="language-plaintext highlighter-rouge">Foo</code> konstruktor i destruktor, które będą coś wyświetlać:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"created"</span><span class="p">);</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">();</span>
+        <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>created
+destroyed
+</pre></table></code></div></div><p>Znowu wszystko wygląda okej. Zobaczmy, co się stanie, gdy rozszerzymy nasz przykład o znane już zagnieżdżone wywołania funkcji. Przy okazji dodajmy do <code class="language-plaintext highlighter-rouge">Foo</code> jakiś identyfikator, aby zobaczyć, kiedy które obiekty są niszczone:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+
+    <span class="n">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="o">:</span> <span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"created {}"</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"destroyed {}"</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">thisFunctionThrows</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">logic_error</span><span class="p">(</span><span class="s">"From nested call stack"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"we threw"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">delegate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">thisFunctionThrows</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"delegate end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">call</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">delegate</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">call</span><span class="p">();</span>
+
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"after `throw`"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Exception! Message: {}"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>created 0
+created 1
+created 2
+created 3
+destroyed 3
+destroyed 2
+destroyed 1
+destroyed 0
+Exception! Message: From nested call stack
+</pre></table></code></div></div><p>Jak można zauważyć, destruktory obiektów są poprawnie wywoływane, nawet jeśli stworzone obiekty są głęboko w stosie wywołania. Oznacza to, że wyjątki nie przeszkadzają nam w dowolnym korzystaniu z wygodnych narzędzi takich jak <code class="language-plaintext highlighter-rouge">std::vector</code> czy <code class="language-plaintext highlighter-rouge">std::fstream</code>! A to oczywiście dlatego, że klasy te dostarczają odpowiednio napisane destruktory.</p><h4 id="zasoby-z-dynamicznym-czasem-życia"><span class="me-2">Zasoby z dynamicznym czasem życia</span><a href="index.html#zasoby-z-dynamicznym-czasem-życia" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4><p>Niestety sytuacja już nie jest taka kolorowa, gdy zarządzamy zasobami <em>ręcznie</em>. Spójrzmy na identyczny przykład jak ten powyżej z jedną małą różnicą — zamiast tworzyć lokalne obiekty o automatycznym czasie życia, będziemy tworzyć wskaźniki do dynamicznie alokowanych obiektów:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+
+    <span class="n">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="o">:</span> <span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"created {}"</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"destroyed {}"</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">thisFunctionThrows</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">logic_error</span><span class="p">(</span><span class="s">"From nested call stack"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"we threw"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">delegate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">thisFunctionThrows</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"delegate end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">call</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">delegate</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">call</span><span class="p">();</span>
+
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"after `throw`"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Exception! Message: {}"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>created 0
+created 1
+created 2
+created 3
+Exception! Message: From nested call stack
+</pre></table></code></div></div><blockquote><p>No to jest przecież oczywiste, że nie ma żadnego <code class="language-plaintext highlighter-rouge">destroy N</code>, ponieważ nigdzie nie ma <code class="language-plaintext highlighter-rouge">delete</code>.</p></blockquote><p>To prawda, tylko problem w tym, że teraz trzeba odpowiedzieć sobie na trudne pytanie — <em>gdzie te <code class="language-plaintext highlighter-rouge">delete</code> umieszczać?</em></p><p>Najlepiej oczywiście przed <code class="language-plaintext highlighter-rouge">throw</code>, ale — przykładowo — przyglądając się implementacji <code class="language-plaintext highlighter-rouge">call()</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">call</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">delegate</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call end"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Oraz nie wiedząc, że <code class="language-plaintext highlighter-rouge">delegate()</code> może rzucić wyjątkiem (a może czasami nie rzuca?), raczej umieścilibyśmy <code class="language-plaintext highlighter-rouge">delete foo</code> na końcu funkcji, czyli tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">call</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Foo</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">delegate</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call end"</span><span class="p">);</span>
+    <span class="k">delete</span> <span class="n">foo</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>To oczywiście nie zadziała, ponieważ z <code class="language-plaintext highlighter-rouge">delegate()</code> “ucieknie” wyjątek i “wyjdzie” z <code class="language-plaintext highlighter-rouge">call()</code>, przez co <code class="language-plaintext highlighter-rouge">delete foo</code> się nigdy nie wywoła.</p><blockquote><p>Co robić?</p></blockquote><p>Wziąć pod uwagę fakt, że jedną z najważniejszych cech destruktorów, czyli:</p><blockquote class="prompt-info"><p>Destruktor obiektu o automatycznym czasie życia wykona się w momencie wychodzenia z bloku, w którym dany obiekt został stworzony.</p><p>Nieważne, czy wyszliśmy z bloku poprzez natrafienie na zamykającą go klamrę, czy poprzez <code class="language-plaintext highlighter-rouge">return</code>, czy poprzez <code class="language-plaintext highlighter-rouge">throw</code>.</p></blockquote><p>Cały problem znika, gdy zastąpimy surowy wskaźnik do dynamicznie alokowanych danych inteligentnym wskaźnikiem:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;exception&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Foo</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+
+    <span class="n">Foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">)</span> <span class="o">:</span> <span class="n">id</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"created {}"</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">Foo</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"destroyed {}"</span><span class="p">,</span> <span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">thisFunctionThrows</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">logic_error</span><span class="p">(</span><span class="s">"From nested call stack"</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"we threw"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">delegate</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+    <span class="n">thisFunctionThrows</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"delegate end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">call</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">delegate</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"call end"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">try</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">foo</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">call</span><span class="p">();</span>
+
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"after `throw`"</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">ex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Exception! Message: {}"</span><span class="p">,</span> <span class="n">ex</span><span class="p">.</span><span class="n">what</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre>created 0
+created 1
+created 2
+created 3
+destroyed 3
+destroyed 2
+destroyed 1
+destroyed 0
+Exception! Message: From nested call stack
+</pre></table></code></div></div><p>Jednoznacznie pokazuje to przewagę inteligentnych wskaźników nad surowymi w kwestii zarządzania dynamicznie alokowaną pamięcią. Destruktory zapewniają nam ogromne gwarancje bezpieczeństwa naszych aplikacji.</p><hr /></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-11-4-podsumowanie-i-dodatki/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 11.4 - Podsumowanie i dodatki</p></a> <a href="../uzupełniające-biblioteka-sfml/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Biblioteka SFML</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script defer src="../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-12-1-wyj%C4%85tki/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

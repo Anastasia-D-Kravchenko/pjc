@@ -1,0 +1,573 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 2.6 - Podsumowanie i dodatki" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-2-6-podsumowanie-i-dodatki/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-03-06T00:00:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 2.6 - Podsumowanie i dodatki" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-06T00:00:00+01:00","datePublished":"2025-03-06T00:00:00+01:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 2.6 - Podsumowanie i dodatki","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-2-6-podsumowanie-i-dodatki/"},"url":"/~fk/wyklady/rozdzia%C5%82-2-6-podsumowanie-i-dodatki/"}</script><title>Rozdział 2.6 - Podsumowanie i dodatki | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en/lectures/chapter-2-6-summary-and-extras/index.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 2.6 - Podsumowanie i dodatki</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 2.6 - Podsumowanie i dodatki</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1741215600" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Mar 6, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2945 słów" > <em>16 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="iterator-to-uniwersalna-abstrakcja-dostępu-do-danych"><span class="me-2">Iterator to uniwersalna abstrakcja dostępu do danych</span><a href="index.html#iterator-to-uniwersalna-abstrakcja-dostępu-do-danych" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>O ile tablice, wektory czy stringi oferują wygodny dostęp do przechowywanych elementów za pomocą indeksowania, <code class="language-plaintext highlighter-rouge">std::set</code> (oraz kilka innych kontenerów, zakresów czy innych abstrakcji danych) wymaga używania iteratorów. Są one uniwersalne.</p><p>Z tego powodu to właśnie z nich korzystają standardowe algorytmy.</p><p>Iteratory to swojego rodzaju “klej” między kontenerami (i nie tylko) a algorytmami.</p><h2 id="cmake-ułatwia-sterowanie-procesem-budowania-aplikacji-oraz-pozwala-na-wygodne-pobieranie-zewnętrznych-zależności"><span class="me-2">CMake ułatwia sterowanie procesem budowania aplikacji oraz pozwala na wygodne pobieranie zewnętrznych zależności</span><a href="index.html#cmake-ułatwia-sterowanie-procesem-budowania-aplikacji-oraz-pozwala-na-wygodne-pobieranie-zewnętrznych-zależności" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>CMake, który jest konfigurowany przez plik <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> przyspiesza i ułatwia konfigurację aplikacji C++owych.</p><h2 id="standardowe-algorytmy-operują-na-zakresach-prawostronnie-otwartych"><span class="me-2">Standardowe algorytmy operują na zakresach prawostronnie otwartych</span><a href="index.html#standardowe-algorytmy-operują-na-zakresach-prawostronnie-otwartych" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Z jednej strony jest to nieintuicyjna rzecz do zapamiętania, ale z drugiej strony pozwala to na szybkie identyfikowanie liczby elementów, z którymi pracujemy. Przykładowo:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+<span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">numbers</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span>
+</pre></table></code></div></div><p>Widząc <code class="language-plaintext highlighter-rouge">.begin()</code> i <code class="language-plaintext highlighter-rouge">.begin() + 3</code> od razu wiemy, że usuwane będą <code class="language-plaintext highlighter-rouge">3</code> elementy. Gdyby zakresy były zamknięte, to trzeba by w dziwnych miejscach dodawać <code class="language-plaintext highlighter-rouge">+ 1</code> lub <code class="language-plaintext highlighter-rouge">- 1</code>.</p><p>To trochę jak z pytaniem:</p><blockquote><p>Wyjeżdżam 24. dnia miesiąca i wracam 26. Na ile dni wyjeżdżam?</p></blockquote><p>Na 3 dni. Mimo że <code class="language-plaintext highlighter-rouge">26 - 24 == 2</code>, to trzeba “dodać 1”.</p><p>Niesie to za sobą jednak pewne dodatkowe konsekwencje. Mianowicie:</p><blockquote class="prompt-danger"><p>Każda dereferencja iteratora <code class="language-plaintext highlighter-rouge">.end()</code> dowolnego kontenera skutkuje Zachowaniem Niezdefiniowanym (UB).</p><p>Słowo “<em>każda</em>” ma tutaj duże znaczenie, ponieważ chodzi zarówno o taką bezpośrednią (np. <code class="language-plaintext highlighter-rouge">*someVector.end()</code>) jak i również pośrednią (np. <code class="language-plaintext highlighter-rouge">someVector.erase(someVector.end())</code><sup id="fnref:nie-insert"><a href="index.html#fn:nie-insert" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>) dereferencję.</p></blockquote><p>Podsumowując, algorytmy biorą pod uwagę elementy od pierwszego iteratora włącznie do ostatniego wyłącznie. W sytuacji, gdy te dwa iteratory wskazują to samo (np. wywołamy <code class="language-plaintext highlighter-rouge">std::ranges::sort(vec.begin(), vec.begin())</code>), to zakres jest uznawany jako “pusty”. Nie ma w nim elementów. <em>Niedotykanie ostatniego elementu</em> “wygrywa” z <em>braniem pod uwagę pierwszego elementu</em>.</p><h2 id="używaj-stdset-lub-stdrangesunique-do-pozbywania-się-duplikatów"><span class="me-2">Używaj <code>std::set</code> lub <code>std::ranges::unique()</code> do pozbywania się duplikatów</span><a href="index.html#używaj-stdset-lub-stdrangesunique-do-pozbywania-się-duplikatów" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Kontener <code class="language-plaintext highlighter-rouge">std::set</code>, przy próbie dodania do niego duplikatu, zwyczajnie nic nie zrobi. Dodatkowo przechowuje swoje elementy w kolejności rosnącej (a w przypadku liter czy słów — alfabetycznie (zwyczajnie zgodnie z operatorem <code class="language-plaintext highlighter-rouge">&lt;</code>)). Oznacza to, że jest idealnym kandydatem do przechowywania danych, gdy interesuje nas tylko ich występowalność (a nie krotność lub kolejność dodawania).</p><p>Gdy jednak mamy już do czynienia z innym kontenerem i to z niego chcemy usunąć duplikaty, <del>lepszym</del> wydajniejszym<sup id="fnref:premature-optimization"><a href="index.html#fn:premature-optimization" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> pomysłem może być skorzystanie z algorytmu <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code>, który — przy założeniu, że <em>identyczne elementy sąsiadują ze sobą</em>, przesunie wszystkie duplikaty na koniec precyzowanego zakresu. Potem wystarczy je wszystkie na raz usunąć.</p><h2 id="można-pomijać-nazwy-parametrów-w-deklaracji-i-czasem-w-definicji"><span class="me-2">Można pomijać nazwy parametrów w deklaracji (i czasem w definicji)</span><a href="index.html#można-pomijać-nazwy-parametrów-w-deklaracji-i-czasem-w-definicji" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Warto rozważać rozdzielanie deklaracji i definicji funkcji. Dzięki temu mamy większą kontrolę nad pozycją implementacji.</p><p>W związku z tym, że deklaracje mówią tylko <em>co</em>, a nie <em>jak</em>, to czasem pomija się w nich nazwy parametrów. Przykładowo:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">printNTimes</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">printNTimes</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">"Hello!"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">printNTimes</span><span class="p">(</span><span class="kt">int</span> <span class="n">count</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">message</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>Hello!
+Hello!
+Hello!
+</pre></table></code></div></div><p>Nazwę parametru można również pominąć w definicji, jeżeli nie planujemy z niego skorzystać.</p><blockquote><p>To po co taki parametr?</p></blockquote><p>:)<sup id="fnref:tag-dispatch"><a href="index.html#fn:tag-dispatch" class="footnote" rel="footnote" role="doc-noteref">3</a></sup></p><h2 id="warto-używać-referencji-do-przekazywania-dużych-typów-danych-których-nie-chcemy-kopiować"><span class="me-2">Warto używać referencji do przekazywania dużych typów danych, których nie chcemy kopiować</span><a href="index.html#warto-używać-referencji-do-przekazywania-dużych-typów-danych-których-nie-chcemy-kopiować" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Używanie referencji pozwala programiście na pracę na oryginalnym, przekazanym do funkcji obiekcie. Jeżeli programista chce zmodyfikować oryginał, to użycie referencji jest bardzo wygodnym sposobem do osiągnięcia tego celu.</p><p>Czasem jednak warto użyć referencji, nawet gdy nie chcemy nic modyfikować. Biorąc pod uwagę fakt, że <code class="language-plaintext highlighter-rouge">std::string</code> czy dowolny inny kontener może być bardzo duży (przechowywać bardzo dużo elementów), to skopiowanie go całego do funkcji tylko po to, żeby odczytać z niego kilka elementów, jest zwyczajnym marnowaniem zasobów komputera. Dlatego warto rozważyć używanie referencji nie tylko dlatego, aby umożliwić modyfikację oryginału, ale również dlatego, żeby zaznaczyć brak chęci skopiowania całego argumentu.</p><p>W przypadku bardzo małych danych (np. <code class="language-plaintext highlighter-rouge">int</code> czy <code class="language-plaintext highlighter-rouge">double</code>) taka “optymalizacja” nie jest jednak aplikowalna. Jeżeli chcemy przekazać do funkcji jakieś dane, które zajmują mało pamięci, to często opłaca się je po prostu skopiować, zamiast korzystać z referencji.</p><p>Na ten moment można posłużyć się uproszczonym drzewkiem decyzyjnym (które pod koniec tego podsumowania zostanie rozszerzone!):</p><pre><code class="language-mermaid">flowchart TD
+    A(Wybór typu&lt;br/&gt;parametru) --&gt; B{Czy chcę&lt;br/&gt;modyfikować&lt;br/&gt;oryginał?}
+    B --&gt;|Tak|C(Przez referencję)
+    B --&gt;|Nie|D{Czy kopiowanie&lt;br/&gt;argumentu będzie&lt;br/&gt;kosztowne?}
+    D --&gt;|Tak|E(Przez referencję)
+    D --&gt;|Nie|F(Przez wartość)
+</code></pre><p>Zaraz do tego dojdzie <code class="language-plaintext highlighter-rouge">const</code>, więc nie trzeba uczyć się tego drzewka na pamięć.</p><h2 id="dodawanie-biblioteki-fmt-dzięki-cmake"><span class="me-2">Dodawanie biblioteki {fmt} dzięki CMake</span><a href="index.html#dodawanie-biblioteki-fmt-dzięki-cmake" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Aby uprzyjemnić sobie życie w kontekście wyświetlania danych w programach C++owych, skorzystaliśmy z technologii CMake, aby pobrać bibliotekę {fmt}. Zobaczmy, jak to zrobiliśmy. Na początek przyjrzyjmy się efektowi:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"hello world"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Ten kod wyświetla:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>hello world
+</pre></table></code></div></div><p>Dzięki inspiracji z Pythonowego <a href="https://docs.python.org/3/library/stdtypes.html#str.format"><code class="language-plaintext highlighter-rouge">str.format()</code></a>, możemy korzystać z zamienników w postaci klamer (<code class="language-plaintext highlighter-rouge">"{}"</code>):</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}{}{}"</span><span class="p">,</span> <span class="s">"hello"</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="s">"world"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>hello world
+</pre></table></code></div></div><p>Naturalnie działa to również przy zmiennych:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">first</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"hello"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">second</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"world"</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}{}{}"</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="n">second</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>hello world
+</pre></table></code></div></div><p>Aby to osiągnąć, w pliku <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> skorzystaliśmy z dodatkowych komend. Cały plik prezentuje się następująco:</p><div file="CMakeLists.txt" class="language-cmake highlighter-rouge"><div class="code-header"> <span data-label-text="CMakeLists.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.26<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>PJC<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 20<span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span>FetchContent<span class="p">)</span>
+
+<span class="nf">FetchContent_Declare</span><span class="p">(</span>
+        fmt
+        GIT_REPOSITORY https://github.com/fmtlib/fmt
+        GIT_TAG 11.0.2
+<span class="p">)</span>
+
+<span class="nf">FetchContent_MakeAvailable</span><span class="p">(</span>fmt<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>Main main.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>Main fmt<span class="p">)</span>
+</pre></table></code></div></div><p>Za dołączenie komend, sprecyzowanie zależności, pobranie jej i dołączenie do naszego pliku odpowiedzialne są <strong>kolejno</strong> komendy:</p><ul><li><code class="language-plaintext highlighter-rouge">include(FetchContent)</code><li><code class="language-plaintext highlighter-rouge">FetchContent_Declare(...)</code><li><code class="language-plaintext highlighter-rouge">FetchContent_MakeAvailable(...)</code><li><code class="language-plaintext highlighter-rouge">target_link_libraries(...)</code></ul><p>Pamiętajmy, że każda zmiana w pliku <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> musi zostać załadowana, np. poprzez skrót klawiszowy <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>O</kbd>.</p><blockquote class="prompt-tip"><p>Istnieje możliwość ustawiania opcji <code class="language-plaintext highlighter-rouge">Reload CMake project on editing CMakeLists.txt or other CMake configuration files</code> w CLionie, dzięki czemu nie trzeba będzie ręcznie przeładowywać projektu przy każdej zmianie. Osobiście odradzam zaznaczanie tej opcji, ponieważ edytowanie <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> zwykle nie jest natychmiastowe. Oznacza to, że podczas takiej edycji CLion spróbuje wielokrotnie przebudować nasz projekt, co będzie bardzo wolne.</p></blockquote><h2 id="wiele-plików-wykonywalnych-w-projekcie"><span class="me-2">Wiele plików wykonywalnych w projekcie</span><a href="index.html#wiele-plików-wykonywalnych-w-projekcie" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Zapewne wiele osób w celu stworzenia sobie wygodnej formy notatek w ramach nauki programowania tworzyło jeden projekt, w którym tworzyło jeden plik per rozdział/wykład, ćwiczenia lub temat. Dzięki temu można było jednocześnie mieć “wszystko w jednym miejscu”, ale jednocześnie fragmenty projektu były odizolowanymi bytami.</p><p>Przykładowo, w Javie można było w ramach tego samego projektu tworzyć wiele plików z publiczną, statyczną klasą oraz z publiczną, statyczną metodą <code class="language-plaintext highlighter-rouge">main()</code>. Dzięki temu można było zachować spójność w postaci kodu znajdującego się w jednym projekcie, ale jednocześnie kod z jednej klasy (“zajęć”) nie miał wpływu na drugą.</p><p>Mogłoby to wyglądać mniej więcej tak:</p><div file="struktura projektu w Javie" class="language-plaintext nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="struktura projektu w Javie"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>├── .idea
+├── out
+│   └── ...
+├── src
+│   ├── Lecture1.java
+│   ├── Lecture2.java
+│   └── Lecture3.java
+</pre></table></code></div></div><p>Gdzie każdy z plików <code class="language-plaintext highlighter-rouge">.java</code> może wyglądać tak:</p><div file="Lecture1.java" class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Lecture1.java"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lecture1</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Learning about printing"</span><span class="o">);</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><div file="Lecture2.java" class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Lecture2.java"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lecture2</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Learning about conditions"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><div file="Lecture3.java" class="language-java highlighter-rouge"><div class="code-header"> <span data-label-text="Lecture3.java"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Lecture3</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">while</span> <span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
+            <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"Learning about loops"</span><span class="o">);</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>Jest to bardzo wygodne, ponieważ w IDE możemy uruchamiać każdą z tych metod <code class="language-plaintext highlighter-rouge">main()</code> osobno. Nie wchodzą sobie one w drogę.</p><p>Jednak w C++ jest to nieco trudniejsze. Jeżeli spróbujemy stworzyć osobny plik, to domyślnie będzie on dołączony do pojedynczej aplikacji tworzonej przez środowisko w ramach narzędzia CMake. Można jednak sterować tym zachowaniem.</p><p>Załóżmy, że chcemy osiągnąć identyczny efekt jak w Javowym projekcie opisanym powyżej. Należy stworzyć zatem odpowiednie pliki:</p><div file="Lecture1.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Lecture1.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Learning about printing"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="Lecture2.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Lecture2.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Learning about conditions"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="Lecture3.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Lecture3.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Learning about loops"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Nasza struktura projektu w CLionie wygląda tak:</p><div file="struktura projektu w C++" class="language-plaintext nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="struktura projektu w C++"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>├── cmake-build-debug
+│   └── ...
+├── CMakeLists.txt
+├── Lecture1.cpp
+├── Lecture2.cpp
+└── Lecture3.cpp
+</pre></table></code></div></div><p>Zależnie od wersji środowiska i zawartości plików <code class="language-plaintext highlighter-rouge">.cpp</code>, próba kompilacji i uruchomienia tak stworzonego, pojedynczego pliku może się skończyć sukcesem. Z drugiej strony tak samo może się to jednak nie udać — np. gdy przypadkiem mieliśmy automatycznie zaznaczoną opcję <kbd>Add to targets</kbd> w IDE lub gdy próbujemy użyć w tych plikach biblioteki fmt.</p><p>Skonfigurujmy zatem projekt “dobrze”, aby mieć pewność, że zadziała i że rozumiemy, co się dzieje.</p><p>Jak już wiemy, konfiguracja naszego projektu jest bardzo zależna od pliku <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code>. Na ten moment wygląda on następująco:</p><div file="CMakeLists.txt" class="language-cmake highlighter-rouge"><div class="code-header"> <span data-label-text="CMakeLists.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.26<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>PJC<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 20<span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span>FetchContent<span class="p">)</span>
+
+<span class="nf">FetchContent_Declare</span><span class="p">(</span>
+        fmt
+        GIT_REPOSITORY  https://github.com/fmtlib/fmt
+        GIT_TAG         11.0.2
+<span class="p">)</span>
+
+<span class="nf">FetchContent_MakeAvailable</span><span class="p">(</span>fmt<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>Lecture1 Lecture1.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>Lecture1 fmt<span class="p">)</span>
+</pre></table></code></div></div><p>Skoncentrujmy się na ostatnich linijkach tego pliku. Przy pomocy <code class="language-plaintext highlighter-rouge">add_executable()</code> tworzymy plik wykonywalny będący naszą aplikacją o nazwie <code class="language-plaintext highlighter-rouge">Lecture1</code> i precyzujemy, że zależy od od tego, co napiszemy w <code class="language-plaintext highlighter-rouge">Lecture1.cpp</code>. Następnie zbudowaną wcześniej bibliotekę {fmt} łączymy z tą aplikacją przy pomocy komendy <code class="language-plaintext highlighter-rouge">target_link_libraries()</code>.</p><p>Efektywnie, musimy zrobić dokładnie to samo dla reszty aplikacji, które chcemy stworzyć. Chcemy, aby kod z <code class="language-plaintext highlighter-rouge">Lecture2.cpp</code> oraz <code class="language-plaintext highlighter-rouge">Lecture3.cpp</code> tworzył osobne, niezależne aplikacje, zatem dopiszmy odpowiednie instrukcje. <strong>Na końcu</strong> pliku <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> należy dopisać następujące linijki:</p><div class="language-cmake nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cmake"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="nb">add_executable</span><span class="p">(</span>Lecture2 Lecture2.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>Lecture2 fmt<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>Lecture3 Lecture3.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>Lecture3 fmt<span class="p">)</span>
+</pre></table></code></div></div><p>Dzięki nim będziemy mogli w standardowy sposób uruchamiać aplikacje i łączyć je ze zbudowaną (tylko raz!) biblioteką {fmt}.</p><blockquote><p>Czy można przy okazji umieścić te pliki <code class="language-plaintext highlighter-rouge">.cpp</code> w folderach dla zwiększenia czytelności (zwłaszcza w przyszłości, gdzie projekty będą zakładały wiele plików per jedna aplikacja)?</p></blockquote><p>Tak. Nic nie stoi na przeszkodzie, aby to zrobić. Wystarczy w CMake przed nazwami plików dopisać odpowiednią nazwę folderu.</p><h2 id="słowo-kluczowe-const-oraz-referencje"><span class="me-2">Słowo kluczowe <code>const</code> oraz referencje</span><a href="index.html#słowo-kluczowe-const-oraz-referencje" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Referencja pozwala nam na pracę z oryginalnymi danymi. Zamiast przekazywać do funkcji kopię, uzyskujemy dostęp do obiektów “z zewnątrz”. Pojawia się jednak mały problem — czasem chcemy skorzystać z referencji nie w celu modyfikacji oryginału, a jedynie w celu uniknięcia kopii. Rozważmy następujący przykład:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">sumOfFirstAndLast</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">+</span> <span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mutableVector</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="c1">// change mutableVector</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sumOfFirstAndLast</span><span class="p">(</span><span class="n">mutableVector</span><span class="p">);</span>
+
+    <span class="c1">// change mutableVector again</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">"sumOfFirstAndLast: {}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>I omówmy jego założenia:</p><ol><li>Mamy <em>modyfikowalny</em> (nie <code class="language-plaintext highlighter-rouge">const</code>) wektor, do którego dodajemy elementy w linijce nr 12.<li>Uzyskujemy sumę pierwszego i ostatniego elementu wektora.<li>Modyfikujemy wektor jeszcze raz (linijka nr 16), ale zakładamy, że w międzyczasie (czyli od zakończenia działania kodu z linijki nr 12) zawartość wektora się nie zmieniła.</ol><p>W tej sytuacji, jeżeli <code class="language-plaintext highlighter-rouge">mutableVector</code> jest bardzo duży, to skopiowanie go całego do funkcji, która efektywnie jedynie odczytuje jego dwa elementy, jest ogromnym marnowaniem zasobów komputera (zarówno pamięci, jak i czasu wykonania).</p><p>Można to naprawić zmieniając typ parametru. Zamiast <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;</code> skorzystamy z referencji do tego typu, czyli z <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;&amp;</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">sumOfFirstAndLast</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span> <span class="c1">// added &amp;</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">+</span> <span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mutableVector</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="c1">// change mutableVector</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sumOfFirstAndLast</span><span class="p">(</span><span class="n">mutableVector</span><span class="p">);</span>
+
+    <span class="c1">// change mutableVector again</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">"sumOfFirstAndLast: {}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Efekt jest taki sam, ale tym razem nie kopiujemy całego wektora. Niestety, wciąż nie jest to optymalne rozwiązanie. Pamiętajmy, że referencje pozwala na zmianę oryginalnego obiektu. Co by się stało, gdyby programista przypadkiem zmienił <code class="language-plaintext highlighter-rouge">v</code> w ciele funkcji <code class="language-plaintext highlighter-rouge">sumOfFirstAndLast()</code>?</p><blockquote><p>Nie no, nikt by tak nie zrobił, szanujmy się.</p></blockquote><p>Mhn, tak samo nikt by nigdy nie zapomniał, czy w danym ogromnym projekcie używamy <code class="language-plaintext highlighter-rouge">double</code>i do reprezentowania \(\frac{\text{N}}{\text{m}^2}\) (Newtonów na metr kwadratowy), czy funtów. Zwłaszcza gdy mówimy o projektach kosztujących $125 000 000, które są sponsorowane przez rząd USA. <a href="https://www.simscale.com/blog/nasa-mars-climate-orbiter-metric/">Prawda?</a></p><p>Poza tym, <a href="../rozdział-1-5-semantyka-wartości-operatory-relacji-i-const/index.html#słowo-kluczowe-const">jak już wiemy</a>, programista C++, gdy widzi brak <code class="language-plaintext highlighter-rouge">const</code>, to się zastanawia, dlaczego go tam nie ma. <strong>Zakłada</strong>, że celem jest modyfikacja.</p><blockquote><p>Jak zatem <em>poprawnie</em> zakomunikować, że chcemy uniknąć kopii, ale jednocześnie nie chcemy modyfikować oryginału?</p></blockquote><p>Doskonałe pytanie. Należy skorzystać ze stałej referencji (ang. <em><code class="language-plaintext highlighter-rouge">const</code> reference</em>):</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">sumOfFirstAndLast</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span> <span class="c1">// added const</span>
+    <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">+</span> <span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mutableVector</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="c1">// change mutableVector</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">sumOfFirstAndLast</span><span class="p">(</span><span class="n">mutableVector</span><span class="p">);</span>
+
+    <span class="c1">// change mutableVector again</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">"sumOfFirstAndLast: {}</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">sum</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p><em>Stała referencja</em> to narzędzie, które pozwala nam w najpoprawniejszy sposób “patrzeć” na dane. Warto zwrócić uwagę, że to również jedyny sposób na “patrzenie na oryginał” danych, które same w sobie są stałe:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">accept</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">constVector</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">accept</span><span class="p">(</span><span class="n">constVector</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>main.cpp:8:12: error: binding reference of type 'std::vector&lt;int&gt;&amp;' to 'const std::vector&lt;int&gt;' discards qualifiers
+    8 |     accept(constVector);
+      |            ^~~~~~~~~~~
+main.cpp:3:31: note:   initializing argument 1 of 'void accept(std::vector&lt;int&gt;&amp;)'
+    3 | auto accept(std::vector&lt;int&gt;&amp; v) -&gt; void { }
+      |             ~~~~~~~~~~~~~~~~~~^
+</pre></table></code></div></div><p>Błąd — jak to bywa w C++ — jest dosyć niejasny, więc go przetłumaczmy na “ludzki”:</p><blockquote><p>error: binding reference of type ‘std::vector<int>&amp;' to 'const std::vector<int>' discards qualifiers</int></int></p></blockquote><p>Mowa tutaj o błędzie, który mówi, że próba połączenia referencji typu <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;&amp;</code> do obiektu typu <code class="language-plaintext highlighter-rouge">const std::vector&lt;int&gt;</code> odrzuca (obowiązkowe) kwalifikatory. Tutaj mowa o kwalifikatorze <code class="language-plaintext highlighter-rouge">const</code>.</p><p>Mówiąc wprost — nie można zrobić “surowej referencji” (ang. <em>raw reference</em>) do stałego obiektu. No bo gdyby można było tak zrobić, to za jej pomocą można by zmodyfikować (stały) oryginał!</p><p>Aby ten problem naprawić, należy zadeklarować typ parametru jako stałą referencję:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">accept</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span> <span class="c1">// added const</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">constVector</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">accept</span><span class="p">(</span><span class="n">constVector</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Warto też zwrócić uwagę, że stała referencja może “patrzeć” na niestałe dane:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">accept</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">mutableVector</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">accept</span><span class="p">(</span><span class="n">mutableVector</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>No bo czemu miałoby być to problemem, prawda? <code class="language-plaintext highlighter-rouge">accept()</code> obiecuje, że nie zmieni oryginału — nieważne, czy oryginał jest stały, czy możliwy do modyfikacji.</p><p>We <a href="index.html#warto-używać-referencji-do-przekazywania-dużych-typów-danych-których-nie-chcemy-kopiować">wcześniejszej części tego rozdziału</a> zapoznaliśmy się z uproszczonym diagramem przekazywania parametrów. Teraz czas go doprecyzować:</p><pre><code class="language-mermaid">flowchart TD
+    A(Wybór typu&lt;br/&gt;parametru) --&gt; B{Czy chcę&lt;br/&gt;modyfikować&lt;br/&gt;oryginał?}
+    B --&gt;|Tak|C(Przez surową referencję)
+    B --&gt;|Nie|D{Czy kopiowanie&lt;br/&gt;argumentu będzie&lt;br/&gt;kosztowne?}
+    D --&gt;|Tak|E(Przez &lt;code&gt;const&lt;/code&gt; referencję)
+    D --&gt;|Nie|F{Czy chcę&lt;br/&gt;modyfikować parametr&lt;br/&gt;w środku funkcji?}
+    F --&gt;|Tak|G(Przez surową kopię)
+    F --&gt;|Nie|H(Przez &lt;code&gt;const&lt;/code&gt; kopię)
+</code></pre><h2 id="const-iteratory"><span class="me-2"><code>const</code> iteratory</span><a href="index.html#const-iteratory" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Jak wiadomo, nie możemy zmodyfikować <code class="language-plaintext highlighter-rouge">const</code> obiektu. Tyczy się to też kontenerów takich jak <code class="language-plaintext highlighter-rouge">std::string</code> czy <code class="language-plaintext highlighter-rouge">std::vector</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+    <span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">vec</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>W powyższym kodzie problematyczne są linijki nr 7 i 8. Próbują one zmodyfikować stan wektora, który jest <code class="language-plaintext highlighter-rouge">const</code>. Nie jest to możliwe.</p><p>Warto jednak zwrócić uwagę, że gdybyśmy je zakomentowali, to kod poprawnie by się skompilował:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="c1">// vec.push_back(4);</span>
+    <span class="c1">// vec[0] = 13;</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">vec</span><span class="p">.</span><span class="n">back</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>3
+</pre></table></code></div></div><p>Indeksowanie samo w sobie również nie jest nielegalną operacją przy stałych kontenerach:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">vec</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1
+</pre></table></code></div></div><p>To modyfikacja poprzez indeksowanie jest nielegalna.</p><blockquote><p>Ale co z iteratorami? Czy pozwolą nam one na nielegalne zmodyfikowanie stałego kontenera?</p></blockquote><p>Nie. Na szczęście nie. Oczywiście można otrzymać iterator na dane ze stałego kontenera i za jego pomocą je odczytywać:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {} {}"</span><span class="p">,</span> <span class="o">*</span><span class="n">iter</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">iter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="o">*</span><span class="p">(</span><span class="n">iter</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1 2 3
+</pre></table></code></div></div><p>Ale nie będziemy w stanie przy jego pomocy zmodyfikować tych danych:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">iter</span> <span class="o">=</span> <span class="n">vec</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="o">*</span><span class="n">iter</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>main.cpp:9:11: error: assignment of read-only location 'iter.__gnu_cxx::__normal_iterator&lt;const int*, std::vector&lt;int&gt; &gt;::operator*()'
+    9 |     *iter = 10;
+      |     ~~~~~~^~~~
+</pre></table></code></div></div><p>Błąd jak zwykle kryptyczny, ale sedno tkwi we fragmencie mówiącym o <em>assignment of read-only location</em>, co raczej jasno wskazuje, że jest to nielegalna operacja.</p><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:nie-insert"><p>Warto jednak zwrócić uwagę, że użycie <code class="language-plaintext highlighter-rouge">.insert()</code> zamiast <code class="language-plaintext highlighter-rouge">.erase()</code> będzie już jak najbardziej w porządku. Można w końcu dodać element na miejsca “za ostatnim” (tam przecież dodaje <code class="language-plaintext highlighter-rouge">.push_back()</code>). Nie można jednak usunąć nieistniejącego elementu, stąd problem przy <code class="language-plaintext highlighter-rouge">.erase()</code>, ale już nie przy <code class="language-plaintext highlighter-rouge">.insert()</code>. Operacja <code class="language-plaintext highlighter-rouge">someVector.insert(someVector.end(), ...)</code> <strong>nie</strong> powoduje dereferencji <code class="language-plaintext highlighter-rouge">.end()</code>, bo nie ma po co. <a href="index.html#fnref:nie-insert" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:premature-optimization"><p>Słowo “<em>lepszym</em>” jest tutaj specjalnie skreślone, ponieważ należy pamiętać, że wydajność to nie wszystko. Pamiętajmy, że kod ma przede wszystkim <strong>działać</strong>, potem <strong>być czytelny</strong>, a dopiero na koniec (zwykle, gdy wykażemy, że jest taka potrzeba) należy go optymalizować. Nikt nie będzie robił problemu, jeżeli nasz kod raz na dzień skorzysta z tymczasowego <code class="language-plaintext highlighter-rouge">std::set</code>u do usunięcia duplikatów z jakiegoś kilkuelementowego <code class="language-plaintext highlighter-rouge">std::vector</code>a zamiast bawienia się w <em>sort-unique</em>. <a href="index.html#fnref:premature-optimization" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:tag-dispatch"><p>Na przykład, gdy korzystamy z techniki o nazwie <em>tag dispatch</em> (<em>wysłanie tagów? tagowanie?</em>). Konstruktory nie mają nazwy, a czasem chcemy sprecyzować dwa konstruktory z tym samym zbiorem parametrów. Osoby znające już się trochę na C++ mogą poczytać o tym więcej <a href="https://www.fluentcpp.com/2018/04/27/tag-dispatching/">tutaj</a>. <a href="index.html#fnref:tag-dispatch" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-2-5-przestrzenie-nazw/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 2.5 - Przestrzenie nazw</p></a> <a href="../rozdział-3-1-nowe-standardowe-algorytmy/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Rozdział 3.1 - Nowe standardowe algorytmy</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js,npm/mermaid@10.9.0/dist/mermaid.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script> /* see: <https://docs.mathjax.org/en/latest/options/input/tex.html#tex-options> */ MathJax = { tex: { /* start/end delimiter pairs for in-line math */ inlineMath: [ ['$', '$'], ['\\(', '\\)'] ], /* start/end delimiter pairs for display math */ displayMath: [ ['$$', '$$'], ['\\[', '\\]'] ], tags: 'ams' } }; </script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script> <script defer src="../../app.js"></script> <script type="text/javascript"> (function () { function updateMermaid(event) { if (event.source === window && event.data && event.data.direction === ModeToggle.ID) { const mode = event.data.message; if (typeof mermaid === 'undefined') { return; } let expectedTheme = mode === ModeToggle.DARK_MODE ? 'dark' : 'default'; let config = { theme: expectedTheme }; /* Re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $('.mermaid').each(function () { let svgCode = $(this).prev().children().html(); $(this).removeAttr('data-processed'); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, '.mermaid'); } } let initTheme = 'default'; const html = document.documentElement; if ( (html.hasAttribute('data-mode') && html.getAttribute('data-mode') === 'dark') || (!html.hasAttribute('data-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches) ) { initTheme = 'dark'; } let mermaidConf = { theme: initTheme /* <default|dark|forest|neutral> */ }; /* Create mermaid tag */ document.querySelectorAll('pre>code.language-mermaid').forEach((elem) => { const svgCode = elem.textContent; const backup = elem.parentElement; backup.classList.add('unloaded'); /* create mermaid node */ let mermaid = document.createElement('pre'); mermaid.classList.add('mermaid'); const text = document.createTextNode(svgCode); mermaid.appendChild(text); backup.after(mermaid); }); mermaid.initialize(mermaidConf); window.addEventListener('message', updateMermaid); })(); </script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-2-6-podsumowanie-i-dodatki/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

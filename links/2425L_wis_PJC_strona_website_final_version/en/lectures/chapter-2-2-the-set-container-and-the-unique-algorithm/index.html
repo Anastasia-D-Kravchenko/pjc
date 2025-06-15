@@ -1,0 +1,375 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 2.2 - std::set container and the std::ranges::unique() algorithm" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/en/lectures/chapter-2-2-the-set-container-and-the-unique-algorithm/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-03-06T00:00:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 2.2 - std::set container and the std::ranges::unique() algorithm" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-06T00:00:00+01:00","datePublished":"2025-03-06T00:00:00+01:00","description":"PJATK / PJAIT PJC","headline":"Chapter 2.2 - std::set container and the std::ranges::unique() algorithm","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-2-2-the-set-container-and-the-unique-algorithm/"},"url":"/~fk/en/lectures/chapter-2-2-the-set-container-and-the-unique-algorithm/"}</script><title>Chapter 2.2 - <code>std::set</code> container and the <code>std::ranges::unique()</code> algorithm | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../../en.html" id="avatar" class="rounded-circle"> <img src="../../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../../en.html">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../../en.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="../../information/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="../../presentations/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="../../tasks/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="../../tags/index.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="../../../wyklady/rozdział-2-2-kontener-set-i-algorytm-unique/index.html" class="nav-link"> <img src="../../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="index.html" class="nav-link"> <img src="../../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../../index.html"> Home </a> </span> <span>Chapter 2.2 - <code>std::set</code> container and the <code>std::ranges::unique()</code> algorithm</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 2.2 - <code>std::set</code> container and the <code>std::ranges::unique()</code> algorithm</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1741215600" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Mar 6, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2534 words" > <em>14 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="storing-unique-values"><span class="me-2">Storing unique values</span><a href="index.html#storing-unique-values" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Sometimes, we’re interested in functionality that allows us to store data without duplicates. For example, we’re storing data about student names and want to see how many different names we have. Naturally, there’s a high chance that some students share the same name, so we need to somehow filter out duplicates.</p><p>One way to achieve this is by using the <code class="language-plaintext highlighter-rouge">std::set</code> container.</p><blockquote class="prompt-info"><p><code class="language-plaintext highlighter-rouge">std::set</code> is a container that does not allow duplicates.</p></blockquote><p>An example of using <code class="language-plaintext highlighter-rouge">std::set</code> is creating the container, adding elements to it, and then displaying its contents:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">set</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">newItem</span> <span class="o">:</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">})</span> <span class="p">{</span>
+        <span class="n">set</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">newItem</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">set</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1 2 3 4 5
+</pre></table></code></div></div><p>As you can see, even when adding many identical elements to <code class="language-plaintext highlighter-rouge">std::set</code>, the container does not allow duplicates.</p><p>Moreover, it’s worth noting that the order of elements has been changed, and it doesn’t match the order in which we added numbers to the set.</p><blockquote class="prompt-info"><p><code class="language-plaintext highlighter-rouge">std::set</code> stores its elements in sorted order and does not allow duplicates.</p></blockquote><p>There are two more things in the code listing that are worth noting:</p><ol><li>To use <code class="language-plaintext highlighter-rouge">std::set</code>, you need to include the appropriate header, i.e., <code class="language-plaintext highlighter-rouge">#include &lt;set&gt;</code>.<li>Adding new elements to the created object is done in an interesting way — the range-based <code class="language-plaintext highlighter-rouge">for</code> loop iterates over elements in curly braces (line number <code class="language-plaintext highlighter-rouge">8</code>). This is called an <em>initializer list</em> (<code class="language-plaintext highlighter-rouge">std::initializer_list</code>), but you don’t need to focus on that too much. It’s just one way to conveniently construct elements. However, it’s important to know that when we place elements directly into the container using curly braces, as shown with <code class="language-plaintext highlighter-rouge">std::vector</code>, we are also using this feature of the language.</ol><p>Instead of using a loop with an initializer list, you can directly use it during the container initialization:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">set</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">set</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The effect will be the same (displaying the sequence <raw-data>1 2 3 4 5</raw-data>).</p><h2 id="obtaining-unique-elements-from-a-set-of-data-with-duplicates"><span class="me-2">Obtaining unique elements from a set of data with duplicates</span><a href="index.html#obtaining-unique-elements-from-a-set-of-data-with-duplicates" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p><code class="language-plaintext highlighter-rouge">std::set</code> does not store duplicates. But what if we have some other set of data (e.g., <code class="language-plaintext highlighter-rouge">std::vector</code>) with duplicates, and we want to know how many unique values are in it?</p><p>Effectively, there are two simple ways to achieve this — removing duplicates from the original set or creating a separate container that won’t contain duplicates.</p><p>The second method will be simpler (although not optimal), so let’s start with it.</p><h3 id="using-stdset-to-remove-duplicates"><span class="me-2">Using <code>std::set</code> to remove duplicates</span><a href="index.html#using-stdset-to-remove-duplicates" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">names</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span>
+            <span class="s">"Jonathan"</span><span class="p">,</span> <span class="s">"Joseph"</span><span class="p">,</span> <span class="s">"Jotaro"</span><span class="p">,</span>
+            <span class="s">"Josuke"</span><span class="p">,</span> <span class="s">"Giorno"</span><span class="p">,</span> <span class="s">"Jolyne"</span><span class="p">,</span>
+            <span class="s">"Jonathan"</span><span class="p">,</span> <span class="s">"Josuke"</span>
+    <span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">uniqueNames</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">name</span> <span class="o">:</span> <span class="n">names</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">uniqueNames</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">name</span> <span class="o">:</span> <span class="n">uniqueNames</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Giorno Jolyne Jonathan Joseph Josuke Jotaro
+</pre></table></code></div></div><p>As we can see, thanks to <code class="language-plaintext highlighter-rouge">std::set</code>, we found out that we only have 6 unique names.</p><h3 id="range-constructor"><span class="me-2">Range constructor</span><a href="index.html#range-constructor" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>However, there is a more concise form of the code presented in the previous listing. You can use a <em>range constructor</em>, which takes a pair of iterators to the range from which elements will be copied. This allows you to create a <code class="language-plaintext highlighter-rouge">std::set</code> based on a <code class="language-plaintext highlighter-rouge">std::vector</code> without explicitly using a loop:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">names</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span>
+            <span class="s">"Jonathan"</span><span class="p">,</span> <span class="s">"Joseph"</span><span class="p">,</span> <span class="s">"Jotaro"</span><span class="p">,</span>
+            <span class="s">"Josuke"</span><span class="p">,</span> <span class="s">"Giorno"</span><span class="p">,</span> <span class="s">"Jolyne"</span><span class="p">,</span>
+            <span class="s">"Jonathan"</span><span class="p">,</span> <span class="s">"Josuke"</span>
+    <span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">uniqueNames</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">names</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">names</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">name</span> <span class="o">:</span> <span class="n">uniqueNames</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The result of this code is identical (i.e., displaying the text <raw-data>Giorno Jolyne Jonathan Joseph Josuke Jotaro</raw-data>).</p><blockquote class="prompt-info"><p>Every container provides a range constructor, which allows you to create a data range based on another one.</p></blockquote><p>For example, you can overwrite such a vector containing duplicates with a new vector created based on the set without duplicates:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">names</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span>
+            <span class="s">"Jonathan"</span><span class="p">,</span> <span class="s">"Joseph"</span><span class="p">,</span> <span class="s">"Jotaro"</span><span class="p">,</span>
+            <span class="s">"Josuke"</span><span class="p">,</span> <span class="s">"Giorno"</span><span class="p">,</span> <span class="s">"Jolyne"</span><span class="p">,</span>
+            <span class="s">"Jonathan"</span><span class="p">,</span> <span class="s">"Josuke"</span>
+    <span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">uniqueNames</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span>
+            <span class="n">names</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">names</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+    <span class="p">);</span>
+
+    <span class="n">names</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span>
+            <span class="n">uniqueNames</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">uniqueNames</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>This way, only unique names remain in the original vector. There are no duplicates in it.</p><p>However, from a performance perspective, this solution is of average quality. It’s certainly relatively simple, but it’s worth examining what exactly we’re doing just to <em>remove duplicates from a set</em>:</p><ol><li>We create a new container (<code class="language-plaintext highlighter-rouge">uniqueNames</code> of type <code class="language-plaintext highlighter-rouge">std::set</code>).<li>We copy elements from the original vector into it (i.e., <code class="language-plaintext highlighter-rouge">names</code>, which stores objects of type <code class="language-plaintext highlighter-rouge">std::string</code>, which in turn can be very long, making their copying time-consuming and requiring allocation of a large amount of additional memory).<li>We create a new vector, into which we again copy elements (from <code class="language-plaintext highlighter-rouge">uniqueNames</code>).<li>We overwrite the original vector with the new one.</ol><p>That’s… definitely a lot of work just to <em>remove duplicates from the original container</em>. Surely there must be an alternative, more efficient way.</p><p>Fortunately, there is one — it uses the <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm.</p><h3 id="removing-duplicates-from-the-original-range-using-stdrangesunique"><span class="me-2">Removing duplicates from the original range using <code>std::ranges::unique()</code></span><a href="index.html#removing-duplicates-from-the-original-range-using-stdrangesunique" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>In an ideal world, <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> could simply <em>efficiently remove duplicates from the provided range</em>. However, this is not possible<sup id="fnref:trade-off"><a href="index.html#fn:trade-off" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>.</p><p>However, delving into why this algorithm was designed this way could take up to a quarter of an ASD lecture<sup id="fnref:asd"><a href="index.html#fn:asd" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>. Therefore, we won’t focus on the reasons, but only on how it works.</p><p>To summarize the algorithm’s operation:</p><blockquote class="prompt-info"><p>The <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm moves duplicates from neighboring groups of identical elements to the end of the specified range.</p></blockquote><p>This information doesn’t provide much insight into intuitively understanding how the algorithm works, so let’s move straight to practical examples. The simplest one would be to execute this algorithm on a vector containing several identical elements:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">unique</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>When running the above code, we’ll notice that something is definitely wrong. The outcome is not guaranteed (although there’s no UB mentioned), but typically the code above displays <raw-data>1 1 1 1 1</raw-data>.</p><p>Before we find out why <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> <del>didn’t work</del> didn’t do what we expected, let’s take a look at line <code class="language-plaintext highlighter-rouge">6</code> from the above listing. It’s worth noting that the vector construction uses <code class="language-plaintext highlighter-rouge">(5, 1)</code> syntax, not <code class="language-plaintext highlighter-rouge">{5, 1}</code> (i.e., we use parentheses instead of braces). The behavior <code class="language-plaintext highlighter-rouge">{5, 1}</code> is familiar to us — it would create a vector with two elements: five and one. However, the <code class="language-plaintext highlighter-rouge">(5, 1)</code> behavior is different (hence the need to pay attention to parentheses). It is a call to a two-argument constructor, which initializes the vector with five ones.</p><blockquote class="prompt-tip"><p>When initializing a vector with several identical elements, consider using an alternative constructor. Instead of using <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;{1, 1, 1, 1, 1}</code>, you can use <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;(5, 1)</code>. Some selected containers also provide this functionality (such as <code class="language-plaintext highlighter-rouge">std::string</code>, but not <code class="language-plaintext highlighter-rouge">std::set</code>).</p></blockquote><p>However, let’s get back to the <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm. What did it do? Why didn’t it remove duplicates?</p><p>First and foremost, it’s important to remember that this algorithm doesn’t remove duplicates. It <em>moves</em> them to the end of the specified range. So, with a vector like <code class="language-plaintext highlighter-rouge">{1, 1, 1, 1, 1}</code>, the algorithm “sees” the first one and the remaining four, and then moves those four ones to the end — i.e., to their original positions. It didn’t do anything.</p><blockquote><p>This sounds completely nonsensical. So, how do we use this algorithm correctly?</p></blockquote><p>By removing all elements that it marked as duplicates.</p><blockquote><p>Okay, but how do we know which elements are marked as duplicates? How do we remove them afterward?</p></blockquote><p>By capturing the return value of the algorithm. It returns a <em>subrange</em> — an object representing a view of a portion of the originally passed range. This subrange contains duplicates that need to be removed.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">unique</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">duplicates</code> is a view of the last four elements of <code class="language-plaintext highlighter-rouge">numbers</code><sup id="fnref:whats-a-view"><a href="index.html#fn:whats-a-view" class="footnote" rel="footnote" role="doc-noteref">3</a></sup>. This is because <code class="language-plaintext highlighter-rouge">numbers</code> contains five identical elements. Therefore, it has four duplicates to remove.</p><blockquote><p>Fantastic. So, how do we remove elements from <code class="language-plaintext highlighter-rouge">numbers</code> referred to by <code class="language-plaintext highlighter-rouge">duplicates</code>?</p></blockquote><p>By using the <code class="language-plaintext highlighter-rouge">.erase()</code> method. This method takes an iterator (or a pair of iterators) to the elements we want to remove. The following listing illustrates this:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+
+    <span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">begin</span><span class="p">());</span> <span class="c1">// removing first element</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+
+    <span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span> <span class="c1">// removing last element</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+
+    <span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">numbers</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">numbers</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>1 2 3 4 5 6 7
+2 3 4 5 6 7
+2 3 4 5 6
+2 5 6
+</pre></table></code></div></div><p>The most interesting part is the <code class="language-plaintext highlighter-rouge">.erase()</code> method call in line 20. The rest of the calls should behave intuitively.</p><p>The mentioned call operates on a vector containing the following elements: <raw-data>2 3 4 5 6</raw-data>. Therefore, <code class="language-plaintext highlighter-rouge">numbers.begin() + 1</code> points to the number <code class="language-plaintext highlighter-rouge">3</code> in the vector. <code class="language-plaintext highlighter-rouge">numbers.begin() + 3</code> points to the number <code class="language-plaintext highlighter-rouge">5</code>. <code class="language-plaintext highlighter-rouge">.erase()</code>, like any algorithm in C++, works on a right-open range, so it will remove all elements from <code class="language-plaintext highlighter-rouge">3</code> to <code class="language-plaintext highlighter-rouge">5</code> (inclusive of <code class="language-plaintext highlighter-rouge">3</code> but excluding <code class="language-plaintext highlighter-rouge">5</code>).</p><blockquote class="prompt-tip"><p>As we can see, the <code class="language-plaintext highlighter-rouge">.erase()</code> method allows for the removal of elements from any position in the vector (unlike the <code class="language-plaintext highlighter-rouge">.pop_back()</code> method we learned earlier, which only removes the last element). Its counterpart is the <code class="language-plaintext highlighter-rouge">.insert()</code> method, which allows for adding elements at any position in the container.</p></blockquote><p>Armed with this knowledge, we now know how to remove multiple elements at once from a vector. Now, all we need to do is obtain iterators to the elements covered by the <code class="language-plaintext highlighter-rouge">duplicates</code> view. This is very simple because the object returned by the <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm has <code class="language-plaintext highlighter-rouge">.begin()</code> and <code class="language-plaintext highlighter-rouge">.end()</code> methods, which return iterators pointing to the elements of the original range that were affected by the call to the algorithm:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">unique</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+
+    <span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">duplicates</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">duplicates</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1
+</pre></table></code></div></div><p>Success. <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> moved all duplicates to the end of the range, returning an object telling us exactly where they are. We used it with the <code class="language-plaintext highlighter-rouge">.erase()</code> method to remove the mentioned duplicates.</p><p>It might seem like that’s all, but unfortunately, it’s not. Let’s look at the following code example:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">unique</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+
+    <span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">duplicates</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">duplicates</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1 2 3 1 2 3 1 2 3
+</pre></table></code></div></div><p>It seems like the algorithm didn’t do anything. Effectively, this is true. It saw that <strong>there are no neighboring duplicates</strong>, so it didn’t move anything to the end. The returned <code class="language-plaintext highlighter-rouge">duplicates</code> object consists of two identical iterators pointing to <code class="language-plaintext highlighter-rouge">numbers.end()</code>. Calling <code class="language-plaintext highlighter-rouge">numbers.erase(numbers.end(), numbers.end())</code> (or <code class="language-plaintext highlighter-rouge">numbers.erase(x, y)</code>, where <code class="language-plaintext highlighter-rouge">x</code> and <code class="language-plaintext highlighter-rouge">y</code> are iterators pointing to <strong>the same element</strong>) won’t do anything (because the algorithm doesn’t touch the element pointed to by the second iterator — it doesn’t matter that the first one also points to it).</p><p>For clarification, let’s revisit the algorithm’s description:</p><blockquote class="prompt-info"><p>The <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm moves duplicates from neighboring groups of identical elements to the end of the specified range.</p></blockquote><blockquote><p>What now? How do we make the algorithm do what we intuitively expect, i.e., remove duplicates regardless of their positions?</p></blockquote><p>Answering this question literally — you can’t.</p><p>However, don’t lose hope. It’s not that <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> won’t help us. It will, but you need to prepare the data properly. You need to prepare them in such a way that all identical elements are next to each other. In the case of the <code class="language-plaintext highlighter-rouge">numbers</code> vector from the previous listing, you need to ensure that all ones are next to each other, all twos are next to each other, and all threes are next to each other.</p><p>It turns out that the simplest way to achieve this effect is by sorting the data<sup id="fnref:sorting-for-grouping"><a href="index.html#fn:sorting-for-grouping" class="footnote" rel="footnote" role="doc-noteref">4</a></sup>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">duplicates</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">unique</span><span class="p">(</span><span class="n">numbers</span><span class="p">);</span>
+
+    <span class="n">numbers</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">duplicates</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">duplicates</span><span class="p">.</span><span class="n">end</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1 2 3
+</pre></table></code></div></div><p>Success! Moreover, <strong>full success</strong>. Sorting the data before using the <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm is a very popular operation. Typically, you need to sort the data, use the <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm, and then use the <code class="language-plaintext highlighter-rouge">.erase()</code> method to actually remove the duplicates.</p><p>As you can see, sorting the data and using the <code class="language-plaintext highlighter-rouge">std::ranges::unique()</code> algorithm is undoubtedly more complicated than using the <code class="language-plaintext highlighter-rouge">std::set</code> container. However, in terms of performance, the approach using the container is usually worse. Therefore, it’s valuable to know both ways to achieve the desired goal.</p><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:trade-off"><p>The algorithm would either need to allocate additional memory (which we want to avoid — similar to what we did with <code class="language-plaintext highlighter-rouge">std::set</code>), or it would need to change the order of the data in a suitable way. <a href="index.html#fnref:trade-off" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:asd"><p>ASD — Algorithms and Data Structures (a course). <a href="index.html#fnref:asd" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:whats-a-view"><p>The term <em>view</em> has its specific definitions, but they are not relevant at the moment. However, it’s worth knowing that if we were to iterate over all elements in <code class="language-plaintext highlighter-rouge">duplicates</code> (e.g., with a range-based <code class="language-plaintext highlighter-rouge">for()</code> loop), we would iterate over elements from the <code class="language-plaintext highlighter-rouge">numbers</code> container. <a href="index.html#fnref:whats-a-view" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:sorting-for-grouping"><p><a href="https://stackoverflow.com/a/14027086">https://stackoverflow.com/a/14027086</a> <a href="index.html#fnref:sorting-for-grouping" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../chapter-2-1-iterators/index.html" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 2.1 - Iterators</p></a> <a href="../chapter-2-3-practical-usage-of-the-environment/index.html" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 2.3 - Practical usage of the environment - CMake and external dependencies</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../../assets/js/dist/post.min.js"></script> <script defer src="../../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/en/lectures/chapter-2-2-the-set-container-and-the-unique-algorithm/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

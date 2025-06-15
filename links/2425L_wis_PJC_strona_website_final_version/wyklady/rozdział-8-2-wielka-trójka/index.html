@@ -1,0 +1,387 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 8.2 - Wielka Trójka" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-8-2-wielka-tr%C3%B3jka/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-04-24T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 8.2 - Wielka Trójka" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-24T00:00:00+02:00","datePublished":"2025-04-24T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 8.2 - Wielka Trójka","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-8-2-wielka-tr%C3%B3jka/"},"url":"/~fk/wyklady/rozdzia%C5%82-8-2-wielka-tr%C3%B3jka/"}</script><title>Rozdział 8.2 - Wielka Trójka | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en/lectures/chapter-8-2-the-big-three-and-const/index.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 8.2 - Wielka Trójka</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 8.2 - Wielka Trójka</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1745445600" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Apr 24, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2305 słów" > <em>12 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="semantyka-wartości"><span class="me-2">Semantyka wartości</span><a href="index.html#semantyka-wartości" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Jak już wiemy, w języku C++ mamy do czynienia z semantyką wartości. Oznacza to, że zmienne, których używamy, faktycznie reprezentują obiekty, na których pracujemy, a nie wyłącznie odnośniki do nich (jak np. w Javie). Gdy wysyłamy obiekt do funkcji, to powstaje jego pełnoprawna, “głęboka” kopia. Możemy oczywiście sterować tym zachowaniem, definiując typy referencyjne. Niemniej jednak nie można zaprzeczyć, że procesy sterujące cyklem życia obiektu (takie jak <em>konstrukcja</em>, <em>kopiowanie</em>, <em>nadpisywanie</em> czy <em>destrukcja</em>) są niesamowicie ważnym elementem działania aplikacji C++owych.</p><p>Język C++ udostępnia nam narzędzia, dzięki którym możemy sterować wszystkimi tymi zachowaniami. Z Javy znamy już <em>konstruktor</em>, który jest specjalną metodą, uruchamianą w momencie tworzenia obiektu. Mamy jeszcze jednak trzy inne narzędzia, które razem stanowią tak zwaną Wielką Trójkę (ang. <em>The Big Three</em>) — konstruktor kopiujący, operator przypisania i destruktor.</p><h2 id="konstruktor"><span class="me-2">Konstruktor</span><a href="index.html#konstruktor" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Konstruktory w C++ z pozoru działają identycznie jak w Javie. Uruchamiają się wtedy, gdy tworzony jest obiekt. Mogą nawet mieć identyczną postać jak w Javie:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">surname</span><span class="p">;</span>
+    
+<span class="nl">public:</span>
+    <span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">n</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+        <span class="n">surname</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Ten konstruktor ma jednak pewną wadę — zamiast inicjalizować pola <code class="language-plaintext highlighter-rouge">name</code> oraz <code class="language-plaintext highlighter-rouge">surname</code>, tworzy je w “domyślnym” stanie, a później nadpisuje na podstawie przekazanych argumentów.</p><blockquote><p>Ale… jaka to różnica?</p></blockquote><p>Wyśmienite pytanie. Spójrzmy na następujący kod:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="kt">int</span><span class="p">();</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    
+    <span class="k">auto</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Czym się różnią operacje wykonane na <code class="language-plaintext highlighter-rouge">x</code> i na <code class="language-plaintext highlighter-rouge">y</code>? Może to łatwiej widać, gdy zamiast <code class="language-plaintext highlighter-rouge">int()</code> napiszemy <code class="language-plaintext highlighter-rouge">0</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Ewidentnie widać już różnicę. W przypadku zmiennej <code class="language-plaintext highlighter-rouge">x</code>, zostaje ona stworzona z domyślną wartością <code class="language-plaintext highlighter-rouge">0</code>, a później nadpisujemy ją wartością <code class="language-plaintext highlighter-rouge">10</code>. W przypadku zmiennej <code class="language-plaintext highlighter-rouge">y</code> wykonujemy mniej operacji, bo od razu przypisujemy (inicjalizując) do niej wartość <code class="language-plaintext highlighter-rouge">10</code>.</p><blockquote><p>Ale jak to się ma do pól w klasie i tym, co z nimi robi konstruktor?</p></blockquote><p>Otóż pola w klasie są tworzone <em>przed</em> momentem, gdy wchodzimy do ciała (bloku) konstruktora. Oznacza to, że gdy nasz konstruktor wygląda tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">n</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="n">surname</span> <span class="o">=</span> <span class="n">s</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>To zanim dojdziemy do operacji <code class="language-plaintext highlighter-rouge">name = n</code>, pole <code class="language-plaintext highlighter-rouge">name</code> już istnieje. Oznacza to, że musiało zostać stworzone. Jak? Używając domyślnego konstruktora typu <code class="language-plaintext highlighter-rouge">std::string</code>. Później nadpisaliśmy tę domyślną wartość zawartością <code class="language-plaintext highlighter-rouge">n</code>.</p><blockquote><p>Ok, jak to naprawić, aby uniknąć niepotrzebnych, domyślnych inicjalizacji?</p></blockquote><p>Skorzystać z <em>listy inicjalizacji pól</em> (ang. <em>member initializer list</em>).</p><h3 id="lista-inicjalizacji-pól"><span class="me-2">Lista inicjalizacji pól</span><a href="index.html#lista-inicjalizacji-pól" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Inicjalizacja docelową wartością jest zwykle lepsza niż inicjalizacja domyślna i późniejsze nadpisanie. Aby zainicjalizować pola klasy przy pomocy konstruktora, należy skorzystać z następującej składni:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">surname</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">n</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> 
+            <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">surname</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Wygląda nieco dziwnie, ale nie wprowadza żadnej skomplikowanej filozofii. Między listą parametrów konstruktora a jego ciałem zostaje umieszczony dwukropek (<code class="language-plaintext highlighter-rouge">:</code>) i po nim zostają wylistowane pola wraz z odpowiednią ich inicjalizacją.</p><p>Warto zwrócić uwagę, że jest to jedyny sposób stworzenia obiektu, który ma pola typu referencyjnego:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">class</span> <span class="nc">Wrapper</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">;</span>
+<span class="nl">public:</span>
+    <span class="n">Wrapper</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">ref</span><span class="p">)</span> <span class="o">:</span> <span class="n">ref</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">changeTo</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">ref</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">wrapper</span> <span class="o">=</span> <span class="n">Wrapper</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">wrapper</span><span class="p">.</span><span class="n">changeTo</span><span class="p">(</span><span class="mi">7331</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>7331
+</pre></table></code></div></div><p>Wiemy przecież, że referencja musi być zainicjalizowana, a skoro lista inicjalizacji pól to jedyny sposób na inicjalizację pola (zamiast jej domyślnej inicjalizacji i późniejszego nadpisania), to pole typu referencyjnego wymusza na nas użycie tej listy.</p><h2 id="konstruktor-kopiujący"><span class="me-2">Konstruktor kopiujący</span><a href="index.html#konstruktor-kopiujący" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Konstruktor kopiujący uruchamia się, gdy kopiujemy dany obiekt. Przykładowo, biorąc pod uwagę obiekty typu <code class="language-plaintext highlighter-rouge">std::vector&lt;int&gt;</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">byCopy</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+<span class="k">auto</span> <span class="n">byReference</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">vec</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">v3</span> <span class="o">=</span> <span class="n">vec</span><span class="p">;</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="n">v3</span><span class="p">;</span>
+    <span class="n">byCopy</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+    <span class="n">byReference</span><span class="p">(</span><span class="n">vec</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Omówmy krótko każdą linijkę <code class="language-plaintext highlighter-rouge">main()</code>a:</p><ul><li><code class="language-plaintext highlighter-rouge">auto vec = std::vector&lt;int&gt;{1, 2, 3};</code> — Tutaj mamy do czynienia z wywołaniem konstruktora, ale <strong>nie</strong> konstruktora kopiującego. Nic tutaj nie kopiujemy. Po prostu tworzymy <code class="language-plaintext highlighter-rouge">vec</code> na podstawie trzech literałów.<li><code class="language-plaintext highlighter-rouge">auto v2 = vec;</code> — Tutaj już wykorzystujemy konstruktor kopiujący. Tworzymy <code class="language-plaintext highlighter-rouge">v2</code> i chcemy, aby przechowywał on identyczne elementy jak <code class="language-plaintext highlighter-rouge">vec</code>.<li><code class="language-plaintext highlighter-rouge">auto v3 = vec;</code> — Taka sama sytuacja jak powyżej.<li><code class="language-plaintext highlighter-rouge">v2 = v3;</code> — Tutaj <strong>nie</strong> wywołujemy żadnego konstruktora. Nie jest tworzony żaden wektor. Nadpisujemy zawartość <code class="language-plaintext highlighter-rouge">v2</code> zawartością <code class="language-plaintext highlighter-rouge">v3</code> (co samo z siebie nie ma sensu — to tylko przykład).<li><code class="language-plaintext highlighter-rouge">byCopy(vec);</code> — Tutaj parametr <code class="language-plaintext highlighter-rouge">v</code> jest kopią argumentu <code class="language-plaintext highlighter-rouge">vec</code>, a zatem wywołuje się konstruktor kopiujący.<li><code class="language-plaintext highlighter-rouge">byReference(vec);</code> — Tutaj nie wywołuje się żaden konstruktor. Tworzony parametr <code class="language-plaintext highlighter-rouge">v</code> to referencja do oryginalnego wektora <code class="language-plaintext highlighter-rouge">vec</code> podanego przez argument.</ul><p>Teraz przedstawmy, jak można zaimplementować konstruktor kopiujący. Steruje on w końcu zachowaniem kopiowania obiektów, co w C++ jest niewątpliwe bardzo ważnym procesem:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">surname</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="c1">// constructor</span>
+    <span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">n</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span>
+            <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">surname</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+            
+    <span class="c1">// copy constructor</span>
+    <span class="n">Student</span><span class="p">(</span><span class="n">Student</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+            <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">name</span><span class="p">),</span> <span class="n">surname</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">surname</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Konstruktor kopiujący, którego widać w 11 linijce, odpowiada za zdefiniowanie zachowania procesu kopiowania. Naturalne jest, że gdy kopiujemy obiekt typu <code class="language-plaintext highlighter-rouge">Student</code>, to powinniśmy nowotworzonemu obiektowi przypisać identyczne imię i nazwisko jak to znajdujące się w obiekcie, który kopiujemy.</p><p>Parametr <code class="language-plaintext highlighter-rouge">other</code> to właśnie ten “oryginał”, który jest kopiowany. Nowy obiekt (kopia) to ten, na rzecz którego wywołujemy konstruktor kopiujący.</p><p>Warto eksperymentalnie wykazać istotę poprawnego implementowania konstruktora kopiującego implementując go niepoprawnie. Załóżmy znaną nam klasę <code class="language-plaintext highlighter-rouge">Point</code>, wzbogaconą o (niepoprawny) konstruktor kopiujący:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="c1">// member init. list allows for name duplication</span>
+    <span class="c1">// and yet it works correctly</span>
+    <span class="n">Point</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="k">const</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="n">Point</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// empty</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Zostawienie konstruktora kopiującego pustego jest niewątpliwie niepokojącym manewrem. Raczej nic dobrego z niego nie wyniknie. W takich sytuacjach może dojść do bardzo niepokojących sytuacji, jak choćby w następującym przypadku:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="c1">// member init-list allows for name duplication</span>
+    <span class="c1">// and yet it works correctly</span>
+    <span class="n">Point</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="k">const</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="n">Point</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// empty</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"({}, {})"</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">{</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">}</span> <span class="p">};</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{::}"</span><span class="p">,</span> <span class="n">points</span><span class="p">);</span>         <span class="c1">// {fmt}'s `::` syntax to print "plainly"</span>
+    <span class="k">auto</span> <span class="n">copiesOfPoints</span> <span class="o">=</span> <span class="n">points</span><span class="p">;</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{::}"</span><span class="p">,</span> <span class="n">copiesOfPoints</span><span class="p">);</span> <span class="c1">// {fmt}'s `::` syntax to print "plainly"</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="przykładowy output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>[(1, 0), (1, 0), (1, 0), (1, 0)]
+[(1, 0), (1, 0), (1, 0), (1, 0)]
+</pre></table></code></div></div><p>Być może niektórzy spodziewali się, że stworzenie <code class="language-plaintext highlighter-rouge">copiesOfPoints</code> zrobi <em>coś</em> dziwnego, bo to w końcu kopia wektora, co oznacza — koniec końców — kopiowanie jego elementów, ale kto by się spodziewał, że samo <code class="language-plaintext highlighter-rouge">points</code> będzie w tak przedziwnym stanie?</p><p>Jeszcze ciekawszym jest fakt, że gdy zbudujemy program, każąc kompilatorowi zaaplikować optymalizacje do generowanego kodu, to wynik może być jeszcze dziwniejszy:</p><div file="przykładowy output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>[(449481824, 32764), (449481824, 32764), (449481824, 32764), (449481824, 32764)]
+[(162, 1), (162, 1), (162, 1), (162, 1)]
+</pre></table></code></div></div><p>Powód jest prosty — mamy Undefined Behavior. Konstruktor kopiujący “nie dotyka” pól <code class="language-plaintext highlighter-rouge">x</code> i <code class="language-plaintext highlighter-rouge">y</code>, tak więc zostają one w niesprecyzowanym stanie. Gdyby zmienić ich definicję z:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+</pre></table></code></div></div><p>Na:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</pre></table></code></div></div><p>To <strong>gwarantowanym</strong> outputem byłoby:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>[(0, 0), (0, 0), (0, 0), (0, 0)]
+[(0, 0), (0, 0), (0, 0), (0, 0)]
+</pre></table></code></div></div><p>Warto jeszcze wspomnieć, dlaczego oryginalny wektor <code class="language-plaintext highlighter-rouge">points</code> się “popsuł”. To dlatego, że działa on na zasadzie <em>zwiększającej się tablicy</em>, co z kolei musi być zaimplementowane jako raz na jakiś czas tworzenie nowej (większej lub mniejszej) i kopiowanie do niej elementów z oryginalnej przestrzeni dedykowanej wektorowi. <em>Kopiowanie</em>, a więc coś, co zepsuliśmy.</p><p>Konstruktor kopiujący z reguły nie robi niczego ciekawego poza zainicjalizowaniem danych nowego obiektu tak, aby były kopiami danych z oryginalnego obiektu. Przykładowo, przyglądając się jeszcze raz klasie <code class="language-plaintext highlighter-rouge">Student</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Student</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">surname</span><span class="p">;</span>
+
+<span class="nl">public:</span>
+    <span class="c1">// constructor</span>
+    <span class="n">Student</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">n</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span>
+            <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">surname</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+            
+    <span class="c1">// copy constructor</span>
+    <span class="n">Student</span><span class="p">(</span><span class="n">Student</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+            <span class="o">:</span> <span class="n">name</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">name</span><span class="p">),</span> <span class="n">surname</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">surname</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Można zauważyć, że <code class="language-plaintext highlighter-rouge">name(other.name)</code> oraz <code class="language-plaintext highlighter-rouge">surname(other.surname)</code> wykorzystują konstruktor kopiujący z klasy <code class="language-plaintext highlighter-rouge">std::string</code>. To bardzo popularny schemat. Ręczne definiowanie tego konstruktora i wykonywanie na nim skomplikowanych operacji ma miejsce relatywnie rzadko — będziemy w przyszłości pokazywali, gdzie (i jak) ma to sens — przy ręcznym zarządzaniu zasobami.</p><h2 id="operator-przypisania"><span class="me-2">Operator przypisania</span><a href="index.html#operator-przypisania" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>W jednym z poprzednich przykładów zobaczyliśmy, że <code class="language-plaintext highlighter-rouge">auto x = y</code> oraz <code class="language-plaintext highlighter-rouge">x = y</code> to nie jest to samo. Pierwsze to <em>kopia</em>, a drugie to <em>nadpisanie</em><sup id="fnref:names"><a href="index.html#fn:names" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. Nadpisaniem też możemy sterować, ale zahacza to o temat <em>przeciążania operatorów</em>, o którym będzie w następnej części tego rozdziału.</p><h2 id="destruktor"><span class="me-2">Destruktor</span><a href="index.html#destruktor" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>W języku C++ mamy do czynienia z bardzo ciekawym zjawiskiem — mamy tak zwaną <em>deterministyczną destrukcję</em>.</p><p>Z Javy pamiętamy, że narzędzie o nazwie Garbage Collector sam dba o to, aby czyścić nieużywaną pamięć. Co jakiś czas skanuje obszar zajmowanej przez nasz Javowy proces pamięci w poszukiwaniu fragmentów, których już nie używamy.</p><p>Tylko czasem pojawia się ważne pytanie — <em>kiedy</em>?</p><p>Na to pytanie bardzo trudno jest odpowiedzieć. Efektywnie nie za bardzo się da sterować Garbage Collectorem z poziomu samej aplikacji. Można oczywiście samemu takowego zaimplementować, ale zasada jego działania sprawia, że praktycznie nigdy nie zdarzy się sytuacja, gdzie uruchomi się od razu, jak tylko przestajemy potrzebować jakiegoś fragmentu pamięci. Jakiś czas zajmujemy pamięć, której nie potrzebujemy.</p><p>Zarządzanie zasobami w C++ działa nieco inaczej. Nie ma Garbage Collectora — mamy do czynienia z precyzyjnie zdefiniowanymi procesami, które w precyzyjnie zdefiniowanych momentach zwalniają zużywane przez aplikację zasoby (nie tylko pamięć, ale też i zamykają otwarte pliki czy połączenia Internetowe).</p><p>Całe to dobro jest możliwe dzięki <em>destruktorom</em>. Można o nich myśleć jako o przeciwieństwach konstruktorów.</p><blockquote class="prompt-info"><p>Konstruktor jest automatycznie wykonywany, gdy tworzony jest obiekt, a destruktor jest automatycznie wykonywany, gdy obiekt ginie.</p></blockquote><p>Deklaracja (i definicja) destruktora jest bardzo podobna do deklaracji (i definicji) konstruktora — poprzedza go dodatkowo znak tyldy, czyli <code class="language-plaintext highlighter-rouge">~</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="n">Point</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="k">const</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Created Point({}, {})"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Point</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Destroyed Point({}, {})"</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Ten kod stworzy trzy punkty, a następnie przejdzie do klamry kończącej blok (ang. <em>scope</em>) <code class="language-plaintext highlighter-rouge">main()</code>a, co poskutkuje zniszczeniem obiektów <code class="language-plaintext highlighter-rouge">p1</code>, <code class="language-plaintext highlighter-rouge">p2</code> i <code class="language-plaintext highlighter-rouge">p3</code>. Formalnie mowa tutaj o zakończeniu życia tych obiektów.</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>Created Point(1, 2)
+Created Point(2, 3)
+Created Point(4, 5)
+Destroyed Point(4, 5)
+Destroyed Point(2, 3)
+Destroyed Point(1, 2)
+</pre></table></code></div></div><p>Warto zwrócić uwagę na kolejność wywoływania destruktorów w relacji do kolejności tworzenia obiektów:</p><blockquote class="prompt-info"><p>W ramach tego samego bloku, obiekty <em>o automatycznym czasie życia</em> (czyli wszystkie, o których do tej pory mówiliśmy) są niszczone w odwrotnej kolejności niż kolejność ich tworzenia.</p></blockquote><p>Warto zrobić mały eksperyment i zobaczyć, co się stanie, gdy będziemy operować na zagnieżdżonych blokach:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">p3</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">auto</span> <span class="n">p4</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">p5</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>Created Point(1, 2)
+Created Point(2, 3)
+Created Point(3, 4)
+Destroyed Point(3, 4)
+Created Point(4, 5)
+Destroyed Point(4, 5)
+Destroyed Point(2, 3)
+Created Point(5, 6)
+Destroyed Point(5, 6)
+Destroyed Point(1, 2)
+</pre></table></code></div></div><p>Powyższy output można łatwo wyjaśnić, analizując kod linia po linii:</p><ol><li><code class="language-plaintext highlighter-rouge">auto main() -&gt; int {</code> — Wchodzimy do głównej funkcji. Otwieramy jej blok.<li><code class="language-plaintext highlighter-rouge">auto p1 = Point(1, 2);</code> — Tworzymy punkt (<code class="language-plaintext highlighter-rouge">Created Point(1, 2)</code>).<li><code class="language-plaintext highlighter-rouge">{</code> — Wchodzimy do nowego bloku.<li><code class="language-plaintext highlighter-rouge">auto p2 = Point(2, 3);</code> — Tworzymy punkt (<code class="language-plaintext highlighter-rouge">Created Point(2, 3)</code>).<li><code class="language-plaintext highlighter-rouge">{</code> — Wchodzimy do nowego bloku.<li><code class="language-plaintext highlighter-rouge">auto p3 = Point(3, 4);</code> — Tworzymy punkt (<code class="language-plaintext highlighter-rouge">Created Point(3, 4)</code>).<li><code class="language-plaintext highlighter-rouge">}</code> — Wychodzimy z bloku, w którym został stworzony <code class="language-plaintext highlighter-rouge">p3</code> (<code class="language-plaintext highlighter-rouge">Destroyed Point(3, 4)</code>).<li><code class="language-plaintext highlighter-rouge">auto p4 = Point(4, 5);</code> — Tworzymy punkt (<code class="language-plaintext highlighter-rouge">Created Point(4, 5)</code>).<li><code class="language-plaintext highlighter-rouge">}</code> — Wychodzimy z bloku, gdzie zostały stworzone <code class="language-plaintext highlighter-rouge">p2</code> i <code class="language-plaintext highlighter-rouge">p4</code> (w tej kolejności), a zatem kolejność ich destrukcji będzie odwrotna — najpierw “umrze” <code class="language-plaintext highlighter-rouge">p4</code>, a potem <code class="language-plaintext highlighter-rouge">p2</code> (<code class="language-plaintext highlighter-rouge">Destroyed Point(4, 5)</code> i <code class="language-plaintext highlighter-rouge">Destroyed Point(2, 3)</code>)<li><code class="language-plaintext highlighter-rouge">auto p5 = Point(5, 6);</code> — Tworzymy punkt (<code class="language-plaintext highlighter-rouge">Created Point(5, 6)</code>).<li><code class="language-plaintext highlighter-rouge">}</code> — Wychodzimy z bloku, gdzie zostały stworzone <code class="language-plaintext highlighter-rouge">p1</code> i <code class="language-plaintext highlighter-rouge">p5</code> — najpierw umiera <code class="language-plaintext highlighter-rouge">p5</code>, a potem <code class="language-plaintext highlighter-rouge">p1</code> (<code class="language-plaintext highlighter-rouge">Destroyed Point(5, 6)</code> i <code class="language-plaintext highlighter-rouge">Destroyed Point(1, 2)</code>).</ol><p>Jak widać, kolejność tworzenia i niszczenia obiektów ma <em>jakiś</em> sens. Oczywiście w powyższym przykładzie konstruktor nie ma potrzeby czegokolwiek wyświetlać, a ręczne zdefiniowanie destruktora nie przynosi żadnych korzyści (poza demonstracją w postaci wyświetlania).</p><p>Możliwość sterowania praktycznie każdym aspektem życia obiektu pozwala na bardzo precyzyjne sterowanie zasobami. Będzie to szalenie potrzebne przy manualnym zarządzaniu pamięcią.</p><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:names"><p>Tłumaczenie terminu <em>assignment operator</em> na język polski nie zawsze jest spójne. Terminy <em>operator przypisania</em>, <em>operator nadpisania</em>, <em>operator kopiująco-nadpisujący</em> czy inne wymyślne terminy z reguły oznaczają dokładnie to samo, czyli <code class="language-plaintext highlighter-rouge">operator=</code>. <a href="index.html#fnref:names" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-8-1-pola-i-metody-statyczne/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 8.1 - Pola i metody statyczne</p></a> <a href="../rozdział-8-3-przeciążanie-operatorów-cz-1/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Rozdział 8.3 - Przeciążanie operatorów, cz. 1</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script defer src="../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-8-2-wielka-tr%C3%B3jka/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

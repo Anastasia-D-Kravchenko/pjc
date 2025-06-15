@@ -1,0 +1,327 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 7.2 - Multi-file applications - .cpp and .hpp files" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/en/lectures/chapter-7-2-multi-file-applications-hpp/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-04-13T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 7.2 - Multi-file applications - .cpp and .hpp files" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-04-13T00:00:00+02:00","datePublished":"2025-04-13T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"Chapter 7.2 - Multi-file applications - .cpp and .hpp files","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-7-2-multi-file-applications-hpp/"},"url":"/~fk/en/lectures/chapter-7-2-multi-file-applications-hpp/"}</script><title>Chapter 7.2 - Multi-file applications - <code>.cpp</code> and <code>.hpp</code> files | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../../en.html" id="avatar" class="rounded-circle"> <img src="../../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../../en.html">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../../en.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="../../information/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="../../presentations/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="../../tasks/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="../../tags/index.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="../../../wyklady/rozdział-7-2-aplikacje-wieloplikowe-hpp/index.html" class="nav-link"> <img src="../../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="index.html" class="nav-link"> <img src="../../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../../index.html"> Home </a> </span> <span>Chapter 7.2 - Multi-file applications - <code>.cpp</code> and <code>.hpp</code> files</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 7.2 - Multi-file applications - <code>.cpp</code> and <code>.hpp</code> files</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1744495200" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Apr 13, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1284 words" > <em>7 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="declaration-in-one-file-definition-in-another"><span class="me-2">Declaration in one file, definition in another</span><a href="index.html#declaration-in-one-file-definition-in-another" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>As it’s known, in C++, we cannot call a function if we don’t know its header, which we can learn from its declaration.</p><p>This is especially evident when our project consists of multiple source files. Let’s assume the following situation — we have three source files:</p><ul><li><code class="language-plaintext highlighter-rouge">main.cpp</code><li><code class="language-plaintext highlighter-rouge">maths.cpp</code><li><code class="language-plaintext highlighter-rouge">printer.cpp</code></ul><p>Where in <code class="language-plaintext highlighter-rouge">maths.cpp</code> and <code class="language-plaintext highlighter-rouge">printer.cpp</code>, we have many different functions:</p><div file="maths.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="maths.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">isOdd</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">not</span> <span class="n">isEven</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="printer.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="printer.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">print</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">print</span><span class="p">(</span><span class="kt">bool</span> <span class="k">const</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Boolean: {}"</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Int: {}"</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">print</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Double: {}"</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>To use those functions in <code class="language-plaintext highlighter-rouge">main.cpp</code>, we are forced to first declare them:</p><div file="main.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="main.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">isOdd</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">double</span><span class="p">;</span>
+
+<span class="k">auto</span> <span class="n">print</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">bool</span> <span class="k">const</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">();</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">isEven</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">isOdd</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mf">2.5</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>Hello
+Boolean: true
+Boolean: false
+Int: 4
+Double: 6.25
+</pre></table></code></div></div><p>It’s impossible not to notice that we lose up to 8 lines (9 if we count the empty line) just to declare functions that are elsewhere.</p><p>Attempting to maintain such code undoubtedly leads to chaos in the project structure. There must be a better way. Fortunately, there is — they are called <em>header files</em>.</p><h2 id="header-files"><span class="me-2">Header files</span><a href="index.html#header-files" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>A file with the extension <code class="language-plaintext highlighter-rouge">.cpp</code> we called an <em>implementation file</em> or <em>source file</em>. It contained source code. A file with the extension <code class="language-plaintext highlighter-rouge">.hpp</code><sup id="fnref:hhpp"><a href="index.html#fn:hhpp" class="footnote" rel="footnote" role="doc-noteref">1</a></sup> we will call a <em>header file</em>. The name clearly indicates its purpose — it will store <strong>headers</strong>.</p><p>Let’s create two additional files — <code class="language-plaintext highlighter-rouge">printer.hpp</code> and <code class="language-plaintext highlighter-rouge">maths.hpp</code>. Their purpose is to store declarations, so let’s move the appropriate declarations from <code class="language-plaintext highlighter-rouge">main.cpp</code> to them:</p><div file="maths.hpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="maths.hpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="cp">#pragma once
+</span>
+<span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">isOdd</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">double</span><span class="p">;</span>
+</pre></table></code></div></div><div file="printer.hpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="printer.hpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="cp">#pragma once
+</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">bool</span> <span class="k">const</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">double</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+</pre></table></code></div></div><p>Now, in our <code class="language-plaintext highlighter-rouge">main.cpp</code>, instead of copying and pasting declarations, we just need to include the header files:</p><div file="main.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="main.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"maths.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"printer.hpp"</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">();</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">isEven</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">isOdd</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mf">2.5</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Such a combination of files results in displaying the same output as before.</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>Hello
+Boolean: true
+Boolean: false
+Int: 4
+Double: 6.25
+</pre></table></code></div></div><p>Time to summarize the appearance of our project and answer a couple of questions.</p><blockquote><p>Wait a moment, what is this <code class="language-plaintext highlighter-rouge">#pragma once</code>?</p></blockquote><p>We’ll cover that in the next part of the chapter. For now, it’s worth remembering that it’s effectively added at the beginning of <strong>every</strong> header file.</p><h2 id="summary-of-changes-and-project-structure-description"><span class="me-2">Summary of changes and project structure description</span><a href="index.html#summary-of-changes-and-project-structure-description" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Our project now consists of 6 files:</p><ul><li><code class="language-plaintext highlighter-rouge">CMakeLists.txt</code><li><code class="language-plaintext highlighter-rouge">main.cpp</code><li>pairs of files <code class="language-plaintext highlighter-rouge">maths.hpp</code> and <code class="language-plaintext highlighter-rouge">maths.cpp</code><li>pairs of files <code class="language-plaintext highlighter-rouge">printer.hpp</code> and <code class="language-plaintext highlighter-rouge">printer.cpp</code></ul><p>The <code class="language-plaintext highlighter-rouge">CMakeLists.txt</code> file hasn’t changed in any specific way — <code class="language-plaintext highlighter-rouge">add_executable()</code> still relies solely on <code class="language-plaintext highlighter-rouge">.cpp</code> files<sup id="fnref:can-include-headers"><a href="index.html#fn:can-include-headers" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>.</p><p>Instead of manually listing all the function declarations it wants to use, <code class="language-plaintext highlighter-rouge">main.cpp</code> includes the appropriate header files using <code class="language-plaintext highlighter-rouge">#include</code>. As we can recall from the <em>Summary and Extras</em> after Lecture 1, <a href="../chapter-1-6-summary-and-extras/index.html#preprocessor-directives">the <code class="language-plaintext highlighter-rouge">#include</code> directive does nothing more than simply paste the contents of the file</a>. Effectively, header files exist to automate the process of copying and pasting declarations of elements we want to use from other files.</p><p>However, it’s hard not to notice that these <code class="language-plaintext highlighter-rouge">#include</code>s look slightly different from before. When including headers from the standard library or from {fmt}, we used <code class="language-plaintext highlighter-rouge">#include &lt;name&gt;</code>. Here, we clearly have <code class="language-plaintext highlighter-rouge">#include "name"</code>, so we’ve swapped angle brackets for quotation marks.</p><p>Behind these differences lies a longer piece of history of original application splitting into multiple files, many design decisions of which were made in the context of very performance-limited computers. Nowadays, project build structures are significantly different, and C++ lags behind in catching up with this evolution. C++ Modules are on the horizon, but there’s still a long way to go before they become widely adopted.</p><p>Returning to the topic of <code class="language-plaintext highlighter-rouge">&lt;&gt;</code> versus <code class="language-plaintext highlighter-rouge">""</code> — there are many configuration options and nuances that can effectively undermine any “absolute” argument trying to explain the use of one over the other, so we won’t delve into the theory. It’s just worth remembering the following guideline:</p><blockquote class="prompt-tip"><p>If we’re including a header from some ready-made library, we use angle brackets (<code class="language-plaintext highlighter-rouge">#include &lt;name&gt;</code>). If we’re including a header from our project, we use quotation marks (<code class="language-plaintext highlighter-rouge">#include "name"</code>).</p></blockquote><h3 id="further-subdivision-into-subfolders"><span class="me-2">Further subdivision into subfolders</span><a href="index.html#further-subdivision-into-subfolders" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>As is often the case when working with computers, sometimes it’s worth placing files in separate subfolders to achieve a clearer structure. There’s nothing stopping us from applying this practice to C++ projects. Naturally, you can create a separate folder for each domain or module of the project. Later, you just need to use relative names accordingly:</p><div file="project structure" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="project structure"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>PJC
+│   CMakeLists.txt
+│   main.cpp
+│
+├───maths
+│       maths.cpp
+│       maths.hpp
+│
+└───printer
+        printer.cpp
+        printer.hpp
+</pre></table></code></div></div><div file="CMakeLists.txt" class="language-cmake highlighter-rouge"><div class="code-header"> <span data-label-text="CMakeLists.txt"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.26<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>PJC<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 20<span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span>FetchContent<span class="p">)</span>
+
+<span class="nf">FetchContent_Declare</span><span class="p">(</span>
+        fmt
+        GIT_REPOSITORY  https://github.com/fmtlib/fmt
+        GIT_TAG         11.0.2
+<span class="p">)</span>
+
+<span class="nf">FetchContent_MakeAvailable</span><span class="p">(</span>fmt<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>PJC main.cpp maths/maths.cpp printer/printer.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>PJC fmt<span class="p">)</span>
+</pre></table></code></div></div><div file="main.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="main.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">"maths/maths.hpp"</span><span class="cp">
+#include</span> <span class="cpf">"printer/printer.hpp"</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">print</span><span class="p">();</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">isEven</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">isOdd</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">print</span><span class="p">(</span><span class="n">squared</span><span class="p">(</span><span class="mf">2.5</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="maths.hpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="maths.hpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="cp">#pragma once
+</span>
+<span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">isOdd</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">double</span><span class="p">;</span>
+</pre></table></code></div></div><div file="maths.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="maths.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">isOdd</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">not</span> <span class="n">isEven</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">squared</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">d</span> <span class="o">*</span> <span class="n">d</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="printer.hpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="printer.hpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="cp">#pragma once
+</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">bool</span> <span class="k">const</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">print</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span><span class="p">;</span>
+</pre></table></code></div></div><div file="printer.cpp" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="printer.cpp"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">print</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">print</span><span class="p">(</span><span class="kt">bool</span> <span class="k">const</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Boolean: {}"</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">n</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Int: {}"</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">print</span><span class="p">(</span><span class="kt">double</span> <span class="k">const</span> <span class="n">d</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Double: {}"</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:hhpp"><p>The C++ convention does not require header files to have the <code class="language-plaintext highlighter-rouge">.hpp</code> extension. In the C language, <code class="language-plaintext highlighter-rouge">.h</code> extensions were preferred, so some C++ projects (e.g., the {fmt} library) use them. However, it’s not that significant. Nothing will happen if someone uses <code class="language-plaintext highlighter-rouge">.h</code> instead of <code class="language-plaintext highlighter-rouge">.hpp</code>. <a href="index.html#fnref:hhpp" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:can-include-headers"><p>However, nothing will break if we add header files to <code class="language-plaintext highlighter-rouge">add_executable()</code>. Some environments even do this automatically. <a href="index.html#fnref:can-include-headers" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../chapter-7-1-multi-file-applications-cpp/index.html" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 7.1 - Multi-file applications - multiple <code>.cpp</code> files</p></a> <a href="../chapter-7-3-multi-file-applications-classes-and-hpp-dangers/index.html" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 7.3 - Multi-file applications - classes and problems they cause with header files</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../../assets/js/dist/post.min.js"></script> <script defer src="../../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/en/lectures/chapter-7-2-multi-file-applications-hpp/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

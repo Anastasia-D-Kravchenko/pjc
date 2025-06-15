@@ -1,0 +1,745 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 5.4 - Typy zdefiniowane przez użytkownika a inne biblioteki" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-5-4-u%C5%BCycie-typ%C3%B3w-zdefiniowanych-przez-u%C5%BCytkownika-a-inne-biblioteki/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-03-30T00:00:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 5.4 - Typy zdefiniowane przez użytkownika a inne biblioteki" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-30T00:00:00+01:00","datePublished":"2025-03-30T00:00:00+01:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 5.4 - Typy zdefiniowane przez użytkownika a inne biblioteki","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-5-4-u%C5%BCycie-typ%C3%B3w-zdefiniowanych-przez-u%C5%BCytkownika-a-inne-biblioteki/"},"url":"/~fk/wyklady/rozdzia%C5%82-5-4-u%C5%BCycie-typ%C3%B3w-zdefiniowanych-przez-u%C5%BCytkownika-a-inne-biblioteki/"}</script><title>Rozdział 5.4 - Typy zdefiniowane przez użytkownika a inne biblioteki | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en/lectures/chapter-5-4-user-defined-types-and-other-libraries/index.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 5.4 - Typy zdefiniowane przez użytkownika a inne biblioteki</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 5.4 - Typy zdefiniowane przez użytkownika a inne biblioteki</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1743289200" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Mar 30, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="4211 słów" > <em>23 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="obiekty-własnych-klas-a-fmt"><span class="me-2">Obiekty własnych klas a {fmt}</span><a href="index.html#obiekty-własnych-klas-a-fmt" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Podstawową operacją przy nauce programowania jest operacja wyświetlania tekstu. Mam nadzieję, że nikogo nie trzeba już przekonywać do {fmt}, dlatego spójrzmy, co się stanie, gdy spróbujemy wyświetlić obiekt naszej własnej klasy przy pomocy tej biblioteki:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">point</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Pierwsze <code class="language-plaintext highlighter-rouge">fmt::println()</code> nie ma żadnego problemu, żeby wyświetlić <raw-data>3 14</raw-data>, ale druga linijka spowoduje błąd kompilacji, który na pierwszy rzut oka jest niezbyt pomocny:</p><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre><td class="rouge-code"><pre>cmake-build-debug/_deps/fmt-src/include/fmt/base.h: In instantiation of 'constexpr decltype (ctx.begin()) fmt::v11::detail::parse_format_specs(ParseContext&amp;) [with T = Point; ParseContext = compile_parse_context&lt;char&gt;; decltype (ctx.begin()) = const char*]':
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2763:51:   required from here
+ 2763 |     return id &gt;= 0 &amp;&amp; id &lt; num_args ? parse_funcs_[id](context_) : begin;
+      |                                       ~~~~~~~~~~~~^
+main.cpp:13:17:   in 'constexpr' expansion of 'fmt::v11::basic_format_string&lt;char, const Point&amp;&gt;("{}")'
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2884:40:   in 'constexpr' expansion of 'fmt::v11::detail::parse_format_string&lt;true, char, format_string_checker&lt;char, Point&gt; &gt;(((fmt::v11::basic_format_string&lt;char, const Point&amp;&gt;*)this)-&gt;fmt::v11::basic_format_string&lt;char, const Point&amp;&gt;::str_, fmt::v11::detail::format_string_checker&lt;char, Point&gt;(fmt::v11::basic_string_view&lt;char&gt;(((const char*)s))))'
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2613:44:   in 'constexpr' expansion of 'fmt::v11::detail::parse_replacement_field&lt;char, format_string_checker&lt;char, Point&gt;&amp;&gt;((p + -1), end, (* &amp; handler))'
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2581:33:   in 'constexpr' expansion of '(&amp; handler)-&gt;fmt::v11::detail::format_string_checker&lt;char, Point&gt;::on_replacement_field((&amp; handler)-&gt;fmt::v11::detail::format_string_checker&lt;char, Point&gt;::on_arg_id(), begin)'
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2756:20:   in 'constexpr' expansion of '((fmt::v11::detail::format_string_checker&lt;char, Point&gt;*)this)-&gt;fmt::v11::detail::format_string_checker&lt;char, Point&gt;::on_format_specs(id, begin, begin)'
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2673:45: error: 'fmt::v11::detail::type_is_unformattable_for&lt;Point, char&gt; _' has incomplete type
+ 2673 |     type_is_unformattable_for&lt;T, char_type&gt; _;
+      |                                             ^
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h: In instantiation of 'constexpr fmt::v11::detail::value&lt;Context&gt; fmt::v11::detail::make_arg(T&amp;) [with bool PACKED = true; Context = fmt::v11::context; T = const Point; typename std::enable_if&lt;PACKED, int&gt;::type &lt;anonymous&gt; = 0]':
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:2018:74:   required from 'constexpr fmt::v11::detail::format_arg_store&lt;Context, NUM_ARGS, 0, DESC&gt; fmt::v11::make_format_args(T&amp; ...) [with Context = context; T = {const Point}; long long unsigned int NUM_ARGS = 1; long long unsigned int NUM_NAMED_ARGS = 0; long long unsigned int DESC = 15; typename std::enable_if&lt;(NUM_NAMED_ARGS == 0), int&gt;::type &lt;anonymous&gt; = 0]'
+ 2018 |   return { {detail::make_arg&lt;NUM_ARGS &lt;= detail::max_packed_args, Context&gt;(
+      |            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+ 2019 |       args)...} };
+      |       ~~~~~                                                               
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:3058:44:   required from 'void fmt::v11::println(FILE*, format_string&lt;T ...&gt;, T&amp;&amp; ...) [with T = {const Point&amp;}; FILE = _iobuf; format_string&lt;T ...&gt; = basic_format_string&lt;char, const Point&amp;&gt;]'
+ 3058 |   const auto&amp; vargs = fmt::make_format_args(args...);
+      |                       ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:3067:22:   required from 'void fmt::v11::println(format_string&lt;T ...&gt;, T&amp;&amp; ...) [with T = {const Point&amp;}; format_string&lt;T ...&gt; = basic_format_string&lt;char, const Point&amp;&gt;]'
+ 3067 |   return fmt::println(stdout, fmt, static_cast&lt;T&amp;&amp;&gt;(args)...);
+      |          ~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+main.cpp:13:17:   required from here
+   13 |     fmt::println("{}", point);
+      |     ~~~~~~~~~~~~^~~~~~~~~~~~~
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:1641:63: error: 'fmt::v11::detail::type_is_unformattable_for&lt;const Point, char&gt; _' has incomplete type
+ 1641 |     type_is_unformattable_for&lt;T, typename Context::char_type&gt; _;
+      |                                                               ^
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:1644:7: error: static assertion failed: Cannot format an argument. To make type T formattable provide a formatter&lt;T&gt; specialization: https://fmt.dev/latest/api.html#udt
+ 1644 |       formattable,
+      |       ^~~~~~~~~~~
+cmake-build-debug/_deps/fmt-src/include/fmt/base.h:1644:7: note: 'formattable' evaluates to false
+</pre></table></code></div></div><p>Warto się przyjrzeć linijce nr 31, która mówi — między innymi — że: <raw-data>static assertion failed: Cannot format an argument. To make type T formattable provide a formatter&lt;T&gt; specialization: https://fmt.dev/latest/api.html#udt</raw-data></p><p>Mamy zatem punkt zaczepienia, gdzie szukać podpowiedzi: <a href="https://fmt.dev/latest/api.html#udt">https://fmt.dev/latest/api.html#udt</a></p><p>Jak możemy przeczytać w podlinkowej sekcji, mamy dwie możliwości:</p><ol><li>Sprecyzować funkcję <code class="language-plaintext highlighter-rouge">format_as()</code> w tej samej przestrzeni nazw, co nasz typ (w tym przypadku w globalnej przestrzeni, bo nie objęliśmy naszego typu <code class="language-plaintext highlighter-rouge">namespace</code>m).<li>Użyć specjalizacji szablonowej struktury <code class="language-plaintext highlighter-rouge">formatter</code>.</ol><p>Opcja nr 2 jest trudna, więc skorzystajmy z opcji nr 1:</p><blockquote><p>Use <code class="language-plaintext highlighter-rouge">format_as</code> if you want to make your type formattable as some other type with the same format specifiers. The <code class="language-plaintext highlighter-rouge">format_as</code> function should take an object of your type and return an object of a formattable type. It should be defined in the same namespace as your type.</p><p>~ <em>Dokumentacja {fmt}.</em></p></blockquote><p><code class="language-plaintext highlighter-rouge">Point</code> wygląda jak para. {fmt} umie sformatować <code class="language-plaintext highlighter-rouge">std::pair</code> (gdy dołączymy <code class="language-plaintext highlighter-rouge">&lt;ranges.h&gt;</code>), dlatego zdefiniujemy <code class="language-plaintext highlighter-rouge">format_as()</code> dla <code class="language-plaintext highlighter-rouge">Point</code> tak, aby ta funkcja zwracała <code class="language-plaintext highlighter-rouge">std::pair</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="c1">  // std::pair</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="c1"> // format for std::pair</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">point</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">point</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">point</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">point</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>3 14
+(3, 14)
+</pre></table></code></div></div><p>Wszystko działa!</p><blockquote><p>No tak, ale czy przypadkiem nie tworzymy tutaj tymczasowego obiektu typu <code class="language-plaintext highlighter-rouge">std::pair</code> <em>tylko</em> po to, żeby <code class="language-plaintext highlighter-rouge">fmt::println()</code> wiedział, jak wyświetlić nasz <code class="language-plaintext highlighter-rouge">Point</code>? Brzmi jak nieoptymalne rozwiązanie.</p></blockquote><p>Zgadza się. Używanie <code class="language-plaintext highlighter-rouge">format_as()</code> zwykle jest nieoptymalnym podejściem, ale wbrew pozorom rzadko trzeba się tym przejmować. Wyświetlanie tekstu jest z reguły bardzo obciążającą operacją dla programu i stworzenie dodatkowego (relatywnie małego) obiektu (czy nawet dwóch) per wyświetlany element nie jest aż tak znaczące w tym kontekście.</p><p>Chcąc osiągnąć optimum wydajności, należałoby skorzystać z opcji nr 2, czyli specjalizacji typu <code class="language-plaintext highlighter-rouge">formatter</code>. Jest to jednak nieproporcjonalnie trudniejsze, dlatego zostaniemy raczej przy podejściu z <code class="language-plaintext highlighter-rouge">format_as()</code>.</p><h3 id="maksimum-wygody-minimum-wydajności"><span class="me-2">Maksimum wygody, minimum wydajności</span><a href="index.html#maksimum-wygody-minimum-wydajności" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>W świecie Javy nikt się nie przejmuje, że wyświetlając obiekt przy pomocy <code class="language-plaintext highlighter-rouge">System.out.println()</code> wywoływana jest metoda <code class="language-plaintext highlighter-rouge">.toString()</code>, która konstruuje tymczasowy obiekt typu <code class="language-plaintext highlighter-rouge">String</code>, który stanie się bezużyteczny tuż po zakończeniu wyświetlania. Jeżeli nie interesuje nas optimum wydajności przy procesie wyświetlania (którego i tak najwolniejszą częścią jest interakcja ze światem zewnętrznym, a nie przygotowanie tymczasowych obiektów), możemy, zamiast szukać typów, z którymi fmt umie pracować, po prostu <em>zawsze domyślnie zwracać <code class="language-plaintext highlighter-rouge">std::string</code></em>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"({}, {})"</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span> <span class="p">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">fmt::format()</code> zwraca <code class="language-plaintext highlighter-rouge">std::string</code>, który — oczywiście — {fmt} umie sformatować.</p><h2 id="obiekty-własnych-klas-a-kontenery"><span class="me-2">Obiekty własnych klas a kontenery</span><a href="index.html#obiekty-własnych-klas-a-kontenery" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Nic nie stoi na przeszkodzie, aby wykorzystywać obiekty stworzonych przez nas klas w kontenerach biblioteki standardowej. W niektórych przypadkach trzeba udostępnić dodatkowe funkcjonalności, ale wpierw przyjrzymy się przykładom, gdzie kod “po prostu działa”.</p><p>Na pierwszy ogień idzie wektor:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="n">points</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">));</span>
+    <span class="n">points</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">71</span><span class="p">));</span>
+    <span class="n">points</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Point</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">61</span><span class="p">));</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">points</span><span class="p">);</span>
+
+    <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">{</span><span class="n">Point</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">},</span> <span class="n">Point</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)};</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">points</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>[(3, 14), (2, 71), (1, 61)]
+[(1, 2), (3, 4), (5, 6)]
+</pre></table></code></div></div><p>Powyższy listing pozwala na kilka ciekawych obserwacji:</p><ul><li><code class="language-plaintext highlighter-rouge">fmt::println()</code>, gdy wyświetla zakres typów zdefiniowanych przez użytkownika, respektuje nasze własne zasady formatowania.<li>Istnieje wiele sposobów na wypełnienie wektora punktami — przede wszystkim możemy je dodawać przy pomocy <code class="language-plaintext highlighter-rouge">.push_back()</code>, ale jednocześnie możemy też zdecydować się na użycie listy inicjalizacji (jak to widać w linijce nr 22).<li>Stworzenie punktu nie ogranicza się tylko do czegoś, co wygląda jak klasyczne wywołanie konstruktora (np. <code class="language-plaintext highlighter-rouge">Point(5, 6)</code>). Można też je tworzyć przy pomocy klamer (<code class="language-plaintext highlighter-rouge">Point{1, 2}</code> oraz <code class="language-plaintext highlighter-rouge">{3, 4}</code>). Fakt, że klamry są tutaj dozwolone, wywodzi się z języka C. Dodatkowo, gdy oczekiwany typ jest znany, można pominąć jego nazwę (pamiętamy o literale domyślnych wartości — <code class="language-plaintext highlighter-rouge">{}</code>).</ul><p>Oczywiście reszta operacji wciąż działa tak, jak nakazuje intuicja — możemy usuwać punkty przy pomocy <code class="language-plaintext highlighter-rouge">.pop_back()</code> czy <code class="language-plaintext highlighter-rouge">.erase()</code> oraz tworzyć wektor przechowujący wiele domyślnie stworzonych punktów (z wartościami <code class="language-plaintext highlighter-rouge">(0, 0)</code>) przy pomocy konstruktora z argumentem liczbowym:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>[(0, 0), (0, 0), (0, 0), (0, 0), (0, 0)]
+</pre></table></code></div></div><h3 id="kontenery-wymagające-dodatkowej-funkcjonalności"><span class="me-2">Kontenery wymagające dodatkowej funkcjonalności</span><a href="index.html#kontenery-wymagające-dodatkowej-funkcjonalności" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Niestety, gdy spróbujemy stworzyć <code class="language-plaintext highlighter-rouge">std::set&lt;Point&gt;</code> czy <code class="language-plaintext highlighter-rouge">std::map&lt;Point, T&gt;</code>, kompilator zaprotestuje. To dlatego, że — jak wiemy — elementy <code class="language-plaintext highlighter-rouge">std::set</code> oraz klucze w <code class="language-plaintext highlighter-rouge">std::map</code> są przechowywane w kolejności rosnącej. Tylko co to znaczy, że jeden <code class="language-plaintext highlighter-rouge">Point</code> jest “większy” od drugiego? Nie wiemy tego ani my, ani kompilator — stąd brak możliwości przechowywania tych elementów w tych kontenerach.</p><p>Nie oznacza to jednak, że posortowanie kontenera punktów jest niemożliwe.</p><h2 id="algorytmy-zakresowe-a-kontenery-obiektów-o-typach-zdefiniowanych-przez-użytkownika"><span class="me-2">Algorytmy zakresowe a kontenery obiektów o typach zdefiniowanych przez użytkownika</span><a href="index.html#algorytmy-zakresowe-a-kontenery-obiektów-o-typach-zdefiniowanych-przez-użytkownika" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Jak zatem posortować <code class="language-plaintext highlighter-rouge">std::vector&lt;Point&gt;</code>? “Klasyczny” sposób niestety nie zadziała:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">{</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span> <span class="p">};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">points</span><span class="p">);</span>  <span class="c1">// error</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Kompilator nie wie, jak ustawić punkty. Powiedzmy mu zatem, jak to zrobić — użyjemy do tego komparatora.</p><p>Wpierw jednak musimy sami sobie odpowiedzieć na pytanie, co to znaczy, że <em>jeden punkt jest “większy” od drugiego</em>.</p><p>W matematyce punkty nie mają dobrze zdefiniowanego porządku. Zatem możemy wymyślić kompletnie dowolną strategię. W ramach tego rozdziału <strong>punkty zostaną uporządkowane względem ich odległości do punktu \((0, 0)\)</strong>. W ramach tej strategii stworzymy w <code class="language-plaintext highlighter-rouge">Point</code> metodę, która zwraca odległość do tego punktu:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">distanceToOrigin</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Tę metodę możemy jednak nieco ulepszyć — po pierwsze skorzystamy z funkcji <a href="https://devdocs.io/cpp/numeric/math/hypot"><code class="language-plaintext highlighter-rouge">std::hypot(x, y)</code></a>, która zwraca \(\sqrt{x^2+y^2}\):</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">distanceToOrigin</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Po drugie oznaczymy ją jako <code class="language-plaintext highlighter-rouge">const</code>. Zaraz się dowiemy dlaczego:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">distanceToOrigin</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>Dzięki temu wszystkiemu możemy do <code class="language-plaintext highlighter-rouge">std::ranges::sort()</code> dostarczyć komparator, który będzie porządkował punkty zgodnie z ich rosnącą odległością do punktu \((0, 0)\):</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="c1">    // std::hypot</span><span class="cp">
+#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">distanceToOrigin</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">{</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">}</span> <span class="p">};</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">[](</span><span class="n">Point</span> <span class="k">const</span> <span class="n">left</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span>  <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">left</span><span class="p">.</span><span class="n">distanceToOrigin</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">right</span><span class="p">.</span><span class="n">distanceToOrigin</span><span class="p">();</span>
+    <span class="p">});</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">points</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>[(0, 0), (2, 0), (1, 2)]
+</pre></table></code></div></div><p>Warto zauważyć, że wywołujemy <code class="language-plaintext highlighter-rouge">.distanceToOrigin()</code> na obydwu punktach w ten sam sposób. W związku z tym warto rozważyć zastąpienie komparatora projekcją:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[](</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">p</span><span class="p">.</span><span class="n">distanceToOrigin</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></table></code></div></div><p>Osiągamy zatem pełen sukces w posortowaniu wektora obiektów naszej własnej klasy.</p><blockquote><p>Ok, ale o co chodziło z tym <code class="language-plaintext highlighter-rouge">const</code> w dziwnym miejscu w nagłówku metody <code class="language-plaintext highlighter-rouge">.distanceToOrigin()</code>?</p></blockquote><p>Doskonałe pytanie. Jest to tak zwana <code class="language-plaintext highlighter-rouge">const</code> metoda, czyli <em>metoda stała</em>.</p><h3 id="const-metody"><span class="me-2"><code>const</code> metody</span><a href="index.html#const-metody" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>Metody stałe, czyli <em><code class="language-plaintext highlighter-rouge">const</code> member functions</em>, powstają, gdy tuż przed strzałką (<code class="language-plaintext highlighter-rouge">-&gt;</code>) precyzującą typ zwracany dopiszemy słowo kluczowe <code class="language-plaintext highlighter-rouge">const</code>.</p><blockquote class="prompt-info"><p><code class="language-plaintext highlighter-rouge">const</code> metoda (metoda stała) różni się od “klasycznej” w taki sposób, że <strong>obiecuje, że jej wywołanie nie zmieni stanu obiektu</strong>.</p></blockquote><p>Jest to bardzo istotne, ponieważ gdybyśmy mieli <code class="language-plaintext highlighter-rouge">const</code> obiekt, to nie powinniśmy być w stanie modyfikować jego stanu. A skoro nie powinniśmy być w stanie modyfikować jego stanu, to nie powinniśmy być w stanie wywołać metody, która może ten stan zmienić.</p><p>Spójrzmy na to z logicznego punktu widzenia — na, przykładowo, <code class="language-plaintext highlighter-rouge">const std::vector&lt;int&gt;</code> nie możemy wywołać <code class="language-plaintext highlighter-rouge">.push_back()</code> czy <code class="language-plaintext highlighter-rouge">.erase()</code>, prawda? Przecież zmieniają one <strong>stan</strong> obiektu. Ale już nic nie stoi na przeszkodzie, aby wywołać na takim obiekcie metodę <code class="language-plaintext highlighter-rouge">.size()</code> czy <code class="language-plaintext highlighter-rouge">.empty()</code>. To dlatego, że są to <code class="language-plaintext highlighter-rouge">const</code> metody.</p><blockquote class="prompt-info"><p>Na <code class="language-plaintext highlighter-rouge">const</code> obiekcie możemy wywoływać tylko <code class="language-plaintext highlighter-rouge">const</code> metody. Na “klasycznym” (nie <code class="language-plaintext highlighter-rouge">const</code> / mutowalnym) obiekcie możemy wywoływać <strong>zarówno</strong> <code class="language-plaintext highlighter-rouge">const</code> jak i nie-<code class="language-plaintext highlighter-rouge">const</code> metody.</p></blockquote><blockquote class="prompt-tip"><p>Tak samo, jak w przypadku obiektów, domyślnym powinno być oznaczanie metod jako <code class="language-plaintext highlighter-rouge">const</code>. Gdy tego nie zrobimy (a metoda ani nie powinna, ani faktycznie nie zmienia stanu obiektu), to nie tylko będziemy błędnie oznaczać nasze intencje, ale też często nasz kod nie będzie działać — głównie z uwagi na to, jak popularne są <code class="language-plaintext highlighter-rouge">const</code> referencje. Taka referencja, nawet jeśli jest połączona z nie-<code class="language-plaintext highlighter-rouge">const</code> obiektem, nie będzie mogła wywołać nie-<code class="language-plaintext highlighter-rouge">const</code> metody.</p></blockquote><h2 id="sortowanie-w-stdset"><span class="me-2">Sortowanie w <code>std::set</code></span><a href="index.html#sortowanie-w-stdset" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><blockquote><p>Brzmi dobrze, ale skoro możemy rozwiązać problem niesortowalnych punktów przy pomocy komparatora w momencie używania <code class="language-plaintext highlighter-rouge">std::ranges::sort()</code>, to czy nie możemy zrobić tego w podobny sposób tak, aby móc stworzyć <code class="language-plaintext highlighter-rouge">std::set&lt;Point&gt;</code>?</p></blockquote><p>Możemy, ale jest to nieco bardziej skomplikowane. Przykład zostanie umieszczony w podsumowaniu i dodatkach tego rozdziału.</p><h2 id="grupa-przechwytująca-lambdy"><span class="me-2">Grupa przechwytująca lambdy</span><a href="index.html#grupa-przechwytująca-lambdy" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p><em>Lambda-capture group</em>, czyli <em>grupa przechwytująca lambdy</em> pozwala lambdzie operować na obiektach, które <strong>nie</strong> zostały przekazane do niej przez <strong>argumenty</strong>.</p><p>Załóżmy przykład, gdzie wśród grupy punktów chcemy znaleźć taki, który jest najbliższy jakiemuś innemu punktowi. Przykładowa funkcja, która realizuje ten cel, może mieć następujący nagłówek:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">closestTo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">points</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">;</span>
+</pre></table></code></div></div><p>Czyli wśród <code class="language-plaintext highlighter-rouge">points</code> szukamy takiego elementu, który jest najbliższej <code class="language-plaintext highlighter-rouge">other</code>.</p><p>Jej użycie wygląda następująco:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">{</span>
+            <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">closestTo</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">}));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Ze wszystkich tych punktów najbliższym będzie \((3, 2)\), dlatego właśnie taki powinien być wynik wywołania programu:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>(3, 2)
+</pre></table></code></div></div><p>Implementacja <code class="language-plaintext highlighter-rouge">closestTo()</code> nie wydaje się być wyjątkowo skomplikowana. Można użyć komparatora, który oblicza odległość obydwu swoich argumentów do <code class="language-plaintext highlighter-rouge">other</code> i zwraca <code class="language-plaintext highlighter-rouge">true</code>, jeżeli odległość lewego argumentu jest bliższa.</p><p>Nie sposób jednak nie zauważyć, że efektywnie <em>porównujemy odległości</em>. Odległości rozważanych punktów do <code class="language-plaintext highlighter-rouge">other</code>. W takim razie użyjmy projekcji zamiast komparatora. Patrzmy na wszystkie elementy z <code class="language-plaintext highlighter-rouge">points</code> poprzez ich odległości do <code class="language-plaintext highlighter-rouge">other</code> i znajdźmy najmniejszą z nich przy użyciu <code class="language-plaintext highlighter-rouge">std::ranges::min</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">closestTo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">points</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[](</span><span class="n">Point</span> <span class="k">const</span> <span class="n">candidate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">candidate</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">candidate</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Rozwiązanie wydaje się dosyć proste. Zgodnie z wcześniejszym planem, używamy <code class="language-plaintext highlighter-rouge">std::ranges::min()</code> oraz lambdy, która jest projekcją naszych punktów z <code class="language-plaintext highlighter-rouge">points</code> na ich odległość do <code class="language-plaintext highlighter-rouge">other</code>.</p><p>Jest tylko jeden problem:</p><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+</pre><td class="rouge-code"><pre>main.cpp: In lambda function:
+main.cpp:21:41: error: 'other' is not captured
+   21 |         return std::hypot(candidate.x - other.x, candidate.y - other.y);
+      |                                         ^~~~~
+main.cpp:20:42: note: the lambda has no capture-default
+   20 |     return std::ranges::min(points, {}, [](Point const candidate) {
+      |                                          ^
+main.cpp:19:62: note: 'const Point other' declared here
+   19 | auto closestTo(std::vector&lt;Point&gt; const&amp; points, Point const other) -&gt; Point {
+      |                                                  ~~~~~~~~~~~~^~~~~
+main.cpp:21:64: error: 'other' is not captured
+   21 |         return std::hypot(candidate.x - other.x, candidate.y - other.y);
+      |                                                                ^~~~~
+main.cpp:20:42: note: the lambda has no capture-default
+   20 |     return std::ranges::min(points, {}, [](Point const candidate) {
+      |                                          ^
+main.cpp:19:62: note: 'const Point other' declared here
+   19 | auto closestTo(std::vector&lt;Point&gt; const&amp; points, Point const other) -&gt; Point {
+      |                                                  ~~~~~~~~~~~~^~~~~
+main.cpp: In function 'Point closestTo(const std::vector&lt;Point&gt;&amp;, Point)':
+main.cpp:20:28: error: no match for call to '(const std::ranges::__min_fn) (const std::vector&lt;Point&gt;&amp;, &lt;brace-enclosed initializer list&gt;, closestTo(const std::vector&lt;Point&gt;&amp;, Point)::&lt;lambda(Point)&gt;)'
+   20 |     return std::ranges::min(points, {}, [](Point const candidate) {
+      |            ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   21 |         return std::hypot(candidate.x - other.x, candidate.y - other.y);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   22 |     });
+      |     ~~                      
+In file included from C:/mingw64/include/c++/14.2.0/bits/ranges_algo.h:39,
+                 from C:/mingw64/include/c++/14.2.0/algorithm:63,
+                 from main.cpp:1:
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:708:7: note: candidate: 'template&lt;class _Tp, class _Proj, class _Comp&gt;  requires  indirect_strict_weak_order&lt;_Comp, typename std::__detail::__projected&lt;const _Tp*, _Proj&gt;::__type, typename std::__detail::__projected&lt;const _Tp*, _Proj&gt;::__type&gt; constexpr const _Tp&amp; std::ranges::__min_fn::operator()(const _Tp&amp;, const _Tp&amp;, _Comp, _Proj) const'
+  708 |       operator()(const _Tp&amp; __a, const _Tp&amp; __b,
+      |       ^~~~~~~~
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:708:7: note:   template argument deduction/substitution failed:
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:708:7: note: constraints not satisfied
+In file included from C:/mingw64/include/c++/14.2.0/compare:40,
+                 from C:/mingw64/include/c++/14.2.0/bits/stl_pair.h:65,
+                 from C:/mingw64/include/c++/14.2.0/bits/stl_algobase.h:64,
+                 from C:/mingw64/include/c++/14.2.0/algorithm:60:
+C:/mingw64/include/c++/14.2.0/concepts: In substitution of 'template&lt;class _Tp, class _Proj, class _Comp&gt;  requires  indirect_strict_weak_order&lt;_Comp, typename std::__detail::__projected&lt;const _Tp*, _Proj&gt;::__type, typename std::__detail::__projected&lt;const _Tp*, _Proj&gt;::__type&gt; constexpr const _Tp&amp; std::ranges::__min_fn::operator()(const _Tp&amp;, const _Tp&amp;, _Comp, _Proj) const [with _Tp = std::vector&lt;Point&gt;; _Proj = std::identity; _Comp = closestTo(const std::vector&lt;Point&gt;&amp;, Point)::&lt;lambda(Point)&gt;]':
+main.cpp:20:28:   required from here
+   20 |     return std::ranges::min(points, {}, [](Point const candidate) {
+      |            ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   21 |         return std::hypot(candidate.x - other.x, candidate.y - other.y);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   22 |     });
+      |     ~~                      
+C:/mingw64/include/c++/14.2.0/concepts:360:13:   required for the satisfaction of 'invocable&lt;_Fn, _Args ...&gt;' [with _Fn = closestTo::._anon_129&amp;; _Args = {std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;, std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;}]
+C:/mingw64/include/c++/14.2.0/concepts:364:13:   required for the satisfaction of 'regular_invocable&lt;_Fn, _Args ...&gt;' [with _Fn = closestTo::._anon_129&amp;; _Args = {std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;, std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;}]
+C:/mingw64/include/c++/14.2.0/concepts:368:13:   required for the satisfaction of 'predicate&lt;_Rel, _Tp, _Tp&gt;' [with _Rel = closestTo::._anon_129&amp;; _Tp = std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;]
+C:/mingw64/include/c++/14.2.0/concepts:373:13:   required for the satisfaction of 'relation&lt;_Rel, _Tp, _Up&gt;' [with _Rel = closestTo::._anon_129&amp;; _Tp = std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;; _Up = std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;]
+C:/mingw64/include/c++/14.2.0/concepts:383:13:   required for the satisfaction of 'strict_weak_order&lt;_Fn&amp;, typename std::__detail::__iter_traits_impl&lt;typename std::remove_cvref&lt;_Tp2&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;_Tp2&gt;::type&gt; &gt;::type::value_type&amp;, typename std::__detail::__iter_traits_impl&lt;typename std::remove_cvref&lt;_I2&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;_I2&gt;::type&gt; &gt;::type::value_type&amp;&gt;' [with _Fn = closestTo::._anon_129; _I1 = std::__detail::__projected&lt;const std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;*, std::identity&gt;::__type; _I2 = std::__detail::__projected&lt;const std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;*, std::identity&gt;::__type]
+C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h:758:13:   required for the satisfaction of 'indirect_strict_weak_order&lt;_Comp, std::projected&lt;const _Tp*, _Proj&gt;, std::projected&lt;const _Tp*, _Proj&gt; &gt;' [with _Comp = closestTo::._anon_129; _Tp = std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;; _Proj = std::identity]
+C:/mingw64/include/c++/14.2.0/concepts:360:25: note: the expression 'is_invocable_v&lt;_Fn, _Args ...&gt; [with _Fn = closestTo::._anon_129&amp;; _Args = {std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;, std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;}]' evaluated to 'false'
+  360 |     concept invocable = is_invocable_v&lt;_Fn, _Args...&gt;;
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:725:7: note: candidate: 'template&lt;class _Range, class _Proj, class _Comp&gt;  requires (input_range&lt;_Range&gt;) &amp;&amp; (indirect_strict_weak_order&lt;_Comp, typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type, typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type&gt;) &amp;&amp; (indirectly_copyable_storable&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), typename std::__detail::__iter_traits_impl&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type&gt; &gt;::__iter_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type&gt; &gt;::value_type*&gt;) constexpr std::ranges::range_value_t&lt;_Range&gt; std::ranges::__min_fn::operator()(_Range&amp;&amp;, _Comp, _Proj) const'
+  725 |       operator()(_Range&amp;&amp; __r, _Comp __comp = {}, _Proj __proj = {}) const
+      |       ^~~~~~~~
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:725:7: note:   template argument deduction/substitution failed:
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:725:7: note: constraints not satisfied
+main.cpp: In substitution of 'template&lt;class _Range, class _Proj, class _Comp&gt;  requires (input_range&lt;_Range&gt;) &amp;&amp; (indirect_strict_weak_order&lt;_Comp, typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type, typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type&gt;) &amp;&amp; (indirectly_copyable_storable&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), typename std::__detail::__iter_traits_impl&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type&gt; &gt;::__iter_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type&gt; &gt;::value_type*&gt;) constexpr std::ranges::range_value_t&lt;_Range&gt; std::ranges::__min_fn::operator()(_Range&amp;&amp;, _Comp, _Proj) const [with _Range = const std::vector&lt;Point&gt;&amp;; _Proj = closestTo(const std::vector&lt;Point&gt;&amp;, Point)::&lt;lambda(Point)&gt;; _Comp = std::ranges::less]':
+main.cpp:20:28:   required from here
+   20 |     return std::ranges::min(points, {}, [](Point const candidate) {
+      |            ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   21 |         return std::hypot(candidate.x - other.x, candidate.y - other.y);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   22 |     });
+      |     ~~                      
+C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h:532:13:   required for the satisfaction of '__indirectly_readable_impl&lt;typename std::remove_cvref&lt;_Tp&gt;::type&gt;' [with _In = typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type]
+C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h:552:13:   required for the satisfaction of 'indirectly_readable&lt;_I1&gt;' [with _I1 = typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type]
+C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h:758:13:   required for the satisfaction of 'indirect_strict_weak_order&lt;_Comp, std::projected&lt;decltype (std::ranges::__access::__begin(declval&lt;_Container&amp;&gt;())), _Proj&gt;, std::projected&lt;decltype (std::ranges::__access::__begin(declval&lt;_Container&amp;&gt;())), _Proj&gt; &gt;' [with _Comp = std::ranges::less; _Range = const std::vector&lt;Point, std::allocator&lt;Point&gt; &gt;&amp;; _Proj = closestTo::._anon_129]
+main.cpp:20:28: error: template constraint failure for 'template&lt;class _Iter, class _Proj&gt;  requires (indirectly_readable&lt;_Iter&gt;) &amp;&amp; (indirectly_regular_unary_invocable&lt;_Proj, _Iter&gt;) using std::projected = typename std::__detail::__projected::__type'
+main.cpp:20:28: note: constraints not satisfied
+C:/mingw64/include/c++/14.2.0/concepts: In substitution of 'template&lt;class _Iter, class _Proj&gt;  requires (indirectly_readable&lt;_Iter&gt;) &amp;&amp; (indirectly_regular_unary_invocable&lt;_Proj, _Iter&gt;) using std::projected = typename std::__detail::__projected::__type [with _Iter = __gnu_cxx::__normal_iterator&lt;const Point*, std::vector&lt;Point&gt; &gt;; _Proj = closestTo(const std::vector&lt;Point&gt;&amp;, Point)::&lt;lambda(Point)&gt;]':
+main.cpp:20:28:   recursively required by substitution of 'template&lt;class _Range, class _Proj, class _Comp&gt;  requires (input_range&lt;_Range&gt;) &amp;&amp; (indirect_strict_weak_order&lt;_Comp, typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type, typename std::__detail::__projected&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), _Proj&gt;::__type&gt;) &amp;&amp; (indirectly_copyable_storable&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)())), typename std::__detail::__iter_traits_impl&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type&gt; &gt;::__iter_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;decltype(std::ranges::__access::__begin((declval&lt;_Container&amp;&gt;)()))&gt;::type&gt; &gt;::value_type*&gt;) constexpr std::ranges::range_value_t&lt;_Range&gt; std::ranges::__min_fn::operator()(_Range&amp;&amp;, _Comp, _Proj) const [with _Range = const std::vector&lt;Point&gt;&amp;; _Proj = closestTo(const std::vector&lt;Point&gt;&amp;, Point)::&lt;lambda(Point)&gt;; _Comp = std::ranges::less]'
+main.cpp:20:28:   required from here
+C:/mingw64/include/c++/14.2.0/concepts:360:13:   required for the satisfaction of 'invocable&lt;_Fn, _Args ...&gt;' [with _Fn = closestTo::._anon_129&amp;; _Args = {Point&amp;}]
+C:/mingw64/include/c++/14.2.0/concepts:364:13:   required for the satisfaction of 'regular_invocable&lt;_Fn&amp;, typename std::__detail::__iter_traits_impl&lt;typename std::remove_cvref&lt;_Tp2&gt;::type, std::indirectly_readable_traits&lt;typename std::remove_cvref&lt;_Tp2&gt;::type&gt; &gt;::type::value_type&amp;&gt;' [with _Fn = closestTo::._anon_129; _Iter = __gnu_cxx::__normal_iterator&lt;const Point*, std::vector&lt;Point, std::allocator&lt;Point&gt; &gt; &gt;]
+C:/mingw64/include/c++/14.2.0/bits/iterator_concepts.h:720:13:   required for the satisfaction of 'indirectly_regular_unary_invocable&lt;_Proj, _Iter&gt;' [with _Proj = closestTo::._anon_129; _Iter = __gnu_cxx::__normal_iterator&lt;const Point*, std::vector&lt;Point, std::allocator&lt;Point&gt; &gt; &gt;]
+C:/mingw64/include/c++/14.2.0/concepts:360:25: note: the expression 'is_invocable_v&lt;_Fn, _Args ...&gt; [with _Fn = closestTo::._anon_129&amp;; _Args = {Point&amp;}]' evaluated to 'false'
+  360 |     concept invocable = is_invocable_v&lt;_Fn, _Args...&gt;;
+      |                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:746:7: note: candidate: 'template&lt;class _Tp, class _Proj, class _Comp&gt;  requires (copyable&lt;_Tp&gt;) &amp;&amp; (indirect_strict_weak_order&lt;_Comp, typename std::__detail::__projected&lt;const _Tp*, _Proj&gt;::__type, typename std::__detail::__projected&lt;const _Tp*, _Proj&gt;::__type&gt;) constexpr _Tp std::ranges::__min_fn::operator()(std::initializer_list&lt;_Tp&gt;, _Comp, _Proj) const'
+  746 |       operator()(initializer_list&lt;_Tp&gt; __r,
+      |       ^~~~~~~~
+C:/mingw64/include/c++/14.2.0/bits/ranges_util.h:746:7: note:   template argument deduction/substitution failed:
+main.cpp:20:28: note:   'std::vector&lt;Point&gt;' is not derived from 'std::initializer_list&lt;_Tp&gt;'
+   20 |     return std::ranges::min(points, {}, [](Point const candidate) {
+      |            ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   21 |         return std::hypot(candidate.x - other.x, candidate.y - other.y);
+      |         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   22 |     });
+      |     ~~
+</pre></table></code></div></div><p><sup id="fnref:ehh"><a href="index.html#fn:ehh" class="footnote" rel="footnote" role="doc-noteref">1</a></sup></p><p>Ewidentnie kompilator ma problem z tym, że w lambdzie używamy <code class="language-plaintext highlighter-rouge">other</code>. Próbuje też dopasować jakieś sugestie, ale niezbyt mu wychodzi. Najważniejszy jest początek błędu:</p><div file="fragment przykładowego błędu kompilacji" class="language-plaintext nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="fragment przykładowego błędu kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>[...] In lambda function:
+[...] error: 'other' is not captured
+[...] note: the lambda has no capture-default
+[...] note: 'const Point other' declared here
+   19 | auto closestTo(std::vector&lt;Point&gt; const&amp; points, Point const other) -&gt; Point {
+      |                                                  ~~~~~~~~~~~~^~~~~
+</pre></table></code></div></div><blockquote><p>Dlaczego? Przecież <code class="language-plaintext highlighter-rouge">other</code> jest <em>widoczne</em> w całej funkcji <code class="language-plaintext highlighter-rouge">closestTo()</code>, a lambda jest jej częścią, prawda?</p></blockquote><p>Prawie. Aby zrozumieć problem, wróćmy do “bardziej podstawowego” narzędzia. Zamiast z lambdy, skorzystajmy ze zwykłej funkcji:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">projectDistance</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">candidate</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">candidate</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">candidate</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">closestTo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">points</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{},</span> <span class="n">projectDistance</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Przyglądając się dokładnie funkcji <code class="language-plaintext highlighter-rouge">projectDistance()</code> możemy już dosyć jasno zidentyfikować błąd. Skąd ta funkcja ma wiedzieć, czym jest <code class="language-plaintext highlighter-rouge">other</code>?</p><p>Lambdy to skrócony zapis tworzenia obiektu o anonimowym typie, który udostępnia nam specjalną funkcjonalność (w postaci specjalnej funkcji), która pozwala używać go jak zwykłą funkcję (czyli wywoływać za pomocą <code class="language-plaintext highlighter-rouge">()</code> po nazwie).</p><p>Skoro koniec końców <em>jakaś</em> funkcja o ciele identycznym, jak to, które precyzujemy w lambdzie, jest tworzona, to nic dziwnego, że jej ciało nie ma pojęcia, czym jest <code class="language-plaintext highlighter-rouge">other</code>.</p><p>Na szczęście istnieje ratunek. W końcu lambdy zostały stworzone głównie po to, aby móc ich wygodnie używać w środku innych funkcji. Funkcje często wprowadzają lokalne zmienne, a więc logicznym byłoby założyć, że ktoś chciałby stworzyć lambdę operującą na tych zmiennych.</p><p>Realizacją tego założenia jest narzędzie o nazwie <em>grupa przechwytująca</em>. To ten niewinnie wyglądający fragment <code class="language-plaintext highlighter-rouge">[]</code>, który zawsze piszemy na początku lambdy.</p><p>Cały problem zostanie rozwiązany, jeżeli wstawimy tam nazwę <code class="language-plaintext highlighter-rouge">other</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">closestTo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">points</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="n">other</span><span class="p">](</span><span class="n">Point</span> <span class="k">const</span> <span class="n">candidate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">candidate</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">candidate</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Składnia <code class="language-plaintext highlighter-rouge">[other]</code> w kontekście lambdy każe jej skopiować ten obiekt do swojej lokalnej pamięci. Tak samo jak <code class="language-plaintext highlighter-rouge">Point</code> ma pole <code class="language-plaintext highlighter-rouge">int x</code> i <code class="language-plaintext highlighter-rouge">int y</code>, teraz nasza lambda ma pole <code class="language-plaintext highlighter-rouge">Point const other</code>.</p><p>Dokładny mechanizm, który umożliwia nam te operacje, zostanie omówiony w przyszłości — wtedy zaimplementujemy “od zera” klasę, która może się zachowywać jak funkcja.</p><p>Na ten moment należy zapamiętać, że logika lambd jest podobnie ograniczona jak ta aplikująca się do zwykłych funkcji. Jeżeli nie przekażemy nieglobalnego obiektu przez argument, to lambda nie może na nim pracować. Jedynym sposobem, aby ten problem rozwiązać, to <em>przechwycić</em> obiekty, z których chcemy skorzystać.</p><p>Składnia <code class="language-plaintext highlighter-rouge">[other]</code> kopiuje punkt do lambdy, ale nie zawsze chcemy obiekt kopiować, gdy interesuje nas praca nad nim. Składnia <code class="language-plaintext highlighter-rouge">[&amp;other]</code> pozwoli nam uniknąć kopii. Lambda wtedy ma lokalne pole typu <code class="language-plaintext highlighter-rouge">Point const&amp;</code>. Oczywiście w przypadku małych typów ma to małe znaczenie, ale niekoniecznie chcemy kopiować inne, duże obiekty, które musimy przechwycić, prawda?</p><blockquote><p>No dobrze, ale czy nie prościej byłoby po prostu w naszej lambdzie przekazać <code class="language-plaintext highlighter-rouge">other</code> przez argument? Po co ten <em>capture</em>?</p></blockquote><p>Doskonałe pytanie. Pokażmy, jakby to wyglądało w kodzie:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">closestTo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">points</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[](</span><span class="n">Point</span> <span class="k">const</span> <span class="n">candidate</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">candidate</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">candidate</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Wygląda obiecująco. Lambda przyjmuje <code class="language-plaintext highlighter-rouge">candidate</code> od wektora i <code class="language-plaintext highlighter-rouge">other</code> od… no właśnie — skąd?</p><p>Argument projekcji jest przekazywany przez algorytm, który jej używa. <code class="language-plaintext highlighter-rouge">std::ranges::min()</code> jest zaimplementowane mniej więcej tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre><td class="rouge-code"><pre><span class="k">template</span> <span class="o">&lt;</span>
+        <span class="k">typename</span> <span class="nc">Range</span><span class="p">,</span>
+        <span class="k">typename</span> <span class="nc">Comparator</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">less</span><span class="p">,</span>
+        <span class="k">typename</span> <span class="nc">Projection</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">identity</span>
+<span class="p">&gt;</span>
+<span class="k">auto</span> <span class="nf">min</span><span class="p">(</span><span class="n">Range</span><span class="o">&amp;</span> <span class="n">range</span><span class="p">,</span> <span class="n">Comparator</span> <span class="n">comparator</span> <span class="o">=</span> <span class="p">{},</span> <span class="n">Projection</span> <span class="n">projection</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">current</span>  <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">end</span>      <span class="o">=</span> <span class="n">range</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">minSoFar</span> <span class="o">=</span> <span class="o">*</span><span class="n">current</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">++</span><span class="n">current</span> <span class="o">!=</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">currentProjected</span> <span class="o">=</span> <span class="n">projection</span><span class="p">(</span><span class="o">*</span><span class="n">current</span><span class="p">);</span>
+        <span class="k">auto</span> <span class="n">minProjected</span>     <span class="o">=</span> <span class="n">projection</span><span class="p">(</span><span class="n">minSoFar</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">comparator</span><span class="p">(</span><span class="n">currentProjected</span><span class="p">,</span> <span class="n">minProjected</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">minSoFar</span> <span class="o">=</span> <span class="o">*</span><span class="n">current</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">minSoFar</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Z czego najbardziej interesuje nas część, w której jest używana projekcja:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">currentProjected</span> <span class="o">=</span> <span class="n">projection</span><span class="p">(</span><span class="o">*</span><span class="n">current</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">minProjected</span>     <span class="o">=</span> <span class="n">projection</span><span class="p">(</span><span class="n">minSoFar</span><span class="p">);</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="n">comparator</span><span class="p">(</span><span class="n">currentProjected</span><span class="p">,</span> <span class="n">minProjected</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">minSoFar</span> <span class="o">=</span> <span class="o">*</span><span class="n">current</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Jak widać, obecny “kandydat” oraz obiekt obecnie uznawany za “najmniejszy” są przepuszczane przez projekcję, a później wyniki tej projekcji są przekazywane do komparatora.</p><p>Algorytm wywołuje projekcję z jednym argumentem na raz. <strong>Zawsze</strong>.</p><p>To efektywnie spisuje na straty nasz pomysł, aby przekazać do projekcji drugi argument. Zwyczajnie architektura i sposób użytkowania projekcji zabrania nam tworzyć takie rozwiązania. Stąd wymóg posiadania “bocznych drzwi” dla dodatkowych obiektów — w postaci grupy przechwytującej.</p><p>Pełen kod można zobaczyć tutaj:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">distanceToOrigin</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">double</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">format_as</span><span class="p">(</span><span class="n">Point</span> <span class="k">const</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">.</span><span class="n">y</span><span class="p">);</span> <span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">closestTo</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">points</span><span class="p">,</span> <span class="n">Point</span> <span class="k">const</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">min</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{},</span> <span class="p">[</span><span class="n">other</span><span class="p">](</span><span class="n">Point</span> <span class="k">const</span> <span class="n">candidate</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">hypot</span><span class="p">(</span><span class="n">candidate</span><span class="p">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">candidate</span><span class="p">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">other</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">points</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Point</span><span class="o">&gt;</span><span class="p">{</span>
+            <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">closestTo</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">}));</span>
+<span class="p">}</span>
+</pre></table></code></div></div><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:ehh"><p>W poprzedniej wersji kompilatora ten błąd miał “tylko” 19 linijek. Fajny ten C++. Taki nie za dobrze się rozwijający… <a href="index.html#fnref:ehh" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-5-3-trywialne-typy-zdefiniowane-przez-użytkownika/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 5.3 - Trywialne typy zdefiniowane przez użytkownika</p></a> <a href="../rozdział-5-5-podsumowanie-i-dodatki/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Rozdział 5.5 - Podsumowanie i dodatki</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script> /* see: <https://docs.mathjax.org/en/latest/options/input/tex.html#tex-options> */ MathJax = { tex: { /* start/end delimiter pairs for in-line math */ inlineMath: [ ['$', '$'], ['\\(', '\\)'] ], /* start/end delimiter pairs for display math */ displayMath: [ ['$$', '$$'], ['\\[', '\\]'] ], tags: 'ams' } }; </script> <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js"></script> <script defer src="../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-5-4-u%C5%BCycie-typ%C3%B3w-zdefiniowanych-przez-u%C5%BCytkownika-a-inne-biblioteki/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

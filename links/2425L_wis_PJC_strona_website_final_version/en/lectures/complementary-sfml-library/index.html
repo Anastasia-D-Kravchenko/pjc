@@ -1,0 +1,819 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="SFML library" /><meta name="author" content="Sasha Rzepkowska" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/en/lectures/complementary-sfml-library/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-04-03T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="SFML library" /><meta name="twitter:site" content="@" /><meta name="twitter:creator" content="@Sasha Rzepkowska" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sasha Rzepkowska"},"dateModified":"2025-04-03T00:00:00+02:00","datePublished":"2025-04-03T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"SFML library","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/complementary-sfml-library/"},"url":"/~fk/en/lectures/complementary-sfml-library/"}</script><title>SFML library | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../../en.html" id="avatar" class="rounded-circle"> <img src="../../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../../en.html">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../../en.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="../../information/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="../../presentations/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="../../tasks/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="../../tags/index.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="../../../wyklady/uzupełniające-biblioteka-sfml/index.html" class="nav-link"> <img src="../../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="index.html" class="nav-link"> <img src="../../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../../index.html"> Home </a> </span> <span>SFML library</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>SFML library</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1743631200" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Apr 3, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="index.html">Sasha Rzepkowska</a> </em>, <em> <a href="index.html">Zdzisław Jaxa-Małachowski</a> </em>, <em> <a href="index.html">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2113 words" > <em>11 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="creating-multimedia-applications"><span class="me-2">Creating multimedia applications</span><a href="index.html#creating-multimedia-applications" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>The <strong>SFML</strong> library (Simple and Fast Multimedia Library) is open-source software that provides a set of tools for creating multimedia applications, especially computer games and interactive graphical applications. SFML offers features for handling 2D graphics, sound, user interaction, and networking.</p><p>It is written in C++, which makes it efficient and easy to integrate with other libraries and development tools. SFML is available on various platforms, including Windows, Linux, and macOS, making it a popular choice for game developers and multimedia application creators.</p><p>Useful links:</p><ul><li><a href="https://www.sfml-dev.org/documentation/3.0.0/">SFML Documentation</a><li><a href="https://www.sfml-dev.org/tutorials/3.0/">SFML Tutorial</a></ul><h2 id="installation-using-git"><span class="me-2">Installation using git</span><a href="index.html#installation-using-git" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Just like with {fmt}, when working with the SFML library, we will also use the git tool to download and configure it locally.</p><blockquote class="prompt-warning"><p>It is important to remember to install the git tool beforehand.</p></blockquote><div file="Sample CMakeLists.txt file" class="language-cmake highlighter-rouge"><div class="code-header"> <span data-label-text="Sample CMakeLists.txt file"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="nb">cmake_minimum_required</span><span class="p">(</span>VERSION 3.24<span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span>Funzies<span class="p">)</span>
+
+<span class="nb">set</span><span class="p">(</span>CMAKE_CXX_STANDARD 20<span class="p">)</span>
+
+<span class="nb">include</span><span class="p">(</span>FetchContent<span class="p">)</span>
+
+<span class="nf">FetchContent_Declare</span><span class="p">(</span>
+        SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 3.0.0
+        GIT_SHALLOW ON
+        EXCLUDE_FROM_ALL
+        SYSTEM
+<span class="p">)</span>
+
+<span class="nf">FetchContent_MakeAvailable</span><span class="p">(</span>SFML<span class="p">)</span>
+
+<span class="nb">add_executable</span><span class="p">(</span>Funzies main.cpp<span class="p">)</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span>Funzies PRIVATE SFML::Graphics<span class="p">)</span>
+</pre></table></code></div></div><h1 id="example-code-fragments">Example code fragments</h1><p>Below are code fragments aimed at presenting the basic elements of the SFML library.</p><blockquote class="prompt-warning"><p>To run the code correctly, you need to add the used fonts or images by yourself.</p></blockquote><h2 id="window-creation"><span class="me-2">Window creation</span><a href="index.html#window-creation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">sf</span><span class="o">::</span><span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>It’s worth discussing some of the elements used above in the program:</p><ul><li><code class="language-plaintext highlighter-rouge">{800, 600}</code>: This is the size of the window in pixels. The first argument is the width, and the second one is the height. In this case, the window has dimensions of 800 pixels by 600 pixels.<li><code class="language-plaintext highlighter-rouge">"Test"</code>: This is the window title that will be displayed on the title bar.<li><code class="language-plaintext highlighter-rouge">sf::Style::Default</code>: This is the window style that defines the appearance and functionality of the window. <code class="language-plaintext highlighter-rouge">sf::Style::Default</code> indicates the standard window style, which includes close, minimize, and maximize buttons, as well as the title bar. Using a different style, for example, could create a window without the top bar containing these buttons (as is common in most games).<li><code class="language-plaintext highlighter-rouge">sf::State::Windowed</code>: Specifies that the application should be displayed in a floating window. An alternative would be <code class="language-plaintext highlighter-rouge">sf::State::Fullscreen</code>. It is worth nothing that <em>fullscreen</em> would not work nicely when the size is specified to be 800 by 600.<li><code class="language-plaintext highlighter-rouge">sf::ContextSettings{.antiAliasingLevel = 8}</code>: Sets selected parameters related to window rendering. Here we define the level of antialiasing (additional smoothing of shapes). Setting value over <code class="language-plaintext highlighter-rouge">8</code> is not advised (it would result in minimal improvements with high computing costs; the default value is <code class="language-plaintext highlighter-rouge">0</code> — meaning no antialiasing whatsoever).</ul><p>The latter code, i.e., those nested loops, is a <em>frame loop</em>, where for each frame we process all the events that have spawned after the previous frame. Without this code, the window will not work properly. This isn’t really a comprehensive explanation, so please also go through the <a href="https://www.sfml-dev.org/tutorials/3.0/window/window/#opening-a-window">official tutorial</a>.</p><h2 id="drawing-shapes-hexagon"><span class="me-2">Drawing shapes (hexagon)</span><a href="index.html#drawing-shapes-hexagon" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">sf</span><span class="o">::</span><span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">hexagon</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">CircleShape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+    <span class="n">hexagon</span><span class="p">.</span><span class="n">setOutlineColor</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">);</span>
+    <span class="n">hexagon</span><span class="p">.</span><span class="n">setOutlineThickness</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+    <span class="n">hexagon</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Blue</span><span class="p">);</span>
+    <span class="n">hexagon</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">});</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">//painting window with background color</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">White</span><span class="p">);</span>
+        <span class="c1">//hexagon drawing</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">hexagon</span><span class="p">);</span>
+        <span class="c1">//updating window display</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output:</p><p><a href="../../../assets/img/sfml/Obrazek&#32;Hexagon.png" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Obrazek%20Hexagon.png" alt="obrazek Hexagon" class="lazyload" data-proofer-ignore></a> <em>Rendering the screen with a hexagon-shaped figure</em></p><p>Please note that when drawing a hexagon, we are using a circle shape. It’s worth testing what shapes will be created when we change the value of the second argument in the constructor (e.g., <code class="language-plaintext highlighter-rouge">sf::CircleShape hexagon(50, 4)</code>).</p><h2 id="drawing-a-collection-of-shapes"><span class="me-2">Drawing a collection of shapes</span><a href="index.html#drawing-a-collection-of-shapes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">sf</span><span class="o">::</span><span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">hexagon</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">CircleShape</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">hexagon</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Black</span><span class="p">);</span>
+                <span class="k">else</span> <span class="n">hexagon</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">White</span><span class="p">);</span>
+
+                <span class="n">hexagon</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span>
+                    <span class="p">(</span><span class="n">y</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">?</span> <span class="mi">280</span> <span class="o">:</span> <span class="mi">230</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">100.f</span><span class="p">,</span> <span class="mi">100</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="mf">85.f</span>
+                <span class="p">});</span>
+
+                <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">hexagon</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output:</p><p><a href="../../../assets/img/sfml/Kolekcja&#32;Figur.png" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Kolekcja%20Figur.png" alt="obrazek kolekcja figur" class="lazyload" data-proofer-ignore></a> <em>Render the screen with multiple hexagon-shaped figures</em></p><h2 id="text-field"><span class="me-2">Text field</span><a href="index.html#text-field" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>You need to download the appropriate font file (<code class="language-plaintext highlighter-rouge">.ttf</code> format) and place it in a folder referenced in the program.</p><p>In the example, the <em>Arial</em> font is used.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">sf</span><span class="o">::</span><span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">arial</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Font</span><span class="p">(</span><span class="s">"../fonts/arial.ttf"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">arial</span><span class="p">,</span> <span class="s">"Hello SFML"</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+    <span class="n">text</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">});</span>
+    <span class="n">text</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Magenta</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">White</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output:</p><p><a href="../../../assets/img/sfml/Obrazek&#32;Tekst.png" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Obrazek%20Tekst.png" alt="obrazek Tekst" class="lazyload" data-proofer-ignore></a> <em>Rendering the screen with text in the chosen font</em></p><h2 id="inserting-images"><span class="me-2">Inserting images</span><a href="index.html#inserting-images" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">sf</span><span class="o">::</span><span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">texture</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Texture</span><span class="p">(</span><span class="s">"../images/logo.png"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">logoImage</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Sprite</span><span class="p">(</span><span class="n">texture</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">White</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">logoImage</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output:</p><p><a href="../../../assets/img/sfml/Obrazek&#32;Image.png" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Obrazek%20Image.png" alt="obrazek Image" class="lazyload" data-proofer-ignore></a> <em>Rendering the screen with the selected image</em></p><h2 id="button"><span class="me-2">Button</span><a href="index.html#button" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>In this fragment, we manually create a button. It’s a rectangle with text in the middle. If the user clicks on our figure (creating the button), a text modification will be made.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="p">{</span>
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">sf</span><span class="o">::</span><span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">sf</span><span class="o">::</span><span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">arial</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Font</span><span class="p">(</span><span class="s">"../fonts/arial.ttf"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">text</span>        <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">arial</span><span class="p">,</span> <span class="s">"Click to change"</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+    <span class="n">text</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">300</span><span class="p">,</span> <span class="mi">250</span><span class="p">});</span>
+
+    <span class="k">auto</span> <span class="n">visibleButton</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">RectangleShape</span><span class="p">({</span><span class="mi">300</span><span class="p">,</span> <span class="mi">50</span><span class="p">});</span>
+    <span class="n">visibleButton</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">});</span>
+    <span class="n">visibleButton</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Green</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">buttonText</span> <span class="o">=</span> <span class="n">sf</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">arial</span><span class="p">,</span> <span class="s">"click"</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+    <span class="n">buttonText</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">350</span><span class="p">,</span> <span class="mi">310</span><span class="p">});</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">onClose</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="n">window</span><span class="p">](</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span> <span class="k">const</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+    <span class="p">};</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">onMouseClicked</span> <span class="o">=</span>
+            <span class="p">[</span><span class="o">&amp;</span><span class="n">visibleButton</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">buttonText</span><span class="p">]</span>
+            <span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Event</span><span class="o">::</span><span class="n">MouseButtonPressed</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">button</span> <span class="o">==</span> <span class="n">sf</span><span class="o">::</span><span class="n">Mouse</span><span class="o">::</span><span class="n">Button</span><span class="o">::</span><span class="n">Left</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">auto</span> <span class="k">const</span> <span class="n">clickedOnButton</span> <span class="o">=</span> <span class="n">visibleButton</span>
+                    <span class="p">.</span><span class="n">getGlobalBounds</span><span class="p">()</span>
+                    <span class="p">.</span><span class="n">contains</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">sf</span><span class="o">::</span><span class="n">Vector2f</span><span class="o">&gt;</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">position</span><span class="p">));</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">clickedOnButton</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">buttonText</span><span class="p">.</span><span class="n">getString</span><span class="p">()</span> <span class="o">==</span> <span class="s">"click"</span><span class="p">)</span>
+                <span class="p">{</span>
+                    <span class="n">buttonText</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="s">"clicked!"</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span>
+                <span class="p">{</span>
+                    <span class="n">buttonText</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="s">"click"</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">handleEvents</span><span class="p">(</span><span class="n">onClose</span><span class="p">,</span> <span class="n">onMouseClicked</span><span class="p">);</span>
+
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">(</span><span class="n">sf</span><span class="o">::</span><span class="n">Color</span><span class="o">::</span><span class="n">Black</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">visibleButton</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">buttonText</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output:</p><p><a href="../../../assets/img/sfml/Obrazek&#32;Button1.png" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Obrazek%20Button1.png" alt="obrazek Button1" class="lazyload" data-proofer-ignore></a> <em>Rendering the screen with a button</em></p><p><a href="../../../assets/img/sfml/Obrazek&#32;Button2.png" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Obrazek%20Button2.png" alt="obrazek Button2" class="lazyload" data-proofer-ignore></a> <em>Rendering the screen with a button after it was pressed</em></p><p>Here we have observed an alternative way of handling events. Instead of a “wall” of <code class="language-plaintext highlighter-rouge">if()</code>s or a huge <code class="language-plaintext highlighter-rouge">switch()</code>, we opted to prepare lambdas that react to certain events (the typ of the event is specified in their arguments passed by <code class="language-plaintext highlighter-rouge">const&amp;</code>) and supply them to the <code class="language-plaintext highlighter-rouge">.handleEvents()</code> method.</p><h2 id="first-animation"><span class="me-2">First animation</span><a href="index.html#first-animation" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>The following code presents a simple example of using the SFML library to create an animation of a rectangle moving across the screen and bouncing off the edges. This code serves as a great introduction to working with SFML and demonstrates basic concepts of event handling, drawing shapes, and manipulating them.</p><blockquote class="prompt-tip"><p>This seems to be an appropriate moment for <code class="language-plaintext highlighter-rouge">using namespace</code>…</p></blockquote><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">sf</span><span class="p">;</span>
+    
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="c1">// Creating a shape (in this case a square)</span>
+    <span class="k">auto</span> <span class="n">shape</span> <span class="o">=</span> <span class="n">RectangleShape</span><span class="p">(</span><span class="n">Vector2f</span><span class="p">(</span><span class="mf">100.f</span><span class="p">,</span> <span class="mf">100.f</span><span class="p">));</span>
+    <span class="n">shape</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Blue</span><span class="p">);</span>
+
+    <span class="c1">// Setting the initial speed of the shape</span>
+    <span class="k">auto</span> <span class="n">velocity</span> <span class="o">=</span> <span class="n">Vector2f</span><span class="p">(</span><span class="mf">0.02f</span><span class="p">,</span> <span class="mf">0.02f</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span>
+    <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span> <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">auto</span> <span class="k">const</span> <span class="n">position</span> <span class="o">=</span> <span class="n">shape</span><span class="p">.</span><span class="n">getPosition</span><span class="p">();</span>
+        <span class="c1">// Bounce the shape off the edge of the window</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">position</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">shape</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">velocity</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">velocity</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">position</span><span class="p">.</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">position</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">shape</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">velocity</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">velocity</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
+
+        <span class="n">shape</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">velocity</span><span class="p">);</span>
+
+        <span class="c1">// Drawing the shape on the screen</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">shape</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output:</p><p><a href="../../../assets/img/sfml/Animacja.gif" class="popup img-link "><img data-src="/~fk/assets/img/sfml/Animacja.gif" alt="Animacja" class="lazyload" data-proofer-ignore></a> <em>Animation of bouncing square</em></p><h2 id="first-game---pong"><span class="me-2">First game - PONG</span><a href="index.html#first-game---pong" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Here is the presentation of implementing a simple version of the PONG game. In this game, the player faces off against the computer. Player control involves using the <kbd>S</kbd> and <kbd>W</kbd> keys to react to the ball’s movements, while the computer automatically adjusts the position of its paddle to effectively bounce the ball. This code not only illustrates handling keystrokes and setting the frame rate limit but also utilizes the <code class="language-plaintext highlighter-rouge">.move()</code> and <code class="language-plaintext highlighter-rouge">.intersects()</code> functions for smooth object movement and collision detection.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;SFML/Graphics.hpp&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/format.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span>
+<span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">sf</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">window</span> <span class="o">=</span> <span class="n">RenderWindow</span><span class="p">(</span>
+        <span class="n">VideoMode</span><span class="p">({</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">}),</span> <span class="s">"Test"</span><span class="p">,</span>
+        <span class="n">Style</span><span class="o">::</span><span class="n">Default</span><span class="p">,</span> <span class="n">State</span><span class="o">::</span><span class="n">Windowed</span><span class="p">,</span>
+        <span class="n">ContextSettings</span><span class="p">{.</span><span class="n">antiAliasingLevel</span> <span class="o">=</span> <span class="mi">8</span><span class="p">}</span>
+    <span class="p">);</span>
+
+    <span class="n">window</span><span class="p">.</span><span class="n">setFramerateLimit</span><span class="p">(</span><span class="mi">240</span><span class="p">);</span>
+    <span class="c1">//ball position and parameters</span>
+    <span class="k">auto</span> <span class="n">ball</span> <span class="o">=</span> <span class="n">CircleShape</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">ball</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Green</span><span class="p">);</span>
+    <span class="n">ball</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">});</span>
+    <span class="k">auto</span> <span class="n">ballVelocity</span> <span class="o">=</span> <span class="n">Vector2f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+    <span class="c1">//parameters of first player</span>
+    <span class="k">auto</span> <span class="n">player</span> <span class="o">=</span> <span class="n">RectangleShape</span><span class="p">(</span><span class="n">Vector2f</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Red</span><span class="p">);</span>
+    <span class="n">player</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">40</span><span class="p">,</span> <span class="mi">250</span><span class="p">});</span>
+
+    <span class="c1">//parameters for computer</span>
+    <span class="k">auto</span> <span class="n">computer</span> <span class="o">=</span> <span class="n">RectangleShape</span><span class="p">(</span><span class="n">Vector2f</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
+    <span class="n">computer</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">Blue</span><span class="p">);</span>
+    <span class="n">computer</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">740</span><span class="p">,</span> <span class="mi">250</span><span class="p">});</span>
+
+    <span class="c1">// players scores</span>
+    <span class="k">auto</span> <span class="n">playerScore</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">computerScore</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">font</span> <span class="o">=</span> <span class="n">Font</span><span class="p">(</span><span class="s">"../fonts/arial.ttf"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">scoreText</span> <span class="o">=</span> <span class="n">Text</span><span class="p">(</span><span class="n">font</span><span class="p">,</span> <span class="s">""</span><span class="p">,</span> <span class="mi">25</span><span class="p">);</span>
+    <span class="n">scoreText</span><span class="p">.</span><span class="n">setFillColor</span><span class="p">(</span><span class="n">Color</span><span class="o">::</span><span class="n">White</span><span class="p">);</span>
+    <span class="n">scoreText</span><span class="p">.</span><span class="n">setPosition</span><span class="p">({</span><span class="mi">250</span><span class="p">,</span> <span class="mi">15</span><span class="p">});</span>
+
+    <span class="k">auto</span> <span class="n">playerMovingUp</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">playerMovingDown</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">window</span><span class="p">.</span><span class="n">isOpen</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">event</span> <span class="o">=</span> <span class="n">window</span><span class="p">.</span><span class="n">pollEvent</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">event</span><span class="o">-&gt;</span><span class="n">is</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">::</span><span class="n">Closed</span><span class="o">&gt;</span><span class="p">())</span> <span class="n">window</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">e</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">getIf</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">::</span><span class="n">KeyPressed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">==</span> <span class="n">Keyboard</span><span class="o">::</span><span class="n">Key</span><span class="o">::</span><span class="n">W</span><span class="p">)</span> <span class="n">playerMovingUp</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">e</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">getIf</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">::</span><span class="n">KeyPressed</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">==</span> <span class="n">Keyboard</span><span class="o">::</span><span class="n">Key</span><span class="o">::</span><span class="n">S</span><span class="p">)</span> <span class="n">playerMovingDown</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">e</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">getIf</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">::</span><span class="n">KeyReleased</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">==</span> <span class="n">Keyboard</span><span class="o">::</span><span class="n">Key</span><span class="o">::</span><span class="n">W</span><span class="p">)</span> <span class="n">playerMovingUp</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">e</span> <span class="o">=</span> <span class="n">event</span><span class="o">-&gt;</span><span class="n">getIf</span><span class="o">&lt;</span><span class="n">Event</span><span class="o">::</span><span class="n">KeyReleased</span><span class="o">&gt;</span><span class="p">())</span>
+            <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">code</span> <span class="o">==</span> <span class="n">Keyboard</span><span class="o">::</span><span class="n">Key</span><span class="o">::</span><span class="n">S</span><span class="p">)</span> <span class="n">playerMovingDown</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">// player movements (W,S)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">playerMovingUp</span> <span class="o">&amp;&amp;</span> <span class="n">player</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">move</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">});</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">playerMovingDown</span> <span class="o">&amp;&amp;</span> <span class="n">player</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">y</span> <span class="o">-</span> <span class="n">player</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">y</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">move</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="c1">// computer movements</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ball</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">computer</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">computer</span><span class="p">.</span><span class="n">move</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">});</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">ball</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">computer</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">+</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">computer</span><span class="p">.</span><span class="n">move</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">});</span>
+        <span class="p">}</span>
+
+        <span class="c1">//ball move</span>
+        <span class="n">ball</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="n">ballVelocity</span><span class="p">);</span>
+
+        <span class="c1">// Bounce the ball off the top and bottom of the window</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ball</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">ball</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">y</span> <span class="o">-</span> <span class="n">ball</span><span class="p">.</span><span class="n">getRadius</span><span class="p">())</span>
+        <span class="p">{</span>
+            <span class="n">ballVelocity</span><span class="p">.</span><span class="n">y</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="c1">// Bouncing the ball off a player's pallet</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">player</span><span class="p">.</span><span class="n">getGlobalBounds</span><span class="p">().</span><span class="n">findIntersection</span><span class="p">(</span><span class="n">ball</span><span class="p">.</span><span class="n">getGlobalBounds</span><span class="p">()))</span>
+        <span class="p">{</span>
+            <span class="n">ballVelocity</span><span class="p">.</span><span class="n">x</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Bounce the ball off a computer's pallet</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">computer</span><span class="p">.</span><span class="n">getGlobalBounds</span><span class="p">().</span><span class="n">findIntersection</span><span class="p">(</span><span class="n">ball</span><span class="p">.</span><span class="n">getGlobalBounds</span><span class="p">()))</span>
+        <span class="p">{</span>
+            <span class="n">ballVelocity</span><span class="p">.</span><span class="n">x</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Checking whether the ball has crossed the left or right edge of the window</span>
+        <span class="k">auto</span> <span class="k">const</span> <span class="n">computerScoredPoint</span> <span class="o">=</span> <span class="n">ball</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">auto</span> <span class="k">const</span> <span class="n">playerScoredPoint</span>   <span class="o">=</span> <span class="n">ball</span><span class="p">.</span><span class="n">getPosition</span><span class="p">().</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">x</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">computerScoredPoint</span><span class="p">)</span> <span class="n">computerScore</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">playerScoredPoint</span><span class="p">)</span> <span class="n">playerScore</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">computerScoredPoint</span> <span class="n">or</span> <span class="n">playerScoredPoint</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">auto</span> <span class="k">const</span> <span class="n">screenMiddle</span> <span class="o">=</span> <span class="n">Vector2f</span><span class="p">(</span>
+                <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">x</span> <span class="o">/</span> <span class="mf">2.0f</span><span class="p">,</span> <span class="n">window</span><span class="p">.</span><span class="n">getSize</span><span class="p">().</span><span class="n">y</span> <span class="o">/</span> <span class="mf">2.0f</span>
+            <span class="p">);</span>
+            <span class="n">ball</span><span class="p">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">screenMiddle</span><span class="p">);</span>
+            <span class="n">ballVelocity</span><span class="p">.</span><span class="n">x</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//real-time display of the score</span>
+        <span class="n">scoreText</span><span class="p">.</span><span class="n">setString</span><span class="p">(</span><span class="n">fmt</span><span class="o">::</span><span class="n">format</span><span class="p">(</span><span class="s">"Player: {}   Computer: {}"</span><span class="p">,</span> <span class="n">playerScore</span><span class="p">,</span> <span class="n">computerScore</span><span class="p">));</span>
+        <span class="c1">// drawing the elements</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">computer</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">ball</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">draw</span><span class="p">(</span><span class="n">scoreText</span><span class="p">);</span>
+        <span class="n">window</span><span class="p">.</span><span class="n">display</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Output: <a href="../../../assets/img/sfml/pong_animation.gif" class="popup img-link "><img data-src="/~fk/assets/img/sfml/pong_animation.gif" alt="Animacja PONG" class="lazyload" data-proofer-ignore></a> <em>PONG game animation</em></p><hr /></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../chapter-12-1-exceptions/index.html" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 11 - Exceptions</p></a><div class="btn btn-outline-primary disabled" prompt="Next" ><p>-</p></div></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../../assets/js/dist/post.min.js"></script> <script defer src="../../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/en/lectures/complementary-sfml-library/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

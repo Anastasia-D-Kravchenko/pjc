@@ -1,0 +1,273 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 1.3 - std::string and std::vector containers" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/en/lectures/chapter-1-3-string-and-vector-containers/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-02-25T00:00:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 1.3 - std::string and std::vector containers" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-02-25T00:00:00+01:00","datePublished":"2025-02-25T00:00:00+01:00","description":"PJATK / PJAIT PJC","headline":"Chapter 1.3 - std::string and std::vector containers","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-1-3-string-and-vector-containers/"},"url":"/~fk/en/lectures/chapter-1-3-string-and-vector-containers/"}</script><title>Chapter 1.3 - <code>std::string</code> and <code>std::vector</code> containers | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../../en.html" id="avatar" class="rounded-circle"> <img src="../../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../../en.html">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../../en.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="../../information/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="../../presentations/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="../../tasks/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="../../tags/index.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="../../../wyklady/rozdział-1-3-kontenery-string-i-vector/index.html" class="nav-link"> <img src="../../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="index.html" class="nav-link"> <img src="../../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../../index.html"> Home </a> </span> <span>Chapter 1.3 - <code>std::string</code> and <code>std::vector</code> containers</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 1.3 - <code>std::string</code> and <code>std::vector</code> containers</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1740438000" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Feb 25, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1728 words" > <em>9 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="stdstring-container"><span class="me-2"><code>std::string</code> container</span><a href="index.html#stdstring-container" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>One of the most popular data types in programming is the string type. Java’s <code class="language-plaintext highlighter-rouge">String</code> has its counterpart in C++ in the form of the <code class="language-plaintext highlighter-rouge">std::string</code> class. Both of these classes are used for storing and modifying text.</p><p>The most noticeable difference between <code class="language-plaintext highlighter-rouge">String</code> (Java) and <code class="language-plaintext highlighter-rouge">std::string</code> (C++) is the access to their elements (individual characters) and the ability to modify them.</p><p>In Java, access to characters is done using the <code class="language-plaintext highlighter-rouge">.charAt()</code> method. There is no possibility to change the stored text — to do this, a new <code class="language-plaintext highlighter-rouge">String</code> must be created.</p><p>Operations on strings in C++ closely resemble operations on convenient character arrays. Not only can you access a specific character using indexing (similar to arrays — using <code class="language-plaintext highlighter-rouge">[]</code>), but you can also change the contents of <code class="language-plaintext highlighter-rouge">std::string</code> objects without the need to create new ones.</p><p>Below are examples of code where a <code class="language-plaintext highlighter-rouge">std::string</code> object is created and displayed.</p><div file="Printing using std::cout" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Printing using std::cout"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming in C++"</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="Printing using the classic for () loop" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Printing using the classic for () loop"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming in C++"</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">[</span><span class="n">index</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="Printing using the range-based for () loop" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Printing using the range-based for () loop"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming in C++"</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">chr</span> <span class="o">:</span> <span class="n">text</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">chr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Immediately, three very important facts about using text objects in C++ can be noticed:</p><ol><li>All the above code snippets introduce a new line with the <code class="language-plaintext highlighter-rouge">#include &lt;string&gt;</code> directive. This directive, just like <code class="language-plaintext highlighter-rouge">#include &lt;iostream&gt;</code>, is a <em>preprocessor directive</em> that pastes the contents of the <code class="language-plaintext highlighter-rouge">&lt;string&gt;</code> header into our code file.<li>An object of type <code class="language-plaintext highlighter-rouge">std::string</code> can be indexed just like arrays. The “classic” <code class="language-plaintext highlighter-rouge">for ()</code> loop additionally illustrates that <code class="language-plaintext highlighter-rouge">std::string</code> (like any container in the C++ standard library) provides the <code class="language-plaintext highlighter-rouge">.size()</code> method, which tells how many elements are in the object.<li><code class="language-plaintext highlighter-rouge">std::string</code> (like any container in the C++ standard library) supports iteration over it using the range-based <code class="language-plaintext highlighter-rouge">for ()</code> loop.</ol><p>The above examples illustrated only ways to display text. But what about modifying it?</p><p>For example, let’s change the first letter to lowercase and the last one to an exclamation mark:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="c1"> </span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming in C++"</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">firstIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">lastIndex</span>  <span class="o">=</span> <span class="n">text</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="n">text</span><span class="p">[</span><span class="n">firstIndex</span><span class="p">]</span> <span class="o">=</span> <span class="sc">'p'</span><span class="p">;</span>
+    <span class="n">text</span><span class="p">[</span><span class="n">lastIndex</span><span class="p">]</span>  <span class="o">=</span> <span class="sc">'!'</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The result of running this code is the display of the text <raw-data>programming in C+!</raw-data>.</p><p>It turns out that when accessing individual elements of a collection, programmers are most often interested in the first and last ones. Therefore, selected containers in C++ (including <code class="language-plaintext highlighter-rouge">std::string</code>) provide additional, dedicated methods for precisely these operations:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming in C++"</span><span class="p">);</span>
+
+    <span class="n">text</span><span class="p">.</span><span class="n">front</span><span class="p">()</span> <span class="o">=</span> <span class="sc">'p'</span><span class="p">;</span>
+    <span class="n">text</span><span class="p">.</span><span class="n">back</span><span class="p">()</span>  <span class="o">=</span> <span class="sc">'!'</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The result of executing the above code is also the display of the text <raw-data>programming in C+!</raw-data>.</p><p>The syntax on lines 7 and 8 may seem strange — as if we’re assigning something to a method or its result. In fact, that’s exactly what’s happening — the second of these associations is correct. This is thanks to <em>references</em>, which will be explained in more detail in the near future.</p><p>Of course, you can use the <code class="language-plaintext highlighter-rouge">.front()</code> and <code class="language-plaintext highlighter-rouge">.back()</code> methods not only to overwrite elements but also to simply display them.</p><blockquote class="prompt-warning"><p>Using the <code class="language-plaintext highlighter-rouge">.front()</code> or <code class="language-plaintext highlighter-rouge">.back()</code> methods on an empty container results in Undefined Behavior (UB).</p></blockquote><p>Characters can be added to a <code class="language-plaintext highlighter-rouge">std::string</code> in many ways. The most common way to do this is using the <code class="language-plaintext highlighter-rouge">+=</code> operator.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+
+    <span class="k">auto</span> <span class="n">first</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">second</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"in"</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">third</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"C++"</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">chr</span> <span class="o">:</span> <span class="n">first</span><span class="p">)</span> <span class="n">text</span> <span class="o">+=</span> <span class="n">chr</span><span class="p">;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">chr</span> <span class="o">:</span> <span class="n">second</span><span class="p">)</span> <span class="n">text</span> <span class="o">+=</span> <span class="n">chr</span><span class="p">;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">chr</span> <span class="o">:</span> <span class="n">third</span><span class="p">)</span> <span class="n">text</span> <span class="o">+=</span> <span class="n">chr</span><span class="p">;</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Running the above code will display the text <raw-data>Programming in C++</raw-data>. It’s worth noting that, just like in Java, you can omit braces under loops or <code class="language-plaintext highlighter-rouge">if ()</code> statements if a single instruction is to be executed within the body.</p><p>The last of the basic operations (so far) concerning <code class="language-plaintext highlighter-rouge">std::string</code> will be constructing text fragments based on the original object. Consider the following listing:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">text</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Programming"</span><span class="p">);</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"kg stands for kilo"</span> <span class="o">&lt;&lt;</span> <span class="n">text</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>It will display the following output:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>kg stands for kilogram
+</pre></table></code></div></div><p>The <code class="language-plaintext highlighter-rouge">.substr()</code> method allows you to construct a new <code class="language-plaintext highlighter-rouge">std::string</code> object containing the specified fragment of the original text. The first argument is the starting index, and the second argument is the number of characters to copy.</p><p>C++ prioritizes application performance. Therefore, it’s not difficult to imagine that creating a completely new object (which often implies memory allocation and copying) when the programmer is interested only in working on a fragment of the original <code class="language-plaintext highlighter-rouge">std::string</code> is not always the best idea. At this point in PJC, there’s no need to worry about this, but if someone wants to read about potentially more efficient alternatives, it’s worth delving deeper into this topic <sup id="fnref:alternatives-to-substr"><a href="index.html#fn:alternatives-to-substr" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>.</p><h2 id="stdvector-container"><span class="me-2"><code>std::vector</code> container</span><a href="index.html#stdvector-container" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p><code class="language-plaintext highlighter-rouge">std::string</code> is a container that stores characters. It’s easy to guess that there exists a more generic container — one that can store anything. It’s called <code class="language-plaintext highlighter-rouge">std::vector</code>.</p><blockquote class="prompt-info"><p><code class="language-plaintext highlighter-rouge">std::vector</code> and <code class="language-plaintext highlighter-rouge">std::string</code> are the most commonly used containers in C++.</p></blockquote><p>When declaring a variable of type <code class="language-plaintext highlighter-rouge">std::vector</code>,<sup id="fnref:not-quite-type"><a href="index.html#fn:not-quite-type" class="footnote" rel="footnote" role="doc-noteref">2</a></sup> you need to specify what type of elements it will store. This is illustrated in the following listing:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">integers</span>    <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">realNumbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">words</span>       <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>We notice a new header — <code class="language-plaintext highlighter-rouge">#include &lt;vector&gt;</code>.</p><p>We specify the type of vector elements within angle brackets (<code class="language-plaintext highlighter-rouge">&lt;&gt;</code>).</p><p>Instead of using the default constructor, you can create a vector already filled with elements. We use braces (<code class="language-plaintext highlighter-rouge">{}</code>) instead of parentheses (<code class="language-plaintext highlighter-rouge">()</code>).</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">integers</span>    <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">realNumbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="p">{</span><span class="mf">3.14</span><span class="p">,</span> <span class="mf">2.71</span><span class="p">,</span> <span class="mf">1.61</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">words</span>       <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="s">"Hello"</span><span class="p">,</span> <span class="s">" "</span><span class="p">,</span> <span class="s">"World"</span><span class="p">};</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>If you don’t know what elements the vector will store, you can create it empty and then add elements using the <code class="language-plaintext highlighter-rouge">.push_back()</code> method. It adds a new element to the vector, placing it at the very end of the container (effectively <strong>increasing</strong> its size by 1):</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">integers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">integers</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">integers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>A vector, similarly to <code class="language-plaintext highlighter-rouge">std::string</code>, supports methods like <code class="language-plaintext highlighter-rouge">.size()</code>, <code class="language-plaintext highlighter-rouge">.front()</code>, and indexing.</p><p>Naturally, adding elements is only half the battle. Sometimes you also need to remove them. To remove an element from the end of the vector, you should use the <code class="language-plaintext highlighter-rouge">.pop_back()</code> method, which removes an elements from the vector’s back (effectively <strong>decreasing</strong> its size by 1):</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">integers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">toRemove</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">toRemove</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">toRemove</span> <span class="o">&gt;</span> <span class="n">integers</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">toRemove</span> <span class="o">=</span> <span class="n">integers</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">toRemove</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">integers</span><span class="p">.</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">integers</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">element</span> <span class="o">:</span> <span class="n">integers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">element</span> <span class="o">&lt;&lt;</span> <span class="sc">' '</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The above listing will prompt the user to enter the number of elements to remove from the vector. If the entered number is greater than the number of elements in the vector, it will be adjusted accordingly. Finally, the number of remaining elements in the vector is displayed.</p><blockquote class="prompt-info"><p><code class="language-plaintext highlighter-rouge">std::string</code> also supports <code class="language-plaintext highlighter-rouge">.push_back()</code> and <code class="language-plaintext highlighter-rouge">.pop_back()</code>, although in the case of this class, the <code class="language-plaintext highlighter-rouge">.push_back()</code> method is rarely used. Most containers share many methods, although sometimes some of them are used very rarely.</p></blockquote><h2 id="stdstring-class-versus-c-string-literals"><span class="me-2"><code>std::string</code> class versus C-string literals</span><a href="index.html#stdstring-class-versus-c-string-literals" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Surely, some have already noticed the first presentation of a text type, more precisely the explicit specification of the type <code class="language-plaintext highlighter-rouge">std::string</code>. So what’s the difference between <code class="language-plaintext highlighter-rouge">"Text"</code> and <code class="language-plaintext highlighter-rouge">std::string("Text")</code>?</p><p>It would be a very minor mistake to reply “everything.”</p><div file="std::string object" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="std::string object"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">string</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">"Text"</span><span class="p">);</span>
+</pre></table></code></div></div><div file="raw text - the so called C-string literal" class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="raw text - the so called C-string literal"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">rawText</span> <span class="o">=</span> <span class="s">"Text"</span><span class="p">;</span>
+</pre></table></code></div></div><p>A C-string is the “rawest” form of text stored in a computer. It doesn’t represent any object in the conventional sense of the term. It’s simply an unmodifiable array of characters stored in computer memory, accessible via its address. With such a variable <code class="language-plaintext highlighter-rouge">rawText</code>, we can’t perform any interesting operations.</p><p>Variables representing access to C-strings support indexing, but, for example, they won’t tell us how many characters they consist of (they don’t have the <code class="language-plaintext highlighter-rouge">.size()</code> method) because <strong>they don’t support any methods</strong>. Effectively, they can only be used for displaying or initialization of objects of the <code class="language-plaintext highlighter-rouge">std::string</code> type.</p><blockquote class="prompt-tip"><p>If we’re not interested in any methods and only need to specify a text literal, we don’t need to put it in an object of type <code class="language-plaintext highlighter-rouge">std::string</code> — simply use a C-style string literal, as demonstrated in the examples above, such as in <code class="language-plaintext highlighter-rouge">std::cout &lt;&lt; "kg stands for kilo"</code>.</p><p>However, most of the time when storing text, we’ll create objects of type <code class="language-plaintext highlighter-rouge">std::string</code> for convenience.</p></blockquote><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:alternatives-to-substr"><p>Working with views: <code class="language-plaintext highlighter-rouge">std::string_view</code> (<a href="https://youtu.be/H9gAaNRoon4">https://youtu.be/H9gAaNRoon4</a>, <a href="https://youtu.be/fj_CF8xK760">https://youtu.be/fj_CF8xK760</a>), <code class="language-plaintext highlighter-rouge">std::span</code> (<a href="https://stackoverflow.com/q/45723819">https://stackoverflow.com/q/45723819</a>, <a href="https://www.modernescpp.com/index.php/c-20-std-span">https://www.modernescpp.com/index.php/c-20-std-span</a>, <a href="https://brevzin.github.io/c++/2018/12/03/span-best-span/">https://brevzin.github.io/c++/2018/12/03/span-best-span/</a>) and <code class="language-plaintext highlighter-rouge">std::ranges::subrange</code> (<a href="https://devdocs.io/cpp/ranges/subrange">https://devdocs.io/cpp/ranges/subrange</a>) <a href="index.html#fnref:alternatives-to-substr" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:not-quite-type"><p><code class="language-plaintext highlighter-rouge">std::vector</code> is actually not a type but a <em>type template</em>. Templates will be discussed in further chapters. For simplicity’s sake, we will say that <code class="language-plaintext highlighter-rouge">std::vector</code> is a type for now. Don’t worry about this for the time being. <a href="index.html#fnref:not-quite-type" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../chapter-1-2-first-c-programs/index.html" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 1.2 - First C++ programs</p></a> <a href="../chapter-1-4-basic-standard-algorithms/index.html" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 1.4 - Basic standard algorithms</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../../assets/js/dist/post.min.js"></script> <script defer src="../../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/en/lectures/chapter-1-3-string-and-vector-containers/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

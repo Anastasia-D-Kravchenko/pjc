@@ -1,0 +1,465 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 3.3 - Lambdy" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-3-3-lambdy/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-03-16T00:00:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 3.3 - Lambdy" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-16T00:00:00+01:00","datePublished":"2025-03-16T00:00:00+01:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 3.3 - Lambdy","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-3-3-lambdy/"},"url":"/~fk/wyklady/rozdzia%C5%82-3-3-lambdy/"}</script><title>Rozdział 3.3 - Lambdy | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en/lectures/chapter-3-3-lambdas/index.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 3.3 - Lambdy</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 3.3 - Lambdy</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1742079600" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Mar 16, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2044 słów" > <em>11 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="znajdywanie-elementu-na-podstawie-dowolnego-kryterium"><span class="me-2">Znajdywanie elementu na podstawie dowolnego kryterium</span><a href="index.html#znajdywanie-elementu-na-podstawie-dowolnego-kryterium" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>W przeszłości poznaliśmy algorytm <code class="language-plaintext highlighter-rouge">std::ranges::find()</code>. Przy jego pomocy jesteśmy w stanie znaleźć jakiś element w sprecyzowanym zakresie. Element, który jest równy temu, który podamy w argumencie wspomnianego algorytmu. Bardzo przydatne w momentach, gdy chcemy sprawdzić, czy taki element znajduje się w kontenerze — zwłaszcza jeżeli później chcemy jakoś wpłynąć na ten element. Przykładowo, możemy chcieć usunąć wszystkie liczby o danej wartości z wektora.</p><p>Przypomnijmy sobie sposób wykorzystania <code class="language-plaintext highlighter-rouge">std::ranges::find()</code> na przykładzie sprawdzenia, czy w danym wektorze znajdują się liczby: 2, 4 lub 6:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">posOf2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">posOf4</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">posOf6</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">twoPresent</span>  <span class="o">=</span> <span class="n">posOf2</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">fourPresent</span> <span class="o">=</span> <span class="n">posOf4</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sixPresent</span>  <span class="o">=</span> <span class="n">posOf6</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">twoPresent</span> <span class="n">or</span> <span class="n">fourPresent</span> <span class="n">or</span> <span class="n">sixPresent</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"2, 4, or 6 is / are present"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Kod ten oczywiście wyświetla komunikat z linijki nr 18.</p><p>Nie sposób jednak nie zauważyć pewnej wspólnej cechy tych trzech, zaprezentowanych liczb. Są to liczby parzyste.</p><p>Załóżmy, że mamy inne zadanie — takie, które nie koncentruje się na liczbie 2, 4 lub 6, tylko na bardziej ogólnym przedstawieniu omawianego problemu:</p><blockquote><p>Jak znaleźć w danym kontenerze liczbę parzystą?</p></blockquote><p>Bardzo prosto. Używając operatora modulo (<code class="language-plaintext highlighter-rouge">%</code>):</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">number</span> <span class="o">:</span> <span class="n">numbers</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">number</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"found an even number: {}"</span><span class="p">,</span> <span class="n">number</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>found an even number: 6
+</pre></table></code></div></div><p>Wszystko fajnie, ale:</p><ul><li>Używamy surowej pętli, która wymaga od nas analizy całego jej ciała, żeby być pewnym, co ona tak naprawdę robi.<li>Używamy instrukcji <code class="language-plaintext highlighter-rouge">break</code>, którą — o ile można — powinniśmy ograniczać, ponieważ może wprowadzać trudne do analizy przebiegi logiki działania programu. Może nie w tym przykładzie, ale wciąż <em>niektórzy</em> twierdzą, że powinno się jej unikać jak ognia.</ul><p>Skorzystajmy zatem ze standardowego algorytmu, który jasno zasugeruje, że szukamy liczby, która jest parzysta. Algorytm będzie bliźniaczy do już wspominanego <code class="language-plaintext highlighter-rouge">std::ranges::find()</code>. Nazywa się <code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code>. Wpierw jednak musimy zrozumieć, co to jest <em>predykat</em>.</p><h2 id="predykaty"><span class="me-2">Predykaty</span><a href="index.html#predykaty" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Poznaliśmy już <em>komparatory</em> i <em>projekcje</em>. W dalszej części tego rozdziału dokładnie nauczymy się je implementować, choć zaczniemy od innego rodzaju funkcji — od <em>predykatu</em> (ang. <em>predicate</em>).</p><blockquote class="prompt-info"><p>Predykat to funkcja, która coś testuje. Przyjmuje pojedynczy argument i zwraca <code class="language-plaintext highlighter-rouge">true</code>, jeżeli spełnia on jakiś warunek.</p></blockquote><p>Przykładowo, możemy mówić o predykacie parzystości. Byłaby to funkcja, która przyjmuje pojedynczy argument i zwraca <code class="language-plaintext highlighter-rouge">true</code> jeżeli jest on parzysty. Jej implementacja mogłaby wyglądać tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">isEven()</code> to ewidentnie predykat. Przyjmuje pojedynczego <code class="language-plaintext highlighter-rouge">int</code>a i zwraca <code class="language-plaintext highlighter-rouge">true</code>, jeżeli jest podzielny przez dwa.</p><blockquote><p>Super, ale jaki to ma związek z <code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code>?</p></blockquote><p>Bardzo dobre pytanie. Wpierw jednak odpowiedzmy na inne — jak się wywołuje funkcje?</p><blockquote><p>Za pomocą jej nazwy.</p></blockquote><p>Okej, czyli aby wywołać <code class="language-plaintext highlighter-rouge">isEven()</code> trzeba napisać taki kod, tak?</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">isEven</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><blockquote><p>Nie… trzeba jeszcze dać nawiasy.</p></blockquote><p>Jasne:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">isEven</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><blockquote><p>No i jeszcze argument.</p></blockquote><p>Mamy to:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">isEven</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>A zatem, aby wywołać funkcję, trzeba:</p><ul><li>użyć jej nazwy;<li>użyć nawiasów okrągłych;<li>przekazać wszystkie potrzebne argumenty w nawiasach.</ul><p>Jest to dosyć oczywiste. Dlaczego zatem jest to teraz omawiane?</p><p>Dlatego, że pierwszy z tych listingów się skompiluje. Tak, to:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">isEven</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Jest <strong>legalnym kodem w C++</strong>. Użyliśmy nazwy <code class="language-plaintext highlighter-rouge">isEven</code>, ale nic z nią nie zrobiliśmy. To tak samo, jakbyśmy stworzyli jakąś zmienną i użyli jej nazwy bez żadnego kontekstu:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">x</span><span class="p">;</span>  <span class="c1">// tutaj</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Za chwilę dojdziemy do konkluzji — obiecuję. Przyjrzyjmy się jeszcze tylko bardzo ważnemu, acz dla większości ponownie oczywistemu, stwierdzeniu:</p><blockquote class="prompt-info"><p>Przekazujemy zmienne przez argumenty, aby przekazać <strong>dane</strong>.</p></blockquote><p>Być może jest to <code class="language-plaintext highlighter-rouge">std::ranges::sort()</code>. Przekazujemy do niego jakiś wektor. Jakieś <em>dane</em>, które ma posortować.</p><p>Być może jest to <code class="language-plaintext highlighter-rouge">std::ranges::find()</code>. Przekazujemy do niego jakiś <code class="language-plaintext highlighter-rouge">std::set</code>. Jakieś <em>dane</em>, wśród których ma czegoś szukać.</p><p>Być może jest to <code class="language-plaintext highlighter-rouge">isEven()</code>. Przekazujemy do tej funkcji pojedynczego <code class="language-plaintext highlighter-rouge">int</code>a. Jakieś <em>dane</em>, które będą w konkretny sposób weryfikowane.</p><p>Wiemy już, jak przekazać do funkcji <em>dane</em>. Ale co w przypadku, gdy chcemy przekazać <em>zachowanie</em>?</p><p><code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code> przyjmuje co najmniej dwa argumenty:</p><ol><li>Zakres danych, gdzie ma szukać elementu spełniającego warunek.<li>Instrukcje, według których ma weryfikować, czy dane spełniają warunek.</ol><p>Jak przekazać <em>zachowanie</em>? Jak przekazać <em>instrukcje</em>? Jak przekazać <em>kod będący logiką warunku</em>?</p><p>Przekazując <strong>funkcję</strong>.</p><blockquote class="prompt-info"><p>Przekazujemy funkcje przez argumenty, aby przekazać <strong>zachowanie</strong>.</p></blockquote><p>Poniższy kod znajdzie i wyświetli pierwszą parzystą wartość z wektora <code class="language-plaintext highlighter-rouge">numbers</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">firstEvenNumberPosition</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">isEven</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">firstEvenNumberPosition</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span>
+                <span class="s">"The first even number is: {}"</span><span class="p">,</span>
+                <span class="o">*</span><span class="n">firstEvenNumberPosition</span>
+        <span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"No even numbers found"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>The first even number is: 6
+</pre></table></code></div></div><p>Naturalnie, najbardziej interesującym fragmentem jest inicjalizacja zmiennej <code class="language-plaintext highlighter-rouge">firstEvenNumberPosition</code>. Odpowiada za to następujący fragment kodu:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">isEven</span><span class="p">);</span>
+</pre></table></code></div></div><p>Należy zwrócić szczególną uwagę na fakt, że po nazwie <code class="language-plaintext highlighter-rouge">isEven</code> <strong>nie występują nawiasy okrągłe precyzujące argumenty</strong>. Nie chcemy <em>wywołać</em> tej funkcji. Chcemy ją <em>przekazać</em>. To <code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code> będzie jej używało. To ten algorytm będzie przekazywał każde kolejne liczby z <code class="language-plaintext highlighter-rouge">numbers</code> do <code class="language-plaintext highlighter-rouge">isEven()</code>. Jak tylko <code class="language-plaintext highlighter-rouge">isEven()</code> zwróci <code class="language-plaintext highlighter-rouge">true</code>, to <code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code> zwróci nam iterator do elementu, który właśnie wysłał do tego predykatu. Iterator do elementu, dla którego <code class="language-plaintext highlighter-rouge">isEven()</code> zwróciło <code class="language-plaintext highlighter-rouge">true</code>. Iterator do elementu, który spełnił przekazany przez nas predykat.</p><h2 id="funkcje-lokalne"><span class="me-2">Funkcje lokalne</span><a href="index.html#funkcje-lokalne" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Spójrzmy jeszcze raz na pełny kod z poprzedniego podrozdziału:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">firstEvenNumberPosition</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">isEven</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">firstEvenNumberPosition</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span>
+                <span class="s">"The first even number is: {}"</span><span class="p">,</span>
+                <span class="o">*</span><span class="n">firstEvenNumberPosition</span>
+        <span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"No even numbers found"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Problemem, który może się kiedyś pojawić, jest fakt, że <code class="language-plaintext highlighter-rouge">isEven()</code>:</p><ul><li>jest wywoływane tylko w jednym miejscu w kodzie;<li>jej (pojedyncze) użycie jest relatywnie daleko od implementacji — nie ma sensu implementować funkcji “gdzieś daleko” (załóżmy, że listing kodu jest znacznie większy), gdy jest używana tylko raz — lokalnie.</ul><blockquote class="prompt-info"><p>Powinniśmy jak najbardziej ograniczać zakres widoczności używanych narzędzi. Dlatego nie tworzymy wszystkich zmiennych jako globalne, tylko umieszczamy je w ciałach funkcji. Dlatego nie deklarujemy zmiennych pętli (np. <code class="language-plaintext highlighter-rouge">auto i = 0</code>) na początku funkcji, tylko w nawiasach (np. <code class="language-plaintext highlighter-rouge">for (auto i = 0; ...)</code>).</p></blockquote><p>Biorąc to pod uwagę, przenieśmy funkcję <code class="language-plaintext highlighter-rouge">isEven()</code> tuż obok użycia:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+
+    <span class="c1">// new place of declaration and definition of the isEven() function</span>
+    <span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">firstEvenNumberPosition</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">isEven</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">firstEvenNumberPosition</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span>
+                <span class="s">"The first even number is: {}"</span><span class="p">,</span>
+                <span class="o">*</span><span class="n">firstEvenNumberPosition</span>
+        <span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"No even numbers found"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre>main.cpp: In function 'int main()':
+main.cpp:10:37: error: a function-definition is not allowed here before '{' token
+   10 |     auto isEven(int const toTest) -&gt; bool {
+      |                                     ^
+main.cpp:13:66: error: 'isEven' was not declared in this scope
+   13 |     auto const firstEvenNumberPosition = std::ranges::find_if(numbers, isEven);
+      |            
+</pre></table></code></div></div><p>Niedobrze. Błąd mówi o tym, że nie możemy <em>definiować</em> funkcji w środku innej funkcji. Co teraz?</p><p>Teraz skorzystamy z lambdy.</p><h2 id="lambdy"><span class="me-2">Lambdy</span><a href="index.html#lambdy" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Jeżeli tworząc funkcję dodamy w odpowiednim miejscu fragment <code class="language-plaintext highlighter-rouge">= []</code>, to stanie się coś bardzo ciekawego. Przykładowo:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span><span class="p">(</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Można zmienić na:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>  <span class="c1">// notice the semicolon (;)</span>
+</pre></table></code></div></div><p>Efektywnie dodaliśmy tylko <code class="language-plaintext highlighter-rouge">= []</code> po jej nazwie (oraz średnik na końcu). Co to zmieniło?</p><p>Przede wszystkim <code class="language-plaintext highlighter-rouge">isEven</code> <strong>nie jest już funkcją</strong>. <code class="language-plaintext highlighter-rouge">isEven</code> <strong>jest zmienną</strong>. Zmienną, która została zainicjalizowana lambdą.</p><p>W środku funkcji nie można definiować innych funkcji. Ale można deklarować i definiować zmienne. Lambda to obiekt, który może zachowywać się jak funkcja. Przykładowo:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">useless</span> <span class="o">=</span> <span class="p">[]()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">};</span>
+
+    <span class="n">useless</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Powyższy kod efektywnie nie zrobi nic. Stworzy obiekt o nazwie <code class="language-plaintext highlighter-rouge">useless</code>, który jest lambdą. Literał <code class="language-plaintext highlighter-rouge">[]() -&gt; void { }</code> tworzy lambdę, która nic nie robi. Taką lambdę można wywołać jak zwykłą funkcję. Gdybyśmy użyli funkcji, to wyglądałoby to tak:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">useless</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="n">useless</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Lambdy mogą robić wszystko to, co funkcje (i więcej!). Przykładowo oto lambda (wraz z jej użyciem), która wyświetla znany nam wszystkim tekst:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">greeter</span> <span class="o">=</span> <span class="p">[]()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="n">greeter</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div class="language-plaintext nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>Hello World!
+</pre></table></code></div></div><p>Lambdę można wywołać wiele razy. <strong>Nie</strong> jest to “obiekt pojedynczego użytku”:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">greeter</span> <span class="o">=</span> <span class="p">[]()</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello World!"</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="n">greeter</span><span class="p">();</span>
+    <span class="n">greeter</span><span class="p">();</span>
+    <span class="n">greeter</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div class="language-plaintext nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre>Hello World!
+Hello World!
+Hello World!
+</pre></table></code></div></div><p>Lambdy, tak samo, jak funkcje, mogą przyjmować argumenty i zwracać coś innego niż <code class="language-plaintext highlighter-rouge">void</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;ranges&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/ranges.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">words</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span>
+            <span class="s">"those"</span><span class="p">,</span> <span class="s">"are"</span><span class="p">,</span> <span class="s">"extremely"</span><span class="p">,</span>
+            <span class="s">"random"</span><span class="p">,</span> <span class="s">"words"</span><span class="p">,</span> <span class="s">"in"</span><span class="p">,</span>
+            <span class="s">"this"</span><span class="p">,</span> <span class="s">"particular"</span><span class="p">,</span> <span class="s">"example"</span>
+    <span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">getSortedCopyByStringLengths</span> <span class="o">=</span> <span class="p">[](</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">copy</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">sort</span><span class="p">(</span><span class="n">copy</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">less</span><span class="p">(),</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">size</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">copy</span><span class="p">;</span>
+    <span class="p">};</span>
+
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">sortedCopy</span> <span class="o">=</span> <span class="n">getSortedCopyByStringLengths</span><span class="p">(</span><span class="n">words</span><span class="p">);</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">words</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="n">sortedCopy</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div class="language-plaintext nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Plaintext"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>["those", "are", "extremely", "random", "words", "in", "this", "particular", "example"]
+["in", "are", "this", "those", "words", "random", "example", "extremely", "particular"]
+</pre></table></code></div></div><p>Tym samym możemy wrócić do oryginalnego przykładu:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">numbers</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">isEven</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">int</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">firstEvenNumberPosition</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">isEven</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">firstEvenNumberPosition</span> <span class="o">!=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span>
+                <span class="s">"The first even number is: {}"</span><span class="p">,</span>
+                <span class="o">*</span><span class="n">firstEvenNumberPosition</span>
+        <span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"No even numbers found"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>W związku z tym, że lambdy potrafią zachowywać się tak samo, jak funkcje, nic dziwnego, że powyższy kod poprawnie wyświetla <raw-data>The first even number is: 6</raw-data>.</p><p><code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code> produkowało poprawny wynik przy pomocy funkcji <code class="language-plaintext highlighter-rouge">isEven()</code>. Skoro lambda <code class="language-plaintext highlighter-rouge">isEven</code> potrafi się zachować tak samo, jak wspomniana funkcja, to nic dziwnego, że <code class="language-plaintext highlighter-rouge">std::ranges::find_if()</code> produkuje tak samo poprawny wynik, gdy z niej korzysta.</p><p>Warto jeszcze dodać, że lambdę można użyć od razu w miejscu jej przeznaczenia. To znaczy, zamiast pisać kod tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">isEven</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">auto</span> <span class="n">firstEvenNumberPosition</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">isEven</span><span class="p">);</span>
+</pre></table></code></div></div><p>Można napisać go tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">firstEvenNumberPosition</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">find_if</span><span class="p">(</span>
+        <span class="n">numbers</span><span class="p">,</span> <span class="p">[](</span><span class="kt">int</span> <span class="k">const</span> <span class="n">toTest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">bool</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">toTest</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+<span class="p">);</span>
+</pre></table></code></div></div><p>Podsumowując, lambdy pozwalają na ominięcie problemu braku możliwości definiowania funkcji w funkcjach. Tworzą obiekty, które mogą zachowywać się jak funkcje.</p><hr /></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-3-2-elementy-sterujące-algorytmami/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 3.2 - Elementy sterujące standardowymi algorytmami</p></a> <a href="../rozdział-3-4-implementacja-komparatorów-i-projekcji/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Rozdział 3.4 - Implementacja komparatorów, projekcji i funkcji transformujących</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script defer src="../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-3-3-lambdy/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

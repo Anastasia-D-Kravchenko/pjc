@@ -1,0 +1,643 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 10.7 - Correct polymorphic container" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/en/lectures/chapter-10-7-correct-polymorphic-container/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-05-07T00:00:00+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 10.7 - Correct polymorphic container" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-07T00:00:00+02:00","datePublished":"2025-05-07T00:00:00+02:00","description":"PJATK / PJAIT PJC","headline":"Chapter 10.7 - Correct polymorphic container","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-10-7-correct-polymorphic-container/"},"url":"/~fk/en/lectures/chapter-10-7-correct-polymorphic-container/"}</script><title>Chapter 10.7 - Correct polymorphic container | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../../en.html" id="avatar" class="rounded-circle"> <img src="../../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../../en.html">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../../en.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="../../information/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="../../presentations/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="../../tasks/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="../../tags/index.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="../../../wyklady/rozdział-10-7-poprawny-polimorficzny-kontener/index.html" class="nav-link"> <img src="../../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="index.html" class="nav-link"> <img src="../../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../../index.html"> Home </a> </span> <span>Chapter 10.7 - Correct polymorphic container</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 10.7 - Correct polymorphic container</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1746568800" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > May 7, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2447 words" > <em>13 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="vector-of-pointers-to-the-base-class"><span class="me-2">Vector of pointers to the base class</span><a href="index.html#vector-of-pointers-to-the-base-class" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Let’s recall the original problem we started this chapter with. It was about wanting to have different animals in one container:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="c1">    </span><span class="cp">
+#include</span> <span class="cpf">&lt;random&gt;</span><span class="c1">       </span><span class="cp">
+#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Cat</span><span class="p">());</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">Dog</span><span class="p">());</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">shuffle</span><span class="p">(</span><span class="n">animals</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">random_device</span><span class="p">());</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">animal</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">animal</span><span class="p">.</span><span class="n">makeSound</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Unfortunately, due to object slicing, this code didn’t store objects of type <code class="language-plaintext highlighter-rouge">Cat</code> or <code class="language-plaintext highlighter-rouge">Dog</code> in the <code class="language-plaintext highlighter-rouge">animals</code> vector. It stored “raw” animals, so calling <code class="language-plaintext highlighter-rouge">.makeSound()</code> effectively did nothing.</p><p>Object slicing was the problem we were solving by avoiding creating copies. We achieved this using references. Now, however, we know that both references and pointers can work on original objects (helping us avoid copying). Since we can’t have a vector of references, let’s use pointers. Let’s simplify the creation and addition of elements to the vector at the same time:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span><span class="p">();</span>  <span class="c1">// vector of pointers</span>
+    <span class="k">auto</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+    
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c1</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c2</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d1</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>As you can see, we’re no longer using <code class="language-plaintext highlighter-rouge">std::vector&lt;Animal&gt;</code>, but <code class="language-plaintext highlighter-rouge">std::vector&lt;Animal*&gt;</code> (<code class="language-plaintext highlighter-rouge">Animal</code> vs <code class="language-plaintext highlighter-rouge">Animal*</code>). We’re adding pointers to the vector, not the animals themselves (obtained by applying the <code class="language-plaintext highlighter-rouge">&amp;</code> operator, which gives us memory addresses of objects, i.e., pointers to them).</p><p>Now let’s call the <code class="language-plaintext highlighter-rouge">.makeSound()</code> method on all objects (pointers) in <code class="language-plaintext highlighter-rouge">animals</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">c1</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">c2</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">d1</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">d2</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c1</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c2</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d1</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d2</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">makeSound</span><span class="p">();</span>   <span class="c1">// notice the arrow instead of a dot</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>Meow
+Meow
+Woof
+Woof
+</pre></table></code></div></div><p>It immediately catches our eye that we’re using the <code class="language-plaintext highlighter-rouge">-&gt;</code> operator. Why isn’t there a dot (<code class="language-plaintext highlighter-rouge">.</code>) there?</p><p>That’s because if instead of <code class="language-plaintext highlighter-rouge">ptr-&gt;makeSound()</code> we used <code class="language-plaintext highlighter-rouge">ptr.makeSound()</code>, we would encounter the following error: <raw-data>request for member 'makeSound' in 'ptr', which is of pointer type 'Animal* const' (maybe you meant to use '-&gt;' ?)</raw-data>.</p><p>In C++, when we want to access a method or a field of a complex object, we use the dot operator (<code class="language-plaintext highlighter-rouge">.</code>). The exception is when we’re dealing with a pointer. In that case, instead of the dot, we use the arrow (<code class="language-plaintext highlighter-rouge">-&gt;</code>). This is a remnant from the C language.</p><p>This way, we managed to create a correctly functioning polymorphic container!</p><h2 id="difficulty-in-managing-object-lifetimes"><span class="me-2">Difficulty in managing object lifetimes</span><a href="index.html#difficulty-in-managing-object-lifetimes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Unfortunately, the fact that the example above is correct doesn’t mean that we won’t break anything. Not only does using pointers require mastering complex syntax, but it also requires ensuring the correctness of our programs from multiple perspectives. We need to:</p><ul><li>ensure that the pointers on which we execute <code class="language-plaintext highlighter-rouge">delete</code> / <code class="language-plaintext highlighter-rouge">delete[]</code> always point to “their own” data (data that no one else will manage, i.e., call their <code class="language-plaintext highlighter-rouge">delete</code> / <code class="language-plaintext highlighter-rouge">delete[]</code>) — which involves the issue of <em>shallow copy</em>;<li>remember that they can point to nothing (<code class="language-plaintext highlighter-rouge">nullptr</code>);<li>remember that a pointer doesn’t extend the object’s lifetime.</ul><p>This last point is quite interesting. Let’s look at an example that is somewhat the opposite of a memory leak. First, let’s create a function <code class="language-plaintext highlighter-rouge">getIntPointer()</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">getIntPointer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">*</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Which we will call and, afterwards, we will free the allocated memory.</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">getIntPointer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">*</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">1337</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">getIntPointer</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre>1337
+</pre></table></code></div></div><p>Now, let’s stop using dynamic memory allocation, but let’s keep the pointers:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="n">getIntPointer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="o">*</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">localInt</span> <span class="o">=</span> <span class="mi">1337</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">&amp;</span><span class="n">localInt</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">getIntPointer</span><span class="p">();</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{}"</span><span class="p">,</span> <span class="o">*</span><span class="n">ptr</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>It’s very easy to overlook a huge problem that this code exhibits — we have UB here because we’re trying to access a non-existing object!</p><blockquote><p>How so?</p></blockquote><p>Let’s pay attention to the fact that <code class="language-plaintext highlighter-rouge">localInt</code> is a local variable with automatic lifetime. This means that when we exit the block in which it was created, it will cease to exist. Returning a pointer to a local variable is an error because we’ll be operating on the address of an object that has been destroyed.</p><p>Running the above code can do <em>anything</em>. That’s how it is with Undefined Behavior. It might display <raw-data>1337</raw-data>, it might display <raw-data>0</raw-data>, it might display nothing, or the program might crash.</p><p>But why are we talking about this? Well, while returning a vector like this poses no problem:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">getVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">local1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">local2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">local3</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{</span><span class="n">local1</span><span class="p">,</span> <span class="n">local2</span><span class="p">,</span> <span class="n">local3</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Returning it like this will be a huge issue:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">getVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">local1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">local2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">local3</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">*&gt;</span><span class="p">{</span><span class="o">&amp;</span><span class="n">local1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">local2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">local3</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">vec</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The vector takes care of the lifecycle of the elements it holds. When it holds <code class="language-plaintext highlighter-rouge">int</code>s, it appropriately copies them “into itself”. However, when it holds pointers, the objects it “cares for” are the pointers themselves, not the objects they point to. In the latter example, all local variables disappear when the <code class="language-plaintext highlighter-rouge">return</code> statement is executed. These three pointers held by the returned vector will be unusable.</p><p>This is a significant problem because — as it may seem — it means we cannot create factory methods for polymorphic containers:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span><span class="p">();</span>
+
+    <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">animals</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>In this example, the returned vector contains pointers to the already non-existing cat and dog. That’s a huge problem. Can it be addressed?</p><p>Yes, it can. We just need to use something we already know. We just need to ensure that exiting the function that creates these two objects does not result in their deletion. We just need to ensure that this cat and dog are not objects with automatic lifetimes, but rather objects with dynamic lifetimes. We need to use dynamic memory allocation:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span><span class="p">();</span>
+
+    <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Cat</span><span class="p">();</span> <span class="c1">// new!</span>
+    <span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">Dog</span><span class="p">();</span> <span class="c1">// new!</span>
+
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">c</span><span class="p">);</span> <span class="c1">// no &amp;</span>
+    <span class="n">animals</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">d</span><span class="p">);</span> <span class="c1">// no &amp;</span>
+
+    <span class="k">return</span> <span class="n">animals</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Let’s simplify the implementation a little bit:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="k">new</span> <span class="n">Cat</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">()};</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Now everything seems correct. Let’s see if that’s really the case:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="n">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="k">new</span> <span class="n">Cat</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">()};</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">makeAnimalsVector</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">makeSound</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>Meow
+Woof
+</pre></table></code></div></div><p>Everything looks great!</p><blockquote><p>But wait… We’re using <code class="language-plaintext highlighter-rouge">new</code>, but where is the <code class="language-plaintext highlighter-rouge">delete</code>..?</p></blockquote><p>…A valid point.</p><p><code class="language-plaintext highlighter-rouge">Cat</code> and <code class="language-plaintext highlighter-rouge">Dog</code> were created using <code class="language-plaintext highlighter-rouge">new</code>, so <em>somewhere</em> we should use <code class="language-plaintext highlighter-rouge">delete</code>. It would be mistaken to assume that the vector will “clean up” these objects on its own. It does indeed use dynamic memory allocation (just like our <code class="language-plaintext highlighter-rouge">pjc::Vector</code>), but it’s only concerned with its own pointer to the array of elements. These elements — in our case — are pointers. The vector simply performs <code class="language-plaintext highlighter-rouge">delete[]</code> on its array of pointers. It doesn’t execute <code class="language-plaintext highlighter-rouge">delete</code> on each of them. To avoid memory leaks, you should save the vector and execute <code class="language-plaintext highlighter-rouge">delete</code> on its elements:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">makeAnimalsVector</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">makeSound</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><blockquote><p>It’s… incredibly inconvenient. Isn’t there a way to simplify this a bit?</p></blockquote><p>There is. You should use <em>smart pointers</em>, which will be covered in the next chapter.</p><h2 id="virtual-destructors"><span class="me-2">Virtual Destructors</span><a href="index.html#virtual-destructors" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>There’s still one more issue remaining. A problem that appeared in the previous listing. Let’s quote the entire code again:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="n">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="k">new</span> <span class="n">Cat</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">()};</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">makeAnimalsVector</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ptr</span><span class="o">-&gt;</span><span class="n">makeSound</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>It’s very hard to notice this problem, but… we have UB in this code example.</p><blockquote><p>Why?</p></blockquote><p>Because the created objects of type <code class="language-plaintext highlighter-rouge">Cat</code> and <code class="language-plaintext highlighter-rouge">Dog</code> are not properly destroyed. And it’s not entirely the fault of <code class="language-plaintext highlighter-rouge">delete</code>. To illustrate this problem, let’s add destructors to our class hierarchy that inform us when an object is being destroyed:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Animal destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Cat</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Cat destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Dog</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Dog destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></table></code></div></div><p>And now let’s create an object for each of the above types:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">d</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Let’s inspect the output:</p><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre>Dog destroyed
+Animal destroyed
+Cat destroyed
+Animal destroyed
+Animal destroyed
+</pre></table></code></div></div><p>As we know, the order of destructor calls within the same block is the reverse of the order of constructor executions. First, we created <code class="language-plaintext highlighter-rouge">a</code>, which is of type <code class="language-plaintext highlighter-rouge">Animal</code>. The action of its destructor can be observed in line 5 of the output. Then we created <code class="language-plaintext highlighter-rouge">c</code>, which is of type <code class="language-plaintext highlighter-rouge">Cat</code>. Its destructor displayed what we observed in lines 3-4. Finally, we created <code class="language-plaintext highlighter-rouge">d</code>, which is <code class="language-plaintext highlighter-rouge">Dog</code>. Its destruction was called first — we can see this in the first two lines of the output.</p><blockquote class="prompt-info"><p>The destructor of the derived class, at the end of its execution, calls the destructor of the base class. This is the reverse situation compared to what we can observe with constructors. The constructor of the derived class <strong>first</strong> calls the constructor of the base class.</p></blockquote><p>Armed with this knowledge, let’s see what happens when we go back to our example with dynamically living animals:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Animal destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Cat</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Cat destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Dog</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Dog destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="n">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="k">new</span> <span class="n">Cat</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">()};</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">makeAnimalsVector</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>Animal destroyed
+Animal destroyed
+</pre></table></code></div></div><p>And here we have a problem. We have <code class="language-plaintext highlighter-rouge">Cat</code> and <code class="language-plaintext highlighter-rouge">Dog</code>, but their destructor didn’t get called. Only the destructor from their base class was called.</p><p>We can deduce the reason why this happened. Hint: it’s because we have a <em>pointer to the base class, and we call <code class="language-plaintext highlighter-rouge">delete</code> on it, which invokes the destructors</em>.</p><p>We’ve encountered a similar situation before, when having access to a derived object through a variable of the base type (then a reference), we called an overridden method, but only the version from the base class was invoked. Object slicing is not the issue here. The issue is the lack of a virtual method!</p><p>For the destructor to correctly “find” the overridden implementation from <code class="language-plaintext highlighter-rouge">Cat</code> and <code class="language-plaintext highlighter-rouge">Dog</code> when called from the perspective of a pointer to <code class="language-plaintext highlighter-rouge">Animal</code>, it must be marked as <code class="language-plaintext highlighter-rouge">virtual</code>:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span>
+<span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Animal</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span> <span class="p">}</span>
+
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">Animal</span><span class="p">()</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Animal destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Cat</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Meow"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Cat</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Cat destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Dog</span> <span class="o">:</span> <span class="n">Animal</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">makeSound</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Woof"</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="o">~</span><span class="n">Dog</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"Dog destroyed"</span><span class="p">);</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="k">auto</span> <span class="n">makeAnimalsVector</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Animal</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span><span class="k">new</span> <span class="n">Cat</span><span class="p">(),</span> <span class="k">new</span> <span class="n">Dog</span><span class="p">()};</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">animals</span> <span class="o">=</span> <span class="n">makeAnimalsVector</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="k">const</span> <span class="n">ptr</span> <span class="o">:</span> <span class="n">animals</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre>Cat destroyed
+Animal destroyed
+Dog destroyed
+Animal destroyed
+</pre></table></code></div></div><hr /></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../chapter-10-6-custom-vector-implementation-pt-2/index.html" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 10.6 - Custom vector implementation, pt. 2</p></a> <a href="../chapter-10-8-summary-and-extras/index.html" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 10.8 - Summary and extras</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../../assets/js/dist/post.min.js"></script> <script defer src="../../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/en/lectures/chapter-10-7-correct-polymorphic-container/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

@@ -1,0 +1,277 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Chapter 5.3 - Trivial user-defined types" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/en/lectures/chapter-5-3-trivial-user-defined-types/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-03-30T00:00:00+01:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Chapter 5.3 - Trivial user-defined types" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-03-30T00:00:00+01:00","datePublished":"2025-03-30T00:00:00+01:00","description":"PJATK / PJAIT PJC","headline":"Chapter 5.3 - Trivial user-defined types","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/en/lectures/chapter-5-3-trivial-user-defined-types/"},"url":"/~fk/en/lectures/chapter-5-3-trivial-user-defined-types/"}</script><title>Chapter 5.3 - Trivial user-defined types | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../../en.html" id="avatar" class="rounded-circle"> <img src="../../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../../en.html">PJC</a></div><div class="site-subtitle fst-italic">Programming in C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../../en.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="../../information/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMATION</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>LECTURES</span> </a><li class="nav-item"> <a href="../../presentations/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PRESENTATIONS</span> </a><li class="nav-item"> <a href="../../tasks/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>TASKS</span> </a><li class="nav-item"> <a href="../../tags/index.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TASKS TAGS</span> </a><li class="nav-item lang-switch-item"> <a href="../../../wyklady/rozdział-5-3-trywialne-typy-zdefiniowane-przez-użytkownika/index.html" class="nav-link"> <img src="../../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="index.html" class="nav-link"> <img src="../../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../../index.html"> Home </a> </span> <span>Chapter 5.3 - Trivial user-defined types</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Chapter 5.3 - Trivial user-defined types</h1><div class="post-meta text-muted"> <span> Posted <em class="" data-ts="1743289200" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Mar 30, 2025 </em> </span><div class="d-flex justify-content-between"> <span> By <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1262 words" > <em>7 min</em> read</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="user-defined-typers"><span class="me-2">User-defined typers</span><a href="index.html#user-defined-typers" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Creating custom types allows a programmer to precisely express intentions. Everything could be stored as <code class="language-plaintext highlighter-rouge">int</code> or <code class="language-plaintext highlighter-rouge">std::string</code>, but then the entire context of the program’s operation would have to actively exist in the programmer’s mind at all times. Types enable transferring some of this information from the mind to easily analyzable constructs in the code.</p><p>In the previous part of the chapter, we learned why we need enumeration types. Additionally, we saw that by using an enumeration type that doesn’t offer any other range of values than the built-in one (in that case — <code class="language-plaintext highlighter-rouge">bool</code>), we can also improve the readability (and sometimes safety) of our code.</p><p>Now we’ll learn how to create arbitrary (not just enumerative) user-defined types. We’ll be able to:</p><ul><li>Instead of thinking about two <code class="language-plaintext highlighter-rouge">std::strings</code> and an age, think about a person (<code class="language-plaintext highlighter-rouge">Person</code>);<li>Instead of thinking about two <code class="language-plaintext highlighter-rouge">int</code>s, think about a point (<code class="language-plaintext highlighter-rouge">Point</code>);<li>Instead of thinking about a vector of <code class="language-plaintext highlighter-rouge">double</code>, two <code class="language-plaintext highlighter-rouge">std::strings</code>, and an <code class="language-plaintext highlighter-rouge">int</code>, you can think about a student with grades (<code class="language-plaintext highlighter-rouge">Student</code>).</ul><p>And so on…</p><h3 id="creating-a-custom-class"><span class="me-2">Creating a custom class</span><a href="index.html#creating-a-custom-class" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>In C++, we have two keywords for creating something intuitively understood as a “class”. These are <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">struct</code>. Let’s look at two ways of defining classes:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span> <span class="p">};</span>
+</pre></table></code></div></div><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span> <span class="p">};</span>
+</pre></table></code></div></div><p>Both of these declarations are equivalent.</p><p>Of course, we can’t define a class (or anything else) twice, so we’ll place them in separate namespaces to make it easier to reason about their differences:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">clazz</span> <span class="p">{</span>
+    <span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">strukt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span> <span class="p">};</span>
+<span class="p">}</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">::</span><span class="n">Point</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="k">const</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">strukt</span><span class="o">::</span><span class="n">Point</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">p1</code> and <code class="language-plaintext highlighter-rouge">p2</code> are clearly of different types, although their “representation” is identical — both are “empty”.</p><p>Such “empty” classes sometimes make sense, although not in this case — let’s add some fields to them:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">clazz</span> <span class="p">{</span>
+    <span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">strukt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">::</span><span class="n">Point</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">strukt</span><span class="o">::</span><span class="n">Point</span><span class="p">();</span>
+
+    <span class="n">p1</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">p1</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="n">p2</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">p2</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Here we notice the first (and <strong>only</strong>) difference between <code class="language-plaintext highlighter-rouge">struct</code> and <code class="language-plaintext highlighter-rouge">class</code>. When we try to run this code, the compiler will protest:</p><div file="sample compilation error" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="sample compilation error"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre>main.cpp: In function 'int main()':
+main.cpp:20:8: error: 'int clazz::Point::x' is private within this context
+   20 |     p1.x = 1;
+      |        ^
+main.cpp:3:13: note: declared private here
+    3 |         int x;
+      |             ^
+main.cpp:21:8: error: 'int clazz::Point::y' is private within this context
+   21 |     p1.y = 2;
+      |        ^
+main.cpp:4:13: note: declared private here
+    4 |         int y;
+      |             ^
+</pre></table></code></div></div><blockquote class="prompt-info"><p>The only difference between <code class="language-plaintext highlighter-rouge">class</code> and <code class="language-plaintext highlighter-rouge">struct</code> is that with <code class="language-plaintext highlighter-rouge">class</code>, everything is private by default, and with <code class="language-plaintext highlighter-rouge">struct</code>, everything is public by default.</p></blockquote><p>That’s it. That’s the only difference.</p><p>Of course, there’s nothing stopping us from using the <code class="language-plaintext highlighter-rouge">public</code> keyword in a <code class="language-plaintext highlighter-rouge">class</code> or the <code class="language-plaintext highlighter-rouge">private</code> keyword in a <code class="language-plaintext highlighter-rouge">struct</code> to make one behave like the other:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+</pre><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">clazz</span> <span class="p">{</span>
+    <span class="k">class</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="nl">public:</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">namespace</span> <span class="n">strukt</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="nl">private:</span>
+        <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">::</span><span class="n">Point</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">strukt</span><span class="o">::</span><span class="n">Point</span><span class="p">();</span>
+
+    <span class="n">p1</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">p1</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+    <span class="n">p2</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">p2</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>The problem remains the same, but now it concerns access to the <code class="language-plaintext highlighter-rouge">.x</code> and <code class="language-plaintext highlighter-rouge">.y</code> of the <code class="language-plaintext highlighter-rouge">p2</code> object, not <code class="language-plaintext highlighter-rouge">p1</code>.</p><p>As you can also notice, unlike Java, in C++ we don’t use <code class="language-plaintext highlighter-rouge">public</code> or <code class="language-plaintext highlighter-rouge">private</code> for each field. These keywords introduce sections of elements that are public or private (there’s also <code class="language-plaintext highlighter-rouge">protected</code>, but we won’t talk much about it).</p><blockquote><p>Why are there two keywords in C++? Which one should we use?</p></blockquote><p>Great questions. The <code class="language-plaintext highlighter-rouge">struct</code> keyword must exist because the C++ language aims to be as backward-compatible with the C language as possible. This means that eventually all code written in C should be compilable (and behave the same) by a C++ compiler. It’s not 100% true, but ultimately this is the direction of C++ architecture. <code class="language-plaintext highlighter-rouge">class</code> was added so that programmers could more easily distinguish the idea of a “simple structure” from a “class in the object-oriented programming sense.” In the end, this distinction turned out to be unimportant. Unfortunately, we’re left with two keywords.</p><p>As for the second question, you can remember the following guideline:</p><blockquote class="prompt-tip"><p>If our type doesn’t represent some internal behavior (no limited invariants), it’s worth using <code class="language-plaintext highlighter-rouge">struct</code>. If the type has methods that maintain invariant behaviors, it’s worth using <code class="language-plaintext highlighter-rouge">class</code>.</p></blockquote><p>The abstraction of a point in mathematics doesn’t impose any restrictions on coordinates, so it’s worth using <code class="language-plaintext highlighter-rouge">struct</code>.</p><h3 id="constructing-objects-of-custom-classes"><span class="me-2">Constructing objects of custom classes</span><a href="index.html#constructing-objects-of-custom-classes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>In the previous example, we created objects <code class="language-plaintext highlighter-rouge">p1</code> and <code class="language-plaintext highlighter-rouge">p2</code>, to which we then tried to assign coordinate values. However, there’s a simpler way to achieve this — we can use constructors.</p><p>The thing is, with such simple types, C++ doesn’t require us to define constructors. It allows us to initialize values in the same order as they were declared in the class:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="nc">Person</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">surname</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">point</span>  <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s">"Dio"</span><span class="p">,</span> <span class="s">"Brando"</span><span class="p">,</span> <span class="mi">121</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><blockquote class="prompt-info"><p>If <code class="language-plaintext highlighter-rouge">point</code> and <code class="language-plaintext highlighter-rouge">person</code> (or <code class="language-plaintext highlighter-rouge">p1</code> and <code class="language-plaintext highlighter-rouge">p2</code> from previous examples) were marked as <code class="language-plaintext highlighter-rouge">const</code>, the modification of their fields (<code class="language-plaintext highlighter-rouge">.x</code> and <code class="language-plaintext highlighter-rouge">.y</code> alongside <code class="language-plaintext highlighter-rouge">.name</code>, <code class="language-plaintext highlighter-rouge">.surname</code>, and <code class="language-plaintext highlighter-rouge">.age</code>) would obviously result in compilation errors. <code class="language-plaintext highlighter-rouge">const</code> object prevents others from modifying its fields.</p></blockquote><h3 id="value-semantics"><span class="me-2">Value semantics</span><a href="index.html#value-semantics" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p>It’s important to remember about value semantics in C++. We operate on objects, not references to them (as in Java). This means that the following code will display <strong>two different</strong> lines of text:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">point1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">point2</span> <span class="o">=</span> <span class="n">point1</span><span class="p">;</span>
+
+    <span class="n">point1</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">point1</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">61</span><span class="p">;</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">point1</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">point1</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">point2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">point2</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>1 61
+3 14
+</pre></table></code></div></div><p>In the case of Java, however, two identical lines would be displayed.</p><p>In C++, <code class="language-plaintext highlighter-rouge">point1</code> and <code class="language-plaintext highlighter-rouge">point2</code> are completely separate objects. One is used to create the other, but after this construction, their relationship disappears. <code class="language-plaintext highlighter-rouge">point2</code> is a completely independent copy. Therefore, changes made to it are not visible to the first object.</p><p>If we wanted to have a second reference to the same object, we would have to use references:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;fmt/base.h&gt;</span><span class="cp">
+</span>
+<span class="k">struct</span> <span class="nc">Point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">};</span>
+
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">point1</span>  <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">14</span><span class="p">);</span>
+    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">point2</span> <span class="o">=</span> <span class="n">point1</span><span class="p">;</span>  <span class="c1">// auto&amp; vs auto</span>
+
+    <span class="n">point1</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">point2</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="mi">61</span><span class="p">;</span>
+
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">point1</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">point1</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+    <span class="n">fmt</span><span class="o">::</span><span class="n">println</span><span class="p">(</span><span class="s">"{} {}"</span><span class="p">,</span> <span class="n">point2</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">point2</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="output" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="output"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre>1 61
+1 61
+</pre></table></code></div></div><hr /></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Contents</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../chapter-5-2-enumerations/index.html" class="btn btn-outline-primary" prompt="Previous" ><p class="p post-nav-p">Chapter 5.2 - Enumerations</p></a> <a href="../chapter-5-4-user-defined-types-and-other-libraries/index.html" class="btn btn-outline-primary" prompt="Next" ><p class="p post-nav-p">Chapter 5.4 - User-defined types and other libraries</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js"></script> <script defer src="../../../assets/js/dist/post.min.js"></script> <script defer src="../../../app.js"></script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_en.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/en/lectures/chapter-5-3-trivial-user-defined-types/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>

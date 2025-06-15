@@ -1,0 +1,311 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="Rozdział 11.1 - Inteligentne wskaźniki" /><meta property="og:locale" content="en" /><meta name="description" content="PJATK / PJAIT PJC" /><meta property="og:description" content="PJATK / PJAIT PJC" /><link rel="canonical" href="index.html" /><meta property="og:url" content="/~fk/wyklady/rozdzia%C5%82-11-1-inteligentne-wska%C5%BAniki/" /><meta property="og:site_name" content="PJC" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-05-20T07:24:39+02:00" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="Rozdział 11.1 - Inteligentne wskaźniki" /><meta name="twitter:site" content="@" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-05-20T07:24:39+02:00","datePublished":"2025-05-20T07:24:39+02:00","description":"PJATK / PJAIT PJC","headline":"Rozdział 11.1 - Inteligentne wskaźniki","mainEntityOfPage":{"@type":"WebPage","@id":"/~fk/wyklady/rozdzia%C5%82-11-1-inteligentne-wska%C5%BAniki/"},"url":"/~fk/wyklady/rozdzia%C5%82-11-1-inteligentne-wska%C5%BAniki/"}</script><title>Rozdział 11.1 - Inteligentne wskaźniki | PJC</title><link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png"><link rel="manifest" href="../../assets/img/favicons/site.webmanifest"><link rel="shortcut icon" href="../../assets/img/favicons/favicon.ico"><meta name="apple-mobile-web-app-title" content="PJC"><meta name="application-name" content="PJC"><meta name="msapplication-TileColor" content="#da532c"><meta name="msapplication-config" content="/~fk/assets/img/favicons/browserconfig.xml"><meta name="theme-color" content="#ffffff"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css"><link rel="stylesheet" href="../../assets/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.21.0/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1.1.0/dist/magnific-popup.min.css"> <script type="text/javascript"> class ModeToggle { static get MODE_KEY() { return 'mode'; } static get MODE_ATTR() { return 'data-mode'; } static get DARK_MODE() { return 'dark'; } static get LIGHT_MODE() { return 'light'; } static get ID() { return 'mode-toggle'; } constructor() { if (this.hasMode) { if (this.isDarkMode) { if (!this.isSysDarkPrefer) { this.setDark(); } } else { if (this.isSysDarkPrefer) { this.setLight(); } } } let self = this; /* always follow the system prefers */ this.sysDarkPrefers.addEventListener('change', () => { if (self.hasMode) { if (self.isDarkMode) { if (!self.isSysDarkPrefer) { self.setDark(); } } else { if (self.isSysDarkPrefer) { self.setLight(); } } self.clearMode(); } self.notify(); }); } /* constructor() */ get sysDarkPrefers() { return window.matchMedia('(prefers-color-scheme: dark)'); } get isSysDarkPrefer() { return this.sysDarkPrefers.matches; } get isDarkMode() { return this.mode === ModeToggle.DARK_MODE; } get isLightMode() { return this.mode === ModeToggle.LIGHT_MODE; } get hasMode() { return this.mode != null; } get mode() { return sessionStorage.getItem(ModeToggle.MODE_KEY); } /* get the current mode on screen */ get modeStatus() { if (this.isDarkMode || (!this.hasMode && this.isSysDarkPrefer)) { return ModeToggle.DARK_MODE; } else { return ModeToggle.LIGHT_MODE; } } setDark() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE); } setLight() { document.documentElement.setAttribute(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE); sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE); } clearMode() { document.documentElement.removeAttribute(ModeToggle.MODE_ATTR); sessionStorage.removeItem(ModeToggle.MODE_KEY); } /* Notify another plugins that the theme mode has changed */ notify() { window.postMessage( { direction: ModeToggle.ID, message: this.modeStatus }, '*' ); } flipMode() { if (this.hasMode) { if (this.isSysDarkPrefer) { if (this.isLightMode) { this.clearMode(); } else { this.setLight(); } } else { if (this.isDarkMode) { this.clearMode(); } else { this.setDark(); } } } else { if (this.isSysDarkPrefer) { this.setLight(); } else { this.setDark(); } } this.notify(); } /* flipMode() */ } /* ModeToggle */ const modeToggle = new ModeToggle(); </script><body><div id="sidebar" class="d-flex flex-column align-items-end"><div class="profile-wrapper"> <a href="../../index.html" id="avatar" class="rounded-circle"> <img src="../../assets/img/cpp_logo.png" width="112" height="112" alt="avatar" onerror="this.style.display='none'"> </a><div class="site-title"> <a href="../../index.html">PJC</a></div><div class="site-subtitle fst-italic">Programowanie w języku C++</div></div><ul class="nav flex-column flex-grow-1 w-100 ps-0"><li class="nav-item"> <a href="../../index.html" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>STRONA GŁÓWNA</span> </a><li class="nav-item"> <a href="../../informacje/index.html" class="nav-link"> <i class="fa-fw fas fa-info"></i> <span>INFORMACJE</span> </a><li class="nav-item"> <a href="../index.html" class="nav-link"> <i class="fa-fw fas fa-book"></i> <span>WYKŁADY</span> </a><li class="nav-item"> <a href="../../prezentacje/index.html" class="nav-link"> <i class="fa-fw fas fa-file"></i> <span>PREZENTACJE</span> </a><li class="nav-item"> <a href="../../zadania/index.html" class="nav-link"> <i class="fa-fw fas fa-flask-vial"></i> <span>ZADANIA</span> </a><li class="nav-item"> <a href="../../tags.html" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGI ZADAŃ</span> </a><li class="nav-item lang-switch-item"> <a href="index.html" class="nav-link"> <img src="../../assets/img/pl.png" style="max-width: 50%"/> <span>PL</span> </a> <a href="../../en/lectures/chapter-12-1-exceptions/index.html" class="nav-link"> <img src="../../assets/img/usa.png" style="max-width: 50%;"/> <span>EN</span> </a></ul><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button class="mode-toggle btn" aria-label="Switch Mode"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/Filip-FK-Kwiatkowski" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="javascript:location.href = 'mailto:' + ['fk','pjwstk.edu.pl'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a></div></div><i id="desktop-sidebar-trigger" class="fas fa-bars fa-fw" onclick="document.getElementById('sidebar').classList.toggle('hidden_on_desktop')"></i><div id="main-wrapper" class="d-flex justify-content-center"><div id="main" class="container px-xxl-5"><div id="topbar-wrapper"><div id="topbar" class="container d-flex align-items-center justify-content-between h-100" > <span id="breadcrumb"> <span> <a href="../../index.html"> Strona główna </a> </span> <span>Rozdział 11.1 - Inteligentne wskaźniki</span> </span> <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i><div id="topbar-title"> Post</div><i id="search-trigger" class="fas fa-search fa-fw"></i> <span id="search-wrapper" class="align-items-center"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Szukaj..." > </span> <span id="search-cancel">Cancel</span></div></div><div class="row"><div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pe-xl-4"><div class="post px-1 px-md-2"><h1 data-toc-skip>Rozdział 11.1 - Inteligentne wskaźniki</h1><div class="post-meta text-muted"> <span> Opublikowano <em class="" data-ts="1747718679" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > May 20, 2025 </em> </span><div class="d-flex justify-content-between"> <span> Autor <em> <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1883 słów" > <em>10 min</em> czytania</span></div></div><em> </em></div><div class="post-content"><hr /><h2 id="wskaźnik-surowy-a-wskaźnik-inteligentny"><span class="me-2">Wskaźnik surowy a wskaźnik inteligentny</span><a href="index.html#wskaźnik-surowy-a-wskaźnik-inteligentny" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Wskaźnik <em>surowy</em> to taki, który nie robi nic innego, jak tylko wskazuje na dane. “Klasyczny” <code class="language-plaintext highlighter-rouge">T*</code>. Przykładowo:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">localInt</span> <span class="o">=</span> <span class="kt">int</span><span class="p">();</span>
+
+    <span class="k">auto</span> <span class="n">first</span>  <span class="o">=</span> <span class="o">&amp;</span><span class="n">localInt</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">second</span> <span class="o">=</span> <span class="k">new</span> <span class="nf">int</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Tutaj zarówno <code class="language-plaintext highlighter-rouge">first</code> jak i <code class="language-plaintext highlighter-rouge">second</code> to <em>surowe wskaźniki</em>. Niewątpliwie potrafią one stanowić problem. O ile z <code class="language-plaintext highlighter-rouge">first</code> wszystko jest w porządku, bo wskazuje jedynie na obiekt o automatycznym czasie życia (czyli tutaj na <code class="language-plaintext highlighter-rouge">localInt</code>), to <code class="language-plaintext highlighter-rouge">second</code> wskazuje na obiekt o dynamicznym czasie życia. Musimy zatem pamiętać, aby za jego pomocą wywołać <code class="language-plaintext highlighter-rouge">delete</code>, bo inaczej spotkamy się z wyciekiem pamięci.</p><p>Pojawia się jednak pytanie — <em>dlaczego</em>? Czemu wskaźniki “nie umieją po sobie posprzątać”? Czemu <code class="language-plaintext highlighter-rouge">second</code> nie może <em>samo</em> wywołać <code class="language-plaintext highlighter-rouge">delete</code>?</p><p>Odpowiedź jest relatywnie prosta — ponieważ legalne jest stworzenie takiego wskaźnika jak <code class="language-plaintext highlighter-rouge">first</code>. Nic nie stoi na przeszkodzie, aby tworzyć wskaźniki do obiektów o innym czasie życia niż dynamiczny. Lub tworzyć wiele wskaźników do jednego obiektu. Gdyby każdy taki wskaźnik wywoływał <code class="language-plaintext highlighter-rouge">delete</code>, to mielibyśmy multum problemów.</p><p>Na szczęście jest proste rozwiązanie — wiemy, że gdy operujemy na dynamicznie alokowanej pamięci, to musimy korzystać ze wskaźników. Gdy możemy, to unikamy ich bezpośredniego użycia — np. stosując odpowiedni kontener. Czasem jednak po prostu potrzebujemy wskaźnika, który wskazuje na dynamicznie zaalokowane dane. Taki wskaźnik powinien zarządzać tą pamięcią. Powinien on w jakiś sposób się wyróżniać, aby było wiadomo, że to wskaźnik na dane, które trzeba usunąć.</p><p>Dlatego wykorzystano możliwości płynące z tego, jak w C++ działają destruktory i stworzono tak zwane <em>inteligentne</em> wskaźniki. Najważniejszym z nich jest tak zwany <em>wskaźnik unikalny</em>, czyli <code class="language-plaintext highlighter-rouge">std::unique_ptr</code>.</p><h2 id="stdunique_ptr"><span class="me-2"><code>std::unique_ptr</code></span><a href="index.html#stdunique_ptr" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p><code class="language-plaintext highlighter-rouge">std::unique_ptr</code> jest bardzo prostym narzędziem. Przechowuje on surowy wskaźnik na dane i jego destruktor wywołuje <code class="language-plaintext highlighter-rouge">delete</code> (lub <code class="language-plaintext highlighter-rouge">delete[]</code> — on sam wie, które ma wywołać) na tym wskaźniku. Spójrzmy na prosty przykład:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="c1"> // std::unique_ptr</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">iLeakMemory</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">iDontLeakMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Jak same nazwy wskazują, <code class="language-plaintext highlighter-rouge">iLeakMemory</code>, przez to, że nie wywołujemy na nim <code class="language-plaintext highlighter-rouge">delete</code>, powoduje wyciek pamięci w nr 6. Ale już <code class="language-plaintext highlighter-rouge">iDontLeakMemory</code>, będąc inteligentnym wskaźnikiem, nie powoduje żadnego wycieku pamięci. Obydwa obiekty (te nazwane wskaźniki) giną linijkę niżej pod tą, w której powstały, ale tylko nasz inteligentny wskaźnik wie, że powinien zwolnić jakąś pamięć — więc to robi.</p><p>Składnia <code class="language-plaintext highlighter-rouge">std::unique_ptr&lt;T&gt;(new int())</code> może nie jest wyjątkowo trudna do zrozumienia (w końcu jedynie “opakowujemy” surowy wskaźnik w inteligentny), ale jednak nie pisze się jej najprzyjemniej. Warto skorzytać z funkcji-fabryki:</p><blockquote class="prompt-tip"><p>Zamiast korzystać z podstawowej składni <code class="language-plaintext highlighter-rouge">std::unique_ptr&lt;T&gt;(new T())</code>, warto używać wygodniejszej metody-fabryki: <code class="language-plaintext highlighter-rouge">std::make_unique&lt;T&gt;()</code>.</p></blockquote><p>Używając <code class="language-plaintext highlighter-rouge">std::make_unique&lt;T&gt;()</code>, w nawiasach podajemy argumenty konstruktora do <code class="language-plaintext highlighter-rouge">T</code>. Na przykład, aby stworzyć inteligentny wskaźnik na dynamicznie alokowanego <code class="language-plaintext highlighter-rouge">int</code>a o wartości <code class="language-plaintext highlighter-rouge">10</code>, można zrobić tak:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</pre></table></code></div></div><p>Podobnie z <code class="language-plaintext highlighter-rouge">std::string</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"initial text"</span><span class="p">)</span><span class="o">:</span>
+</pre></table></code></div></div><p>Działa to też z konstruktorami, które pobierają wiele argumentów (nawet jeśli są domyślne):</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">first</span>  <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">second</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">first</code> jest wskaźnikiem na wektor przechowujący <raw-data>0 0 0</raw-data>, a <code class="language-plaintext highlighter-rouge">second</code> na wektor przechowujący <raw-data>7 7 7</raw-data>.</p><p>Wygodnie jest też korzystać z tablicowych wersji tych funkcji-fabryk:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span>
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">tenInts</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Wtedy w nawiasach okrągłych podajemy wielkość tablicy.</p><h2 id="praktyczne-wykorzystanie-szablonu-stdunique_ptr"><span class="me-2">Praktyczne wykorzystanie szablonu <code>std::unique_ptr</code></span><a href="index.html#praktyczne-wykorzystanie-szablonu-stdunique_ptr" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Dobrym pomysłem może być zamienienie implementacji naszego wektora z poprzedniego rozdziału na taką, która korzysta z inteligentnych wskaźników. Zobaczmy, czy będzie to trudne i jak się kod zmieni. Zacznijmy od podstaw:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span>
+<span class="k">namespace</span> <span class="n">pjc</span><span class="o">::</span><span class="n">smart</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+    <span class="k">class</span> <span class="nc">Vector</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">size_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">memory_</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Nic nie stoi na przeszkodzie, aby <code class="language-plaintext highlighter-rouge">std::unique_ptr</code> (tutaj — do tablicy elementów typu <code class="language-plaintext highlighter-rouge">T</code>) był polem w obiektach jakiejś klasy. Dodajmy publiczne metody:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre><td class="rouge-code"><pre><span class="k">namespace</span> <span class="n">pjc</span><span class="o">::</span><span class="n">smart</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+    <span class="k">class</span> <span class="nc">Vector</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">size_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">memory_</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+
+    <span class="nl">public:</span>
+        <span class="k">auto</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">size_</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+            
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>I skoncentrujmy się na implementacji <code class="language-plaintext highlighter-rouge">.push_back()</code>. Wpierw ta metoda jest pusta, ale wiadomo, że na pewno musimy zaalokować większy bufor pamięci i zwiększyć wartość pola <code class="language-plaintext highlighter-rouge">.size_</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">size_</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">biggerMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size_</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Warto zwrócić uwagę, że mimo iż jeszcze nic ciekawego nie zrobiliśmy, na pewno nie mamy żadnych wycieków pamięci. Użyjmy naszego wektora w następujący sposób:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">pjc</span><span class="o">::</span><span class="n">smart</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p><code class="language-plaintext highlighter-rouge">.push_back()</code> zaalokowało pamięć, ale jako że wskazywał na nią obiekt typu <code class="language-plaintext highlighter-rouge">std::unique_ptr</code>, który umarł podczas kończenia działania tej metody, ta większa pamięć została poprawnie zwolniona. Dodatkowo warto zwrócić uwagę, że gdy <code class="language-plaintext highlighter-rouge">vec</code> ginie w <code class="language-plaintext highlighter-rouge">main()</code>ie, to giną też jego pola — <code class="language-plaintext highlighter-rouge">.size_</code> i <code class="language-plaintext highlighter-rouge">.memory_</code>. To drugie to inteligentny wskaźnik, więc na pewno poprawnie wywoła <code class="language-plaintext highlighter-rouge">delete[]</code> (tablicowy — wie to ze swojego typu).</p><p>Podczas alokowania większej ilości pamięci, należy skopiować wszystkie elementy z poprzedniego, mniejszego segmentu do nowego. <code class="language-plaintext highlighter-rouge">std::unique_ptr</code> wspiera indeksowanie, ale zamiast używania surowej pętli, można wywołać na nim <code class="language-plaintext highlighter-rouge">.get()</code>, który zwróci kopię wewnętrznego wskaźnika na dane. Wskaźnik jest legalnym iteratorem<sup id="fnref:ale-nie-unique"><a href="index.html#fn:ale-nie-unique" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>, więc będziemy mogli skorzystać z algorytmu <code class="language-plaintext highlighter-rouge">std::ranges::copy_n</code>:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">size_</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">biggerMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Należy jeszcze dodać nowy element na koniec naszego większego bloku pamięci:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">size_</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">biggerMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+    <span class="n">biggerMemory</span><span class="p">[</span><span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">newElement</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>I teraz odpowiednio nadpisać <code class="language-plaintext highlighter-rouge">.memory_</code> tak, aby dawało nam dostęp do nowej, większej tablicy:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">size_</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">biggerMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+    <span class="n">biggerMemory</span><span class="p">[</span><span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">newElement</span><span class="p">;</span>
+    <span class="n">memory_</span> <span class="o">=</span> <span class="n">biggerMemory</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Niestety ostatnia linijka nie zadziała. To dlatego, że obiektów typu <code class="language-plaintext highlighter-rouge">std::unqiue_ptr</code> nie można tak po prostu kopiować lub nadpisywać.</p><blockquote class="prompt-info"><p>Obiekty typu <code class="language-plaintext highlighter-rouge">std::unique_ptr</code> są niekopiowalne i nie można ich nadpisywać innymi obiektami<sup id="fnref:move-semantics"><a href="index.html#fn:move-semantics" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>.</p></blockquote><p>Można jednak zrobić sprytną sztuczkę. Załóżmy, że <code class="language-plaintext highlighter-rouge">.memory_</code> wskazuje na tablicę 3 <code class="language-plaintext highlighter-rouge">int</code>ów i właśnie dodajemy czwartego. Zwróćmy uwagę na to, jak wygląda nasza pamięć tuż pod koniec wykonywania metody <code class="language-plaintext highlighter-rouge">.push_back()</code> (bez niekompilującego się fragmentu <code class="language-plaintext highlighter-rouge">memory_ = biggerMemory</code>):</p><pre><code class="language-mermaid">block-beta
+  columns 3
+  A("memory_") space C["｜ 1 ｜ 2 ｜ 3 ｜"]
+  B("biggerMemory") space D["｜ 1 ｜ 2 ｜ 3 ｜ 4 ｜"]
+  A --&gt; C
+  B --&gt; D
+</code></pre><p>Gdyby metoda zakończyła teraz działanie, <code class="language-plaintext highlighter-rouge">.memory_</code> by dalej wskazywało “starą” tablicę, a <code class="language-plaintext highlighter-rouge">biggerMemory</code> by usunęło naszą nową, większą tablicę. Jednak my przecież chcemy, żeby było zupełnie odwrotnie!</p><p>Prostą sposobem na naprawienie tego problemu będzie zamienienie tego, na co wskazują te inteligentne wskaźniki:</p><pre><code class="language-mermaid">block-beta
+  columns 3
+    A("memory_") space C["｜ 1 ｜ 2 ｜ 3 ｜"]
+    B("biggerMemory") space D["｜ 1 ｜ 2 ｜ 3 ｜ 4 ｜"]
+    A --&gt; D
+    B --&gt; C
+</code></pre><p>Można to bardzo prosto osiągnąć przy pomocy <code class="language-plaintext highlighter-rouge">std::ranges::swap()</code>, który umie zamieniać wartościami nie tylko zakresy:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+    <span class="n">size_</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="n">biggerMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+    <span class="n">biggerMemory</span><span class="p">[</span><span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">newElement</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">memory_</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Warto jeszcze raz przyjrzeć się temu, czemu ta “sztuczka” działa. Po omawianej zamianie obiekt <code class="language-plaintext highlighter-rouge">biggerMemory</code>, który jest <strong>lokalną</strong> zmienną (o automatycznym czasie życia), będzie wskazywał na <strong>starą</strong>, mniejszą tablicę, a pole <code class="language-plaintext highlighter-rouge">.memory_</code> będzie wskazywało na nową, większą tablicę obiektów.</p><p>Jako że <code class="language-plaintext highlighter-rouge">biggerMemory</code> to lokalny <code class="language-plaintext highlighter-rouge">std::unique_ptr</code>, to wraz z końcem wykonania metody <code class="language-plaintext highlighter-rouge">.push_back()</code> zginie. Zginie, zabierając ze sobą tę starą tablicę. W końcu jest inteligentnym wskaźnikiem i ginąć zwolni pamięć, na którą wskazuje.</p><p>Przyjrzyjmy się pełnej implementacji:</p><div class="language-cpp highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre><td class="rouge-code"><pre><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span>
+<span class="k">namespace</span> <span class="n">pjc</span><span class="o">::</span><span class="n">smart</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="p">&gt;</span>
+    <span class="k">class</span> <span class="nc">Vector</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">size_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">memory_</span> <span class="o">=</span> <span class="nb">nullptr</span><span class="p">;</span>
+
+    <span class="nl">public:</span>
+        <span class="k">auto</span> <span class="n">size</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">size_</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">auto</span> <span class="n">push_back</span><span class="p">(</span><span class="n">T</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">newElement</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">void</span> <span class="p">{</span>
+            <span class="n">size_</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+            <span class="k">auto</span> <span class="n">biggerMemory</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">size_</span><span class="p">);</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+            <span class="n">biggerMemory</span><span class="p">[</span><span class="n">size_</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">newElement</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">memory_</span><span class="p">,</span> <span class="n">biggerMemory</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">pjc</span><span class="o">::</span><span class="n">smart</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+        <span class="n">vec</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Taki kod nie powoduje żadnych wycieków pamięci. Jest krótszy i prostszy od tego, który powstał przy użyciu surowych wskaźników na dynamicznie alokowaną pamięć.</p><h3 id="konsekwencje-niekopiowalności"><span class="me-2">Konsekwencje niekopiowalności</span><a href="index.html#konsekwencje-niekopiowalności" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p><code class="language-plaintext highlighter-rouge">std::unique_ptr</code> nie może być skopiowany. To dlatego, że gdyby mógł, to moglibyśmy mieć dwa takie wskaźniki wskazujące na takie same dane. Po pewnym czasie moglibyśmy wtedy spróbować zniszczyć obydwa, co by skutkowało <em>problemem podwójnego usunięcia</em>, czyli UB.</p><p>Nasz <code class="language-plaintext highlighter-rouge">pjc::smart::Vector</code> ma pole typu <code class="language-plaintext highlighter-rouge">std::unique_ptr</code>. Oznacza to, że naszych wektorów nie można domyślnie kopiować:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre><td class="rouge-code"><pre><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">vec</span> <span class="o">=</span> <span class="n">pjc</span><span class="o">::</span><span class="n">smart</span><span class="o">::</span><span class="n">Vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">vec</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><div file="przykładowy błąd kompilacji" class="language-plaintext highlighter-rouge"><div class="code-header"> <span data-label-text="przykładowy błąd kompilacji"><i class="far fa-file-code fa-fw"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+</pre><td class="rouge-code"><pre>main.cpp: In function 'int main()':
+main.cpp:28:17: error: use of deleted function 'pjc::smart::Vector&lt;int&gt;::Vector(const pjc::smart::Vector&lt;int&gt;&amp;)'
+   28 |     auto copy = vec;
+      |                 ^~~
+main.cpp:6:11: note: 'pjc::smart::Vector&lt;int&gt;::Vector(const pjc::smart::Vector&lt;int&gt;&amp;)' is implicitly deleted because the default definition would be ill-formed:
+    6 |     class Vector {
+      |           ^~~~~~
+main.cpp:6:11: error: use of deleted function 'std::unique_ptr&lt;_Tp [], _Dp&gt;::unique_ptr(const std::unique_ptr&lt;_Tp [], _Dp&gt;&amp;) [with _Tp = int; _Dp = std::default_delete&lt;int []&gt;]'
+In file included from C:/Users/Filip/AppData/Local/Programs/CLion 2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/memory:78,
+                 from main.cpp:2:
+C:/Users/Filip/AppData/Local/Programs/CLion 2/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/unique_ptr.h:796:7: note: declared here
+  796 |       unique_ptr(const unique_ptr&amp;) = delete;
+      |       ^~~~~~~~~~
+</pre></table></code></div></div><p>Wbrew pozorom <strong>to dobra wiadomość</strong>. Przypomnijmy sobie, że gdy mieliśmy do czynienia z własną implementacją wektora używającą surowych wskaźników, to <a href="../rozdział-10-6-własna-implementacja-wektora-cz-2/index.html">kopiowanie tego wektora prowadziło do szybkiego UB</a>.</p><p>Tutaj znaleźliśmy się w dużo lepszej sytuacji. Operacja kopiowania, która prowadziłaby do błędów, zwyczajnie się nie kompiluje! To dobrze. Wiemy zatem, że coś pominęliśmy — naprawmy to. Od razu dostarczy konstruktor kopiujący i operator nadpisania:</p><div class="language-cpp nolineno highlighter-rouge"><div class="code-header"> <span data-label-text="Cpp"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Skopiowano!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+</pre><td class="rouge-code"><pre><span class="n">Vector</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+<span class="n">Vector</span><span class="p">(</span><span class="n">Vector</span> <span class="k">const</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">size_</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">),</span> <span class="n">memory_</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">T</span><span class="p">[]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">size_</span><span class="p">))</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">copy_n</span><span class="p">(</span><span class="n">other</span><span class="p">.</span><span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">size_</span><span class="p">,</span> <span class="n">memory_</span><span class="p">.</span><span class="n">get</span><span class="p">());</span>
+<span class="p">}</span>
+
+<span class="k">auto</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">Vector</span> <span class="n">copiedOther</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vector</span><span class="o">&amp;</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">memory_</span><span class="p">,</span> <span class="n">copiedOther</span><span class="p">.</span><span class="n">memory_</span><span class="p">);</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">ranges</span><span class="o">::</span><span class="n">swap</span><span class="p">(</span><span class="n">size_</span><span class="p">,</span> <span class="n">copiedOther</span><span class="p">.</span><span class="n">size_</span><span class="p">);</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></table></code></div></div><p>Kolejno zdefiniowaliśmy:</p><ol><li>Domyślny konstruktor. Musimy go dostarczyć (choćby oznaczając jako <code class="language-plaintext highlighter-rouge">= default</code>), bo gdy dostarczymy konstruktor kopiujący, to C++ przestaje automatycznie generować inne konstruktory.<li>Konstruktor kopiujący. Alokuje on odpowiednio pamięć i kopiuje elementy z innego wektora.<li>Operator nadpisania. Korzysta on z tak zwanego idiomu kopiowania i zamieniania (ang. <em>copy and swap idiom</em>), czyli tworzy lokalną kopię wektora-źródła, zamienia nasze pola z tą kopią i na koniec niszczy tę kopię. Dodatkowo warto zwrócić uwagę, że zwraca <code class="language-plaintext highlighter-rouge">*this</code>, czyli referencję na nadpisywany obiekt. Dzięki temu można korzystać ze składni <code class="language-plaintext highlighter-rouge">vec1 = vec2 = vec3 = ...;</code>.</ol><p>Z jednej strony <code class="language-plaintext highlighter-rouge">std::unique_ptr</code> wydaje się trudnym i nieprzyjemnym narzędziem. Nie pozwala na kopiowanie, nie pozwala na iterowanie i bez dostarczenia dodatkowego kodu (jak np. konstruktor kopiujący) nie pozwoli na skopiowanie obiektów zawierających go jako pole. Ale koniec końców okazuje się, że pozwala nam na pisanie krótszego i bezpieczniejszego kodu, a elementy, bez których się nie kompiluje, i tak byśmy musieli sami dostarczyć — prędzej czy później.</p><hr /><div class="footnotes" role="doc-endnotes"><ol><li id="fn:ale-nie-unique"><p><em><strong>Surowy</strong></em> wskaźnik jest legalnym iteratorem. Nie można używać <code class="language-plaintext highlighter-rouge">std::unique_ptr</code> jak zwykłego iteratora. <a href="index.html#fnref:ale-nie-unique" class="reversefootnote" role="doc-backlink">&#8617;</a></p><li id="fn:move-semantics"><p>Można nadpisywać i kopiować <em>z przenoszeniem</em> (tematyka semantyk przenoszenia, (ang. <em>move semantics</em>)), ale jeszcze tego nie umiemy. <a href="index.html#fnref:move-semantics" class="reversefootnote" role="doc-backlink">&#8617;</a></p></ol></div></div><div class="post-tail-wrapper text-muted"><div class="post-tail-bottom d-flex justify-content-between align-items-center mt-3 pt-5 pb-2"><div class="license-wrapper"></div></div></div></div></div><div id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"></div><div id="toc-wrapper" class="ps-0 pe-4 mb-5"><div class="panel-heading ps-3 pt-2 mb-2">Zawartość</div><nav id="toc"></nav></div></div></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-3 pe-xl-4 mt-5"><div class="post-navigation d-flex justify-content-between"> <a href="../rozdział-10-8-podsumowanie-i-dodatki/index.html" class="btn btn-outline-primary" prompt="Poprzedni" ><p class="p post-nav-p">Rozdział 10.8 - Podsumowanie i dodatki</p></a> <a href="../rozdział-11-2-arytmetyka-wskaźników/index.html" class="btn btn-outline-primary" prompt="Następny" ><p class="p post-nav-p">Rozdział 11.2 - Arytmetyka wskaźników</p></a></div></div></div><div id="search-result-wrapper" class="d-flex justify-content-center unloaded"><div class="col-11 post-content"><div id="search-hints"></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div></div><footer><div class="container px-lg-4"><div class="d-flex justify-content-center align-items-center text-muted mx-md-3"><p>Using the <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a> theme <a href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener">Chirpy</a></p><p>© 2025 <a href="https://github.com/Filip-FK-Kwiatkowski">Filip Kwiatkowski</a>.</p></div></div></footer><div id="mask"></div><button id="back-to-top" aria-label="back-to-top" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button><div id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3 text-center">Nowa wersja strony jest dostępna.</p><button type="button" class="btn btn-primary" aria-label="Update"> Aktualizuj </button></div></div><script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.7.0/dist/jquery.min.js,npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js,npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/lazysizes@5.3.2/lazysizes.min.js,npm/magnific-popup@1.1.0/dist/jquery.magnific-popup.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.7/dayjs.min.js,npm/dayjs@1.11.7/locale/en.min.js,npm/dayjs@1.11.7/plugin/relativeTime.min.js,npm/dayjs@1.11.7/plugin/localizedFormat.min.js,npm/tocbot@4.21.0/dist/tocbot.min.js,npm/mermaid@10.9.0/dist/mermaid.min.js"></script> <script defer src="../../assets/js/dist/post.min.js"></script> <script defer src="../../app.js"></script> <script type="text/javascript"> (function () { function updateMermaid(event) { if (event.source === window && event.data && event.data.direction === ModeToggle.ID) { const mode = event.data.message; if (typeof mermaid === 'undefined') { return; } let expectedTheme = mode === ModeToggle.DARK_MODE ? 'dark' : 'default'; let config = { theme: expectedTheme }; /* Re-render the SVG › <https://github.com/mermaid-js/mermaid/issues/311#issuecomment-332557344> */ $('.mermaid').each(function () { let svgCode = $(this).prev().children().html(); $(this).removeAttr('data-processed'); $(this).html(svgCode); }); mermaid.initialize(config); mermaid.init(undefined, '.mermaid'); } } let initTheme = 'default'; const html = document.documentElement; if ( (html.hasAttribute('data-mode') && html.getAttribute('data-mode') === 'dark') || (!html.hasAttribute('data-mode') && window.matchMedia('(prefers-color-scheme: dark)').matches) ) { initTheme = 'dark'; } let mermaidConf = { theme: initTheme /* <default|dark|forest|neutral> */ }; /* Create mermaid tag */ document.querySelectorAll('pre>code.language-mermaid').forEach((elem) => { const svgCode = elem.textContent; const backup = elem.parentElement; backup.classList.add('unloaded'); /* create mermaid node */ let mermaid = document.createElement('pre'); mermaid.classList.add('mermaid'); const text = document.createTextNode(svgCode); mermaid.appendChild(text); backup.after(mermaid); }); mermaid.initialize(mermaidConf); window.addEventListener('message', updateMermaid); })(); </script> <script> /* Note: dependent library will be loaded in `js-selector.html` */ SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/~fk/assets/js/data/search_pl.json', searchResultTemplate: '<div class="px-1 px-sm-2 px-lg-4 px-xl-0"> <a href="https://users.pja.edu.pl/~fk/wyklady/rozdzia%C5%82-11-1-inteligentne-wska%C5%BAniki/{url}">{title}</a><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div><p>{snippet}</p></div>', noResultsText: '<p class="mt-5"></p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); </script>
