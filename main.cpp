@@ -2442,7 +2442,6 @@ auto main() -> int {
             std::cout << "Child says " << result << std::endl; // 'result' here is 0 from initialization
             sleep(10); // Child sleeps for 10 seconds
             break; // Child exits the switch.
-
             default: // Parent process (pid > 0)
                 std::cout << "Diagnostic message 3" << std::endl;
             // fork();
