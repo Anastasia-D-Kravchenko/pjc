@@ -2430,6 +2430,7 @@ auto main() -> int {
 
         int result = 0; // Initialized in both parent and child
         std::cout << "Diagnostic message 1" << std::endl; // Printed by both parent and child
+    
         int pid = fork(); // Point of divergence
     //     fork();
     // fork();
