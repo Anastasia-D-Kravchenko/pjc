@@ -2427,7 +2427,6 @@ auto main() -> int {
     // fmt::println("end");
     // return 0;
     // for (int i = 0; i < 100; i++) {
-
         int result = 0; // Initialized in both parent and child
         std::cout << "Diagnostic message 1" << std::endl; // Printed by both parent and child
 
