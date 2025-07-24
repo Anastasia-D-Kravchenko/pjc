@@ -2419,7 +2419,6 @@ auto accept(Foo f1, int i) -> void { // f1 is passed by value (copy)
     f = f1;      // f is assigned f1
     accept(f1, i + 1); // f1 (original copy) is passed by value again
 }
-
 auto main() -> int {
     // auto x = Foo(); // calls default constructor
     // accept(x, 0);   // x is copied into f1
